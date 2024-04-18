@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Battleships/client"
+	"Battleships/client/data"
 	"Battleships/server"
 	"fmt"
 )
@@ -9,6 +9,6 @@ import (
 func main() {
 	fmt.Print(server.CheckConnection())
 
-	client.SetToken(server.PostGameDataToGetToken())
-	fmt.Printf(client.GetToken())
+	data.SetToken(server.PostGameDataToGetToken())
+	fmt.Printf(data.GetToken())
 }
