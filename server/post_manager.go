@@ -1,12 +1,18 @@
 package server
 
 import (
+	"Battleships/client/data"
 	"bytes"
+	"errors"
 	"net/http"
 )
 
-func PostGameDataToGetToken() string {
+func InitGame() error {
 	posturl := "https://go-pjatk-server.fly.dev/api/game"
+
+	if CheckConnection() != "200 OK" {
+		return errors.New("couldn't connect to server")
+	}
 
 	body := []byte(`{
   "coords": [
@@ -39,7 +45,7 @@ func PostGameDataToGetToken() string {
 
 	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	r.Header.Add("Content-Type", "application/json")
@@ -47,9 +53,10 @@ func PostGameDataToGetToken() string {
 	client := &http.Client{}
 	res, err := client.Do(r)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	defer res.Body.Close()
 
-	return res.Header.Get("x-auth-token")
+	data.SetToken(res.Header.Get("x-auth-token"))
+	return nil
 }
