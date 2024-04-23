@@ -11,7 +11,11 @@ import (
 func main() {
 
 	server.InitGame()
-	fmt.Printf(data.GetToken())
-	http.HandleFunc("/", web.WelcomePage)
-	http.ListenAndServe("", nil)
+	fmt.Println(data.GetToken())
+
+	fs := http.FileServer(http.Dir("assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets", fs))
+	// Staring server
+	http.HandleFunc("/", web.Handler)
+	http.ListenAndServe("localhost:8080", nil)
 }

@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a1632b3-0754-44cc-a372-f3a1cec75e5b" name="Changes" comment="Battleships v2">
-      <change afterPath="$PROJECT_DIR$/client/web/web_pages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/connection_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server_manager.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/get_manager.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/post_manager.go" beforeDir="false" />
+    <list default="true" id="2a1632b3-0754-44cc-a372-f3a1cec75e5b" name="Changes" comment="Battleships v3">
+      <change afterPath="$PROJECT_DIR$/assets/battle_page.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/web/web_pages.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/web/web_pages.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go_build_Battleships.exe" beforeDir="false" afterPath="$PROJECT_DIR$/go_build_Battleships.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,28 +42,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.go build Battleships (1).executor&quot;: &quot;Run&quot;,
-    &quot;Go Build.go build Battleships.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ignacy/Desktop&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.goide.configuration.GoProjectSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build Battleships (1).executor": "Run",
+    "Go Build.go build Battleships.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "C:/Users/Ignacy/go/Battleships",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.goide.configuration.GoProjectSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ignacy\go\Battleships" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ignacy\go\Battleships\static" />
       <recent name="C:\Users\Ignacy\go\Battleships\client\data" />
     </key>
   </component>
@@ -94,7 +102,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Battleships v1" />
     <MESSAGE value="Battleships v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v2" />
+    <MESSAGE value="Battleships v3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
