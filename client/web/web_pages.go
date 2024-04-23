@@ -1,33 +1,38 @@
 package web
 
 import (
+	"Battleships/client/data"
 	"fmt"
 	"html/template"
 	"net/http"
 )
 
-func WelcomePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Welcome")
+type PageData struct {
+	Token string
 }
 
-func battle(w http.ResponseWriter, r *http.Request) {
+func battlePageHandler(w http.ResponseWriter, r *http.Request) {
 	var fileName = "assets/battle_page.html"
 	t, err := template.ParseFiles(fileName)
 	if err != nil {
-		fmt.Println("Error when parsing")
+		http.Error(w, "Error loading template", http.StatusInternalServerError)
 		return
 	}
-	err = t.ExecuteTemplate(w, "battle_page", nil)
+
+	data := PageData{
+		Token: "Game Id: " + data.GetToken(),
+	}
+
+	err = t.ExecuteTemplate(w, "battle_page", data)
 	if err != nil {
-		fmt.Println("Error executing")
-		return
+		http.Error(w, "Error rendering template", http.StatusInternalServerError)
 	}
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/battle":
-		battle(w, r)
+		battlePageHandler(w, r)
 	default:
 
 		fmt.Fprint(w, "Default")

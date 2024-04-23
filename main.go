@@ -18,4 +18,5 @@ func main() {
 	// Staring server
 	http.HandleFunc("/", web.Handler)
 	http.ListenAndServe("localhost:8080", nil)
+
 }

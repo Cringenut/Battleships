@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2a1632b3-0754-44cc-a372-f3a1cec75e5b" name="Changes" comment="Battleships v3">
-      <change afterPath="$PROJECT_DIR$/assets/battle_page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/styles.css" afterDir="false" />
+    <list default="true" id="2a1632b3-0754-44cc-a372-f3a1cec75e5b" name="Changes" comment="Battleships v4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/battle_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/battle_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/web/web_pages.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/web/web_pages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go_build_Battleships.exe" beforeDir="false" afterPath="$PROJECT_DIR$/go_build_Battleships.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
@@ -103,7 +100,8 @@
     <MESSAGE value="Battleships v1" />
     <MESSAGE value="Battleships v2" />
     <MESSAGE value="Battleships v3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3" />
+    <MESSAGE value="Battleships v4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
