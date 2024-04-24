@@ -29,3 +29,15 @@ html, body {
     text-align: center;
     padding: 0; /* Adjust padding as needed, removed for this example */
 }
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+    grid-template-rows: repeat(10, 60px);
+    gap: 1px; /* This will act as the grid lines */
+}
+.square {
+    width: 60px;
+    height: 60px;
+    background-color: #000; /* Black squares, assuming a dark theme */
+}
