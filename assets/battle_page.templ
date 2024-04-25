@@ -1,0 +1,32 @@
+package assets
+
+templ Page(token string, coords []string) {
+<style>
+		p {
+			font-family: sans-serif;
+			color: green;
+		}
+		footer {
+            background-color: black;
+            color: white;
+            padding: 10px; /* Adjust padding as needed */
+            position: fixed; /* Fixed position keeps the footer at the bottom of the page */
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Battle Page Temple</title>
+    </head>
+    <body>
+        @Board(coords)
+        <footer>
+            <p>{ token }</p>
+        </footer>
+    </body>
+</html>
+}
