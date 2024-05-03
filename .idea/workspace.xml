@@ -5,29 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/battle_page.templ" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/board.templ" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tile.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Battleships.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Battleships.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pregame/placing.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/battle_page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/web/web_pages.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/web/web_pages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/battle_page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle_page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/battle_page_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle_page_templ.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/board.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/board_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/board_templ.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tile.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/tile.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tile_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/tile_templ.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/data/client_data.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/web/web_pages.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/pages.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/game/server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../Program Files/Go" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22.2" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Cringenut&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Cringenut/Battleships.git&quot;,
+    &quot;accountId&quot;: &quot;59f6f34e-3f20-4ce2-998e-263a32f3aa41&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -39,6 +58,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
     &quot;Go Build.go build Battleships.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -52,9 +72,17 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Ignacy&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\client" />
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\handlers" />
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\pregame" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="go build Battleships" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="Battleships" />
@@ -74,7 +102,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
+        <option value="bundled-gosdk-33c477a475b1-e0158606a674-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.15989.157" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-GO-241.15989.157" />
       </set>
     </attachedChunks>
   </component>
