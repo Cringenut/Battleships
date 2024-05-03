@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v0.1 // New project structure">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/data.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/game/server.go" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v0.2">
+      <change afterPath="$PROJECT_DIR$/client/static.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/boards.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/placing.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/placing.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle_page.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle_page_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/tile.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/tile_templ.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +113,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Battleships v0.1 // New project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v0.1 // New project structure" />
+    <MESSAGE value="Battleships v0.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v0.2" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

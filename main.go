@@ -4,10 +4,17 @@ import (
 	"Battleships/client"
 	"Battleships/game"
 	"Battleships/pregame"
+	"Battleships/views"
 	"fmt"
-	"net/http"
+	"github.com/a-h/templ"
+	"github.com/gin-gonic/gin"
 	"time"
 )
+
+func render(c *gin.Context, status int, template templ.Component) error {
+	c.Status(status)
+	return template.Render(c.Request.Context(), c.Writer)
+}
 
 func main() {
 
@@ -21,13 +28,14 @@ func main() {
 	}
 
 	fmt.Println("Game token is: " + client.GetToken())
-	err, coords := game.GetBoard()
+	_, coords := game.GetBoard()
 	client.SetShips(coords)
 
-	err = http.ListenAndServe(":8080", nil)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
+	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		render(c, 200, views.MakeBattlePage(client.GetToken()))
+	})
+	r.Run(":8080")
 
 }

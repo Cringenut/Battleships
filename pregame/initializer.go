@@ -23,7 +23,7 @@ func BuildPostBody() []byte {
 		Wpbot:       true,
 	}
 
-	gameData.Coords = PlaceShips()
+	//gameData.Coords = PlaceShips()
 	fmt.Println(gameData.Coords)
 
 	body, _ := json.Marshal(gameData)
