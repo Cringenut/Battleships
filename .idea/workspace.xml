@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pregame/placing.go" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v0.1 // New project structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/battle_page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle_page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/battle_page_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle_page_templ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/board.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/board_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/board_templ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tile.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/tile.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tile_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/tile_templ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/data/client_data.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/web/web_pages.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/pages.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/data.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/game/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server_manager.go" beforeDir="false" afterPath="$PROJECT_DIR$/game/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +102,10 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Battleships v0.1 // New project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v0.1 // New project structure" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
