@@ -34,3 +34,9 @@ func StringSliceContains(s []string, str string) bool {
 	}
 	return false
 }
+
+func CalculateCellCoord(row int, col int) string {
+	x := rune('A' + col)
+	y := rune(InvertNumber(row))
+	return string(x) + string(y)
+}

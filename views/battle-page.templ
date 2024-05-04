@@ -1,5 +1,9 @@
 package views
 
+import (
+    "Battleships/client"
+)
+
 templ MakeBattlePage(token string) {
 <style>
     body {
@@ -71,7 +75,7 @@ templ MakeBattlePage(token string) {
         <div class="board">
             for col := 0; col < 10; col++ {
                 for row := 0; row < 10; row++ {
-                    @MakeBoardCell()
+                    @MakeBoardCell(client.CalculateCellCoord(row, col))
                 }
             }
         </div>
@@ -88,7 +92,7 @@ templ MakeBattlePage(token string) {
 </html>
 }
 
-templ MakeBoardCell() {
+templ MakeBoardCell(coord string) {
 <style>
     .cell {
         background-color: #222;
@@ -101,11 +105,8 @@ templ MakeBoardCell() {
 </style>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Battle Page Temple</title>
-</head>
 <body>
-    <div class="cell"></div>
+    <div class="cell">{ coord }</div>
 </body>
 </html>
 }
