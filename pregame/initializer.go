@@ -1,8 +1,8 @@
 package pregame
 
 import (
+	"Battleships/client"
 	"encoding/json"
-	"fmt"
 )
 
 type GameData struct {
@@ -24,7 +24,7 @@ func BuildPostBody() []byte {
 	}
 
 	//gameData.Coords = PlaceShips()
-	fmt.Println(gameData.Coords)
+	client.SetShips(gameData.Coords)
 
 	body, _ := json.Marshal(gameData)
 	return body

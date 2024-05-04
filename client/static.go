@@ -1,5 +1,7 @@
 package client
 
+import "strconv"
+
 func InvertNumber(digit int) int {
 	switch digit {
 	case 1:
@@ -36,7 +38,7 @@ func StringSliceContains(s []string, str string) bool {
 }
 
 func CalculateCellCoord(row int, col int) string {
-	x := rune('A' + col)
-	y := rune(InvertNumber(row))
-	return string(x) + string(y)
+	x := InvertNumber(row)
+	y := rune('A' + col)
+	return string(y) + strconv.Itoa(x)
 }

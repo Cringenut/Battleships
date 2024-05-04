@@ -28,11 +28,9 @@ func main() {
 	}
 
 	fmt.Println("Game token is: " + client.GetToken())
-	_, coords := game.GetBoard()
-	client.SetShips(coords)
+	//_, coords := game.GetBoard()
 
 	r := gin.Default()
-
 	r.GET("/", func(c *gin.Context) {
 		render(c, 200, views.MakeBattlePage(client.GetToken()))
 	})

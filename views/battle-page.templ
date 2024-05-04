@@ -73,8 +73,8 @@ templ MakeBattlePage(token string) {
     <div class="boards">
         // Player board
         <div class="board">
-            for col := 0; col < 10; col++ {
-                for row := 0; row < 10; row++ {
+            for row := 0; row < 10; row++ {
+                for col := 0; col < 10; col++ {
                     @MakeBoardCell(client.CalculateCellCoord(row, col))
                 }
             }
@@ -94,19 +94,28 @@ templ MakeBattlePage(token string) {
 
 templ MakeBoardCell(coord string) {
 <style>
-    .cell {
-        background-color: #222;
+    .cell, .ship-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
         color: white; /* Sets the text color */
         font-size: 24px; /* Sets the text size */
     }
+    .ship-cell {
+        background-color: green;
+    }
+    .cell {
+        background-color: #222;
+    }
 </style>
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <div class="cell">{ coord }</div>
+    if (client.StringSliceContains(client.GetShips(), coord)) {
+        <div class="ship-cell" id={ coord }>{ coord }</div>
+    } else {
+        <div class="cell" id={ coord }>{ coord }</div>
+    }
 </body>
 </html>
 }
