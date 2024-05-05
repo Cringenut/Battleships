@@ -10,10 +10,6 @@ import "context"
 import "io"
 import "bytes"
 
-import (
-	"Battleships/client"
-)
-
 func MakeBattlePage(token string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
@@ -27,19 +23,7 @@ func MakeBattlePage(token string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<style>\r\n    body {\r\n        margin: 0;\r\n        height: 100vh;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #141526;\r\n        color: white;\r\n        font-family: Arial, sans-serif;\r\n    }\r\n    .footer {\r\n        background-color: black;\r\n        color: white;\r\n        padding: 10px;\r\n        position: fixed;\r\n        left: 0;\r\n        bottom: 0;\r\n        width: 100%;\r\n        text-align: center;\r\n        display: flex;\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n    .input-field {\r\n        margin-right: 10px;\r\n        padding: 5px;\r\n        font-size: 16px;\r\n        width: 60px; /* Set width to accommodate 3 characters */\r\n    }\r\n    .submit-button {\r\n        padding: 5px 15px;\r\n        font-size: 16px;\r\n        background-color: white;\r\n        color: black;\r\n        border: none;\r\n        cursor: pointer;\r\n    }\r\n    .boards {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        align-items: center;\r\n        flex-grow: 1;\r\n        width: 100%;\r\n        margin-bottom: 50px;\r\n    }\r\n    .board {\r\n        background-color: #837777;\r\n        width: 40%;\r\n        aspect-ratio: 1;\r\n        display: grid;\r\n        grid-template-columns: repeat(10, 1fr);\r\n        grid-template-rows: repeat(10, 1fr);\r\n        gap: 3px;\r\n        margin: 12px;\r\n        border: 3px solid #837777;\r\n    }\r\n</style><!doctype html><html lang=\"en\"><head><title>Battle Page Temple</title></head><body><div class=\"boards\"><div class=\"board\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		for row := 0; row < 10; row++ {
-			for col := 0; col < 10; col++ {
-				templ_7745c5c3_Err = MakeBoardCell(client.CalculateCellCoord(row, col)).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"board\"></div></div><div class=\"footer\"><input type=\"text\" maxlength=\"3\" class=\"input-field\" placeholder=\"...\"> <button class=\"submit-button\">Fire</button></div></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\" integrity=\"sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC\" crossorigin=\"anonymous\"></script><script src=\"https://cdn.tailwindcss.com\"></script><title>Todo App</title></head><style type=\"text/css\">\r\n    tr.htmx-swapping td {\r\n        opacity: 0;\r\n        transition: opacity 1s ease-out;\r\n    }\r\n</style><body><div class=\"min-h-screen bg-gray-900 flex flex-col items-center justify-start pt-10\" id=\"todolist\"><div class=\"bg-gray-700 shadow rounded-lg p-6 text-gray-50\"><h1 class=\"text-xl font-semibold mb-4 text-green-500\">Todo App</h1><p class=\"mb-6\">Add your todos below and keep track of your progress.</p><form id=\"\" hx-boost=\"true\" hx-post=\"/fire\" hx-swap=\"none\" hx-target=\"this\"><input type=\"text\" name=\"brand\" placeholder=\"Brand\" autocomplete=\"off\"> <input type=\"text\" name=\"make\" placeholder=\"Make\" autocomplete=\"off\"> <input type=\"text\" name=\"model\" placeholder=\"Model\" autocomplete=\"off\"> <input type=\"text\" name=\"year\" placeholder=\"Year\" autocomplete=\"off\"> <input type=\"text\" name=\"imageURL\" placeholder=\"Image Link\" autocomplete=\"off\"> <button class=\"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 mt-4 bg-green-500 text-gray-50\" type=\"submit\">Add Todo\r</button></form></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

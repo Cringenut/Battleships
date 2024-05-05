@@ -1,94 +1,65 @@
 package views
 
-import (
-    "Battleships/client"
-)
 
 templ MakeBattlePage(token string) {
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #141526;
-        color: white;
-        font-family: Arial, sans-serif;
-    }
-    .footer {
-        background-color: black;
-        color: white;
-        padding: 10px;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .input-field {
-        margin-right: 10px;
-        padding: 5px;
-        font-size: 16px;
-        width: 60px; /* Set width to accommodate 3 characters */
-    }
-    .submit-button {
-        padding: 5px 15px;
-        font-size: 16px;
-        background-color: white;
-        color: black;
-        border: none;
-        cursor: pointer;
-    }
-    .boards {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-grow: 1;
-        width: 100%;
-        margin-bottom: 50px;
-    }
-    .board {
-        background-color: #837777;
-        width: 40%;
-        aspect-ratio: 1;
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(10, 1fr);
-        gap: 3px;
-        margin: 12px;
-        border: 3px solid #837777;
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Todo App</title>
+</head>
+<style type="text/css">
+    tr.htmx-swapping td {
+        opacity: 0;
+        transition: opacity 1s ease-out;
     }
 </style>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Battle Page Temple</title>
-    </head>
-    <body>
-    <div class="boards">
-        // Player board
-        <div class="board">
-            for row := 0; row < 10; row++ {
-                for col := 0; col < 10; col++ {
-                    @MakeBoardCell(client.CalculateCellCoord(row, col))
-                }
-            }
-        </div>
-        // Enemy board
-        <div class="board">
+<body>
+<div class="min-h-screen bg-gray-900 flex flex-col items-center justify-start pt-10" id="todolist">
+    <div class="bg-gray-700 shadow rounded-lg p-6 text-gray-50">
+        <h1 class="text-xl font-semibold mb-4 text-green-500">Todo App</h1>
+        <p class="mb-6">Add your todos below and keep track of your progress.</p>
+        <form id="" hx-boost="true" hx-post="/fire" hx-swap="none" hx-target="this">
+            <input
+                    type="text"
+                    name="brand"
+                    placeholder="Brand"
+                    autocomplete="off"
+            />
+            <input
+                    type="text"
+                    name="make"
+                    placeholder="Make"
+                    autocomplete="off"
+            />
+            <input
+                    type="text"
+                    name="model"
+                    placeholder="Model"
+                    autocomplete="off"
+            />
+            <input
+                    type="text"
+                    name="year"
+                    placeholder="Year"
+                    autocomplete="off"
+            />
+            <input
+                    type="text"
+                    name="imageURL"
+                    placeholder="Image Link"
+                    autocomplete="off"
+            />
+            <button
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 mt-4 bg-green-500 text-gray-50"
+                    type="submit">
+                Add Todo
+            </button>
+        </form>
 
-        </div>
     </div>
-    <div class="footer">
-        <input type="text" maxlength="3" class="input-field" placeholder="..."></input>
-        <button class="submit-button">Fire</button>
-    </div>
-    </body>
+</div>
+</body>
 </html>
 }
 

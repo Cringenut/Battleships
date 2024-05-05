@@ -23,12 +23,14 @@ func main() {
 	fmt.Println("Game token is: " + client.GetToken())
 	//_, coords := server.GetBoard()
 
-	r := gin.Default()
+	router := gin.Default()
 
-	// Handlers
-	r.Handle("GET", "/", server.HandleHomePage())
-	r.Handle("POST", "/fire", server.HandleFire())
+	//initialize config
+	app := server.Config{Router: router}
 
-	r.Run(":8080")
+	//routes
+	app.Routes()
+
+	router.Run(":8080")
 
 }

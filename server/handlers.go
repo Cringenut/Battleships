@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
+	"io"
 )
 
 func render(c *gin.Context, status int, template templ.Component) error {
@@ -19,8 +20,11 @@ func HandleHomePage() gin.HandlerFunc {
 	}
 }
 
-func HandleFire() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		fmt.Println("Handled")
+func (app *Config) HandleFire(c *gin.Context) {
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		// Handle error
 	}
+	fmt.Println(string(jsonData))
+	fmt.Println("Bang")
 }
