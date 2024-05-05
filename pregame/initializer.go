@@ -17,7 +17,7 @@ func BuildPostBody() []byte {
 
 	gameData := GameData{
 		Coords:      []string{},
-		Description: "My first game",
+		Description: "My first server",
 		Nickname:    "John_Doe",
 		TargetNick:  "",
 		Wpbot:       true,

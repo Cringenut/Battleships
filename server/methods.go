@@ -1,4 +1,4 @@
-package game
+package server
 
 import (
 	"Battleships/client"
@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
 )
@@ -59,6 +60,10 @@ func InitGame(body []byte) error {
 
 type GetBoardResponse struct {
 	ShipCoords []string `json:"board"`
+}
+
+func TestFire(c *gin.Context) {
+	fmt.Println("Fired")
 }
 
 /* GET */

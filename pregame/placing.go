@@ -61,7 +61,7 @@ func PlaceShips() []string {
 
 const size = 10
 
-// Board represents the game board
+// Board represents the server board
 var board [size][size]bool
 
 // ShipSizes defines the sizes of ships to be placed

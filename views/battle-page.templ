@@ -92,30 +92,3 @@ templ MakeBattlePage(token string) {
 </html>
 }
 
-templ MakeBoardCell(coord string) {
-<style>
-    .cell, .ship-cell {
-        display: flex; /* Makes cell a flex container */
-        justify-content: center; /* Centers content horizontally */
-        align-items: center; /* Centers content vertically */
-        color: white; /* Sets the text color */
-        font-size: 24px; /* Sets the text size */
-    }
-    .ship-cell {
-        background-color: green;
-    }
-    .cell {
-        background-color: #222;
-    }
-</style>
-<!DOCTYPE html>
-<html lang="en">
-<body>
-    if (client.StringSliceContains(client.GetShips(), coord)) {
-        <div class="ship-cell" id={ coord }>{ coord }</div>
-    } else {
-        <div class="cell" id={ coord }>{ coord }</div>
-    }
-</body>
-</html>
-}
