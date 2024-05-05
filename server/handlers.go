@@ -7,6 +7,7 @@ import (
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 	"io"
+	"strings"
 )
 
 func render(c *gin.Context, status int, template templ.Component) error {
@@ -25,6 +26,10 @@ func (app *Config) HandleFire(c *gin.Context) {
 	if err != nil {
 		// Handle error
 	}
-	fmt.Println(string(jsonData))
+
+	coord := strings.TrimPrefix(string(jsonData), "coord=")
+
+	fmt.Println(coord)
 	fmt.Println("Bang")
+
 }

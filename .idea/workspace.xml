@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v1.0 // New structure">
-      <change afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v1.1 // Base to make post requests by clicking on the cell">
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/methods.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page_templ.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/cell.templ" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +109,8 @@
     <MESSAGE value="Battleships v0.2" />
     <MESSAGE value="Battleships v0.3" />
     <MESSAGE value="Battleships v1.0 // New structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v1.0 // New structure" />
+    <MESSAGE value="Battleships v1.1 // Base to make post requests by clicking on the cell" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v1.1 // Base to make post requests by clicking on the cell" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
