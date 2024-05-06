@@ -28,6 +28,10 @@ func (app *Config) HandleFire(c *gin.Context) {
 	}
 
 	coord := strings.TrimPrefix(string(jsonData), "coord=")
+	err = PostFire(coord)
+	if err != nil {
+		return
+	}
 
 	fmt.Println(coord)
 	fmt.Println("Bang")

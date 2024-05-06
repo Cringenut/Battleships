@@ -13,7 +13,7 @@ func main() {
 
 	requestBody := pregame.BuildPostBody()
 
-	if err := server.InitGame(requestBody); err != nil {
+	if err := server.PostInitGame(requestBody); err != nil {
 		fmt.Println(err.Error())
 		fmt.Println("Retrying in 3 seconds...")
 		time.Sleep(3 * time.Second)
