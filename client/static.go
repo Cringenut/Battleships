@@ -42,3 +42,12 @@ func CalculateCellCoord(row int, col int) string {
 	y := rune('A' + col)
 	return string(y) + strconv.Itoa(x)
 }
+
+func IsHit(coord string) bool {
+	_, ok := GetPlayerShots()[coord]
+	if ok {
+		return false
+	} else {
+		return true
+	}
+}

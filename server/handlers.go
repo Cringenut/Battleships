@@ -36,4 +36,5 @@ func (app *Config) HandleFire(c *gin.Context) {
 	fmt.Println(coord)
 	fmt.Println("Bang")
 
+	render(c, 200, views.MakeEnemyBoard())
 }

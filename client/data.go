@@ -1,17 +1,15 @@
 package client
 
-import "sync"
-
-type PlayerShot struct {
-	coord string
-	hit   bool
-}
+import (
+	"fmt"
+	"sync"
+)
 
 var (
 	tokenMutex  sync.RWMutex // to ensure safe concurrent access to the token
 	token       string
 	playerShips []string
-	playerShots []PlayerShot
+	playerShots map[string]bool
 )
 
 // SetToken sets the token.
@@ -42,8 +40,14 @@ func GetPlayerShips() []string {
 	return playerShips
 }
 
-func AppendPlayerShots(s PlayerShot) {
-	tokenMutex.RLock()
-	defer tokenMutex.RUnlock()
-	playerShots = append(playerShots, s)
+func AppendPlayerShots(coord string, hit bool) {
+	if playerShots == nil {
+		playerShots = make(map[string]bool) // Initialize the map if it is nil.
+	}
+	playerShots[coord] = hit
+	fmt.Print(playerShots)
+}
+
+func GetPlayerShots() map[string]bool {
+	return playerShots
 }

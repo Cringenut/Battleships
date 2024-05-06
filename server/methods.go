@@ -10,6 +10,10 @@ import (
 	"net/http"
 )
 
+type FireResponseData struct {
+	Result string `json:"result"`
+}
+
 func CheckConnection() error {
 	response, err := http.Get("https://go-pjatk-server.fly.dev/swagger/index.html")
 	if err != nil {
@@ -85,22 +89,27 @@ func PostFire(coord string) error {
 	if err != nil {
 		return err
 	}
-
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-			// Handle the error
-		}
-	}(res.Body)
+	defer res.Body.Close()
 
 	// Read the response body
-	responseData, err := io.ReadAll(res.Body)
+	responseData := &FireResponseData{}
+	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
 		return err
 	}
 
-	// Print the response body
-	fmt.Println("Response from server:", string(responseData))
+	// Print or use the "result" parameter
+	fmt.Println("Response from server:", responseData.Result)
+
+	if responseData.Result == "" {
+		return nil
+	}
+
+	if responseData.Result == "miss" {
+		client.AppendPlayerShots(coord, false)
+	} else {
+		client.AppendPlayerShots(coord, true)
+	}
 
 	return nil
 }
