@@ -77,7 +77,7 @@ templ MakeEnemyBoardCell(coord string) {
     <title></title>
 </head>
 <body>
-<form id="" class="mb-4" hx-boost="true" hx-post="/fire" hx-swap="outerHTML" hx-target="#enemy-board">
+<form id="" hx-boost="true" hx-post="/fire" hx-swap="outerHTML" hx-target="#enemy-board">
     <input type="hidden" name="coord" value={ coord } />
     if cellHit, shipHit := client.IsCellHit(coord); cellHit {
         if shipHit {

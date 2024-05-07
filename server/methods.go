@@ -180,7 +180,7 @@ func GetBoard() ([]string, error) {
 }
 
 func GetGameStatus() (*GetGameStatusData, error) {
-	geturl := "https://go-pjatk-server.fly.dev/api/game/board"
+	geturl := "https://go-pjatk-server.fly.dev/api/game"
 
 	if err := CheckConnection(); err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ func GetGameStatus() (*GetGameStatusData, error) {
 	}
 
 	// Decode the JSON response into the GetBoardResponseData struct
-	responseData := &GetBoardResponseData{}
+	responseData := &GetGameStatusData{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
 		return nil, err
