@@ -56,8 +56,8 @@ templ MakeEnemyBoard() {
 </style>
 <body>
 <div class="board" id="enemy-board">
-    for col := 0; col < 10; col++ {
-        for row := 0; row < 10; row++ {
+    for row := 0; row < 10; row++ {
+        for col := 0; col < 10; col++ {
             @MakeEnemyBoardCell(client.CalculateCellCoord(row, col))
         }
     }
