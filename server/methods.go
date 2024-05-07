@@ -14,6 +14,10 @@ type FireResponseData struct {
 	Result string `json:"result"`
 }
 
+type GetBoardResponseData struct {
+	Board []string `json:"board"`
+}
+
 func CheckConnection() error {
 	response, err := http.Get("https://go-pjatk-server.fly.dev/swagger/index.html")
 	if err != nil {
@@ -58,6 +62,12 @@ func PostInitGame(body []byte) error {
 
 	// If post goes successful
 	client.SetToken(res.Header.Get("x-auth-token"))
+
+	if ships, err := GetBoard(); err != nil {
+		return err
+	} else {
+		client.SetPlayerShips(ships)
+	}
 	return nil
 }
 
@@ -112,4 +122,49 @@ func PostFire(coord string) error {
 	}
 
 	return nil
+}
+
+/* GET */
+func GetBoard() ([]string, error) {
+	geturl := "https://go-pjatk-server.fly.dev/api/game/board"
+
+	if err := CheckConnection(); err != nil {
+		return nil, err
+	}
+
+	// Create a new GET request
+	req, err := http.NewRequest("GET", geturl, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Add the X-Auth-Token header using the token received during game initialization
+	req.Header.Add("X-Auth-Token", client.GetToken())
+
+	// Create a new HTTP client and send the request
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			fmt.Println("Error closing response body:", err)
+		}
+	}(res.Body)
+
+	if res.StatusCode != http.StatusOK {
+		return nil, errors.New("failed to fetch the game board")
+	}
+
+	// Decode the JSON response into the GetBoardResponseData struct
+	responseData := &GetBoardResponseData{}
+	err = json.NewDecoder(res.Body).Decode(responseData)
+	if err != nil {
+		return nil, err
+	}
+
+	// Return the board data
+	return responseData.Board, nil
 }

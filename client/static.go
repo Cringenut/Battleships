@@ -43,11 +43,11 @@ func CalculateCellCoord(row int, col int) string {
 	return string(y) + strconv.Itoa(x)
 }
 
-func IsHit(coord string) bool {
-	_, ok := GetPlayerShots()[coord]
+func IsCellHit(coord string) (bool, bool) {
+	hit, ok := GetPlayerShots()[coord]
 	if ok {
-		return false
+		return true, hit
 	} else {
-		return true
+		return false, false
 	}
 }

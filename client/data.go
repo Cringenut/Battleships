@@ -6,10 +6,11 @@ import (
 )
 
 var (
-	tokenMutex  sync.RWMutex // to ensure safe concurrent access to the token
-	token       string
-	playerShips []string
-	playerShots map[string]bool
+	tokenMutex     sync.RWMutex // to ensure safe concurrent access to the token
+	token          string
+	playerShips    []string
+	playerShipsSet bool
+	playerShots    map[string]bool
 )
 
 // SetToken sets the token.
@@ -30,7 +31,12 @@ func GetToken() string {
 func SetPlayerShips(s []string) {
 	tokenMutex.Lock()
 	defer tokenMutex.Unlock()
-	playerShips = s
+	if !playerShipsSet {
+		playerShips = make([]string, len(s))
+		copy(playerShips, s) // Use copy to prevent external modifications through the original slice
+		playerShipsSet = true
+		fmt.Println("Player ships set:", playerShips)
+	}
 }
 
 // GetToken returns the token.

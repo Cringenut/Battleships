@@ -6,7 +6,7 @@ import (
 
 templ MakePlayerBoardCell(coord string) {
 <style>
-    .player-cell, .player-ship-cell {
+    .cell, .player-ship-cell, .enemy-cell, .hit-cell, .miss-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
@@ -19,7 +19,16 @@ templ MakePlayerBoardCell(coord string) {
         position: relative; /* Allows for absolute positioning of the button */
     }
     .player-ship-cell {
+        background-color: blue; /* Background color for cells with ships */
+    }
+    .enemy-cell {
+        cursor: pointer; /* Indicates that the element is clickable */
+    }
+    .hit-cell {
         background-color: green; /* Background color for cells with ships */
+    }
+    .miss-cell {
+        background-color: red; /* Background color for cells with ships */
     }
 </style>
 <!DOCTYPE html>
@@ -29,7 +38,7 @@ templ MakePlayerBoardCell(coord string) {
     <title></title>
 </head>
 <body>
-    <div class="player-cell" id={ coord } ></div>
+    <div class="cell" id={ coord } ></div>
 </body>
 </html>
 }
@@ -43,24 +52,6 @@ templ MakeEnemyBoardCell(coord string) {
         height: 100%; /* Ensure the form fills its container */
         width: 100%; /* Ensure the form fills its container */
         position: relative; /* Required for absolute positioning of the button */
-    }
-    .enemy-cell, .enemy-hit-cell {
-        display: flex; /* Makes cell a flex container */
-        justify-content: center; /* Centers content horizontally */
-        align-items: center; /* Centers content vertically */
-        color: white; /* Sets the text color */
-        font-size: 24px; /* Sets the text size */
-        aspect-ratio: 1; /* Ensures that each cell is square */
-        width: 100%; /* Fill the grid space */
-        height: 100%; /* Ensures the cell fills the height of its container */
-        background-color: #222; /* Default background color */
-        position: relative; /* Allows for absolute positioning of the button */
-    }
-    .enemy-cell {
-        cursor: pointer; /* Indicates that the element is clickable */
-    }
-    .enemy-hit-cell {
-        background-color: red; /* Background color for cells with ships */
     }
     button.invisible-button {
         position: absolute; /* Position the button over the cell */
@@ -84,12 +75,16 @@ templ MakeEnemyBoardCell(coord string) {
 <body>
 <form id="" class="mb-4" hx-boost="true" hx-post="/fire" hx-swap="outerHTML" hx-target="#enemy-board">
     <input type="hidden" name="coord" value={ coord } />
-    if client.IsHit(coord) {
+    if cellHit, shipHit := client.IsCellHit(coord); cellHit {
+        if shipHit {
+            <div class="hit-cell" id={ coord } ></div>
+        } else {
+            <div class="miss-cell" id={ coord } ></div>
+        }
+    } else {
         <div class="enemy-cell" id={ coord } hx-swap="none" hx-target="this" hx-trigger="click">
             <button class="invisible-button" type="submit"></button>
         </div>
-    } else {
-        <div class="enemy-hit-cell" id={ coord }></div>
     }
 </form>
 </body>

@@ -11,6 +11,14 @@ import (
 
 func main() {
 
+	router := gin.Default()
+
+	//initialize config
+	app := server.Config{Router: router}
+
+	//routes
+	app.Routes()
+
 	requestBody := pregame.BuildPostBody()
 
 	if err := server.PostInitGame(requestBody); err != nil {
@@ -22,14 +30,6 @@ func main() {
 
 	fmt.Println("Game token is: " + client.GetToken())
 	//_, coords := server.GetBoard()
-
-	router := gin.Default()
-
-	//initialize config
-	app := server.Config{Router: router}
-
-	//routes
-	app.Routes()
 
 	router.Run(":8080")
 
