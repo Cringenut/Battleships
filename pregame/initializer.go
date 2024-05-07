@@ -1,7 +1,6 @@
 package pregame
 
 import (
-	"Battleships/client"
 	"encoding/json"
 )
 
@@ -24,7 +23,6 @@ func BuildPostBody() []byte {
 	}
 
 	//gameData.Coords = PlaceShips()
-	client.SetPlayerShips(gameData.Coords)
 
 	body, _ := json.Marshal(gameData)
 	return body

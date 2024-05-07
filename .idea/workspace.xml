@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v2.1">
-      <change afterPath="$PROJECT_DIR$/assets/explosion_icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/explosion_icon.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/data.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/static.go" beforeDir="false" afterPath="$PROJECT_DIR$/client/static.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/methods.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-cell.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/boards.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/boards.templ" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

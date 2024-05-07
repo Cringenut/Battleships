@@ -25,7 +25,11 @@ templ MakePlayerBoard() {
 </style>
 <body>
 <div class="board">
-    @MakePlayerBoardCell(client.CalculateCellCoord(0, 0))
+    for col := 0; col < 10; col++ {
+        for row := 0; row < 10; row++ {
+            @MakePlayerBoardCell(client.CalculateCellCoord(row, col))
+        }
+    }
 </div>
 </body>
 </html>
@@ -53,9 +57,9 @@ templ MakeEnemyBoard() {
 <body>
 <div class="board" id="enemy-board">
     for col := 0; col < 10; col++ {
-    for row := 0; row < 10; row++ {
-    @MakeEnemyBoardCell(client.CalculateCellCoord(row, col))
-    }
+        for row := 0; row < 10; row++ {
+            @MakeEnemyBoardCell(client.CalculateCellCoord(row, col))
+        }
     }
 </div>
 </body>

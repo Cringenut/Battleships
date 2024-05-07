@@ -38,7 +38,11 @@ templ MakePlayerBoardCell(coord string) {
     <title></title>
 </head>
 <body>
-    <div class="cell" id={ coord } ></div>
+    if (client.StringSliceContains(client.GetPlayerShips(), coord)) {
+        <div class="player-ship-cell" id={ coord }>{ coord }</div>
+    } else {
+        <div class="cell" id={ coord } >{ coord }</div>
+    }
 </body>
 </html>
 }
@@ -77,12 +81,13 @@ templ MakeEnemyBoardCell(coord string) {
     <input type="hidden" name="coord" value={ coord } />
     if cellHit, shipHit := client.IsCellHit(coord); cellHit {
         if shipHit {
-            <div class="hit-cell" id={ coord } ></div>
+            <div class="hit-cell" id={ coord } >{ coord }</div>
         } else {
-            <div class="miss-cell" id={ coord } ></div>
+            <div class="miss-cell" id={ coord } >{ coord }</div>
         }
     } else {
         <div class="enemy-cell" id={ coord } hx-swap="none" hx-target="this" hx-trigger="click">
+            { coord }
             <button class="invisible-button" type="submit"></button>
         </div>
     }
