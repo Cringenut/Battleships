@@ -1,6 +1,7 @@
 package views
 
 import (
+    "Battleships/data"
     "strconv"
 )
 
@@ -39,10 +40,13 @@ templ MakeGameStatusFooter(shouldFire bool, time int) {
         <div class="input-container">Your turn</div>
     } else {
         <div class="input-container">Enemy turn</div>
-
     }
-    <div class="" hx-trigger="every 1s" hx-get="/board" hx-swap="outerHTML" hx-target="#enemy-board"></div>
     <div class="input-container">{ strconv.Itoa(time) }</div>
+    <div class="" hx-trigger="every 1s" hx-get="/e-board" hx-swap="outerHTML" hx-target="#enemy-board"></div>
+    <div class="" hx-trigger="every .3s" hx-get="/p-board" hx-swap="outerHTML" hx-target="#player-board"></div>
+    if data.GetGameData().GameStatus == "ended" {
+        <div class="" hx-trigger="load" hx-get="/" hx-target="#page"></div>
+    }
 </div>
 </body>
 </html>

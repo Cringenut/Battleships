@@ -1,5 +1,9 @@
 package views
 
+import (
+    "Battleships/data"
+)
+
 templ MakeBattlePage(token string) {
 <html>
 <head>
@@ -29,12 +33,16 @@ templ MakeBattlePage(token string) {
     }
 </style>
 <body>
-<div class="boards">
-    // Player board
-    @MakePlayerBoard()
+<div class="boards" id="page">
 
-    // Enemy board
-    @MakeEnemyBoard()
+    if data.GetGameData().GameStatus != "ended" {
+        // Player board
+        @MakePlayerBoard()
+
+        // Enemy board
+        @MakeEnemyBoard()
+    }
+
 
 </div>
     @MakeGameStatusFooter(true, 0)

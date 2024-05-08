@@ -64,5 +64,22 @@ func SetGameData(data *GetGameStatusData) {
 }
 
 func GetGameData() *GetGameStatusData {
+	if gameData == nil {
+		return &GetGameStatusData{
+			GameStatus:     "",
+			LastGameStatus: "",
+			Nick:           "",
+			OppShots:       []string{},
+			Opponent:       "",
+			ShouldFire:     true,
+			Timer:          60,
+		}
+	}
 	return gameData
+}
+
+func IsGameEnded() bool {
+	fmt.Println("Some text")
+
+	return true
 }

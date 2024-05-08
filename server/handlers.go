@@ -17,6 +17,7 @@ func render(c *gin.Context, status int, template templ.Component) error {
 
 func HandleHomePage() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		fmt.Println("Homepage")
 		render(c, 200, views.MakeBattlePage(data.GetToken()))
 	}
 }
@@ -48,6 +49,10 @@ func (app *Config) HandleGetGameStatus(c *gin.Context) {
 	render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer))
 }
 
-func (app *Config) HandleBoard(c *gin.Context) {
+func (app *Config) HandleEnemyBoard(c *gin.Context) {
 	render(c, 200, views.MakeEnemyBoard())
+}
+
+func (app *Config) HandlePlayerBoard(c *gin.Context) {
+	render(c, 200, views.MakePlayerBoard())
 }

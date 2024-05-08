@@ -24,7 +24,7 @@ templ MakePlayerBoard() {
     }
 </style>
 <body>
-<div class="player-board">
+<div class="player-board" id="player-board">
     for row := 0; row < 10; row++ {
         for col := 0; col < 10; col++ {
             @MakePlayerBoardCell("p" + data.CalculateCellCoord(row, col))

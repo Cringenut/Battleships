@@ -35,7 +35,13 @@ templ MakePlayerBoardCell(coord string) {
     <title></title>
 </head>
 <body>
-    if (data.StringSliceContains(data.GetPlayerShips(), coord)) {
+    if data.StringSliceContains(data.GetGameData().OppShots, coord) {
+        if (data.StringSliceContains(data.GetPlayerShips(), coord)) {
+            <div class="hit-cell" id={ coord}>{ coord[1:] }</div>
+        } else {
+            <div class="miss-cell" id={ coord}>{ coord[1:] }</div>
+        }
+    } else if (data.StringSliceContains(data.GetPlayerShips(), coord)) {
         <div class="player-ship-cell" id={ coord}>{ coord[1:] }</div>
     } else {
         <div class="cell" id={ coord } >{ coord[1:] }</div>
