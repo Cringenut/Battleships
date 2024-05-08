@@ -6,7 +6,7 @@ import (
 
 templ MakePlayerBoardCell(coord string) {
 <style>
-    .cell, .player-ship-cell, .enemy-cell, .hit-cell, .miss-cell {
+    .cell, .player-ship-cell, .hit-cell, .miss-cell, .enemy-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
@@ -18,17 +18,14 @@ templ MakePlayerBoardCell(coord string) {
         background-color: #222; /* Default background color */
         position: relative; /* Allows for absolute positioning of the button */
     }
-    .player-ship-cell {
-        background-color: blue; /* Background color for cells with ships */
-    }
-    .enemy-cell {
-        cursor: pointer; /* Indicates that the element is clickable */
-    }
     .hit-cell {
         background-color: green; /* Background color for cells with ships */
     }
     .miss-cell {
         background-color: red; /* Background color for cells with ships */
+    }
+    .player-ship-cell {
+        background-color: blue; /* Background color for cells with ships */
     }
 </style>
 <!DOCTYPE html>
@@ -39,9 +36,9 @@ templ MakePlayerBoardCell(coord string) {
 </head>
 <body>
     if (client.StringSliceContains(client.GetPlayerShips(), coord)) {
-        <div class="player-ship-cell" id={ coord }>{ coord }</div>
+        <div class="player-ship-cell" id={ coord}>{ coord[1:] }</div>
     } else {
-        <div class="cell" id={ coord } >{ coord }</div>
+        <div class="cell" id={ coord } >{ coord[1:] }</div>
     }
 </body>
 </html>

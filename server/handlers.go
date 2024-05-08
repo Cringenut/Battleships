@@ -40,9 +40,10 @@ func (app *Config) HandleFire(c *gin.Context) {
 }
 
 func (app *Config) HandleGetGameStatus(c *gin.Context) {
-	fmt.Println("Status...")
-
 	status, _ := GetGameStatus()
-
 	render(c, 200, views.MakeGameStatusFooter(status.ShouldFire, status.Timer))
+}
+
+func (app *Config) HandleBoard(c *gin.Context) {
+	render(c, 200, views.MakeEnemyBoard())
 }

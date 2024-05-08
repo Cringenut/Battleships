@@ -222,3 +222,9 @@ func GetGameStatus() (*GetGameStatusData, error) {
 	// Return the board data
 	return responseData, nil
 }
+
+func te() {
+	if status, _ := GetGameStatus(); !status.ShouldFire {
+
+	}
+}

@@ -1,6 +1,8 @@
 package client
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func InvertNumber(digit int) int {
 	switch digit {
@@ -29,6 +31,9 @@ func InvertNumber(digit int) int {
 
 // Helper function to check if a string is in a slice of strings
 func StringSliceContains(s []string, str string) bool {
+	if str[0] == 'p' {
+		str = str[1:]
+	}
 	for _, v := range s {
 		if v == str {
 			return true

@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	router := gin.Default()
+	router := gin.New()
 
 	//initialize config
 	app := server.Config{Router: router}

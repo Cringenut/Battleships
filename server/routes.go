@@ -14,4 +14,5 @@ func (app *Config) Routes() {
 
 	app.Router.POST("/fire", app.HandleFire)
 	app.Router.GET("/game", app.HandleGetGameStatus)
+	app.Router.GET("/board", app.HandleBoard)
 }
