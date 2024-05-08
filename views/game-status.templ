@@ -41,7 +41,7 @@ templ MakeGameStatusFooter(shouldFire bool, time int) {
         <div class="input-container">Enemy turn</div>
 
     }
-    <div class="" hx-trigger="every 0.1s" hx-get="/board" hx-swap="outerHTML" hx-target="#enemy-board"></div>
+    <div class="" hx-trigger="every 1s" hx-get="/board" hx-swap="outerHTML" hx-target="#enemy-board"></div>
     <div class="input-container">{ strconv.Itoa(time) }</div>
 </div>
 </body>

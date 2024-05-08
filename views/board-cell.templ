@@ -1,7 +1,7 @@
 package views
 
 import (
-    "Battleships/client"
+    "Battleships/data"
 )
 
 templ MakePlayerBoardCell(coord string) {
@@ -35,7 +35,7 @@ templ MakePlayerBoardCell(coord string) {
     <title></title>
 </head>
 <body>
-    if (client.StringSliceContains(client.GetPlayerShips(), coord)) {
+    if (data.StringSliceContains(data.GetPlayerShips(), coord)) {
         <div class="player-ship-cell" id={ coord}>{ coord[1:] }</div>
     } else {
         <div class="cell" id={ coord } >{ coord[1:] }</div>
@@ -60,7 +60,7 @@ templ MakeEnemyBoardCell(coord string) {
         left: 0;
         width: 100%;
         height: 100%;
-        background: transparent; /* Make the button invisible */
+        background: chocolate; /* Make the button invisible */
         border: none; /* No border */
         padding: 0;
         cursor: pointer; /* Show pointer on hover */
@@ -76,7 +76,7 @@ templ MakeEnemyBoardCell(coord string) {
 <body>
 <form id="" hx-boost="true" hx-post="/fire" hx-swap="outerHTML" hx-target="#enemy-board">
     <input type="hidden" name="coord" value={ coord } />
-    if cellHit, shipHit := client.IsCellHit(coord); cellHit {
+    if cellHit, shipHit := data.IsCellHit(coord); cellHit {
         if shipHit {
             <div class="hit-cell" id={ coord } >{ coord }</div>
         } else {
@@ -84,8 +84,7 @@ templ MakeEnemyBoardCell(coord string) {
         }
     } else {
         <div class="enemy-cell" id={ coord } hx-swap="none" hx-target="this" hx-trigger="click">
-            { coord }
-            <button class="invisible-button" type="submit"></button>
+            <button class="invisible-button" type="submit" hx-boost="true" hx-post="/fire" hx-swap="outerHTML" hx-target="#enemy-board"></button>
         </div>
     }
 </form>

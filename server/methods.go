@@ -1,7 +1,7 @@
 package server
 
 import (
-	"Battleships/client"
+	"Battleships/data"
 	"bytes"
 	"encoding/json"
 	"errors"
@@ -9,24 +9,6 @@ import (
 	"io"
 	"net/http"
 )
-
-type FireResponseData struct {
-	Result string `json:"result"`
-}
-
-type GetBoardResponseData struct {
-	Board []string `json:"board"`
-}
-
-type GetGameStatusData struct {
-	GameStatus     string   `json:"game_status"`
-	LastGameStatus string   `json:"last_game_status"`
-	Nick           string   `json:"nick"`
-	OppShots       []string `json:"opp_shots"`
-	Opponent       string   `json:"opponent"`
-	ShouldFire     bool     `json:"should_fire"`
-	Timer          int      `json:"timer"`
-}
 
 func CheckConnection() error {
 	response, err := http.Get("https://go-pjatk-server.fly.dev/swagger/index.html")
@@ -71,12 +53,12 @@ func PostInitGame(body []byte) error {
 	}(res.Body)
 
 	// If post goes successful
-	client.SetToken(res.Header.Get("x-auth-token"))
+	data.SetToken(res.Header.Get("x-auth-token"))
 
 	if ships, err := GetBoard(); err != nil {
 		return err
 	} else {
-		client.SetPlayerShips(ships)
+		data.SetPlayerShips(ships)
 	}
 	return nil
 }
@@ -102,7 +84,7 @@ func PostFire(coord string) error {
 
 	// Adding the necessary headers
 	r.Header.Add("Content-Type", "application/json")
-	r.Header.Add("X-Auth-Token", client.GetToken()) // Assuming authToken is provided when function is called
+	r.Header.Add("X-Auth-Token", data.GetToken()) // Assuming authToken is provided when function is called
 
 	httpClient := &http.Client{}
 	res, err := httpClient.Do(r)
@@ -112,7 +94,7 @@ func PostFire(coord string) error {
 	defer res.Body.Close()
 
 	// Read the response body
-	responseData := &FireResponseData{}
+	responseData := &data.FireResponseData{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
 		return err
@@ -126,9 +108,9 @@ func PostFire(coord string) error {
 	}
 
 	if responseData.Result == "miss" {
-		client.AppendPlayerShots(coord, false)
+		data.AppendPlayerShots(coord, false)
 	} else {
-		client.AppendPlayerShots(coord, true)
+		data.AppendPlayerShots(coord, true)
 	}
 
 	return nil
@@ -149,9 +131,9 @@ func GetBoard() ([]string, error) {
 	}
 
 	// Add the X-Auth-Token header using the token received during game initialization
-	req.Header.Add("X-Auth-Token", client.GetToken())
+	req.Header.Add("X-Auth-Token", data.GetToken())
 
-	// Create a new HTTP client and send the request
+	// Create a new HTTP data and send the request
 	httpClient := &http.Client{}
 	res, err := httpClient.Do(req)
 	if err != nil {
@@ -169,7 +151,7 @@ func GetBoard() ([]string, error) {
 	}
 
 	// Decode the JSON response into the GetBoardResponseData struct
-	responseData := &GetBoardResponseData{}
+	responseData := &data.GetBoardResponseData{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
 		return nil, err
@@ -179,7 +161,7 @@ func GetBoard() ([]string, error) {
 	return responseData.Board, nil
 }
 
-func GetGameStatus() (*GetGameStatusData, error) {
+func GetGameStatus() (*data.GetGameStatusData, error) {
 	geturl := "https://go-pjatk-server.fly.dev/api/game"
 
 	if err := CheckConnection(); err != nil {
@@ -193,9 +175,9 @@ func GetGameStatus() (*GetGameStatusData, error) {
 	}
 
 	// Add the X-Auth-Token header using the token received during game initialization
-	req.Header.Add("X-Auth-Token", client.GetToken())
+	req.Header.Add("X-Auth-Token", data.GetToken())
 
-	// Create a new HTTP client and send the request
+	// Create a new HTTP data and send the request
 	httpClient := &http.Client{}
 	res, err := httpClient.Do(req)
 	if err != nil {
@@ -213,7 +195,7 @@ func GetGameStatus() (*GetGameStatusData, error) {
 	}
 
 	// Decode the JSON response into the GetBoardResponseData struct
-	responseData := &GetGameStatusData{}
+	responseData := &data.GetGameStatusData{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
 		return nil, err
@@ -221,10 +203,4 @@ func GetGameStatus() (*GetGameStatusData, error) {
 
 	// Return the board data
 	return responseData, nil
-}
-
-func te() {
-	if status, _ := GetGameStatus(); !status.ShouldFire {
-
-	}
 }

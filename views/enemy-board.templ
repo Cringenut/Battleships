@@ -1,7 +1,7 @@
 package views
 
 import (
-    "Battleships/client"
+    "Battleships/data"
 )
 
 templ MakeEnemyBoard() {
@@ -27,7 +27,7 @@ templ MakeEnemyBoard() {
 <div class="enemy-board" id="enemy-board">
     for row := 0; row < 10; row++ {
     for col := 0; col < 10; col++ {
-    @MakeEnemyBoardCell(client.CalculateCellCoord(row, col))
+    @MakeEnemyBoardCell(data.CalculateCellCoord(row, col))
     }
     }
 </div>

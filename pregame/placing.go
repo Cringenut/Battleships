@@ -1,7 +1,7 @@
 package pregame
 
 import (
-	"Battleships/client"
+	"Battleships/data"
 	"bufio"
 	"fmt"
 	"math"
@@ -40,7 +40,7 @@ func PlaceShips() []string {
 				endInput := strings.ToUpper(scanner.Text())
 				endRow, endCol, validEnd := isValidCoordinate(endInput)
 
-				if !validEnd || !client.StringSliceContains(ends, endInput) {
+				if !validEnd || !data.StringSliceContains(ends, endInput) {
 					fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
 					continue
 				}
@@ -79,7 +79,7 @@ func isValidCoordinate(coord string) (int, int, bool) {
 	if len(coord) == 3 && coord[1] == '1' && coord[2] == '0' {
 		row = 0 // Zero-indexed, so '10' becomes 0
 	} else if len(coord) == 2 && unicode.IsDigit(rune(coord[1])) {
-		row = client.InvertNumber(int(coord[1] - '0'))
+		row = data.InvertNumber(int(coord[1] - '0'))
 	} else {
 		return 0, 0, false
 	}
@@ -143,7 +143,7 @@ func possibleEndCoords(row, col, length int) []string {
 			}
 		}
 		if valid {
-			formattedEnd := fmt.Sprintf("%c%d", rune('A'+endCol), client.InvertNumber(endRow)) // Ensure correct formatting
+			formattedEnd := fmt.Sprintf("%c%d", rune('A'+endCol), data.InvertNumber(endRow)) // Ensure correct formatting
 			ends = append(ends, formattedEnd)
 		}
 	}

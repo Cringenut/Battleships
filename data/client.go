@@ -1,4 +1,4 @@
-package client
+package data
 
 import (
 	"fmt"
@@ -11,6 +11,7 @@ var (
 	playerShips    []string
 	playerShipsSet bool
 	playerShots    map[string]bool
+	gameData       *GetGameStatusData
 )
 
 // SetToken sets the token.
@@ -56,4 +57,12 @@ func AppendPlayerShots(coord string, hit bool) {
 
 func GetPlayerShots() map[string]bool {
 	return playerShots
+}
+
+func SetGameData(data *GetGameStatusData) {
+	gameData = data
+}
+
+func GetGameData() *GetGameStatusData {
+	return gameData
 }

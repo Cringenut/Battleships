@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Battleships/client"
+	"Battleships/data"
 	"Battleships/pregame"
 	"Battleships/server"
 	"fmt"
@@ -28,7 +28,7 @@ func main() {
 		fmt.Println("Reconnection...")
 	}
 
-	fmt.Println("Game token is: " + client.GetToken())
+	fmt.Println("Game token is: " + data.GetToken())
 	//_, coords := server.GetBoard()
 
 	router.Run(":8080")

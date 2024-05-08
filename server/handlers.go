@@ -1,7 +1,7 @@
 package server
 
 import (
-	"Battleships/client"
+	"Battleships/data"
 	"Battleships/views"
 	"fmt"
 	"github.com/a-h/templ"
@@ -17,7 +17,7 @@ func render(c *gin.Context, status int, template templ.Component) error {
 
 func HandleHomePage() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		render(c, 200, views.MakeBattlePage(client.GetToken()))
+		render(c, 200, views.MakeBattlePage(data.GetToken()))
 	}
 }
 
@@ -40,8 +40,12 @@ func (app *Config) HandleFire(c *gin.Context) {
 }
 
 func (app *Config) HandleGetGameStatus(c *gin.Context) {
-	status, _ := GetGameStatus()
-	render(c, 200, views.MakeGameStatusFooter(status.ShouldFire, status.Timer))
+	gameData, err := GetGameStatus()
+	if err != nil {
+		return
+	}
+	data.SetGameData(gameData)
+	render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer))
 }
 
 func (app *Config) HandleBoard(c *gin.Context) {
