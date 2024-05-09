@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -55,4 +56,8 @@ func IsCellHit(coord string) (bool, bool) {
 	} else {
 		return false, false
 	}
+}
+
+func PrintErrorInfo(err error) {
+	fmt.Println("ERROR: " + err.Error())
 }

@@ -23,7 +23,6 @@ func BuildPostBody() []byte {
 	}
 
 	//gameData.Coords = PlaceShips()
-
 	body, _ := json.Marshal(gameData)
 	return body
 }

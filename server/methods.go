@@ -13,6 +13,7 @@ import (
 func CheckConnection() error {
 	response, err := http.Get("https://go-pjatk-server.fly.dev/swagger/index.html")
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 	defer response.Body.Close()
@@ -29,11 +30,13 @@ func PostInitGame(body []byte) error {
 	posturl := "https://go-pjatk-server.fly.dev/api/game"
 
 	if err := CheckConnection(); err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 
 	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer((body)))
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 
@@ -42,6 +45,7 @@ func PostInitGame(body []byte) error {
 	httpClient := &http.Client{}
 	res, err := httpClient.Do(r)
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 
@@ -56,6 +60,7 @@ func PostInitGame(body []byte) error {
 	data.SetToken(res.Header.Get("x-auth-token"))
 
 	if ships, err := GetBoard(); err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	} else {
 		data.SetPlayerShips(ships)
@@ -70,10 +75,12 @@ func PostFire(coord string) error {
 	jsonData := map[string]string{"coord": coord}
 	body, err := json.Marshal(jsonData)
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 
 	if err := CheckConnection(); err != nil {
+		data.PrintErrorInfo(err)
 		return err
 	}
 
@@ -121,12 +128,14 @@ func GetBoard() ([]string, error) {
 	geturl := "https://go-pjatk-server.fly.dev/api/game/board"
 
 	if err := CheckConnection(); err != nil {
+		data.PrintErrorInfo(err)
 		return nil, err
 	}
 
 	// Create a new GET request
 	req, err := http.NewRequest("GET", geturl, nil)
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return nil, err
 	}
 
@@ -165,12 +174,14 @@ func GetGameStatus() (*data.GetGameStatusData, error) {
 	geturl := "https://go-pjatk-server.fly.dev/api/game"
 
 	if err := CheckConnection(); err != nil {
+		data.PrintErrorInfo(err)
 		return nil, err
 	}
 
 	// Create a new GET request
 	req, err := http.NewRequest("GET", geturl, nil)
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return nil, err
 	}
 
@@ -198,6 +209,7 @@ func GetGameStatus() (*data.GetGameStatusData, error) {
 	responseData := &data.GetGameStatusData{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
+		data.PrintErrorInfo(err)
 		return nil, err
 	}
 

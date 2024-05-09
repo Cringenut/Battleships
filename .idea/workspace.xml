@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v2.5 // Fixed flickering bug">
+      <change afterPath="$PROJECT_DIR$/views/boards.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/client.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/static.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/static.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-cell.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/methods.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/enemy-board.templ" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/views/game-status.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/game-status.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/player-board.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/player-board.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/player-board.templ" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

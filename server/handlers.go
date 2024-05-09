@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"strings"
+	"time"
 )
 
 func render(c *gin.Context, status int, template templ.Component) error {
@@ -43,7 +44,11 @@ func (app *Config) HandleFire(c *gin.Context) {
 func (app *Config) HandleGetGameStatus(c *gin.Context) {
 	gameData, err := GetGameStatus()
 	if err != nil {
-		return
+		data.PrintErrorInfo(err)
+		for err != nil {
+			time.Sleep(250 * time.Millisecond)
+			gameData, err = GetGameStatus()
+		}
 	}
 	data.SetGameData(gameData)
 	render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer))
