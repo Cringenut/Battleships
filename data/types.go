@@ -17,3 +17,18 @@ type GetGameStatusData struct {
 	ShouldFire     bool     `json:"should_fire"`
 	Timer          int      `json:"timer"`
 }
+
+type GetPlayersData struct {
+	PlayerDesc string `json:"desc"`
+	PlayerNick string `json:"nick"`
+	EnemyDesc  string `json:"opp_desc"`
+	EnemyNick  string `json:"opponent"`
+}
+
+type GameStartData struct {
+	Coords      []string `json:"coords"`
+	Description string   `json:"desc"`
+	Nickname    string   `json:"nick"`
+	TargetNick  string   `json:"target_nick"`
+	Wpbot       bool     `json:"wpbot"`
+}

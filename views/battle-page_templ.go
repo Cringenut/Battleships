@@ -14,7 +14,7 @@ import (
 	"Battleships/data"
 )
 
-func MakeBattlePage(token string) templ.Component {
+func MakeBattlePage(token string, desc *data.GetPlayersData) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -27,7 +27,7 @@ func MakeBattlePage(token string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\" integrity=\"sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC\" crossorigin=\"anonymous\"></script><title>Battle</title></head><style>\r\n    body {\r\n        margin: 0;\r\n        height: 100vh;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #141526;\r\n        color: white;\r\n        font-family: Arial, sans-serif;\r\n    }\r\n    .boards {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        align-items: center;\r\n        flex-grow: 1;\r\n        width: 100%;\r\n        padding-top: 8vh; /* Adjust based on the footer's height */\r\n        box-sizing: border-box; /* Include padding in height calculation */\r\n    }\r\n</style><body><div class=\"boards\" id=\"page\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\" integrity=\"sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC\" crossorigin=\"anonymous\"></script><title>Battle</title></head><style>\r\n    body {\r\n        margin: 0;\r\n        height: 100vh;\r\n        display: flex;\r\n        flex-direction: column;\r\n        align-items: center;\r\n        justify-content: center;\r\n        background-color: #141526;\r\n        color: white;\r\n        font-family: Arial, sans-serif;\r\n    }\r\n    .boards {\r\n        display: flex;\r\n        justify-content: space-around;\r\n        align-items: center;\r\n        flex-grow: 1;\r\n        width: 100%;\r\n        padding-top: 8vh; /* Adjust based on the top footer's height */\r\n        padding-bottom: -4vh; /* Adjust based on the bottom footer's height */\r\n        box-sizing: border-box; /* Include padding in height calculation */\r\n    }\r\n</style><body><div class=\"boards\" id=\"page\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -53,7 +53,11 @@ func MakeBattlePage(token string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = MakeGameStatusFooter(true, 0).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = MakeGameStatusFooter(true, 60, desc).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = MakeBottomFooter(token).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

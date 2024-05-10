@@ -27,7 +27,7 @@ func MakePlayerBoard() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\" integrity=\"sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC\" crossorigin=\"anonymous\"></script><title>Battle</title></head><style>\r\n    .player-board, .enemy-board {\r\n        background-color: #837777;\r\n        width: 36%;\r\n        aspect-ratio: 1;\r\n        display: grid;\r\n        grid-template-columns: repeat(10, 1fr);\r\n        grid-template-rows: repeat(10, 1fr);\r\n        gap: 3px;\r\n        margin: 12px;\r\n        border: 3px solid #837777;\r\n    }\r\n</style><body><div class=\"player-board\" id=\"player-board\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\" integrity=\"sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC\" crossorigin=\"anonymous\"></script><title>Battle</title></head><style>\r\n    .player-board, .enemy-board {\r\n        background-color: #837777;\r\n        width: 38%;\r\n        aspect-ratio: 1;\r\n        display: grid;\r\n        grid-template-columns: repeat(10, 1fr);\r\n        grid-template-rows: repeat(10, 1fr);\r\n        gap: 3px;\r\n        margin: 12px;\r\n        border: 3px solid #837777;\r\n    }\r\n</style><body><div class=\"player-board\" id=\"player-board\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

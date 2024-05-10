@@ -12,6 +12,7 @@ var (
 	playerShipsSet bool
 	playerShots    map[string]bool
 	gameData       *GetGameStatusData
+	playersData    *GetPlayersData
 )
 
 // SetToken sets the token.
@@ -76,6 +77,22 @@ func GetGameData() *GetGameStatusData {
 		}
 	}
 	return gameData
+}
+
+func SetPlayersDescData(data *GetPlayersData) {
+	playersData = data
+}
+
+func GetPlayersDescData() *GetPlayersData {
+	if playersData == nil {
+		return &GetPlayersData{
+			PlayerNick: "",
+			PlayerDesc: "",
+			EnemyNick:  "",
+			EnemyDesc:  "",
+		}
+	}
+	return playersData
 }
 
 func IsGameEnded() bool {

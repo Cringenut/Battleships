@@ -1,30 +1,22 @@
 package views
 
 import (
-    "strconv"
+"strconv"
 )
 
-templ MakeGameStatusFooter(shouldFire bool, time int) {
+templ MakeTimer(shouldFire bool, time int) {
 <style>
-    .footer {
-        background-color: black;
-        color: white;
-        height: 8vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
+    .data-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-    .input-container {
-        width: 100%; /* Ensures the container uses the full width */
-        display: flex; /* Enables flexbox properties */
-        align-items: center; /* Centers content vertically */
-        justify-content: center; /* Centers content horizontally */
-        margin: 5px 0; /* Adds vertical margin for spacing */
+    .vertical-center-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%; /* Ensure the container takes up full height */
     }
 </style>
 <!DOCTYPE html>
@@ -33,18 +25,33 @@ templ MakeGameStatusFooter(shouldFire bool, time int) {
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <title></title>
 </head>
+
+
 <body>
-<div id="status" class="footer" hx-trigger="every 0.4s" hx-boost="true" hx-get="/game" hx-swap="outerHTML" hx-target="#status">
+<div class="center-container" id="footer-center-container" hx-trigger="every 0.4s" hx-boost="true" hx-get="/game" hx-swap="outerHTML" hx-target="#footer-center-container">
     if shouldFire {
-        <div class="input-container">Your turn</div>
+        <div class="data-container">Your turn</div>
     } else {
-        <div class="input-container">Enemy turn</div>
+        <div class="data-container">Enemy turn</div>
     }
-    <div class="input-container">{ strconv.Itoa(time) }</div>
+    <div class="data-container">{ strconv.Itoa(time) }</div>
+
     <div class="" hx-trigger="every 1s" hx-get="/e-board" hx-swap="outerHTML" hx-target="#enemy-board"></div>
     <div class="" hx-trigger="every .3s" hx-get="/p-board" hx-swap="outerHTML" hx-target="#player-board"></div>
-
 </div>
+</body>
+</html>
+}
+
+templ MakeGameEndStatus() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<body>
+    <div class="vertical-center-container">Game Ended</div>
 </body>
 </html>
 }

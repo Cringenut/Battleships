@@ -1,0 +1,79 @@
+package views
+
+import (
+    "Battleships/data"
+)
+
+templ MakeGameStatusFooter(shouldFire bool, time int, desc *data.GetPlayersData) {
+<style>
+    .footer {
+        background-color: black;
+        color: white;
+        height: auto;
+        padding: 5px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nickname {
+        flex-basis: 30%;
+        text-align: center;
+        position: relative;
+    }
+    .center-container {
+        min-height: 8vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tooltip-enemy, .tooltip-player {
+        visibility: hidden;
+        width: 400px; /* Adjust width as needed */
+        background-color: gray;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px; /* Adjust padding as needed */
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        /* Remove left: 100%; */
+        /* Add the following to center horizontally */
+        left: 50%;
+        transform: translateX(-50%);
+        /* Fade in */
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .nickname:hover .tooltip-enemy, .nickname:hover .tooltip-player {
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<body>
+<div class="footer">
+    <div class="nickname">{ desc.PlayerNick }
+        <span class="tooltip-player">{ desc.PlayerDesc }</span>
+    </div>
+    if data.GetGameData().GameStatus != "ended" {
+        @MakeGameEndStatus()
+    } else {
+        @MakeTimer(shouldFire, time)
+    }
+    <div class="nickname">{ desc.EnemyNick }
+        <span class="tooltip-enemy">{ desc.EnemyDesc }</span>
+    </div>
+</div>
+</body>
+</html>
+}

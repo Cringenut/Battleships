@@ -4,7 +4,7 @@ import (
     "Battleships/data"
 )
 
-templ MakeBattlePage(token string) {
+templ MakeBattlePage(token string, desc *data.GetPlayersData) {
 <html>
 <head>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
@@ -28,7 +28,8 @@ templ MakeBattlePage(token string) {
         align-items: center;
         flex-grow: 1;
         width: 100%;
-        padding-top: 8vh; /* Adjust based on the footer's height */
+        padding-top: 8vh; /* Adjust based on the top footer's height */
+        padding-bottom: -4vh; /* Adjust based on the bottom footer's height */
         box-sizing: border-box; /* Include padding in height calculation */
     }
 </style>
@@ -43,9 +44,9 @@ templ MakeBattlePage(token string) {
         @MakeEnemyBoard()
     }
 
-
 </div>
-    @MakeGameStatusFooter(true, 0)
+    @MakeGameStatusFooter(true, 60, desc)
+    @MakeBottomFooter(token)
 </body>
 </html>
 }

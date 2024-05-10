@@ -29,6 +29,7 @@ func main() {
 	}
 
 	fmt.Println("Game token is: " + data.GetToken())
+
 	//_, coords := server.GetBoard()
 
 	router.Run(":8080")

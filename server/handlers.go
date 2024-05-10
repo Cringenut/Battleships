@@ -18,8 +18,12 @@ func render(c *gin.Context, status int, template templ.Component) error {
 
 func HandleHomePage() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		desc, err := GetPlayersDescription()
+		if err == nil {
+			data.SetPlayersDescData(desc)
+		}
 		fmt.Println("Homepage")
-		render(c, 200, views.MakeBattlePage(data.GetToken()))
+		render(c, 200, views.MakeBattlePage(data.GetToken(), desc))
 	}
 }
 
@@ -51,7 +55,12 @@ func (app *Config) HandleGetGameStatus(c *gin.Context) {
 		}
 	}
 	data.SetGameData(gameData)
-	render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer))
+
+	if data.GetGameData().GameStatus != "ended" {
+		render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer, data.GetPlayersDescData()))
+	} else {
+		render(c, 200, views.MakeGameEndStatus())
+	}
 }
 
 func (app *Config) HandleEnemyBoard(c *gin.Context) {
