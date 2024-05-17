@@ -1,14 +1,13 @@
 package server
 
 import (
-	"Battleships/data"
 	"Battleships/views"
 	"fmt"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 	"io"
+	"net/http"
 	"strings"
-	"time"
 )
 
 func render(c *gin.Context, status int, template templ.Component) error {
@@ -16,57 +15,40 @@ func render(c *gin.Context, status int, template templ.Component) error {
 	return template.Render(c.Request.Context(), c.Writer)
 }
 
-func HandleHomePage() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		desc, err := GetPlayersDescription()
-		if err == nil {
-			data.SetPlayersDescData(desc)
-		}
-		fmt.Println("Homepage")
-		render(c, 200, views.MakeBattlePage(data.GetToken(), desc))
+// Handling Main Menu page
+func (app *Config) HandleMainMenu(c *gin.Context) {
+	if c.Request.URL.Path != "/" {
+		c.Redirect(http.StatusMovedPermanently, "http://www.google.com/")
 	}
+	render(c, 200, views.MakeMainMenu())
 }
 
-func (app *Config) HandleFire(c *gin.Context) {
-	jsonData, err := io.ReadAll(c.Request.Body)
-	if err != nil {
-		// Handle error
+func (app *Config) HandleMainMenuContainer(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	// Using a variable declared inside html file using HTMX
+	chosenOption := strings.TrimPrefix(string(jsonData), "chosenOption=")
+
+	switch chosenOption {
+	case "single":
+		render(c, 200, views.MakeSingeplayerChosen())
+	case "back":
+		render(c, 200, views.MakeMainMenu())
+
+	default:
+		render(c, 200, views.MakeMainMenu())
 	}
 
-	coord := strings.TrimPrefix(string(jsonData), "coord=")
-	err = PostFire(coord)
-	if err != nil {
-		return
-	}
-
-	fmt.Println(coord)
-	fmt.Println("Bang")
-
-	render(c, 200, views.MakeEnemyBoard())
+	fmt.Println(chosenOption)
 }
 
-func (app *Config) HandleGetGameStatus(c *gin.Context) {
-	gameData, err := GetGameStatus()
-	if err != nil {
-		data.PrintErrorInfo(err)
-		for err != nil {
-			time.Sleep(250 * time.Millisecond)
-			gameData, err = GetGameStatus()
-		}
-	}
-	data.SetGameData(gameData)
-
-	if data.GetGameData().GameStatus != "ended" {
-		render(c, 200, views.MakeGameStatusFooter(data.GetGameData().ShouldFire, data.GetGameData().Timer, data.GetPlayersDescData()))
-	} else {
-		render(c, 200, views.MakeGameEndStatus())
-	}
+func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
+	fmt.Println("Redirect")
+	render(c, 200, views.MakeMainMenu())
 }
 
-func (app *Config) HandleEnemyBoard(c *gin.Context) {
-	render(c, 200, views.MakeEnemyBoard())
-}
-
-func (app *Config) HandlePlayerBoard(c *gin.Context) {
-	render(c, 200, views.MakePlayerBoard())
+// Handle Battle Page
+func (app *Config) HandleBattlePage(c *gin.Context) {
+	fmt.Println("Battle page")
+	render(c, 200, views.MakeBattlePage())
 }

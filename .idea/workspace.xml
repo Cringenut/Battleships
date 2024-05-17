@@ -4,22 +4,31 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v2.5 // Fixed flickering bug">
-      <change afterPath="$PROJECT_DIR$/views/bottom-footer.templ" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/top-bar.templ" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.0 Whole new project structure">
+      <change afterPath="$PROJECT_DIR$/views/battle-bage.templ" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/main-menu.templ" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/main-menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/client.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/client.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/static.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/types.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" afterPath="$PROJECT_DIR$/pregame/initializer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregame/placing.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/methods.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page_templ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/boards_templ.go" beforeDir="false" afterPath="$PROJECT_DIR$/views/boards_templ.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/game-status.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/game-status.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/game-status_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-page_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board-cell.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board-cell_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/boards.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/boards_templ.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/bottom-footer.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/game-status.templ" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/top-bar.templ" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +146,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Battleships v0.1 // New project structure" />
     <MESSAGE value="Battleships v0.2" />
@@ -149,7 +169,8 @@
     <MESSAGE value="Battleships v2.2" />
     <MESSAGE value="Battleships v2.4" />
     <MESSAGE value="Battleships v2.5 // Fixed flickering bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v2.5 // Fixed flickering bug" />
+    <MESSAGE value="Battleships v3.0 Whole new project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.0 Whole new project structure" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

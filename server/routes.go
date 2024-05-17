@@ -9,11 +9,11 @@ type Config struct {
 }
 
 func (app *Config) Routes() {
-	//views
-	app.Router.GET("/", HandleHomePage())
+	// Main page getters
+	app.Router.GET("/", app.HandleMainMenu)
+	app.Router.GET("/battle", app.HandleBattlePage)
 
-	app.Router.POST("/fire", app.HandleFire)
-	app.Router.GET("/game", app.HandleGetGameStatus)
-	app.Router.GET("/e-board", app.HandleEnemyBoard)
-	app.Router.GET("/p-board", app.HandlePlayerBoard)
+	// Handlers for main menu
+	app.Router.POST("/", app.HandleMainMenuContainer)
+	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
 }
