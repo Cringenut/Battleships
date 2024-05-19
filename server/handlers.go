@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -32,6 +33,8 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 		render(c, 200, views.MakeSingeplayerChosen())
 	case "back":
 		render(c, 200, views.MakeMainMenu())
+	case "battle":
+		fmt.Println("BATTLE")
 
 	default:
 		render(c, 200, views.MakeMainMenu())
@@ -58,30 +61,49 @@ func (app *Config) HandleSettings(c *gin.Context) {
 }
 
 func (app *Config) HandleSave(c *gin.Context) {
-	jsonData, _ := io.ReadAll(c.Request.Body)
-	// Using a variable declared inside html file using HTMX
-	saveData := strings.TrimPrefix(string(jsonData), "")
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to read request body")
+		return
+	}
 
-	fmt.Println("Save data:", saveData) // Add this line for debugging
+	// Parse the form data
+	formData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to parse form data")
+		return
+	}
+
+	saveNickname := formData.Get("nickname")
+	saveDescription := formData.Get("description")
+
+	fmt.Println("NICKNAME: " + saveNickname)
+	fmt.Println("DESCRIPTION: " + saveDescription)
+
+	if saveNickname == "" {
+		return
+	} else {
+		data.SetPlayerData(saveNickname, saveDescription)
+	}
+
+	fmt.Println("Save data:", formData) // Add this line for debugging
 
 	// Respond with an HTML page containing JavaScript to redirect
 	c.Header("Content-Type", "text/html")
 	c.String(http.StatusOK, `
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<title>Redirecting...</title>
-		</head>
-		<body>
-			<p>Processing complete. Redirecting...</p>
-			<script type="text/javascript">
-				window.location.href = "/";
-			</script>
-		</body>
-		</html>
-	`)
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Redirecting...</title>
+        </head>
+        <body>
+            <p>Processing complete. Redirecting...</p>
+            <script type="text/javascript">
+                window.location.href = "/";
+            </script>
+        </body>
+        </html>
+    `)
 	c.Abort() // End the request early
-
-	fmt.Println("Redirecting to settings page")
 }

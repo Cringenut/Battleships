@@ -139,7 +139,9 @@ templ MakeSingeplayerChosen() {
       hx-get="/redirect"
       hx-trigger="load"
       hx-target="this"
-      hx-swap="delete"></form>
+      hx-vals='{"chosenOption": "battle"}'
+      hx-swap="afterend"
+></form>
 
 </body>
 </html>

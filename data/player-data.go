@@ -12,6 +12,11 @@ func (pd *PlayerData) Init() {
 	pd.Description = "My first game"
 }
 
+func SetPlayerData(nickname, description string) {
+	playerData.Nickname = nickname
+	playerData.Description = description
+}
+
 func GetPlayerNickname() string {
 	return playerData.Nickname
 }
