@@ -18,4 +18,7 @@ func (app *Config) Routes() {
 	app.Router.POST("/", app.HandleMainMenuContainer)
 	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
 
+	// Handlers for settings
+	app.Router.POST("/save", app.HandleSave)
+
 }

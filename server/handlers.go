@@ -7,6 +7,7 @@ import (
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 	"io"
+	"net/http"
 	"strings"
 )
 
@@ -45,13 +46,42 @@ func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
 	render(c, 200, views.MakeMainMenu())
 }
 
-// Handle Battle Page
+// Handling Battle Page
 func (app *Config) HandleBattlePage(c *gin.Context) {
 	fmt.Println("Battle page")
 	render(c, 200, views.MakeBattlePage())
 }
 
-// Handle Settings Page
+// Handling Settings Page
 func (app *Config) HandleSettings(c *gin.Context) {
 	render(c, 200, views.MakeSettingsPage(data.GetPlayerNickname(), data.GetPlayerDescription()))
+}
+
+func (app *Config) HandleSave(c *gin.Context) {
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	// Using a variable declared inside html file using HTMX
+	saveData := strings.TrimPrefix(string(jsonData), "")
+
+	fmt.Println("Save data:", saveData) // Add this line for debugging
+
+	// Respond with an HTML page containing JavaScript to redirect
+	c.Header("Content-Type", "text/html")
+	c.String(http.StatusOK, `
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<title>Redirecting...</title>
+		</head>
+		<body>
+			<p>Processing complete. Redirecting...</p>
+			<script type="text/javascript">
+				window.location.href = "/";
+			</script>
+		</body>
+		</html>
+	`)
+	c.Abort() // End the request early
+
+	fmt.Println("Redirecting to settings page")
 }

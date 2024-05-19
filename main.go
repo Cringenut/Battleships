@@ -25,6 +25,9 @@ func main() {
 	app := server.Config{Router: router}
 	app.Routes()
 
+	// Load HTML templates
+	router.LoadHTMLGlob("views/*")
+
 	router.Run(":8080")
 
 }
