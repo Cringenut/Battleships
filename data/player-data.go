@@ -7,14 +7,19 @@ type PlayerData struct {
 
 var playerData PlayerData
 
-func (playerData *PlayerData) init() {
-	playerData.Nickname = "John_Doe"
-	playerData.Description = "My first game"
+func (pd *PlayerData) Init() {
+	pd.Nickname = "John_Doe"
+	pd.Description = "My first game"
 }
 
 func GetPlayerNickname() string {
 	return playerData.Nickname
 }
+
 func GetPlayerDescription() string {
 	return playerData.Description
+}
+
+func InitializePlayerData() {
+	playerData.Init()
 }

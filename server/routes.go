@@ -12,8 +12,10 @@ func (app *Config) Routes() {
 	// Main page getters
 	app.Router.GET("/", app.HandleMainMenu)
 	app.Router.GET("/battle", app.HandleBattlePage)
+	app.Router.GET("/settings", app.HandleSettings)
 
 	// Handlers for main menu
 	app.Router.POST("/", app.HandleMainMenuContainer)
 	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
+
 }

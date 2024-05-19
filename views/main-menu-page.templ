@@ -55,11 +55,11 @@ templ MakeMainMenu() {
         z-index: 1;
     }
 
-    .option {
+    .option, a {
         font-size: 28px;
         padding: 5px 20px;
         color: #eaeaea;
-        margin: 5px; /* Space between options */
+        margin: 3px; /* Space between options */
         cursor: pointer;
         text-decoration: none; /* Remove default underline */
         display: block; /* Make anchor elements block-level */
@@ -80,6 +80,11 @@ templ MakeMainMenu() {
         color: white;
         margin-bottom: 10px; /* Space between title and options */
         z-index: 1;
+    }
+
+    form {
+        display: inline-block; /* Treat forms as inline-block elements */
+        margin: 0; /* Remove default margin */
     }
 </style>
 <body>
@@ -104,6 +109,13 @@ templ MakeDefaultMenuOptions() {
     >
         <button class="option">Singleplayer</button>
     </form>
+
+    <div>
+        <a href="http://localhost:8080/">Multiplayer</a>
+        <a href="http://localhost:8080/settings">Settings</a>
+    </div>
+    <a href="http://localhost:8080/settings">Settings</a>
+
 </div>
 
 </body>
@@ -123,7 +135,12 @@ templ MakeSingeplayerChosen() {
 <!-- This trigger is called after some time to give player a chance to go back to main menu before the game starts -->
 <!-- After that POST request is send with "battle" variable used to call redirect inside switch -->
 
-<form id="search-form" hx-get="/redirect" hx-trigger="load" hx-target="this"></form>
+<form id="search-form"
+      hx-boost="true"
+      hx-get="/redirect"
+      hx-trigger="load"
+      hx-target="this"
+      hx-swap="delete"></form>
 
 </body>
 </html>

@@ -9,7 +9,9 @@ import (
 
 func main() {
 
+	data.InitializePlayerData()
 	fmt.Println(data.GetPlayerNickname())
+	fmt.Println(data.GetPlayerDescription())
 
 	// Initializing gin
 
