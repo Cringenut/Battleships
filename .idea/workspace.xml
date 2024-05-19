@@ -5,30 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.0 Whole new project structure">
-      <change afterPath="$PROJECT_DIR$/views/battle-bage.templ" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/main-menu.templ" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/main-menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_4_2024_3_23_AM__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/player-data.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/client.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/static.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/types.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pregame/initializer.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pregame/placing.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/methods.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page_templ.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-cell.templ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-cell_templ.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/boards.templ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/boards_templ.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bottom-footer.templ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/game-status.templ" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/top-bar.templ" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +24,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../Program Files/Go" />
+  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22.2" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
@@ -81,7 +63,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ignacy&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Battleships&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -93,11 +75,11 @@
       <recent name="C:\Battleships\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Battleships\views" />
+      <recent name="D:\Battleships\web" />
+      <recent name="D:\Battleships" />
       <recent name="C:\Battleships\views" />
       <recent name="C:\Battleships\views\bottom" />
-      <recent name="C:\Battleships\views\page" />
-      <recent name="C:\Battleships\views\board" />
-      <recent name="C:\Battleships\views\top" />
     </key>
   </component>
   <component name="RunManager">
@@ -138,7 +120,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
+        <option value="bundled-gosdk-33c477a475b1-e0158606a674-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.15989.157" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-GO-241.15989.157" />
       </set>
     </attachedChunks>
   </component>

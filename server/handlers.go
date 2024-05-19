@@ -1,7 +1,6 @@
 package server
 
 import (
-	"Battleships/views"
 	"fmt"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
@@ -20,7 +19,7 @@ func (app *Config) HandleMainMenu(c *gin.Context) {
 	if c.Request.URL.Path != "/" {
 		c.Redirect(http.StatusMovedPermanently, "http://www.google.com/")
 	}
-	render(c, 200, views.MakeMainMenu())
+	//render(c, 200, views.MakeMainMenu())
 }
 
 func (app *Config) HandleMainMenuContainer(c *gin.Context) {
@@ -31,12 +30,12 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 
 	switch chosenOption {
 	case "single":
-		render(c, 200, views.MakeSingeplayerChosen())
+		//render(c, 200, views.MakeSingeplayerChosen())
 	case "back":
-		render(c, 200, views.MakeMainMenu())
+		//render(c, 200, views.MakeMainMenu())
 
 	default:
-		render(c, 200, views.MakeMainMenu())
+		//render(c, 200, views.MakeMainMenu())
 	}
 
 	fmt.Println(chosenOption)
@@ -44,11 +43,11 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 
 func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
 	fmt.Println("Redirect")
-	render(c, 200, views.MakeMainMenu())
+	//render(c, 200, views.MakeMainMenu())
 }
 
 // Handle Battle Page
 func (app *Config) HandleBattlePage(c *gin.Context) {
 	fmt.Println("Battle page")
-	render(c, 200, views.MakeBattlePage())
+	//render(c, 200, views.MakeBattlePage())
 }
