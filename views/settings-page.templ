@@ -160,30 +160,8 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
     </style>
 </head>
 <body>
-<form action="" method="post"
-      hx-post="/save"
-      hx-swap="afterend"
-      hx-target="this"
->
-    <div class="container">
-        <a href="/" class="back-button">X</a>
-        <div class="content">
-            <h1 class="header">Settings</h1>
-            <div class="section">
-                <h1>Player information</h1>
-                <p>Change your nickname and description</p>
-                <label for="nickname">Nickname:</label>
-                <input type="text" id="nickname" value={ playerNickname } name="nickname" ></input>
-                <label for="description">Description:</label>
-                <textarea id="description"  name="description" >{ playerDescription }</textarea>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <button class="save-button" name="save" value="save">Save</button>
-    </div>
-</form>
 
+    @MakePlacementBoard()
 
 <script>
     function adjustTextareaHeight(textarea) {

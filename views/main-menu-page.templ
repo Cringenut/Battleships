@@ -131,18 +131,6 @@ templ MakeSingeplayerChosen() {
     <p>Game starts soon...</p>
     <a href="/" class="option">Back</a>
 </div>
-<!-- This trigger is called after some time to give player a chance to go back to main menu before the game starts -->
-<!-- After that POST request is send with "battle" variable used to call redirect inside switch -->
-
-<form id="search-form"
-      hx-boost="true"
-      hx-get="/redirect"
-      hx-trigger="load"
-      hx-target="this"
-      hx-vals='{"chosenOption": "battle"}'
-      hx-swap="afterend"
-></form>
-
 </body>
 </html>
 }

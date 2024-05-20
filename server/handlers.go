@@ -3,6 +3,7 @@ package server
 import (
 	"Battleships/data"
 	"Battleships/views"
+	"Battleships/web"
 	"fmt"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
@@ -29,18 +30,18 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	chosenOption := strings.TrimPrefix(string(jsonData), "chosenOption=")
 
 	switch chosenOption {
+	case "battle":
+		return
 	case "single":
 		render(c, 200, views.MakeSingeplayerChosen())
 	case "back":
 		render(c, 200, views.MakeMainMenu())
-	case "battle":
-		fmt.Println("BATTLE")
-
 	default:
 		render(c, 200, views.MakeMainMenu())
 	}
 
 	fmt.Println(chosenOption)
+
 }
 
 func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
@@ -57,6 +58,7 @@ func (app *Config) HandleBattlePage(c *gin.Context) {
 
 // Handling Settings Page
 func (app *Config) HandleSettings(c *gin.Context) {
+	web.SetFirstCoord("")
 	render(c, 200, views.MakeSettingsPage(data.GetPlayerNickname(), data.GetPlayerDescription()))
 }
 
@@ -90,7 +92,7 @@ func (app *Config) HandleSave(c *gin.Context) {
 
 	// Respond with an HTML page containing JavaScript to redirect
 	c.Header("Content-Type", "text/html")
-	c.String(http.StatusOK, `
+	c.String(http.StatusMovedPermanently, `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -106,4 +108,29 @@ func (app *Config) HandleSave(c *gin.Context) {
         </html>
     `)
 	c.Abort() // End the request early
+}
+
+func (app *Config) HandlePlacementCell(c *gin.Context) {
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to read request body")
+		return
+	}
+
+	// Parse the form data
+	formData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to parse form data")
+		return
+	}
+
+	if web.GetFirstCoord().Coord == "" {
+		fmt.Println(formData.Get("placementCoord"))
+		web.SetFirstCoord(formData.Get("placementCoord"))
+		fmt.Println(web.GetEndCoords())
+	} else {
+
+	}
+
+	render(c, 200, views.MakePlacementBoard())
 }

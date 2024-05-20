@@ -20,5 +20,6 @@ func (app *Config) Routes() {
 
 	// Handlers for settings
 	app.Router.POST("/save", app.HandleSave)
+	app.Router.POST("/place", app.HandlePlacementCell)
 
 }
