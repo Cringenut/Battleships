@@ -129,7 +129,7 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 		web.SetFirstCoord(formData.Get("placementCoord"))
 		fmt.Println(web.GetEndCoords())
 	} else {
-
+		web.SetLastCoord(formData.Get("placementCoord"))
 	}
 
 	render(c, 200, views.MakePlacementBoard())

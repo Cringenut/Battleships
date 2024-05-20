@@ -41,17 +41,32 @@ func SetFirstCoord(coord string) {
 		return
 	}
 
-	if len(possibleEndCoords(row, col, 4)) != 0 {
+	if shipSizes[0] == 1 {
 		firstCoord = Coordinate{Row: row, Col: col, Coord: coord}
-		endCoords = possibleEndCoords(row, col, 4)
-
+		endCoords = possibleEndCoords(row, col, shipSizes[0])
+		SetLastCoord(coord)
+	} else if len(possibleEndCoords(row, col, shipSizes[0])) != 0 {
+		firstCoord = Coordinate{Row: row, Col: col, Coord: coord}
+		endCoords = possibleEndCoords(row, col, shipSizes[0])
 	} else {
 		firstCoord = Coordinate{}
 	}
 }
 
 func SetLastCoord(coord string) {
+	endRow, endCol, validEnd := isValidCoordinate(coord)
 
+	if !validEnd || !data.StringSliceContains(endCoords, coord) {
+		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
+		firstCoord = Coordinate{}
+		return
+	}
+
+	placeShip(firstCoord.Row, firstCoord.Col, endRow, endCol, shipSizes[0])
+	printBoard()
+	shipSizes = shipSizes[1:]
+	firstCoord = Coordinate{}
+	endCoords = []string{}
 }
 
 // isValidCoordinate checks if the coordinate is within board limits
@@ -174,7 +189,7 @@ func printBoard() {
 
 }
 
-func getAllShipCoords() []string {
+func GetAllShipCoords() []string {
 	var coords []string
 	for row := 0; row < size; row++ {
 		for col := 0; col < size; col++ {

@@ -62,9 +62,11 @@ templ MakePlacementCell(coord string) {
 </head>
 <body>
 <form>
-    if web.GetFirstCoord().Coord == coord {
+    if (data.StringSliceContains(web.GetAllShipCoords(), coord)) {
+        <div class="player-ship-cell"></div>
+    }
+    else if web.GetFirstCoord().Coord == coord {
         <div class="placement-cell"></div>
-
     } else if (len(web.GetEndCoords()) == 0) {
         <div class="cell">
             { coord }
