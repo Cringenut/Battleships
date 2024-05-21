@@ -11,7 +11,7 @@ templ MakePlacementBoard() {
     <title>Battle</title>
 </head>
 <style>
-    .placement-board, .player-board, .enemy-board {
+    .placement-board, .show-placement-board, .player-board, .enemy-board {
         background-color: #837777;
         width: 38%;
         aspect-ratio: 1;
@@ -19,8 +19,22 @@ templ MakePlacementBoard() {
         grid-template-columns: repeat(10, 1fr);
         grid-template-rows: repeat(10, 1fr);
         gap: 3px;
-        margin: 12px;
         border: 3px solid #837777;
+    }
+    .random-overlay {
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: calc(100% + 6px);
+        height: calc(100% + 6px);
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 36px;
+        color: white;
+        backdrop-filter: blur(50px);
+        z-index: 2;
     }
 </style>
 <body>
@@ -30,6 +44,23 @@ templ MakePlacementBoard() {
             @MakePlacementCell(data.CalculateCellCoord(row, col))
         }
     }
+</div>
+</body>
+</html>
+}
+
+templ MakeShowPlacementBoard() {
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title>Battle</title>
+</head>
+<style>
+
+</style>
+<body>
+<div class="show-placement-board">
+
 </div>
 </body>
 </html>

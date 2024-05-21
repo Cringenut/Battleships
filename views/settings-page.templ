@@ -55,6 +55,7 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
         .content {
             position: relative;
             z-index: 2;
+            margin-bottom: 40px; /* Margin to avoid overlap with footer */
             padding-left: 20%;
             padding-top: 20px;
         }
@@ -157,11 +158,75 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
         .save-button:hover {
             color: white;
         }
+
+        .edit-formation-button {
+            font-family: "Special Elite", system-ui;
+            background-color: transparent;
+            color: #eaeaea;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .edit-formation-button:hover {
+            color: white;
+        }
+
+        .random-overlay {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: white;
+            backdrop-filter: blur(50px);
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
+<a href="/" class="back-button">X</a>
+<form action="" method="post"
+      hx-post="/save"
+      hx-swap="afterend"
+      hx-target="this"
+>
+    <div class="container">
+        <div class="content">
+            <h1 class="header">Settings</h1>
+            <div class="section">
+                <h1>Player information</h1>
+                <p>Change your nickname and description</p>
+                <label for="nickname">Nickname:</label>
+                <input type="text" id="nickname" value={ playerNickname } name="nickname" ></input>
+                <label for="description">Description:</label>
+                <textarea id="description"  name="description" >{ playerDescription }</textarea>
+            </div>
 
-    @MakePlacementBoard()
+            <div class="section">
+                <h1>Ship placement</h1>
+                <p>Choose the best formation for your ships armada</p>
+                    @MakePlacementBoard()
+                <button type="button" class="edit-formation-button">Edit</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button class="save-button" name="save" value="save">Save</button>
+    </div>
+</form>
+
 
 <script>
     function adjustTextareaHeight(textarea) {

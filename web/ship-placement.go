@@ -8,6 +8,11 @@ import (
 	"unicode"
 )
 
+type Coordinate struct {
+	Row, Col int
+	Coord    string
+}
+
 const size = 10
 
 // Board represents the server board
@@ -15,14 +20,9 @@ var board [size][size]bool
 
 // ShipSizes defines the sizes of ships to be placed
 var shipSizes = []int{4, 3, 3, 2, 2, 2, 1, 1, 1, 1}
-
-type Coordinate struct {
-	Row, Col int
-	Coord    string
-}
-
 var firstCoord Coordinate
 var endCoords []string
+var currentPlacement data.Placement
 
 func GetFirstCoord() Coordinate {
 	return firstCoord

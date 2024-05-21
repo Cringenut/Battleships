@@ -85,7 +85,7 @@ func (app *Config) HandleSave(c *gin.Context) {
 	if saveNickname == "" {
 		return
 	} else {
-		data.SetPlayerData(saveNickname, saveDescription)
+		data.SetPlayerData(saveNickname, saveDescription, web.GetAllShipCoords())
 	}
 
 	fmt.Println("Save data:", formData) // Add this line for debugging
