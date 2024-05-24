@@ -3,15 +3,13 @@ package main
 import (
 	"Battleships/data"
 	"Battleships/server"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
 	data.InitializePlayerData()
-	fmt.Println(data.GetPlayerNickname())
-	fmt.Println(data.GetPlayerDescription())
+	data.InitializeCurrentGameData()
 
 	// Initializing gin
 

@@ -217,7 +217,7 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
             <div class="section">
                 <h1>Ship placement</h1>
                 <p>Choose the best formation for your ships armada</p>
-                    @MakePlacementBoard()
+                <div>@MakeShowPlacementBoard()</div>
                 <button type="button" class="edit-formation-button">Edit</button>
             </div>
         </div>

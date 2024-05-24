@@ -2,19 +2,6 @@ package data
 
 type Placement int
 
-const (
-	Random Placement = iota
-	Simple
-	Advanced
-)
-
-type PlayerData struct {
-	Nickname          string
-	Description       string
-	ShipCoords        []string
-	ShipPlacementType Placement
-}
-
 var playerData PlayerData
 
 func (pd *PlayerData) Init() {

@@ -5,15 +5,11 @@ import (
 )
 
 templ MakePlacementBoard() {
-<html>
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title>Battle</title>
-</head>
 <style>
-    .placement-board, .show-placement-board, .player-board, .enemy-board {
+    .placement-board, .player-board, .enemy-board {
         background-color: #837777;
         width: 38%;
+        height: auto;
         aspect-ratio: 1;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
@@ -21,22 +17,13 @@ templ MakePlacementBoard() {
         gap: 3px;
         border: 3px solid #837777;
     }
-    .random-overlay {
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        width: calc(100% + 6px);
-        height: calc(100% + 6px);
-        background: rgba(0, 0, 0, 0.2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 36px;
-        color: white;
-        backdrop-filter: blur(50px);
-        z-index: 2;
-    }
 </style>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="boards.css"></link>
+    <title>Battle</title>
+</head>
 <body>
 <div class="placement-board" id="placement-board">
     for row := 0; row < 10; row++ {
@@ -50,17 +37,53 @@ templ MakePlacementBoard() {
 }
 
 templ MakeShowPlacementBoard() {
+<style>
+    .placement-board {
+        background-color: #837777;
+        width: 38%;
+        aspect-ratio: 1;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        gap: 3px;
+        border: 3px solid #837777;
+        position: relative;
+    }
+    .random-overlay {
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: calc(100% + 6px);
+        height: calc(100% + 6px);
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        color: white;
+        backdrop-filter: blur(3px);
+        z-index: 2;
+    }
+</style>
 <html>
 <head>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="mystyle.css"></link>
     <title>Battle</title>
 </head>
-<style>
-
-</style>
 <body>
-<div class="show-placement-board">
-
+<div class="placement-board" id="show-placement-board">
+    for row := 0; row < 10; row++ {
+    for col := 0; col < 10; col++ {
+    @MakeShowPlacementCell()
+    }
+    }
+    switch data.GetPlayerShipPlacementType() {
+    case data.Random:
+        <div class="random-overlay">Random</div>
+    default:
+    fmt.Println("Invalid level")
+    }
 </div>
 </body>
 </html>

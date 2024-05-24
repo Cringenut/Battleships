@@ -33,6 +33,10 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	case "battle":
 		return
 	case "single":
+		err := StartBattle()
+		if err != nil {
+			return
+		}
 		render(c, 200, views.MakeSingeplayerChosen())
 	case "back":
 		render(c, 200, views.MakeMainMenu())

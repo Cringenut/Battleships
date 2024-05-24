@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.3">
+      <change afterPath="$PROJECT_DIR$/assets/boards.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/battle.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/requests.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/explosion_icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/explosion_icon.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/player-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/player-data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ship-placement.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ship-placement.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +35,6 @@
   <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22.3" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -75,11 +82,11 @@
       <recent name="C:\Battleships\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\server" />
       <recent name="D:\Battleships\views" />
       <recent name="D:\Battleships\web" />
       <recent name="D:\Battleships" />
       <recent name="C:\Battleships\views" />
-      <recent name="C:\Battleships\views\bottom" />
     </key>
   </component>
   <component name="RunManager">
