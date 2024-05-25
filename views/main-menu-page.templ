@@ -16,7 +16,6 @@ templ MakeMainMenu() {
         margin: 0;
         font-family: "Special Elite", system-ui;
         background-size: cover;
-        background-image: url("https://topwar.ru/uploads/posts/2013-06/1372027106_cleveland.jpg");
         background-position: center;
         text-shadow: black 2px 0 10px;
         -webkit-text-stroke: 0.01em black;
@@ -55,25 +54,6 @@ templ MakeMainMenu() {
         z-index: 1;
     }
 
-    .option, a {
-        font-size: 28px;
-        padding: 5px 20px;
-        color: #eaeaea;
-        margin: 3px; /* Space between options */
-        cursor: pointer;
-        text-decoration: none; /* Remove default underline */
-        display: block; /* Make anchor elements block-level */
-        background: none;
-        border: none;
-        font-family: inherit;
-        cursor: pointer;
-    }
-
-    .option:hover, a:hover {
-        color: #ffffff;
-        -webkit-text-stroke: 0.03em transparent;
-    }
-
     p {
         font-size: 36px;
         user-select: none;
@@ -95,6 +75,28 @@ templ MakeMainMenu() {
 
 templ MakeDefaultMenuOptions() {
 <html lang="en">
+<style>
+    .option, a {
+        text-shadow: black 2px 0 10px;
+        -webkit-text-stroke: 0.01em black;
+        font-size: 28px;
+        padding: 5px 20px;
+        color: red;
+        margin: 3px; /* Space between options */
+        cursor: pointer;
+        text-decoration: none; /* Remove default underline */
+        display: block; /* Make anchor elements block-level */
+        background: none;
+        border: none;
+        font-family: inherit;
+        cursor: pointer;
+    }
+
+    .option:hover, a:hover {
+        color: #ffffff;
+        -webkit-text-stroke: 0.03em transparent;
+    }
+</style>
 <head>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 </head>
@@ -107,7 +109,7 @@ templ MakeDefaultMenuOptions() {
             hx-target="#menu-container"
             hx-vals='{"chosenOption": "single"}'
     >
-        <button class="option">Singleplayer</button>
+        <input class="option" type="submit" value="Submit" name="commit"></input>
     </form>
 
     <div>

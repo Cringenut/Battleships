@@ -30,10 +30,12 @@ func StartBattle() error {
 
 	data.SetToken(token)
 	println(data.GetToken())
+
 	ships, _ := GetBoard(data.GetToken())
 	for _, position := range ships {
 		fmt.Println(position)
 	}
+
 	data.SetPlayerShips(ships)
 	return nil
 }

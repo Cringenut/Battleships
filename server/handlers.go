@@ -10,7 +10,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 func render(c *gin.Context, status int, template templ.Component) error {
@@ -26,8 +25,14 @@ func (app *Config) HandleMainMenu(c *gin.Context) {
 func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	// Taking request body to extract chosen option
 	jsonData, _ := io.ReadAll(c.Request.Body)
-	// Using a variable declared inside html file using HTMX
-	chosenOption := strings.TrimPrefix(string(jsonData), "chosenOption=")
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	// Extracting the chosen option from the parsed data
+	chosenOption := parsedData.Get("chosenOption")
 
 	switch chosenOption {
 	case "battle":
@@ -45,7 +50,6 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	}
 
 	fmt.Println(chosenOption)
-
 }
 
 func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
