@@ -6,6 +6,15 @@ const (
 	Advanced
 )
 
+type CellType int
+
+const (
+	Default CellType = iota
+	Ship
+	Hit
+	Miss
+)
+
 type PlayerData struct {
 	Nickname          string
 	Description       string

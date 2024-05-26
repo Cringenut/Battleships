@@ -23,3 +23,7 @@ func GetToken() string {
 func SetPlayerShips(ships []string) {
 	currentGameData.PlayerShips = ships
 }
+
+func GetPlayerShips() []string {
+	return currentGameData.PlayerShips
+}

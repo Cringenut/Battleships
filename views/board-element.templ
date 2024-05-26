@@ -6,16 +6,18 @@ import (
 
 templ MakePlacementBoard() {
 <style>
-    .placement-board, .player-board, .enemy-board {
-        background-color: #837777;
-        width: 38%;
-        height: auto;
+    .placement-board {
+        border-radius: 2px;
+        width: 100%;
         aspect-ratio: 1;
+        background-color: rgba(44, 44, 44, 0.9);
+        margin: 30px;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         grid-template-rows: repeat(10, 1fr);
         gap: 3px;
-        border: 3px solid #837777;
+        padding: 4px;
+        z-index: 1;
     }
 </style>
 <html>
@@ -39,15 +41,17 @@ templ MakePlacementBoard() {
 templ MakeShowPlacementBoard() {
 <style>
     .placement-board {
-        background-color: #837777;
+        border-radius: 2px;
         width: 38%;
         aspect-ratio: 1;
+        background-color: rgba(44, 44, 44, 0.9);
+        margin: 30px;
         display: grid;
         grid-template-columns: repeat(10, 1fr);
         grid-template-rows: repeat(10, 1fr);
         gap: 3px;
-        border: 3px solid #837777;
-        position: relative;
+        padding: 4px;
+        z-index: 1;
     }
     .random-overlay {
         position: absolute;
@@ -83,6 +87,39 @@ templ MakeShowPlacementBoard() {
         <div class="random-overlay">Random</div>
     default:
     fmt.Println("Invalid level")
+    }
+</div>
+</body>
+</html>
+}
+
+templ MakePlayerBoard() {
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title>Battle</title>
+</head>
+<style>
+    .player-board {
+        border-radius: 2px;
+        width: 100%;
+        aspect-ratio: 1;
+        background-color: rgba(44, 44, 44, 0.9);
+        margin: 30px;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        gap: 3px;
+        padding: 4px;
+        z-index: 1;
+    }
+</style>
+<body>
+<div class="player-board">
+    for row := 0; row < 10; row++ {
+        for col := 0; col < 10; col++ {
+            @MakePlayerBoardCell(data.CalculateCellCoord(row, col))
+        }
     }
 </div>
 </body>

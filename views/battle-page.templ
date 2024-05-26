@@ -4,25 +4,220 @@ templ MakeBattlePage() {
 <html lang="en">
 <head>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title>Player Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
+    <title>Battle</title>
     <style>
         body, html {
             height: 100%;
             width: 100%;
             margin: 0;
-            font-family: Arial, sans-serif;
             background-size: cover;
             background-position: center;
+            font-family: "Special Elite", system-ui;
+            display: flex;
+            color: white;
+            background-image: url("https://www.shutterstock.com/shutterstock/videos/32777806/thumb/1.jpg");
+            background-attachment: fixed;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(60, 57, 57, 0.65); /* Adjust the tint color and opacity here */
+            z-index: -1;
+        }
+
+        .container {
             display: flex;
             flex-direction: column;
-            color: white;
-            background-image: url("https://content.onliner.by/news/1400x5616/fdaeaf30e65e7093883f974eb174d511.jpeg");
-            background-attachment: fixed;
         }
+
+        .fixed-width {
+            width: 640px;
+            position: relative;
+        }
+
+        .flexible-width {
+            flex: 1;
+        }
+
+        .top-element, .top-element1, .surrender-button {
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .rectangle {
+            width: 200px;
+            height: 100px;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: absolute;
+            margin-right: -100px;
+            right: 0; /* Position at the right edge of the top element */
+            z-index: 10; /* Ensures it is on top of other elements */
+        }
+
+        .top-element {
+            align-items: flex-start;
+        }
+
+        .top-element1 {
+            align-items: flex-end;
+        }
+
+        .surrender-button {
+            height: 48px;
+            background-color: rgba(255, 0, 0, 0.8);
+            align-content: center;
+            align-items: center;
+        }
+
+        .nickname-text {
+            font-size: 20px;
+            padding-top: 22px;
+        }
+
+        .bottom-text {
+            font-size: 16px;
+            padding-top: 4px;
+        }
+
+        .turn-text {
+            font-size: 18px;
+            padding-top: 28px;
+        }
+
+        .timer-text {
+            font-size: 20px;
+            padding-top: 4px;
+        }
+
+        .field-left, .field-right, .side-menu {
+            flex: 1;
+            display: flex;
+            position: relative;
+        }
+
+        .side-menu {
+            background-color: rgba(52, 51, 51, 0.5);
+        }
+
+        .square {
+            border-radius: 2px;
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: rgba(44, 44, 44, 0.9);
+            margin: 30px;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+            gap: 3px;
+            padding: 4px;
+            z-index: 1;
+        }
+
+        .cell, .ship-cell, .miss-cell, .hit-cell {
+            display: flex; /* Makes cell a flex container */
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            color: white; /* Sets the text color */
+            font-size: 24px; /* Sets the text size */
+            background-color: #222; /* Default background color */
+            position: relative; /* Allows for absolute positioning of the button */
+            z-index: auto;
+            width: 100%; /* Fill the grid space */
+            height: 100%; /* Ensures the cell fills the height of its container */
+            aspect-ratio: 1; /* Ensures that each cell is square */
+            overflow: hidden; /* Hide    any content that overflows */
+        }
+
+        .ship-cell, .hit-cell {
+            background-color: rgb(19, 19, 114);
+        }
+
+        .hit-cell {
+            background-image: url("explosion.png");
+            background-repeat: no-repeat;
+            background-size: 78%;
+            background-position: center;
+        }
+
+        .miss-cell {
+            background-image: url("x.png");
+            background-repeat: no-repeat;
+            background-size: 90%;
+            background-position: center;
+        }
+
+        .footer {
+            width: 400px;
+            height: 10px;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: absolute;
+            margin-top: 220%;
+            margin-right: -200px;
+            font-size: 12px;
+            right: 0; /* Position at the right edge of the top element */
+            z-index: 10; /* Ensures it is on top of other elements */
+        }
+
     </style>
 </head>
 <body>
+<div class="container fixed-width">
+    <div class="top-element">
+        <div class="nickname-text">Player</div>
+        <div class="bottom-text">Accuracy: 28%</div>
+        <div class="rectangle">
+            <div class="turn-text">Your turn</div>
+            <div class="timer-text">60</div>
+        </div>
+        <div class="footer">
+            e634fc93-5ff0-48a7-8f6d-79c3d9169fa4
+        </div>
+    </div>
+    <div class="field-left">
+        @MakePlayerBoard()
+    </div>
+</div>
+<div class="container fixed-width">
+    <div class="top-element1">
+        <div class="nickname-text">Enemy</div>
+        <div class="bottom-text">Accuracy: 65%</div>
+    </div>
+    <div class="field-right">
+        <div class="square">
 
+        </div>
+    </div>
+</div>
+<div class="container flexible-width">
+    <div class="side-menu"></div>
+    <div class="surrender-button">
+        <div>Surrender</div>
+    </div>
+</div>
 </body>
 </html>
+}
+
+templ MakeTurnText() {
+
 }

@@ -47,3 +47,15 @@ func CalculateCellCoord(row int, col int) string {
 	y := rune('A' + col)
 	return string(y) + strconv.Itoa(x)
 }
+
+func GetPlayerCellType(coord string) CellType {
+	if GetToken() == "" {
+		return Default
+	}
+
+	if StringSliceContains(GetPlayerShips(), coord) {
+		return Ship
+	}
+
+	return Default
+}

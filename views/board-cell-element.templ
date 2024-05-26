@@ -7,7 +7,7 @@ import (
 
 templ MakePlacementCell(coord string) {
 <style>
-    .cell, .player-ship-cell, .hit-cell, .miss-cell, .enemy-cell, .placement-cell {
+    .cell, .placement-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
@@ -19,15 +19,6 @@ templ MakePlacementCell(coord string) {
         background-color: #222; /* Default background color */
         position: relative; /* Allows for absolute positioning of the button */
         z-index: auto;
-    }
-    .hit-cell {
-        background-color: green; /* Background color for cells with ships */
-    }
-    .miss-cell {
-        background-color: red; /* Background color for cells with ships */
-    }
-    .player-ship-cell {
-        background-color: blue; /* Background color for cells with ships */
     }
     .placement-cell {
         background-color: orange;
@@ -112,9 +103,6 @@ templ MakeShowPlacementCell() {
         position: relative; /* Allows for absolute positioning of the button */
         z-index: 1;
     }
-    .player-ship-cell {
-        background-color: blue; /* Background color for cells with ships */
-    }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,6 +112,48 @@ templ MakeShowPlacementCell() {
 </head>
 <body>
     <div class="cell"></div>
+</body>
+</html>
+}
+
+templ MakePlayerBoardCell(coord string) {
+<style>
+    .cell, .ship-cell {
+        display: flex; /* Makes cell a flex container */
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
+        color: white; /* Sets the text color */
+        font-size: 24px; /* Sets the text size */
+        aspect-ratio: 1; /* Ensures that each cell is square */
+        width: 100%; /* Fill the grid space */
+        height: 100%; /* Ensures the cell fills the height of its container */
+        background-color: #222; /* Default background color */
+        position: relative; /* Allows for absolute positioning of the button */
+        z-index: 1;
+    }
+    .ship-cell, .hit-cell {
+        background-color: rgb(19, 19, 114);
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<body>
+    switch data.GetPlayerCellType(coord) {
+    case data.Default:
+        <div class="cell" id={ coord } >{ coord }</div>
+    case data.Ship:
+        <div class="ship-cell" id={ coord } >{ coord }</div>
+    case data.Hit:
+    fmt.Println("This cell has been hit.")
+    case data.Miss:
+    fmt.Println("This cell is a miss.")
+    default:
+        <div class="cell" id={ coord } >{ coord }</div>
+    }
 </body>
 </html>
 }
