@@ -142,3 +142,9 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 
 	render(c, 200, views.MakePlacementBoard())
 }
+
+func (app *Config) HandleGameStatus(c *gin.Context) {
+	fmt.Println(data.GetToken())
+
+	render(c, 200, views.MakeTurnText())
+}

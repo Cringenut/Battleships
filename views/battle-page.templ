@@ -95,11 +95,6 @@ templ MakeBattlePage() {
             padding-top: 4px;
         }
 
-        .turn-text {
-            font-size: 18px;
-            padding-top: 28px;
-        }
-
         .timer-text {
             font-size: 20px;
             padding-top: 4px;
@@ -186,7 +181,7 @@ templ MakeBattlePage() {
         <div class="nickname-text">Player</div>
         <div class="bottom-text">Accuracy: 28%</div>
         <div class="rectangle">
-            <div class="turn-text">Your turn</div>
+            @MakeTurnText()
             <div class="timer-text">60</div>
         </div>
         <div class="footer">
@@ -219,5 +214,19 @@ templ MakeBattlePage() {
 }
 
 templ MakeTurnText() {
-
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .turn-text {
+        font-size: 18px;
+        padding-top: 28px;
+    }
+</style>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
+</head>
+<body>
+    <div class="turn-text">Turn</div>
+</body>
+</html>
 }
