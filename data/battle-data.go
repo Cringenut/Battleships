@@ -5,6 +5,7 @@ import "fmt"
 var gameData GameData
 var gameStatus *GameStatus
 var playerShots = make(map[string]bool)
+var enemyShots []string
 var IsPlayerTurn = false
 
 func (gd *GameData) InitGameData() {
@@ -56,4 +57,12 @@ func AppendPlayerShots(coord string, isHit bool) {
 
 func GetPlayerShots() map[string]bool {
 	return playerShots
+}
+
+func SetEnemyShots(shots []string) {
+	enemyShots = shots
+}
+
+func GetEnemyShots() []string {
+	return enemyShots
 }

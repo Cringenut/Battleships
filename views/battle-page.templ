@@ -181,10 +181,21 @@ templ MakeTurnText(turnChanged bool) {
 <body>
     <div class="turn-text" id="turn"
          hx-get="/status"
-         hx-trigger="every 0.6s"
+         hx-trigger="every 0.2s"
          hx-target="this"
          hx-swap="outerHTML"
-    >Turn</div>
+    >
+        if (data.GetGameStatus().ShouldFire) {
+            Your turn
+        } else {
+            Enemy turn
+        }
+
+        if len(data.GetEnemyShots()) != len(data.GetGameStatus().OppShots) {
+            <div hx-trigger="load" hx-get="/shots" hx-swap="none"></div>
+            <div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+        }
+    </div>
 
 
     if (turnChanged) {

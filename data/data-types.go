@@ -61,5 +61,5 @@ type GameStatus struct {
 }
 
 type FireResponse struct {
-	Result []string `json:"result"`
+	Result string `json:"result"`
 }

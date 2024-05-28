@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.5 // New battle system handling">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/static-functions.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/static-functions.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/requests.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/explosion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/x.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +161,8 @@
     <MESSAGE value="Battleships v3.3 // Custom placement" />
     <MESSAGE value="Battleships v3.3" />
     <MESSAGE value="Battleships v3.5 // New battle system handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.5 // New battle system handling" />
+    <MESSAGE value="Battleships v3.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.5" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

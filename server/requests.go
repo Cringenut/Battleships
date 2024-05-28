@@ -55,33 +55,33 @@ func PostInitGame(body []byte) (string, error) {
 	return res.Header.Get("x-auth-token"), nil
 }
 
-func PostFire(coord string) error {
+func PostFire(token string, coord string) (string, error) {
 	posturl := "https://go-pjatk-server.fly.dev/api/game/fire"
 
 	// Creating the JSON body using a map and marshal it to bytes
 	jsonData := map[string]string{"coord": coord}
 	body, err := json.Marshal(jsonData)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	if err := CheckConnection(); err != nil {
-		return err
+		return "", err
 	}
 
 	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Adding the necessary headers
 	r.Header.Add("Content-Type", "application/json")
-	r.Header.Add("X-Auth-Token", data.GetToken()) // Assuming authToken is provided when function is called
+	r.Header.Add("X-Auth-Token", token) // Assuming authToken is provided when function is called
 
 	httpClient := &http.Client{}
 	res, err := httpClient.Do(r)
 	if err != nil {
-		return err
+		return "", err
 	}
 	defer res.Body.Close()
 
@@ -89,12 +89,12 @@ func PostFire(coord string) error {
 	responseData := &data.FireResponse{}
 	err = json.NewDecoder(res.Body).Decode(responseData)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	// Print or use the "result" parameter
 	fmt.Println("Response from server:", responseData.Result)
-	return nil
+	return responseData.Result, nil
 }
 
 /* GET */
