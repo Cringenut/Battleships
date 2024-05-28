@@ -95,3 +95,48 @@ func GetBoard(token string) ([]string, error) {
 
 	return boardResponse.Board, nil
 }
+
+func GetGameStatus(token string) (*data.GameStatus, error) {
+	geturl := "https://go-pjatk-server.fly.dev/api/game"
+
+	if err := CheckConnection(); err != nil {
+		return nil, err
+	}
+
+	// Create a new GET request
+	req, err := http.NewRequest("GET", geturl, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Add the X-Auth-Token header using the token received during game initialization
+	req.Header.Add("X-Auth-Token", token)
+
+	// Create a new HTTP client and send the request
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer func(Body io.ReadCloser) {
+		if err := Body.Close(); err != nil {
+			fmt.Println("Error closing response body:", err)
+		}
+	}(res.Body)
+
+	if res.StatusCode != http.StatusOK {
+		return nil, errors.New("failed to fetch the game status")
+	}
+
+	var gameStatus data.GameStatus
+	if err := json.NewDecoder(res.Body).Decode(&gameStatus); err != nil {
+		return nil, err
+	}
+
+	// Check if game_status is empty
+	if gameStatus.GameStatus == "" {
+		return nil, errors.New("game status is empty")
+	}
+
+	return &gameStatus, nil
+}

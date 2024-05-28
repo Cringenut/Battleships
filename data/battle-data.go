@@ -1,29 +1,43 @@
 package data
 
-var currentGameData CurrentGameData
+var gameData GameData
+var gameStatus *GameStatus
+var IsPlayerTurn = false
 
-func (cgd *CurrentGameData) Init() {
-	cgd.Token = ""
-	cgd.PlayerShips = []string{}
-	cgd.PlayerShots = make(map[string]bool)
+func (gd *GameData) Init() {
+	gd.Token = ""
+	gd.PlayerShips = []string{}
+	gd.PlayerShots = make(map[string]bool)
 }
 
 func InitializeCurrentGameData() {
-	currentGameData.Init()
+	gameData.Init()
 }
 
 func SetToken(token string) {
-	currentGameData.Token = token
+	gameData.Token = token
 }
 
 func GetToken() string {
-	return currentGameData.Token
+	return gameData.Token
 }
 
 func SetPlayerShips(ships []string) {
-	currentGameData.PlayerShips = ships
+	gameData.PlayerShips = ships
 }
 
 func GetPlayerShips() []string {
-	return currentGameData.PlayerShips
+	return gameData.PlayerShips
+}
+
+func SetGameStatus(status *GameStatus) {
+	gameStatus = status
+}
+
+func GetGameStatus() *GameStatus {
+	return gameStatus
+}
+
+func IsTurnChanged() bool {
+	return gameStatus.ShouldFire != IsPlayerTurn
 }

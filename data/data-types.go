@@ -22,7 +22,7 @@ type PlayerData struct {
 	ShipPlacementType Placement
 }
 
-type CurrentGameData struct {
+type GameData struct {
 	Token       string
 	PlayerShips []string
 	PlayerShots map[string]bool
@@ -48,4 +48,14 @@ type GameRequestBody struct {
 
 type BoardResponse struct {
 	Board []string `json:"board"`
+}
+
+type GameStatus struct {
+	GameStatus     string   `json:"game_status"`
+	LastGameStatus string   `json:"last_game_status"`
+	Nick           string   `json:"nick"`
+	OppShots       []string `json:"opp_shots"`
+	Opponent       string   `json:"opponent"`
+	ShouldFire     bool     `json:"should_fire"`
+	Timer          int      `json:"timer"`
 }

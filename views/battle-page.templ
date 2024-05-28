@@ -1,5 +1,9 @@
 package views
 
+import (
+    "Battleships/data"
+)
+
 templ MakeBattlePage() {
 <html lang="en">
 <head>
@@ -181,7 +185,7 @@ templ MakeBattlePage() {
         <div class="nickname-text">Player</div>
         <div class="bottom-text">Accuracy: 28%</div>
         <div class="rectangle">
-            @MakeTurnText()
+            @MakeTurnText(true)
             <div class="timer-text">60</div>
         </div>
         <div class="footer">
@@ -213,7 +217,7 @@ templ MakeBattlePage() {
 </html>
 }
 
-templ MakeTurnText() {
+templ MakeTurnText(turnChanged bool) {
 <!DOCTYPE html>
 <html lang="en">
 <style>
@@ -226,7 +230,19 @@ templ MakeTurnText() {
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
 </head>
 <body>
-    <div class="turn-text">Turn</div>
+    <div class="turn-text" id="turn"
+         hx-get="/status"
+         hx-trigger="every 0.6s"
+         hx-target="this"
+         hx-swap="outerHTML"
+    >Turn</div>
+    if (turnChanged) {
+        if (data.GetGameStatus() != nil && data.GetGameStatus().ShouldFire) {
+            <div id="content" hx-trigger="load once" hx-get="/board/player" hx-swap="delete"></div>
+        } else {
+            <div id="content" hx-trigger="load once" hx-get="/board/enemy" hx-swap="delete"></div>
+        }
+    }
 </body>
 </html>
 }

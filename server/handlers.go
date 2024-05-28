@@ -144,7 +144,29 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 }
 
 func (app *Config) HandleGameStatus(c *gin.Context) {
-	fmt.Println(data.GetToken())
+	if data.GetToken() == "" {
+		return
+	}
 
-	render(c, 200, views.MakeTurnText())
+	gameStatus, err := GetGameStatus(data.GetToken())
+	if err != nil {
+		render(c, 200, views.MakeTurnText(false))
+		return
+	}
+
+	if data.GetGameStatus() == nil {
+		render(c, 200, views.MakeTurnText(true))
+	} else {
+		render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
+		data.IsPlayerTurn = gameStatus.ShouldFire
+	}
+	data.SetGameStatus(gameStatus)
+}
+
+func (app *Config) HandlePlayerBoard(c *gin.Context) {
+	println("Player")
+}
+
+func (app *Config) HandleEnemyBoard(c *gin.Context) {
+	println("Enemy")
 }
