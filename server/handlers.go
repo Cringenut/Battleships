@@ -150,7 +150,7 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 
 	gameStatus, err := GetGameStatus(data.GetToken())
 	if err != nil {
-		render(c, 200, views.MakeTurnText(true))
+		render(c, 200, views.MakeTurnText(false))
 		return
 	}
 
@@ -160,10 +160,14 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 
 }
 
-func (app *Config) HandlePlayerBoard(c *gin.Context) {
+func (app *Config) HandlePlayerTurn(c *gin.Context) {
 	println("Player")
+	data.PrintOppShots()
+	render(c, 200, views.MakeEnemyBoard())
 }
 
-func (app *Config) HandleEnemyBoard(c *gin.Context) {
+func (app *Config) HandleEnemyTurn(c *gin.Context) {
 	println("Enemy")
+	data.PrintOppShots()
+	render(c, 200, views.MakePlayerBoard())
 }

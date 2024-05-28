@@ -24,7 +24,6 @@ templ MakeBattlePage() {
             background-attachment: fixed;
             z-index: -2;
         }
-
         body::after {
             content: '';
             position: fixed;
@@ -35,21 +34,17 @@ templ MakeBattlePage() {
             background-color: rgba(60, 57, 57, 0.65); /* Adjust the tint color and opacity here */
             z-index: -1;
         }
-
         .container {
             display: flex;
             flex-direction: column;
         }
-
         .fixed-width {
             width: 640px;
             position: relative;
         }
-
         .flexible-width {
             flex: 1;
         }
-
         .top-element, .top-element1, .surrender-button {
             height: 40px;
             display: flex;
@@ -58,7 +53,6 @@ templ MakeBattlePage() {
             padding-left: 30px;
             padding-right: 30px;
         }
-
         .rectangle {
             width: 200px;
             height: 100px;
@@ -73,47 +67,38 @@ templ MakeBattlePage() {
             right: 0; /* Position at the right edge of the top element */
             z-index: 10; /* Ensures it is on top of other elements */
         }
-
         .top-element {
             align-items: flex-start;
         }
-
         .top-element1 {
             align-items: flex-end;
         }
-
         .surrender-button {
             height: 48px;
             background-color: rgba(255, 0, 0, 0.8);
             align-content: center;
             align-items: center;
         }
-
         .nickname-text {
             font-size: 20px;
             padding-top: 22px;
         }
-
         .bottom-text {
             font-size: 16px;
             padding-top: 4px;
         }
-
         .timer-text {
             font-size: 20px;
             padding-top: 4px;
         }
-
         .field-left, .field-right, .side-menu {
             flex: 1;
             display: flex;
             position: relative;
         }
-
         .side-menu {
             background-color: rgba(52, 51, 51, 0.5);
         }
-
         .square {
             border-radius: 2px;
             width: 100%;
@@ -127,40 +112,6 @@ templ MakeBattlePage() {
             padding: 4px;
             z-index: 1;
         }
-
-        .cell, .ship-cell, .miss-cell, .hit-cell {
-            display: flex; /* Makes cell a flex container */
-            justify-content: center; /* Centers content horizontally */
-            align-items: center; /* Centers content vertically */
-            color: white; /* Sets the text color */
-            font-size: 24px; /* Sets the text size */
-            background-color: #222; /* Default background color */
-            position: relative; /* Allows for absolute positioning of the button */
-            z-index: auto;
-            width: 100%; /* Fill the grid space */
-            height: 100%; /* Ensures the cell fills the height of its container */
-            aspect-ratio: 1; /* Ensures that each cell is square */
-            overflow: hidden; /* Hide    any content that overflows */
-        }
-
-        .ship-cell, .hit-cell {
-            background-color: rgb(19, 19, 114);
-        }
-
-        .hit-cell {
-            background-image: url("explosion.png");
-            background-repeat: no-repeat;
-            background-size: 78%;
-            background-position: center;
-        }
-
-        .miss-cell {
-            background-image: url("x.png");
-            background-repeat: no-repeat;
-            background-size: 90%;
-            background-position: center;
-        }
-
         .footer {
             width: 400px;
             height: 10px;
@@ -202,9 +153,7 @@ templ MakeBattlePage() {
         <div class="bottom-text">Accuracy: 65%</div>
     </div>
     <div class="field-right">
-        <div class="square">
-
-        </div>
+        @MakeEnemyBoard()
     </div>
 </div>
 <div class="container flexible-width">
@@ -236,11 +185,14 @@ templ MakeTurnText(turnChanged bool) {
          hx-target="this"
          hx-swap="outerHTML"
     >Turn</div>
+
+
     if (turnChanged) {
         if (data.GetGameStatus().ShouldFire) {
-            <div id="content" hx-trigger="load once" hx-get="/board/player" hx-swap="delete"></div>
+            <div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+            <div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
         } else {
-            <div id="content" hx-trigger="load once" hx-get="/board/enemy" hx-swap="delete"></div>
+            <div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
         }
     }
 </body>

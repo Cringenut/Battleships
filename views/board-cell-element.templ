@@ -118,21 +118,32 @@ templ MakeShowPlacementCell() {
 
 templ MakePlayerBoardCell(coord string) {
 <style>
-    .cell, .ship-cell {
+    .cell, .ship-cell, .hit-cell, .miss-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
         color: white; /* Sets the text color */
-        font-size: 18px; /* Sets the text size */
-        aspect-ratio: 1; /* Ensures that each cell is square */
-        width: 100%; /* Fill the grid space */
-        height: 100%; /* Ensures the cell fills the height of its container */
+        font-size: 24px; /* Sets the text size */
         background-color: #222; /* Default background color */
         position: relative; /* Allows for absolute positioning of the button */
-        z-index: 1;
+        z-index: auto;
+        width: 100%; /* Fill the grid space */
+        height: 100%; /* Ensures the cell fills the height of its container */
+        aspect-ratio: 1; /* Ensures that each cell is square */
+        overflow: hidden; /* Hide    any content that overflows */
     }
-    .ship-cell, .hit-cell {
-        background-color: rgb(19, 19, 114);
+    .hit-cell {
+        background-color: rgba(234, 234, 234, 0.14);
+        background-image: url("explosion.png");
+        background-repeat: no-repeat;
+        background-size: 78%;
+        background-position: center;
+    }
+    .miss-cell {
+        background-image: url("x.png");
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: center;
     }
 </style>
 <!DOCTYPE html>
@@ -144,16 +155,60 @@ templ MakePlayerBoardCell(coord string) {
 <body>
     switch data.GetPlayerCellType(coord) {
     case data.Default:
-        <div class="cell" id={ coord } >{ coord }</div>
+        <div class="cell" id={ coord } >{ coord[1:] }</div>
     case data.Ship:
-        <div class="ship-cell" id={ coord } >{ coord }</div>
+        <div class="ship-cell" id={ coord } >{ coord[1:] }</div>
     case data.Hit:
-    fmt.Println("This cell has been hit.")
+        <div class="hit-cell" id={ coord } ></div>
     case data.Miss:
-    fmt.Println("This cell is a miss.")
+        <div class="miss-cell" id={ coord } ></div>
     default:
-        <div class="cell" id={ coord } >{ coord }</div>
+        <div class="cell" id={ coord } >{ coord[1:] }</div>
     }
+</body>
+</html>
+}
+
+templ MakeEnemyBoardCell(coord string) {
+<style>
+    .cell, .ship-cell, .hit-cell, .miss-cell {
+        display: flex; /* Makes cell a flex container */
+        justify-content: center; /* Centers content horizontally */
+        align-items: center; /* Centers content vertically */
+        color: white; /* Sets the text color */
+        font-size: 24px; /* Sets the text size */
+        background-color: #222; /* Default background color */
+        position: relative; /* Allows for absolute positioning of the button */
+        z-index: auto;
+        width: 100%; /* Fill the grid space */
+        height: 100%; /* Ensures the cell fills the height of its container */
+        aspect-ratio: 1; /* Ensures that each cell is square */
+        overflow: hidden; /* Hide    any content that overflows */
+    }
+    .ship-cell, .hit-cell {
+        background-color: rgb(19, 19, 114);
+    }
+    .hit-cell {
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Explosion-155624_icon.svg/600px-Explosion-155624_icon.svg.png");
+        background-repeat: no-repeat;
+        background-size: 84%;
+        background-position: center;
+    }
+    .miss-cell {
+        background-image: url("https://i.imgur.com/GFE7hTr.png");
+        background-repeat: no-repeat;
+        background-size: 60%;
+        background-position: center;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title></title>
+</head>
+<body>
+    <div class="cell" id={ coord } >{ coord }</div>
 </body>
 </html>
 }

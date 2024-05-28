@@ -24,7 +24,7 @@ func (app *Config) Routes() {
 
 	// Handlers for battle
 	app.Router.GET("/status", app.HandleGameStatus)
-	app.Router.GET("/board/player", app.HandlePlayerBoard)
-	app.Router.GET("/board/enemy", app.HandleEnemyBoard)
+	app.Router.GET("/board/turn/player", app.HandlePlayerTurn)
+	app.Router.GET("/board/turn/enemy", app.HandleEnemyTurn)
 
 }

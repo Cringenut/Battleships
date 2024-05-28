@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"strconv"
 )
 
@@ -48,14 +49,34 @@ func CalculateCellCoord(row int, col int) string {
 	return string(y) + strconv.Itoa(x)
 }
 
+func GetEnemyCellType(coord string) CellType {
+	if GetToken() == "" {
+		return Default
+	}
+
+	return Default
+}
+
 func GetPlayerCellType(coord string) CellType {
 	if GetToken() == "" {
 		return Default
 	}
 
-	if StringSliceContains(GetPlayerShips(), coord) {
+	if StringSliceContains(GetGameStatus().OppShots, coord) {
+		if StringSliceContains(GetPlayerShips(), coord) {
+			return Hit
+		} else {
+			return Miss
+		}
+	} else if StringSliceContains(GetPlayerShips(), coord) {
 		return Ship
 	}
 
 	return Default
+}
+
+func PrintOppShots() {
+	for _, item := range GetGameStatus().OppShots {
+		fmt.Println(item)
+	}
 }
