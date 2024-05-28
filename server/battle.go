@@ -37,5 +37,6 @@ func StartBattle() error {
 	}
 
 	data.SetPlayerShips(ships)
+
 	return nil
 }

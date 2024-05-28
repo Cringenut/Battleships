@@ -59,3 +59,7 @@ type GameStatus struct {
 	ShouldFire     bool     `json:"should_fire"`
 	Timer          int      `json:"timer"`
 }
+
+type FireResponse struct {
+	Result []string `json:"result"`
+}

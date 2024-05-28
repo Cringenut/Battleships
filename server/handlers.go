@@ -171,3 +171,7 @@ func (app *Config) HandleEnemyTurn(c *gin.Context) {
 	data.PrintOppShots()
 	render(c, 200, views.MakePlayerBoard())
 }
+
+func HandleFire() {
+
+}

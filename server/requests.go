@@ -55,6 +55,48 @@ func PostInitGame(body []byte) (string, error) {
 	return res.Header.Get("x-auth-token"), nil
 }
 
+func PostFire(coord string) error {
+	posturl := "https://go-pjatk-server.fly.dev/api/game/fire"
+
+	// Creating the JSON body using a map and marshal it to bytes
+	jsonData := map[string]string{"coord": coord}
+	body, err := json.Marshal(jsonData)
+	if err != nil {
+		return err
+	}
+
+	if err := CheckConnection(); err != nil {
+		return err
+	}
+
+	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
+	if err != nil {
+		return err
+	}
+
+	// Adding the necessary headers
+	r.Header.Add("Content-Type", "application/json")
+	r.Header.Add("X-Auth-Token", data.GetToken()) // Assuming authToken is provided when function is called
+
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(r)
+	if err != nil {
+		return err
+	}
+	defer res.Body.Close()
+
+	// Read the response body
+	responseData := &data.FireResponse{}
+	err = json.NewDecoder(res.Body).Decode(responseData)
+	if err != nil {
+		return err
+	}
+
+	// Print or use the "result" parameter
+	fmt.Println("Response from server:", responseData.Result)
+	return nil
+}
+
 /* GET */
 func GetBoard(token string) ([]string, error) {
 	geturl := "https://go-pjatk-server.fly.dev/api/game/board"

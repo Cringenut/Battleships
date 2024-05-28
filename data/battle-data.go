@@ -1,7 +1,10 @@
 package data
 
+import "fmt"
+
 var gameData GameData
 var gameStatus *GameStatus
+var playerShots = make(map[string]bool)
 var IsPlayerTurn = false
 
 func (gd *GameData) InitGameData() {
@@ -44,4 +47,13 @@ func GetGameStatus() *GameStatus {
 
 func IsTurnChanged() bool {
 	return gameStatus.ShouldFire != IsPlayerTurn
+}
+
+func AppendPlayerShots(coord string, isHit bool) {
+	playerShots[coord] = isHit
+	fmt.Print(playerShots)
+}
+
+func GetPlayerShots() map[string]bool {
+	return playerShots
 }
