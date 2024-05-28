@@ -231,6 +231,9 @@ templ MakeEnemyBoardCell(coord string) {
     <title></title>
 </head>
 <body>
+
+switch data.GetEnemyCellType(coord) {
+case data.Default:
 <form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
     <input type="hidden" name="coord" value={ coord } />
     <div class="cell" id={ coord } >{ coord }
@@ -239,6 +242,23 @@ templ MakeEnemyBoardCell(coord string) {
         }
     </div>
 </form>
+case data.Ship:
+
+case data.Hit:
+    <div class="hit-cell" id={ coord } ></div>
+case data.Miss:
+    <div class="miss-cell" id={ coord } ></div>
+default:
+<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
+    <input type="hidden" name="coord" value={ coord } />
+    <div class="cell" id={ coord } >{ coord[1:] }
+        if (data.GetGameStatus().ShouldFire) {
+        <button class="invisible-button" type="submit"></button>
+        }
+    </div>
+</form>
+}
+
 </body>
 </html>
 }

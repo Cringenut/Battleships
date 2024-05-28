@@ -185,7 +185,7 @@ func (app *Config) HandleFire(c *gin.Context) {
 	}
 
 	fmt.Println(coord)
-	fmt.Println("Bang")
+	data.AppendPlayerShots(coord, res)
 
 	render(c, 200, views.MakeEnemyBoard())
 }

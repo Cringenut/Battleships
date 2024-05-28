@@ -25,7 +25,7 @@ type PlayerData struct {
 type GameData struct {
 	Token       string
 	PlayerShips []string
-	PlayerShots map[string]bool
+	PlayerShots []ShotResponse
 }
 
 type ServerGameStatusData struct {
@@ -62,4 +62,9 @@ type GameStatus struct {
 
 type FireResponse struct {
 	Result string `json:"result"`
+}
+
+type ShotResponse struct {
+	Coord      string
+	ShotResult string
 }

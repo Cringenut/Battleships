@@ -92,6 +92,10 @@ func PostFire(token string, coord string) (string, error) {
 		return "", err
 	}
 
+	if responseData.Result == "" {
+		return "", err
+	}
+
 	// Print or use the "result" parameter
 	fmt.Println("Response from server:", responseData.Result)
 	return responseData.Result, nil

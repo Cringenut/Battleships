@@ -133,7 +133,7 @@ templ MakeBattlePage() {
 <body>
 <div class="container fixed-width">
     <div class="top-element">
-        <div class="nickname-text">Player</div>
+        <div class="nickname-text">{ data.GetPlayerNickname() }</div>
         <div class="bottom-text">Accuracy: 28%</div>
         <div class="rectangle">
             @MakeTurnText(true)

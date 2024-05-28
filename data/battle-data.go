@@ -4,14 +4,14 @@ import "fmt"
 
 var gameData GameData
 var gameStatus *GameStatus
-var playerShots = make(map[string]bool)
+var playerShots []ShotResponse
 var enemyShots []string
 var IsPlayerTurn = false
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
 	gd.PlayerShips = []string{}
-	gd.PlayerShots = make(map[string]bool)
+	gd.PlayerShots = []ShotResponse{}
 }
 
 func InitializeGameData() {
@@ -50,13 +50,9 @@ func IsTurnChanged() bool {
 	return gameStatus.ShouldFire != IsPlayerTurn
 }
 
-func AppendPlayerShots(coord string, isHit bool) {
-	playerShots[coord] = isHit
+func AppendPlayerShots(coord string, res string) {
+	playerShots = append(playerShots, ShotResponse{coord, res})
 	fmt.Print(playerShots)
-}
-
-func GetPlayerShots() map[string]bool {
-	return playerShots
 }
 
 func SetEnemyShots(shots []string) {
@@ -65,4 +61,47 @@ func SetEnemyShots(shots []string) {
 
 func GetEnemyShots() []string {
 	return enemyShots
+}
+
+func GetEnemyCellType(coord string) CellType {
+	if GetToken() == "" {
+		return Default
+	}
+
+	if result, found := getShotResult(playerShots, coord); found {
+		if result == "hit" || result == "sunk" {
+			return Hit
+		} else {
+			return Miss
+		}
+	}
+
+	return Default
+}
+
+func GetPlayerCellType(coord string) CellType {
+	if GetToken() == "" {
+		return Default
+	}
+
+	if StringSliceContains(GetGameStatus().OppShots, coord) {
+		if StringSliceContains(GetPlayerShips(), coord) {
+			return Hit
+		} else {
+			return Miss
+		}
+	} else if StringSliceContains(GetPlayerShips(), coord) {
+		return Ship
+	}
+
+	return Default
+}
+
+func getShotResult(shots []ShotResponse, coord string) (string, bool) {
+	for _, shot := range shots {
+		if shot.Coord == coord {
+			return shot.ShotResult, true
+		}
+	}
+	return "", false
 }
