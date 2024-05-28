@@ -4,14 +4,18 @@ var gameData GameData
 var gameStatus *GameStatus
 var IsPlayerTurn = false
 
-func (gd *GameData) Init() {
+func (gd *GameData) InitGameData() {
 	gd.Token = ""
 	gd.PlayerShips = []string{}
 	gd.PlayerShots = make(map[string]bool)
 }
 
-func InitializeCurrentGameData() {
-	gameData.Init()
+func InitializeGameData() {
+	gameData.InitGameData()
+}
+
+func InitializeGameStatus() {
+	gameStatus = &GameStatus{}
 }
 
 func SetToken(token string) {

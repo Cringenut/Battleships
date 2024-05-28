@@ -9,7 +9,8 @@ import (
 func main() {
 
 	data.InitializePlayerData()
-	data.InitializeCurrentGameData()
+	data.InitializeGameData()
+	data.InitializeGameStatus()
 
 	// Initializing gin
 

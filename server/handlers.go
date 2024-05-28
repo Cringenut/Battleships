@@ -150,17 +150,14 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 
 	gameStatus, err := GetGameStatus(data.GetToken())
 	if err != nil {
-		render(c, 200, views.MakeTurnText(false))
+		render(c, 200, views.MakeTurnText(true))
 		return
 	}
 
-	if data.GetGameStatus() == nil {
-		render(c, 200, views.MakeTurnText(true))
-	} else {
-		render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
-		data.IsPlayerTurn = gameStatus.ShouldFire
-	}
 	data.SetGameStatus(gameStatus)
+	render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
+	data.IsPlayerTurn = gameStatus.ShouldFire
+
 }
 
 func (app *Config) HandlePlayerBoard(c *gin.Context) {

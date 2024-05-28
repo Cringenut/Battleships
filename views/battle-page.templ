@@ -237,7 +237,7 @@ templ MakeTurnText(turnChanged bool) {
          hx-swap="outerHTML"
     >Turn</div>
     if (turnChanged) {
-        if (data.GetGameStatus() != nil && data.GetGameStatus().ShouldFire) {
+        if (data.GetGameStatus().ShouldFire) {
             <div id="content" hx-trigger="load once" hx-get="/board/player" hx-swap="delete"></div>
         } else {
             <div id="content" hx-trigger="load once" hx-get="/board/enemy" hx-swap="delete"></div>
