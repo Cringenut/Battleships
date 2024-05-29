@@ -7,6 +7,7 @@ var gameStatus *GameStatus
 var playerShots []ShotResponse
 var enemyShots []string
 var IsPlayerTurn = false
+var enemyData EnemyData
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -104,4 +105,13 @@ func getShotResult(shots []ShotResponse, coord string) (string, bool) {
 		}
 	}
 	return "", false
+}
+
+func SetEnemyData(nickname, description string) {
+	enemyData.Nickname = nickname
+	enemyData.Description = description
+}
+
+func GetEnemyData() EnemyData {
+	return enemyData
 }

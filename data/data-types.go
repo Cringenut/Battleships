@@ -22,6 +22,11 @@ type PlayerData struct {
 	ShipPlacementType Placement
 }
 
+type EnemyData struct {
+	Nickname    string `json:"opponent"`
+	Description string `json:"opp_desc"`
+}
+
 type GameData struct {
 	Token       string
 	PlayerShips []string

@@ -1,7 +1,8 @@
-package server
+package web
 
 import (
 	"Battleships/data"
+	"Battleships/requests"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +24,7 @@ func StartBattle() error {
 		return err
 	}
 
-	token, err := PostInitGame(jsonBody)
+	token, err := requests.PostInitGame(jsonBody)
 	if err != nil {
 		return err
 	}
@@ -31,7 +32,7 @@ func StartBattle() error {
 	data.SetToken(token)
 	println(data.GetToken())
 
-	ships, _ := GetBoard(data.GetToken())
+	ships, _ := requests.GetBoard(data.GetToken())
 	for _, position := range ships {
 		fmt.Println(position)
 	}

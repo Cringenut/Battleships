@@ -8,13 +8,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data-types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/requests.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/requests/requests.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/explosion.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/main-menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/main-menu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +28,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22.3" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -66,7 +66,7 @@
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "D:/Battleships/views",
+    "last_opened_file_path": "C:/Users/Ignacy",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -79,11 +79,11 @@
       <recent name="C:\Battleships\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\web" />
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\requests" />
+      <recent name="C:\Users\Ignacy\GolandProjects\Battleships\web\test" />
       <recent name="C:\Users\Ignacy\GolandProjects\Battleships\server" />
       <recent name="D:\Battleships\views" />
-      <recent name="D:\Battleships\web" />
-      <recent name="D:\Battleships" />
-      <recent name="C:\Battleships\views" />
     </key>
   </component>
   <component name="RunManager">
@@ -167,5 +167,16 @@
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/web/main-menu.go</url>
+          <line>8</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

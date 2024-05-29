@@ -1,13 +1,20 @@
 package web
 
 import (
-	"fmt"
+	"Battleships/data"
+	"Battleships/requests"
 	"time"
 )
 
-func IsTokenValid() bool {
-	time.Sleep(0 * time.Second)
-	fmt.Println("Second")
+func CheckBattleDataIntegrity() {
 
-	return true
+Data:
+	time.Sleep(200 * time.Millisecond)
+	enemyData, err := requests.GetEnemyData(data.GetToken())
+	if err != nil {
+		goto Data
+	}
+	data.SetEnemyData(enemyData.Nickname, enemyData.Description)
+
+	return
 }

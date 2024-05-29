@@ -122,7 +122,7 @@ templ MakeDefaultMenuOptions() {
 </html>
 }
 
-templ MakeSingeplayerChosen() {
+templ MakeSingleplayerChosen() {
 <html lang="en">
 <head>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
@@ -131,6 +131,8 @@ templ MakeSingeplayerChosen() {
 <div class="container" id="menu-container">
     <p>Game starts soon...</p>
     <a href="/" class="option">Back</a>
+
+    <div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
 </div>
 </body>
 </html>

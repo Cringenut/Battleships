@@ -28,5 +28,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/board/turn/enemy", app.HandleEnemyTurn)
 	app.Router.POST("/handle/fire", app.HandleFire)
 	app.Router.GET("/shots", app.HandleSetShots)
+	app.Router.POST("/player/info", app.HandlePlayerInfo)
+	app.Router.POST("/enemy/info", app.HandleEnemyInfo)
 
 }

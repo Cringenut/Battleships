@@ -2,6 +2,7 @@ package server
 
 import (
 	"Battleships/data"
+	"Battleships/requests"
 	"Battleships/views"
 	"Battleships/web"
 	"fmt"
@@ -39,11 +40,11 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	case "battle":
 		return
 	case "single":
-		err := StartBattle()
+		render(c, 200, views.MakeSingleplayerChosen())
+		err := web.StartBattle()
 		if err != nil {
 			return
 		}
-		render(c, 200, views.MakeSingeplayerChosen())
 	case "back":
 		render(c, 200, views.MakeMainMenu())
 	default:
@@ -54,9 +55,8 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 }
 
 func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
+	web.CheckBattleDataIntegrity()
 	fmt.Println("Redirect")
-
-	render(c, 200, views.MakeMainMenu())
 }
 
 // Handling Battle Page
@@ -149,7 +149,7 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 		return
 	}
 
-	gameStatus, err := GetGameStatus(data.GetToken())
+	gameStatus, err := requests.GetGameStatus(data.GetToken())
 	if err != nil {
 		render(c, 200, views.MakeTurnText(false))
 		return
@@ -178,7 +178,7 @@ func (app *Config) HandleFire(c *gin.Context) {
 	}
 
 	coord := strings.TrimPrefix(string(jsonData), "coord=")
-	res, err := PostFire(data.GetToken(), coord)
+	res, err := requests.PostFire(data.GetToken(), coord)
 	if err != nil {
 		render(c, 200, views.MakeEnemyBoard())
 		return
@@ -193,4 +193,19 @@ func (app *Config) HandleFire(c *gin.Context) {
 func (app *Config) HandleSetShots(c *gin.Context) {
 	println("SET")
 	data.SetEnemyShots(data.GetGameStatus().OppShots)
+}
+
+func (app *Config) HandlePlayerInfo(c *gin.Context) {
+	println("PlayerInfo")
+	render(c, 200, views.MakePlayerInfo(data.GetPlayerNickname(), data.GetPlayerDescription()))
+}
+
+func (app *Config) HandleEnemyInfo(c *gin.Context) {
+	println("EnemyInfo")
+	if data.GetToken() == "" {
+		return
+	}
+
+	enemyData := data.GetEnemyData()
+	render(c, 200, views.MakePlayerInfo(enemyData.Nickname, enemyData.Description))
 }
