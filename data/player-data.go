@@ -1,7 +1,5 @@
 package data
 
-type Placement int
-
 var playerData PlayerData
 var simplePlacement []string
 var advancedPlacement []string
@@ -10,7 +8,7 @@ func (pd *PlayerData) Init() {
 	pd.Nickname = "John_Doe"
 	pd.Description = "My first game"
 	pd.ShipCoords = []string{}
-	pd.ShipPlacementType = Random
+	pd.ShipPlacementType = Simple
 }
 
 func SetPlayerData(nickname, description string, shipCoords []string) {

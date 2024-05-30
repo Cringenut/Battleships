@@ -21,6 +21,7 @@ func (app *Config) Routes() {
 	// Handlers for settings
 	app.Router.POST("/save", app.HandleSave)
 	app.Router.POST("/place", app.HandlePlacementCell)
+	app.Router.POST("/placement/switch", app.HandlePlacementTypeSwitch)
 
 	// Handlers for battle
 	app.Router.GET("/status", app.HandleGameStatus)

@@ -140,6 +140,7 @@ templ MakePlayerBoardCell(coord string) {
         height: 100%; /* Ensures the cell fills the height of its container */
         aspect-ratio: 1; /* Ensures that each cell is square */
         overflow: hidden; /* Hide    any content that overflows */
+		user-select: none;
     }
     .ship-cell, .hit-cell {
         background-color: rgb(19, 19, 114);
@@ -195,6 +196,7 @@ templ MakeEnemyBoardCell(coord string) {
         height: 100%; /* Ensures the cell fills the height of its container */
         aspect-ratio: 1; /* Ensures that each cell is square */
         overflow: hidden; /* Hide    any content that overflows */
+		user-select: none;
     }
     .ship-cell, .hit-cell {
         background-color: rgb(19, 19, 114);

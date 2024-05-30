@@ -4,22 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.6 // Enemy and player information window during the battle, getting enemy information, new web structure">
-      <change afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/settings.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Battleships.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Battleships.iml" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.7 // Settings page rework">
+      <change afterPath="$PROJECT_DIR$/views/placement-field-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/player-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/player-data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-element.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +164,8 @@
     <MESSAGE value="Battleships v3.5 // New battle system handling" />
     <MESSAGE value="Battleships v3.5" />
     <MESSAGE value="Battleships v3.6 // Enemy and player information window during the battle, getting enemy information, new web structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.6 // Enemy and player information window during the battle, getting enemy information, new web structure" />
+    <MESSAGE value="Battleships v3.7 // Settings page rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.7 // Settings page rework" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

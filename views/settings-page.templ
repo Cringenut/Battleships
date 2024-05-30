@@ -1,6 +1,12 @@
 package views
 
-templ MakeSettingsPage(playerNickname string, playerDescription string) {
+import (
+"Battleships/data"
+"Battleships/web"
+)
+
+templ MakeSettingsPage() {
+<div id="placement_menu">
 	<!DOCTYPE html>
 	<html lang="en">
 		<style>
@@ -76,14 +82,14 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
         aspect-ratio: 1;
     }
 
-    footer {
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: center;
-        padding: 14px;
-        background-color: transparent;
-        font-family: "Special Elite", system-ui;
-    }
+	footer {
+		display: flex;
+		flex-shrink: 0;
+		justify-content: center;
+		padding-top: 44px;
+		background-color: transparent;
+		font-family: "Special Elite", system-ui;
+	}
 
     .save-text, .rectangle-text {
         font-family: "Special Elite", system-ui;
@@ -93,6 +99,11 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
     .rectangle-text {
         margin-top: 12px;
     }
+
+	.left-btn, .right-btn {
+		user-select: none;
+		cursor: pointer;
+	}
 
 </style>
 		<head>
@@ -104,11 +115,35 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
 		</head>
 		<body>
 			<div class="top-bar">
-				<div class="left-btn">&#60</div>
-				<span class="center-text">Server Placement</span>
-				<div class="right-btn">&#62</div>
+				<div class="left-btn"
+					 hx-trigger="click"
+					 hx-post="/placement/switch"
+					 hx-swap="outerHTML"
+					 hx-target="#placement_menu"
+					 hx-vals='{"chosenOption": "previous"}'
+				>&#60</div>
+				<span class="center-text">
+					switch web.GetCurrentPlacementType() {
+						case data.Simple:
+							Simple
+						case data.Advanced:
+							Advanced
+						case data.ServerRandom:
+							Server Random
+						case data.Random:
+							Randomised
+						default:
+					}
+				</span>
+				<div class="right-btn"
+					 hx-trigger="click"
+					 hx-post="/placement/switch"
+					 hx-swap="outerHTML"
+					 hx-target="#placement_menu"
+					 hx-vals='{"chosenOption": "next"}'
+				>&#62</div>
 			</div>
-			<div class="container">
+			<div class="container" id="placement_container">
 				<div class="rectangle"></div>
 				<div class="main-container">
 					<div class="squares-container">
@@ -137,4 +172,5 @@ templ MakeSettingsPage(playerNickname string, playerDescription string) {
 			</footer>
 		</body>
 	</html>
+</div>
 }

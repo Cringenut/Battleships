@@ -1,9 +1,12 @@
 package data
 
+type Placement int
+
 const (
 	Random Placement = iota
 	Simple
 	Advanced
+	ServerRandom
 )
 
 type CellType int
