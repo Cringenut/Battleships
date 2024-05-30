@@ -1,248 +1,140 @@
 package views
 
-
 templ MakeSettingsPage(playerNickname string, playerDescription string) {
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-    <title>Settings</title>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
-    <style>
-        body, html {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            background-size: cover;
-            background-position: center;
-            font-family: "Special Elite", system-ui;
-
-            display: flex;
-            flex-direction: column;
-            color: white;
-            background-image: url("https://content.onliner.by/news/1400x5616/fdaeaf30e65e7093883f974eb174d511.jpeg");
-            background-attachment: fixed;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(60, 57, 57, 0.65); /* Adjust the tint color and opacity here */
-            z-index: 0;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            flex: 1;
-            margin-bottom: 60px; /* Margin to avoid overlap with footer */
-            z-index: 1;
-            overflow-y: scroll;
-            scrollbar-width: none; /* For Firefox */
-            -ms-overflow-style: none;  /* For Internet Explorer and Edge */
-        }
-
-        .container::-webkit-scrollbar {
-            display: none; /* For Chrome, Safari, and Opera */
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            margin-bottom: 40px; /* Margin to avoid overlap with footer */
-            padding-left: 20%;
-            padding-top: 20px;
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        .section p {
-            font-size: 18px;
-            margin-top: 0;
-        }
-
-        label {
-            display: block;
-            height: 40px;
-            line-height: 40px;
-            font-size: 20px;
-            margin-bottom: 0;
-        }
-
-        input, textarea {
-            width: 50%;
-            padding-left: 8px;
-            height: 48px;
-            border: none;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 20px;
-            resize: none;
-            overflow: hidden;
-        }
-
-        textarea {
-            min-height: 96px;
-            padding-top: 12px;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .header {
-            font-size: 40px;
-            height: 104px;
-            line-height: 104px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 30px;
-            text-decoration: none;
-            color: #eaeaea;
-            padding: 10px 20px;
-            border-radius: 5px;
-            z-index: 3;
-        }
-
-        .back-button:hover {
-            color: white;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 48px; /* Footer height */
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 3;
-        }
-
-        .save-button {
-            font-family: "Special Elite", system-ui;
-            background-color: transparent;
-            color: #eaeaea;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .save-button:hover {
-            color: white;
-        }
-
-        .edit-formation-button {
-            font-family: "Special Elite", system-ui;
-            background-color: transparent;
-            color: #eaeaea;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .edit-formation-button:hover {
-            color: white;
-        }
-
-        .random-overlay {
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            width: calc(100% + 6px);
-            height: calc(100% + 6px);
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            color: white;
-            backdrop-filter: blur(50px);
-            z-index: 2;
-        }
-    </style>
-</head>
-<body>
-<a href="/" class="back-button">X</a>
-<form action="" method="post"
-      hx-post="/save"
-      hx-swap="afterend"
-      hx-target="this"
->
-    <div class="container">
-        <div class="content">
-            <h1 class="header">Settings</h1>
-            <div class="section">
-                <h1>Player information</h1>
-                <p>Change your nickname and description</p>
-                <label for="nickname">Nickname:</label>
-                <input type="text" id="nickname" value={ playerNickname } name="nickname" ></input>
-                <label for="description">Description:</label>
-                <textarea id="description"  name="description" >{ playerDescription }</textarea>
-            </div>
-
-            <div class="section">
-                <h1>Ship placement</h1>
-                <p>Choose the best formation for your ships armada</p>
-                <div>@MakeShowPlacementBoard()</div>
-                <button type="button" class="edit-formation-button">Edit</button>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <button class="save-button" name="save" value="save">Save</button>
-    </div>
-</form>
-
-
-<script>
-    function adjustTextareaHeight(textarea) {
-        textarea.style.height = 'auto'; // Reset the height to auto to calculate the new height
-        textarea.style.height = (textarea.scrollHeight) + 'px'; // Set the new height based on the scrollHeight
+	<!DOCTYPE html>
+	<html lang="en">
+		<style>
+    body, html {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const descriptionTextarea = document.getElementById('description');
-        adjustTextareaHeight(descriptionTextarea);
-        descriptionTextarea.addEventListener('input', function() {
-            adjustTextareaHeight(this);
-        });
-    });
-</script>
-</body>
-</html>
+    .top-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        padding: 12px;
+        font-family: "Special Elite", system-ui;
+    }
 
+    .top-bar button {
+        font-size: 18px;
+        margin: 0 10px;
+    }
+
+    .center-text {
+        width: 160px;
+        margin: 0 10px;
+        text-align: center;
+    }
+
+    .container {
+        flex: 1;
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .rectangle {
+        width: 400px;
+        aspect-ratio: 1;
+        background-color: #ccc;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 6;
+    }
+
+    .main-container {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        background-color: red;
+        gap: 4px;
+        padding: 8px;
+        min-height: 384px;
+        min-width: 50px;
+        transform: translateX(95%);
+        margin-left: 202px;
+        z-index: 5;
+    }
+
+    .squares-container {
+        display: flex;
+        gap: 4px;
+    }
+
+    .square {
+        flex: 1;
+        height: 48px;
+        background-color: #007bff;
+        aspect-ratio: 1;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        padding: 14px;
+        background-color: transparent;
+        font-family: "Special Elite", system-ui;
+    }
+
+    .save-text, .rectangle-text {
+        font-family: "Special Elite", system-ui;
+        text-align: center;
+    }
+
+    .rectangle-text {
+        margin-top: 12px;
+    }
+
+</style>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title>Layout Example</title>
+		</head>
+		<body>
+			<div class="top-bar">
+				<div class="left-btn">&#60</div>
+				<span class="center-text">Server Placement</span>
+				<div class="right-btn">&#62</div>
+			</div>
+			<div class="container">
+				<div class="rectangle"></div>
+				<div class="main-container">
+					<div class="squares-container">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+					<div class="squares-container">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+					<div class="squares-container">
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+					<div class="squares-container">
+						<div class="square"></div>
+					</div>
+				</div>
+			</div>
+			<div class="rectangle-text">Randomise</div>
+			<footer>
+				<div class="save-text">Save</div>
+			</footer>
+		</body>
+	</html>
 }

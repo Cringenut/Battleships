@@ -1,12 +1,12 @@
 package views
 
 import (
-    "Battleships/data"
-    "Battleships/web"
+	"Battleships/data"
+	"Battleships/web"
 )
 
 templ MakePlacementCell(coord string) {
-<style>
+	<style>
     .cell, .placement-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
@@ -45,51 +45,60 @@ templ MakePlacementCell(coord string) {
         z-index: 5;
     }
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title></title>
-</head>
-<body>
-<form>
-    if (data.StringSliceContains(web.GetAllShipCoords(), coord)) {
-        <div class="player-ship-cell"></div>
-    }
-    else if web.GetFirstCoord().Coord == coord {
-        <div class="placement-cell"></div>
-    } else if (len(web.GetEndCoords()) == 0) {
-        <div class="cell">
-            { coord }
-            <button class="invisible-button" type="submit" id={ coord } name="placementCoord" value={ coord }
-                    hx-boost="true"
-                    hx-post="/place"
-                    hx-swap="outerHTML"
-                    hx-target="#placement-board">
-            </button>
-        </div>
-    } else {
-        if (!data.StringSliceContains(web.GetEndCoords(), coord)) {
-            <div class="cell">{ coord }</div>
-        } else {
-            <div class="hit-cell">
-                { coord }
-                <button class="invisible-button" type="submit" id={ coord } name="placementCoord" value={ coord }
-                        hx-boost="true"
-                        hx-post="/place"
-                        hx-swap="outerHTML"
-                        hx-target="#placement-board">
-                </button>
-            </div>
-        }
-    }
-</form>
-</body>
-</html>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title></title>
+		</head>
+		<body>
+			<form>
+				if (data.StringSliceContains(web.GetAllShipCoords(), coord)) {
+					<div class="player-ship-cell"></div>
+				} else if web.GetFirstCoord().Coord == coord {
+					<div class="placement-cell"></div>
+				} else if (len(web.GetEndCoords()) == 0) {
+					<div class="cell">
+						{ coord }
+						<button
+							class="invisible-button"
+							type="submit"
+							id={ coord }
+							name="placementCoord"
+							value={ coord }
+							hx-boost="true"
+							hx-post="/place"
+							hx-swap="outerHTML"
+							hx-target="#placement-board"
+						></button>
+					</div>
+				} else {
+					if (!data.StringSliceContains(web.GetEndCoords(), coord)) {
+						<div class="cell">{ coord }</div>
+					} else {
+						<div class="hit-cell">
+							{ coord }
+							<button
+								class="invisible-button"
+								type="submit"
+								id={ coord }
+								name="placementCoord"
+								value={ coord }
+								hx-boost="true"
+								hx-post="/place"
+								hx-swap="outerHTML"
+								hx-target="#placement-board"
+							></button>
+						</div>
+					}
+				}
+			</form>
+		</body>
+	</html>
 }
 
 templ MakeShowPlacementCell() {
-<style>
+	<style>
     .cell, .player-ship-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
@@ -104,20 +113,20 @@ templ MakeShowPlacementCell() {
         z-index: 1;
     }
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title></title>
-</head>
-<body>
-    <div class="cell"></div>
-</body>
-</html>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title></title>
+		</head>
+		<body>
+			<div class="cell"></div>
+		</body>
+	</html>
 }
 
 templ MakePlayerBoardCell(coord string) {
-<style>
+	<style>
     .cell, .ship-cell, .hit-cell, .miss-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
@@ -148,31 +157,31 @@ templ MakePlayerBoardCell(coord string) {
         background-position: center;
     }
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title></title>
-</head>
-<body>
-    switch data.GetPlayerCellType(coord) {
-    case data.Default:
-        <div class="cell" id={ coord } >{ coord[1:] }</div>
-    case data.Ship:
-        <div class="ship-cell" id={ coord } >{ coord[1:] }</div>
-    case data.Hit:
-        <div class="hit-cell" id={ coord } ></div>
-    case data.Miss:
-        <div class="miss-cell" id={ coord } ></div>
-    default:
-        <div class="cell" id={ coord } >{ coord[1:] }</div>
-    }
-</body>
-</html>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title></title>
+		</head>
+		<body>
+			switch data.GetPlayerCellType(coord) {
+				case data.Default:
+					<div class="cell" id={ coord }>{ coord[1:] }</div>
+				case data.Ship:
+					<div class="ship-cell" id={ coord }>{ coord[1:] }</div>
+				case data.Hit:
+					<div class="hit-cell" id={ coord }></div>
+				case data.Miss:
+					<div class="miss-cell" id={ coord }></div>
+				default:
+					<div class="cell" id={ coord }>{ coord[1:] }</div>
+			}
+		</body>
+	</html>
 }
 
 templ MakeEnemyBoardCell(coord string) {
-<style>
+	<style>
     .cell, .ship-cell, .hit-cell, .miss-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
@@ -224,41 +233,40 @@ templ MakeEnemyBoardCell(coord string) {
         overflow: hidden; /* Hide    any content that overflows */
     }
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <title></title>
-</head>
-<body>
-
-switch data.GetEnemyCellType(coord) {
-case data.Default:
-<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
-    <input type="hidden" name="coord" value={ coord } />
-    <div class="cell" id={ coord } >{ coord }
-        if (data.GetGameStatus().ShouldFire) {
-        <button class="invisible-button" type="submit"></button>
-        }
-    </div>
-</form>
-case data.Ship:
-
-case data.Hit:
-    <div class="hit-cell" id={ coord } ></div>
-case data.Miss:
-    <div class="miss-cell" id={ coord } ></div>
-default:
-<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
-    <input type="hidden" name="coord" value={ coord } />
-    <div class="cell" id={ coord } >{ coord[1:] }
-        if (data.GetGameStatus().ShouldFire) {
-        <button class="invisible-button" type="submit"></button>
-        }
-    </div>
-</form>
-}
-
-</body>
-</html>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title></title>
+		</head>
+		<body>
+			switch data.GetEnemyCellType(coord) {
+				case data.Default:
+					<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
+						<input type="hidden" name="coord" value={ coord }/>
+						<div class="cell" id={ coord }>
+							{ coord }
+							if (data.GetGameStatus().ShouldFire) {
+								<button class="invisible-button" type="submit"></button>
+							}
+						</div>
+					</form>
+				case data.Ship:
+				case data.Hit:
+					<div class="hit-cell" id={ coord }></div>
+				case data.Miss:
+					<div class="miss-cell" id={ coord }></div>
+				default:
+					<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
+						<input type="hidden" name="coord" value={ coord }/>
+						<div class="cell" id={ coord }>
+							{ coord[1:] }
+							if (data.GetGameStatus().ShouldFire) {
+								<button class="invisible-button" type="submit"></button>
+							}
+						</div>
+					</form>
+			}
+		</body>
+	</html>
 }

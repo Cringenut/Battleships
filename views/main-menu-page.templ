@@ -1,14 +1,14 @@
 package views
 
 templ MakeMainMenu() {
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet"></link>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
-    <title>Battleships</title>
-</head>
-<style>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet"/>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			<title>Battleships</title>
+		</head>
+		<style>
     body, html {
         height: 100%;
         width: 100%;
@@ -66,15 +66,15 @@ templ MakeMainMenu() {
         margin: 0; /* Remove default margin */
     }
 </style>
-<body>
-    @MakeDefaultMenuOptions()
-</body>
-</html>
+		<body>
+			@MakeDefaultMenuOptions()
+		</body>
+	</html>
 }
 
 templ MakeDefaultMenuOptions() {
-<html lang="en">
-<style>
+	<html lang="en">
+		<style>
     .option, a {
         text-shadow: black 2px 0 10px;
         -webkit-text-stroke: 0.01em black;
@@ -96,44 +96,40 @@ templ MakeDefaultMenuOptions() {
         -webkit-text-stroke: 0.03em transparent;
     }
 </style>
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-</head>
-<body>
-<div class="container" id="menu-container">
-    <div class="title">Battleships</div>
-    <form
-            hx-post="/"
-            hx-swap="outerHTML"
-            hx-target="#menu-container"
-            hx-vals='{"chosenOption": "single"}'
-    >
-        <input class="option" type="submit" value="Submit" name="commit"></input>
-    </form>
-
-    <div>
-        <a href="http://localhost:8080/settings">Settings</a>
-    </div>
-    <a href="http://localhost:8080/settings">Settings</a>
-
-</div>
-
-</body>
-</html>
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		</head>
+		<body>
+			<div class="container" id="menu-container">
+				<div class="title">Battleships</div>
+				<form
+					hx-post="/"
+					hx-swap="outerHTML"
+					hx-target="#menu-container"
+					hx-vals='{"chosenOption": "single"}'
+				>
+					<input class="option" type="submit" value="Submit" name="commit"/>
+				</form>
+				<div>
+					<a href="http://localhost:8080/settings">Settings</a>
+				</div>
+				<a href="http://localhost:8080/settings">Settings</a>
+			</div>
+		</body>
+	</html>
 }
 
 templ MakeSingleplayerChosen() {
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-</head>
-<body>
-<div class="container" id="menu-container">
-    <p>Game starts soon...</p>
-    <a href="/" class="option">Back</a>
-
-    <div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
-</div>
-</body>
-</html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		</head>
+		<body>
+			<div class="container" id="menu-container">
+				<p>Game starts soon...</p>
+				<a href="/" class="option">Back</a>
+				<div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
+			</div>
+		</body>
+	</html>
 }

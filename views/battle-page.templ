@@ -1,16 +1,16 @@
 package views
 
 import (
-    "Battleships/data"
+	"Battleships/data"
 )
 
 templ MakeBattlePage() {
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
-    <title>Battle</title>
-    <style>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			<title>Battle</title>
+			<style>
         body, html {
             height: 100%;
             width: 100%;
@@ -117,95 +117,97 @@ templ MakeBattlePage() {
         }
 
     </style>
-</head>
-<body>
-<div class="container fixed-width">
-    <div class="top-element">
-        <div class="nickname-text"
-             hx-post="/player/info"
-             hx-swap="outerHTML"
-             hx-target="#player_info"
-             hx-trigger="click">{ data.GetPlayerNickname() }
-        </div>
-        <div class="bottom-text">Accuracy: 28%</div>
-        <div class="rectangle">
-            @MakeTurnText(true)
-            <div class="timer-text">60</div>
-        </div>
-        <div class="footer">
-            e634fc93-5ff0-48a7-8f6d-79c3d9169fa4
-        </div>
-    </div>
-    <div class="field-left">
-        @MakePlayerBoard()
-    </div>
-</div>
-<div class="container fixed-width">
-    <div class="top-element1">
-        <div class="nickname-text"
-             hx-post="/enemy/info"
-             hx-swap="outerHTML"
-             hx-target="#player_info"
-             hx-trigger="click">{ data.GetEnemyData().Nickname }</div>
-        <div class="bottom-text">Accuracy: 65%</div>
-    </div>
-    <div class="field-right">
-        @MakeEnemyBoard()
-    </div>
-</div>
-<div class="container flexible-width">
-    <div class="side-menu"></div>
-    <div class="surrender-button">
-        <div>Surrender</div>
-    </div>
-</div>
-
-<div id="player_info"></div>
-
-</body>
-</html>
+		</head>
+		<body>
+			<div class="container fixed-width">
+				<div class="top-element">
+					<div
+						class="nickname-text"
+						hx-post="/player/info"
+						hx-swap="outerHTML"
+						hx-target="#player_info"
+						hx-trigger="click"
+					>
+						{ data.GetPlayerNickname() }
+					</div>
+					<div class="bottom-text">Accuracy: 28%</div>
+					<div class="rectangle">
+						@MakeTurnText(true)
+						<div class="timer-text">60</div>
+					</div>
+					<div class="footer">
+						e634fc93-5ff0-48a7-8f6d-79c3d9169fa4
+					</div>
+				</div>
+				<div class="field-left">
+					@MakePlayerBoard()
+				</div>
+			</div>
+			<div class="container fixed-width">
+				<div class="top-element1">
+					<div
+						class="nickname-text"
+						hx-post="/enemy/info"
+						hx-swap="outerHTML"
+						hx-target="#player_info"
+						hx-trigger="click"
+					>{ data.GetEnemyData().Nickname }</div>
+					<div class="bottom-text">Accuracy: 65%</div>
+				</div>
+				<div class="field-right">
+					@MakeEnemyBoard()
+				</div>
+			</div>
+			<div class="container flexible-width">
+				<div class="side-menu"></div>
+				<div class="surrender-button">
+					<div>Surrender</div>
+				</div>
+			</div>
+			<div id="player_info"></div>
+		</body>
+	</html>
 }
 
 templ MakeTurnText(turnChanged bool) {
-<!DOCTYPE html>
-<html lang="en">
-<style>
+	<!DOCTYPE html>
+	<html lang="en">
+		<style>
     .turn-text {
         font-size: 18px;
         padding-top: 28px;
     }
 </style>
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
-</head>
-<body>
-    <div class="turn-text" id="turn"
-         hx-get="/status"
-         hx-trigger="every 0.2s"
-         hx-target="this"
-         hx-swap="outerHTML"
-    >
-        if (data.GetGameStatus().ShouldFire) {
-            Your turn
-        } else {
-            Enemy turn
-        }
-
-        if len(data.GetEnemyShots()) != len(data.GetGameStatus().OppShots) {
-            <div hx-trigger="load" hx-get="/shots" hx-swap="none"></div>
-            <div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-        }
-    </div>
-
-
-    if (turnChanged) {
-        if (data.GetGameStatus().ShouldFire) {
-            <div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
-            <div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-        } else {
-            <div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
-        }
-    }
-</body>
-</html>
+		<head>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+		</head>
+		<body>
+			<div
+				class="turn-text"
+				id="turn"
+				hx-get="/status"
+				hx-trigger="every 0.2s"
+				hx-target="this"
+				hx-swap="outerHTML"
+			>
+				if (data.GetGameStatus().ShouldFire) {
+					Your turn
+				} else {
+					Enemy turn
+				}
+				if len(data.GetEnemyShots()) != len(data.GetGameStatus().OppShots) {
+					<div hx-trigger="load" hx-get="/shots" hx-swap="none"></div>
+					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+				}
+			</div>
+			if (turnChanged) {
+				if (data.GetGameStatus().ShouldFire) {
+					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+				} else {
+					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+				}
+			}
+		</body>
+	</html>
 }
