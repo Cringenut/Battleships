@@ -13,6 +13,11 @@ type Coordinate struct {
 	Coord    string
 }
 
+type Ship struct {
+	size   int
+	coords []string
+}
+
 const size = 10
 
 // Board represents the server board
@@ -20,9 +25,22 @@ var board [size][size]bool
 
 // ShipSizes defines the sizes of ships to be placed
 var shipSizes = []int{4, 3, 3, 2, 2, 2, 1, 1, 1, 1}
+var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
+	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
+var placingShip *Ship
 var firstCoord Coordinate
 var endCoords []string
-var currentPlacement data.Placement
+
+func SetPlacingShip(index int) {
+	if placingShip != nil {
+		placingShip.coords = []string{}
+	}
+	placingShip = &ships[index]
+}
+
+func GetPlacingShip() *Ship {
+	return placingShip
+}
 
 func GetFirstCoord() Coordinate {
 	return firstCoord

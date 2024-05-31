@@ -1,0 +1,169 @@
+package views
+
+import (
+"Battleships/data"
+"Battleships/web"
+)
+
+templ MakePlacingElement() {
+<div id="placement_menu">
+    switch web.GetCurrentPlacementType() {
+    case data.Simple:
+    @MakeSimplePlacementBoard()
+    case data.Advanced:
+    case data.ServerRandom:
+    case data.Random:
+    default:
+    }
+</div>
+}
+
+templ MakeSimplePlacementBoard() {
+    <!DOCTYPE html>
+    <html lang="en">
+    <style>
+        .top-bar button {
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .container {
+            flex: 1;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .main-container {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            gap: 4px;
+            min-height: 384px;
+            min-width: 50px;
+            transform: translateX(95%);
+            margin-left: 194px;
+            z-index: 5;
+        }
+
+        .squares-container {
+            display: flex;
+            gap: 4px;
+        }
+
+        .square {
+            border-radius: 1px;
+            flex: 1;
+            width: 68px;
+            height: 68px;
+            background-color: rgba(44, 44, 44, 0.95);
+            aspect-ratio: 1;
+            z-index: 4;
+            cursor: pointer;
+        }
+
+        footer {
+            display: flex;
+            flex-shrink: 0;
+            justify-content: center;
+            padding-top: 44px;
+            background-color: transparent;
+            font-family: "Special Elite", system-ui;
+        }
+
+    </style>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+        <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+        <title>Layout Example</title>
+    </head>
+    <body>
+    <div class="container" id="placement_container">
+        @MakePlacementBoard()
+        <div class="main-container">
+            <div class="squares-container">
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="outer"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "9"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "8"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "7"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "6"}'
+                ></div>
+            </div>
+            <div class="squares-container">
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "5"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "4"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "3"}'
+                ></div>
+            </div>
+            <div class="squares-container">
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "2"}'
+                ></div>
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "1"}'
+                ></div>
+            </div>
+            <div class="squares-container">
+                <div class="square"
+                     hx-trigger="click"
+                     hx-post="/placement/option"
+                     hx-swap="none"
+                     hx-target="#placement_menu"
+                     hx-vals='{"chosenOption": "0"}'
+                ></div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+}

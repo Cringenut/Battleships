@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 func (app *Config) HandleSave(c *gin.Context) {
@@ -102,5 +103,21 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 	}
 
 	Render(c, 200, views.MakeSettingsPage())
+}
 
+func (app *Config) HandleShipPlacementChosen(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	// Checking if next or previous type was chosen
+	chosenOption, err := strconv.Atoi(parsedData.Get("chosenOption"))
+	web.SetPlacingShip(chosenOption)
+	println(web.GetPlacingShip() != nil)
+
+	Render(c, 200, views.MakePlacingElement())
 }
