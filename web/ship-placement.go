@@ -85,6 +85,7 @@ func SetLastCoord(coord string) {
 	shipSizes = shipSizes[1:]
 	firstCoord = Coordinate{}
 	endCoords = []string{}
+	placingShip = nil
 }
 
 // isValidCoordinate checks if the coordinate is within board limits

@@ -3,6 +3,7 @@ package views
 import (
 	"Battleships/data"
 	"Battleships/web"
+	"fmt"
 )
 
 templ MakePlacementCell(coord string) {
@@ -25,15 +26,7 @@ templ MakePlacementCell(coord string) {
     .placement-cell {
         background-color: orange;
     }
-    form {
-        margin: 0;
-        padding: 0;
-        border: none;
-        height: 100%; /* Ensure the form fills its container */
-        width: 100%; /* Ensure the form fills its container */
-        position: relative; /* Required for absolute positioning of the button */
-    }
-    button.invisible-button {
+    .invisible-button {
         position: absolute; /* Position the button over the cell */
         top: 0;
         left: 0;
@@ -54,14 +47,23 @@ templ MakePlacementCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-		if web.GetPlacingShip() != nil {
-		<div class="cell" id={ coord }>{ coord }</div>
-		} else {
-		<div class="placement-cell" id={ coord }>{ coord }</div>
-		}
+		<div class="cell" id={ coord }>{ coord }
+			if web.GetPlacingShip() != nil {
+				<div class="invisible-button"
+					 hx-trigger="click"
+					 hx-post="/placement/place"
+					 hx-target="#placement_menu"
+					 hx-vals={ chosenOption(coord) }
+				></div>
+			}
+		</div>
 
 		</body>
 	</html>
+}
+
+func chosenOption(coord string) string {
+	return fmt.Sprintf(`{"chosenOption": "%s"}`, coord)
 }
 
 templ MakePlayerBoardCell(coord string) {

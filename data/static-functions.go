@@ -54,3 +54,7 @@ func PrintOppShots() {
 		fmt.Println(item)
 	}
 }
+
+func HxValCoord(coord string) string {
+	return coord
+}

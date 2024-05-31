@@ -61,28 +61,19 @@ func (app *Config) HandleSave(c *gin.Context) {
 }
 
 func (app *Config) HandlePlacementCell(c *gin.Context) {
-	jsonData, err := io.ReadAll(c.Request.Body)
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
 	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to read request body")
+		c.JSON(400, gin.H{"error": "Invalid request data"})
 		return
 	}
 
-	// Parse the form data
-	formData, err := url.ParseQuery(string(jsonData))
-	if err != nil {
-		c.String(http.StatusBadRequest, "Failed to parse form data")
-		return
-	}
+	// Checking if next or previous type was chosen
+	chosenOption := parsedData.Get("chosenOption")
+	println(chosenOption)
 
-	if web.GetFirstCoord().Coord == "" {
-		fmt.Println(formData.Get("placementCoord"))
-		web.SetFirstCoord(formData.Get("placementCoord"))
-		fmt.Println(web.GetEndCoords())
-	} else {
-		web.SetLastCoord(formData.Get("placementCoord"))
-	}
-
-	Render(c, 200, views.MakePlacementBoard())
+	Render(c, 200, views.MakePlacingElement())
 }
 
 func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
