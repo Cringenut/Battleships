@@ -1,12 +1,11 @@
 package views
 
 import (
-"Battleships/data"
-"Battleships/web"
+	"Battleships/data"
+	"Battleships/web"
 )
 
 templ MakeSettingsPage() {
-
 	<!DOCTYPE html>
 	<html lang="en">
 		<style>
@@ -142,12 +141,13 @@ templ MakeSettingsPage() {
 		</head>
 		<body>
 			<div class="top-bar">
-				<div class="left-btn"
-					 hx-trigger="click"
-					 hx-post="/placement/switch"
-					 hx-swap="outerHTML"
-					 hx-target="#placement_menu"
-					 hx-vals='{"chosenOption": "previous"}'
+				<div
+					class="left-btn"
+					hx-trigger="click"
+					hx-post="/placement/switch"
+					hx-swap="outerHTML"
+					hx-target="#placement_menu"
+					hx-vals='{"chosenOption": "previous"}'
 				>&#60</div>
 				<span class="center-text">
 					switch web.GetCurrentPlacementType() {
@@ -162,12 +162,13 @@ templ MakeSettingsPage() {
 						default:
 					}
 				</span>
-				<div class="right-btn"
-					 hx-trigger="click"
-					 hx-post="/placement/switch"
-					 hx-swap="outerHTML"
-					 hx-target="body"
-					 hx-vals='{"chosenOption": "next"}'
+				<div
+					class="right-btn"
+					hx-trigger="click"
+					hx-post="/placement/switch"
+					hx-swap="outerHTML"
+					hx-target="body"
+					hx-vals='{"chosenOption": "next"}'
 				>&#62</div>
 			</div>
 			@MakePlacingElement()

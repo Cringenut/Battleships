@@ -8,7 +8,7 @@ import (
 
 templ MakePlacementCell(coord string) {
 	<style>
-    .cell, .placement-cell {
+    .cell, .ship-cell, .possible-end-cell, .placement-cell {
 		display: flex; /* Makes cell a flex container */
 		justify-content: center; /* Centers content horizontally */
 		align-items: center; /* Centers content vertically */
@@ -23,9 +23,15 @@ templ MakePlacementCell(coord string) {
 		overflow: hidden; /* Hide    any content that overflows */
 		user-select: none;
     }
-    .placement-cell {
-        background-color: orange;
+    .possible-end-cell {
+        background-color: #287700;
     }
+	.ship-cell {
+		background-color: rgb(19, 19, 114);
+	}
+	.placement-cell {
+		background-color: #ffb02f;
+	}
     .invisible-button {
         position: absolute; /* Position the button over the cell */
         top: 0;
@@ -47,23 +53,41 @@ templ MakePlacementCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-		<div class="cell" id={ coord }>{ coord }
-			if web.GetPlacingShip() != nil {
-				<div class="invisible-button"
-					 hx-trigger="click"
-					 hx-post="/placement/place"
-					 hx-target="#placement_menu"
-					 hx-vals={ chosenOption(coord) }
-				></div>
+			if (data.StringSliceContains(web.GetEndCoords(), coord)) {
+				<div class="possible-end-cell">
+					{ coord }
+					<div
+						class="invisible-button"
+						hx-trigger="click"
+						hx-post="/placement/place"
+						hx-target="#placement_menu"
+						hx-vals={ chosenCoord(coord) }
+					></div>
+				</div>
+			} else if (web.GetFirstCoord().Coord == coord) {
+				<div class="placement-cell">{ coord }</div>
+			} else if (web.IsCoordinateInShips(coord)) {
+				<div class="ship-cell">{ coord }</div>
+			} else {
+				<div class="cell">
+					{ coord }
+					if web.GetPlacingShip() != nil {
+						<div
+							class="invisible-button"
+							hx-trigger="click"
+							hx-post="/placement/place"
+							hx-target="#placement_menu"
+							hx-vals={ chosenCoord(coord) }
+						></div>
+					}
+				</div>
 			}
-		</div>
-
 		</body>
 	</html>
 }
 
-func chosenOption(coord string) string {
-	return fmt.Sprintf(`{"chosenOption": "%s"}`, coord)
+func chosenCoord(coord string) string {
+	return fmt.Sprintf(`{"chosenCoord": "%s"}`, coord)
 }
 
 templ MakePlayerBoardCell(coord string) {

@@ -8,7 +8,7 @@ import (
 	"unicode"
 )
 
-type Coordinate struct {
+type PlacementCoordinate struct {
 	Row, Col int
 	Coord    string
 }
@@ -24,25 +24,32 @@ const size = 10
 var board [size][size]bool
 
 // ShipSizes defines the sizes of ships to be placed
-var shipSizes = []int{4, 3, 3, 2, 2, 2, 1, 1, 1, 1}
 var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
 var placingShip *Ship
-var firstCoord Coordinate
+var firstCoord PlacementCoordinate
 var endCoords []string
 
 func SetPlacingShip(index int) {
-	if placingShip != nil {
+	placingShip = &ships[index]
+
+	// Clear previous ship's coordinates from the board if they exist
+	if placingShip != nil && placingShip.coords != nil {
+		for _, coord := range placingShip.coords {
+			row, col, valid := getCoordPosition(strings.ToUpper(coord))
+			if valid {
+				board[row][col] = false
+			}
+		}
 		placingShip.coords = []string{}
 	}
-	placingShip = &ships[index]
 }
 
 func GetPlacingShip() *Ship {
 	return placingShip
 }
 
-func GetFirstCoord() Coordinate {
+func GetFirstCoord() PlacementCoordinate {
 	return firstCoord
 }
 
@@ -51,61 +58,60 @@ func GetEndCoords() []string {
 }
 
 func SetFirstCoord(coord string) {
-	row, col, valid := isValidCoordinate(strings.ToUpper(coord))
+	row, col, valid := isValidPlacingCoordinate(strings.ToUpper(coord))
 
 	if !valid {
 		fmt.Println("Invalid coordinate. Please enter a valid coordinate.")
-		firstCoord = Coordinate{}
+		firstCoord = PlacementCoordinate{}
 		return
 	}
 
-	if shipSizes[0] == 1 {
-		firstCoord = Coordinate{Row: row, Col: col, Coord: coord}
-		endCoords = possibleEndCoords(row, col, shipSizes[0])
+	if placingShip.size == 1 {
+		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
+		endCoords = possibleEndCoords(row, col, 1)
 		SetLastCoord(coord)
-	} else if len(possibleEndCoords(row, col, shipSizes[0])) != 0 {
-		firstCoord = Coordinate{Row: row, Col: col, Coord: coord}
-		endCoords = possibleEndCoords(row, col, shipSizes[0])
+	} else if placingShip != nil {
+		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
+		endCoords = possibleEndCoords(row, col, placingShip.size)
 	} else {
-		firstCoord = Coordinate{}
+		firstCoord = PlacementCoordinate{}
 	}
 }
 
 func SetLastCoord(coord string) {
-	endRow, endCol, validEnd := isValidCoordinate(coord)
+	endRow, endCol, validEnd := isValidPlacingCoordinate(coord)
 
 	if !validEnd || !data.StringSliceContains(endCoords, coord) {
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
-		firstCoord = Coordinate{}
+		firstCoord = PlacementCoordinate{}
 		return
 	}
 
-	placeShip(firstCoord.Row, firstCoord.Col, endRow, endCol, shipSizes[0])
+	placeShip(firstCoord.Row, firstCoord.Col, endRow, endCol, placingShip.size)
 	printBoard()
-	shipSizes = shipSizes[1:]
-	firstCoord = Coordinate{}
+	firstCoord = PlacementCoordinate{}
 	endCoords = []string{}
 	placingShip = nil
 }
 
-// isValidCoordinate checks if the coordinate is within board limits
-func isValidCoordinate(coord string) (int, int, bool) {
-	if len(coord) < 2 || !unicode.IsLetter(rune(coord[0])) || !unicode.IsDigit(rune(coord[1])) {
-		return 0, 0, false
+// IsCoordinateInShips checks if the given coordinate string is inside any of the ships' coordinates
+func IsCoordinateInShips(coord string) bool {
+	for _, ship := range ships {
+		for _, shipCoord := range ship.coords {
+			if strings.EqualFold(shipCoord, coord) {
+				return true
+			}
+		}
 	}
-	col := int(coord[0] - 'A')
+	return false
+}
 
-	// Handle column parsing when it could be two digits (e.g., "10")
-	row := 0
-	if len(coord) == 3 && coord[1] == '1' && coord[2] == '0' {
-		row = 0 // Zero-indexed, so '10' becomes 0
-	} else if len(coord) == 2 && unicode.IsDigit(rune(coord[1])) {
-		row = data.InvertNumber(int(coord[1] - '0'))
-	} else {
-		return 0, 0, false
-	}
+// isValidPlacingCoordinate checks if the coordinate is within board limits
+func isValidPlacingCoordinate(coord string) (int, int, bool) {
 
-	if row < 0 || row >= size {
+	row, col, isValid := getCoordPosition(coord)
+
+	if !isValid {
 		return 0, 0, false
 	}
 
@@ -123,6 +129,32 @@ func isValidCoordinate(coord string) (int, int, bool) {
 				return 0, 0, false
 			}
 		}
+	}
+
+	return row, col, true
+}
+
+func getCoordPosition(coord string) (int, int, bool) {
+	if len(coord) < 2 || !unicode.IsLetter(rune(coord[0])) || !unicode.IsDigit(rune(coord[1])) {
+		return 0, 0, false
+	}
+	col := int(coord[0] - 'A')
+	if col < 0 || col > 10 {
+		return 0, 0, false
+	}
+
+	// Handle column parsing when it could be two digits (e.g., "10")
+	row := 0
+	if len(coord) == 3 && coord[1] == '1' && coord[2] == '0' {
+		row = 0 // Zero-indexed, so '10' becomes 0
+	} else if len(coord) == 2 && unicode.IsDigit(rune(coord[1])) {
+		row = data.InvertNumber(int(coord[1] - '0'))
+	} else {
+		return 0, 0, false
+	}
+
+	if row < 0 || row >= size {
+		return 0, 0, false
 	}
 
 	return row, col, true
@@ -180,7 +212,12 @@ func placeShip(row, col, endRow, endCol int, length int) {
 		dy = 1
 	}
 	for i := 0; i < length; i++ {
-		board[int(math.Min(float64(row), float64(endRow)))+i*dx][int(math.Min(float64(col), float64(endCol)))+i*dy] = true
+		curRow := int(math.Min(float64(row), float64(endRow))) + i*dx
+		curCol := int(math.Min(float64(col), float64(endCol))) + i*dy
+		board[curRow][curCol] = true
+
+		// Add coordinate to the placingShip's coords
+		placingShip.coords = append(placingShip.coords, fmt.Sprintf("%c%d", rune('A'+curCol), 10-curRow))
 	}
 }
 
@@ -220,4 +257,11 @@ func GetAllShipCoords() []string {
 		}
 	}
 	return coords
+}
+
+func GetShipCoords(index int) string {
+	if len(ships[index].coords) == 0 {
+		return "+"
+	}
+	return strings.Join(ships[index].coords, " ")
 }
