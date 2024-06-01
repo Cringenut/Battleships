@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.8 // New coordinate post system">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/ship-placing-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ship-placing-element.templ" afterDir="false" />
@@ -165,7 +164,8 @@
     <MESSAGE value="Battleships v3.7 // Settings page rework" />
     <MESSAGE value="Battleships v3.7" />
     <MESSAGE value="Battleships v3.8 // New coordinate post system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.8 // New coordinate post system" />
+    <MESSAGE value="Battleships v3.8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v3.8" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

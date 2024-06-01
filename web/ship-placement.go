@@ -63,6 +63,7 @@ func SetFirstCoord(coord string) {
 	if !valid {
 		fmt.Println("Invalid coordinate. Please enter a valid coordinate.")
 		firstCoord = PlacementCoordinate{}
+		endCoords = []string{}
 		return
 	}
 
@@ -84,6 +85,7 @@ func SetLastCoord(coord string) {
 	if !validEnd || !data.StringSliceContains(endCoords, coord) {
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
 		firstCoord = PlacementCoordinate{}
+		endCoords = []string{}
 		return
 	}
 
@@ -261,6 +263,9 @@ func GetAllShipCoords() []string {
 
 func GetShipCoords(index int) string {
 	if len(ships[index].coords) == 0 {
+		if &ships[index] == placingShip {
+			return "Selected"
+		}
 		return "+"
 	}
 	return strings.Join(ships[index].coords, " ")

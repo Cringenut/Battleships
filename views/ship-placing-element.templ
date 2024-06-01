@@ -41,7 +41,7 @@ templ MakeSimplePlacementBoard() {
             display: flex;
             height: 100%;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             min-height: 384px;
             min-width: 50px;
             transform: translateX(95%);
@@ -51,25 +51,25 @@ templ MakeSimplePlacementBoard() {
 
         .squares-container {
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
 
         .square {
-            width: 72px;
-            height: 72px;
-            background-color: #000; /* Black squares, assuming a dark theme */
+            width: 70px;
+            height: 70px;
+            background-color: #222; /* Black squares, assuming a dark theme */
             display: flex;
             justify-content: center;
             align-items: flex-end; /* Align items at the bottom */
             color: white; /* Text color inside the square */
-            font-size: 16px; /* Adjust text size as needed */
+            font-size: 14px; /* Adjust text size as needed */
             padding-bottom: 4px; /* Add some padding at the bottom for spacing */
             position: relative; /* Required for positioning child elements */
             border-radius: 1px;
             flex: 1;
-            background-color: rgba(44, 44, 44, 0.95);
             aspect-ratio: 1;
             font-family: "Special Elite", system-ui;
+            outline: 2px solid rgba(44, 44, 44, 0.9);
             z-index: 4;
         }
 
@@ -105,6 +105,7 @@ templ MakeSimplePlacementBoard() {
 
         .square:hover {
             cursor: pointer;
+            outline-color: white;
         }
 
         .square:hover img {
