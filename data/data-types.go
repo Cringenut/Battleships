@@ -1,9 +1,9 @@
 package data
 
-type Placement int
+type PlacementType int
 
 const (
-	Random Placement = iota
+	Random PlacementType = iota
 	Simple
 	Advanced
 	ServerRandom
@@ -22,7 +22,7 @@ type PlayerData struct {
 	Nickname          string
 	Description       string
 	ShipCoords        []string
-	ShipPlacementType Placement
+	ShipPlacementType PlacementType
 }
 
 type EnemyData struct {

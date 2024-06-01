@@ -1,8 +1,6 @@
 package data
 
 var playerData PlayerData
-var simplePlacement []string
-var advancedPlacement []string
 
 func (pd *PlayerData) Init() {
 	pd.Nickname = "John_Doe"
@@ -25,8 +23,12 @@ func GetPlayerDescription() string {
 	return playerData.Description
 }
 
-func GetPlayerShipPlacementType() Placement {
+func GetPlayerShipPlacementType() PlacementType {
 	return playerData.ShipPlacementType
+}
+
+func SetPlayerShipPlacementType(placement PlacementType) {
+	playerData.ShipPlacementType = placement
 }
 
 func InitializePlayerData() {

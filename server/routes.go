@@ -22,7 +22,10 @@ func (app *Config) Routes() {
 	app.Router.POST("/save", app.HandleSave)
 	app.Router.POST("/placement/place", app.HandlePlacementCell)
 	app.Router.POST("/placement/switch", app.HandlePlacementTypeSwitch)
-	app.Router.POST("/placement/option", app.HandleShipPlacementChosen)
+	app.Router.POST("/placement/option", app.HandlePlacementChosen)
+	app.Router.POST("/placement/clear", app.HandlePlacementClear)
+	app.Router.POST("/placement/cancel", app.HandlePlacementCancel)
+	app.Router.POST("/placement/save", app.HandlePlacementSave)
 
 	// Handlers for battle
 	app.Router.GET("/status", app.HandleGameStatus)

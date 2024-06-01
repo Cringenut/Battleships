@@ -2,19 +2,26 @@ package views
 
 import (
 	"Battleships/data"
+"Battleships/web"
 )
+
+func GetPlacementBoardClass() string {
+	if web.GetPlacingShip() == nil {
+		return "placement-board"
+	} else {
+		return "placement-board highlight"
+	}
+}
 
 templ MakePlacementBoard() {
 	<style>
     .placement-board {
 		width: 400px;
 		aspect-ratio: 1;
-		background-color: #ccc;
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
 		padding: 2px;
-
 		border-radius: 2px;
 		background-color: rgba(44, 44, 44, 0.9);
 		display: grid;
@@ -22,6 +29,10 @@ templ MakePlacementBoard() {
 		grid-template-rows: repeat(10, 1fr); /* 10 rows */
 		gap: 2px; /* Optional gap between cells */
     }
+
+	.placement-board.highlight {
+		background-color: white;
+	}
 </style>
 	<html>
 		<head>
@@ -30,7 +41,7 @@ templ MakePlacementBoard() {
 			<title>Battle</title>
 		</head>
 		<body>
-			<div class="placement-board" id="placement-board">
+			<div class={ GetPlacementBoardClass() } id="placement-board">
 				for row := 0; row < 10; row++ {
 					for col := 0; col < 10; col++ {
 						@MakePlacementCell(data.CalculateCellCoord(row, col))

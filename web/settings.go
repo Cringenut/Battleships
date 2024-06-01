@@ -5,14 +5,14 @@ import (
 	"fmt"
 )
 
-var placementTypes = []data.Placement{data.Simple, data.Advanced, data.Random}
-var currentPlacementType data.Placement
+var placementTypes = []data.PlacementType{data.Simple, data.Advanced, data.Random}
+var currentPlacementType data.PlacementType
 
-func SetCurrentPlacementType(placementType data.Placement) {
+func SetCurrentPlacementType(placementType data.PlacementType) {
 	currentPlacementType = placementType
 }
 
-func GetCurrentPlacementType() data.Placement {
+func GetCurrentPlacementType() data.PlacementType {
 	return currentPlacementType
 }
 
@@ -38,11 +38,20 @@ func SwitchCurrentPlacementType(isNext bool) {
 	}
 }
 
-func findPlacementIndex(value data.Placement) int {
+func findPlacementIndex(value data.PlacementType) int {
 	for i, v := range placementTypes {
 		if v == value {
 			return i
 		}
 	}
 	return -1
+}
+
+func CanCurrentPlacementBeSaved() bool {
+	switch currentPlacementType {
+	case data.Simple:
+		return IsAnyShipMissingCoords()
+	default:
+		return false
+	}
 }

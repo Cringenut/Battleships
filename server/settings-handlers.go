@@ -100,7 +100,7 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 	Render(c, 200, views.MakeSettingsPage())
 }
 
-func (app *Config) HandleShipPlacementChosen(c *gin.Context) {
+func (app *Config) HandlePlacementChosen(c *gin.Context) {
 	// Taking request body to extract chosen option
 	jsonData, _ := io.ReadAll(c.Request.Body)
 	parsedData, err := url.ParseQuery(string(jsonData))
@@ -115,4 +115,22 @@ func (app *Config) HandleShipPlacementChosen(c *gin.Context) {
 	println(chosenOption)
 
 	Render(c, 200, views.MakePlacingElement())
+}
+
+func (app *Config) HandlePlacementClear(c *gin.Context) {
+	web.ClearAllShipCoords()
+	Render(c, 200, views.MakePlacingElement())
+}
+
+func (app *Config) HandlePlacementCancel(c *gin.Context) {
+	web.SetPlacingShip(-1)
+	Render(c, 200, views.MakePlacingElement())
+}
+
+func (app *Config) HandlePlacementSave(c *gin.Context) {
+	if !web.CanCurrentPlacementBeSaved() {
+		Render(c, 200, views.MakeSettingsPage())
+	}
+	data.SetPlayerShipPlacementType(web.GetCurrentPlacementType())
+	println(data.GetPlayerShipPlacementType())
 }

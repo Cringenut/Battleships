@@ -31,6 +31,11 @@ var firstCoord PlacementCoordinate
 var endCoords []string
 
 func SetPlacingShip(index int) {
+	if index < 0 {
+		placingShip = nil
+		return
+	}
+
 	placingShip = &ships[index]
 
 	// Clear previous ship's coordinates from the board if they exist
@@ -269,4 +274,19 @@ func GetShipCoords(index int) string {
 		return "+"
 	}
 	return strings.Join(ships[index].coords, " ")
+}
+
+func ClearAllShipCoords() {
+	for i := range ships {
+		ships[i].coords = nil
+	}
+}
+
+func IsAnyShipMissingCoords() bool {
+	for i := range ships {
+		if len(ships[i].coords) != ships[i].size {
+			return false
+		}
+	}
+	return true
 }

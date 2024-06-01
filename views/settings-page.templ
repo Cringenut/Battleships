@@ -44,6 +44,7 @@ templ MakeSettingsPage() {
 	}
 
 	.center-text {
+		color: #e7e6e6;
 		display: flex; /* Add this line */
 		justify-content: center; /* Add this line */
 		align-items: center; /* Add this line */
@@ -58,60 +59,6 @@ templ MakeSettingsPage() {
         margin: 0 10px;
     }
 
-    .container {
-        flex: 1;
-        padding-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        position: relative;
-    }
-
-    .rectangle {
-		width: 400px;
-		aspect-ratio: 1;
-		background-color: #ccc;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		padding: 2px;
-
-		border-radius: 2px;
-		background-color: rgba(44, 44, 44, 0.9);
-		display: grid;
-		grid-template-columns: repeat(10, 1fr); /* 10 columns */
-		grid-template-rows: repeat(10, 1fr); /* 10 rows */
-		gap: 2px; /* Optional gap between cells */
-    }
-
-    .main-container {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        gap: 4px;
-        min-height: 384px;
-        min-width: 50px;
-        transform: translateX(95%);
-        margin-left: 194px;
-        z-index: 5;
-    }
-
-    .squares-container {
-        display: flex;
-        gap: 4px;
-    }
-
-    .square {
-		border-radius: 1px;
-		flex: 1;
-		width: 68px;
-		height: 68px;
-		background-color: rgba(44, 44, 44, 0.95);
-		aspect-ratio: 1;
-		z-index: 4;
-		cursor: pointer;
-    }
-
 	footer {
 		display: flex;
 		justify-content: center;
@@ -124,16 +71,19 @@ templ MakeSettingsPage() {
 		height: 32px; /* Adjust the height as needed */
 	}
 
-    .save-text, .rectangle-text {
+    .save-text {
+		color: #e7e6e6;
         font-family: "Special Elite", system-ui;
         text-align: center;
     }
-
-    .rectangle-text {
-        margin-top: 12px;
-    }
-
 	.left-btn, .right-btn {
+		color: #e7e6e6;
+		user-select: none;
+		cursor: pointer;
+	}
+
+	.left-btn:hover, .right-btn:hover, .save-text:hover {
+		color: white;
 		user-select: none;
 		cursor: pointer;
 	}
@@ -180,7 +130,11 @@ templ MakeSettingsPage() {
 			</div>
 			@MakePlacingElement()
 			<footer>
-				<div class="save-text">Save</div>
+				<div class="save-text"
+						hx-trigger="click"
+						hx-post="/placement/save"
+						hx-target="body"
+				>Save</div>
 			</footer>
 		</body>
 	</html>

@@ -3,8 +3,8 @@ package views
 import (
 	"Battleships/data"
 	"Battleships/web"
-    "fmt"
-        "strconv"
+	"fmt"
+	"strconv"
 )
 
 templ MakePlacingElement() {
@@ -121,6 +121,24 @@ templ MakeSimplePlacementBoard() {
             font-family: "Special Elite", system-ui;
         }
 
+        .clear-btn, .cancel-btn {
+            height: 70px;
+            flex: 1;
+            display: flex; /* Add this line */
+            color: #e7e6e6;
+            justify-content: center; /* Add this line */
+            align-items: center; /* Add this line */
+            text-align: center;
+            cursor: pointer;
+
+            background-color: red;
+            margin: 20px 100px;
+        }
+
+        .clear-btn:hover, .cancel-btn:hover {
+            color: white;
+        }
+
     </style>
 		<head>
 			<meta charset="UTF-8"/>
@@ -134,23 +152,37 @@ templ MakeSimplePlacementBoard() {
 				@MakePlacementBoard()
 				<div class="main-container">
 					<div class="squares-container">
-                        @MakeOneSquareLongPlacementButton(9)
-                        @MakeOneSquareLongPlacementButton(8)
-                        @MakeOneSquareLongPlacementButton(7)
-                        @MakeOneSquareLongPlacementButton(6)
+						@MakeOneSquareLongPlacementButton(9)
+						@MakeOneSquareLongPlacementButton(8)
+						@MakeOneSquareLongPlacementButton(7)
+						@MakeOneSquareLongPlacementButton(6)
 					</div>
 					<div class="squares-container">
-                        @MakeTwoSquareLongPlacementButton(5)
-                        @MakeTwoSquareLongPlacementButton(4)
-                        @MakeTwoSquareLongPlacementButton(3)
-                    </div>
-					<div class="squares-container">
-                        @MakeThreeSquareLongPlacementButton(2)
-                        @MakeThreeSquareLongPlacementButton(1)
+						@MakeTwoSquareLongPlacementButton(5)
+						@MakeTwoSquareLongPlacementButton(4)
+						@MakeTwoSquareLongPlacementButton(3)
 					</div>
 					<div class="squares-container">
-                        @MakeFourSquareLongPlacementButton(0)
+						@MakeThreeSquareLongPlacementButton(2)
+						@MakeThreeSquareLongPlacementButton(1)
 					</div>
+					<div class="squares-container">
+						@MakeFourSquareLongPlacementButton(0)
+					</div>
+                    if web.GetPlacingShip() == nil {
+                    <div class="clear-btn"
+                         hx-trigger="click"
+                         hx-post="/placement/clear"
+                         hx-target="#placement_menu"
+                    >Clear all</div>
+                    } else {
+                    <div class="cancel-btn"
+                         hx-trigger="click"
+                         hx-post="/placement/cancel"
+                         hx-target="#placement_menu"
+                    >Cancel</div>
+                    }
+
 				</div>
 			</div>
 		</body>
@@ -158,8 +190,9 @@ templ MakeSimplePlacementBoard() {
 }
 
 func chosenButton(index int) string {
-return fmt.Sprintf(`{"chosenOption": "%s"}`, strconv.Itoa(index))
+	return fmt.Sprintf(`{"chosenOption": "%s"}`, strconv.Itoa(index))
 }
+
 templ MakeOneSquareLongPlacementButton(index int) {
 	<div
 		class="square img1"
@@ -174,42 +207,40 @@ templ MakeOneSquareLongPlacementButton(index int) {
 }
 
 templ MakeTwoSquareLongPlacementButton(index int) {
-<div
-        class="square img2"
-        hx-trigger="click"
-        hx-post="/placement/option"
-        hx-target="#placement_menu"
-        hx-vals={ chosenButton(index) }
->
-    <img src="https://i.imgur.com/OVSX1Hh.png" alt="Image 2"/>
-    { web.GetShipCoords(index) }
-</div>
+	<div
+		class="square img2"
+		hx-trigger="click"
+		hx-post="/placement/option"
+		hx-target="#placement_menu"
+		hx-vals={ chosenButton(index) }
+	>
+		<img src="https://i.imgur.com/OVSX1Hh.png" alt="Image 2"/>
+		{ web.GetShipCoords(index) }
+	</div>
 }
 
 templ MakeThreeSquareLongPlacementButton(index int) {
-<div
-        class="square img3"
-        hx-trigger="click"
-        hx-post="/placement/option"
-        hx-target="#placement_menu"
-        hx-vals={ chosenButton(index) }
->
-    <img src="https://i.imgur.com/dTb4d3k.png" alt="Image 3"/>
-    { web.GetShipCoords(index) }
-</div>
+	<div
+		class="square img3"
+		hx-trigger="click"
+		hx-post="/placement/option"
+		hx-target="#placement_menu"
+		hx-vals={ chosenButton(index) }
+	>
+		<img src="https://i.imgur.com/dTb4d3k.png" alt="Image 3"/>
+		{ web.GetShipCoords(index) }
+	</div>
 }
 
 templ MakeFourSquareLongPlacementButton(index int) {
-<div
-        class="square img4"
-        hx-trigger="click"
-        hx-post="/placement/option"
-        hx-target="#placement_menu"
-        hx-vals={ chosenButton(index) }
->
-    <img src="https://i.imgur.com/XUlAbmN.png" alt="Image 4"/>
-    { web.GetShipCoords(index) }
-</div>
+	<div
+		class="square img4"
+		hx-trigger="click"
+		hx-post="/placement/option"
+		hx-target="#placement_menu"
+		hx-vals={ chosenButton(index) }
+	>
+		<img src="https://i.imgur.com/XUlAbmN.png" alt="Image 4"/>
+		{ web.GetShipCoords(index) }
+	</div>
 }
-
-
