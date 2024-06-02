@@ -8,6 +8,8 @@ import (
 )
 
 templ MakeShipPlacementElement() {
+<div class="fullscreen-container" id="fullscreen_container">
+
 <style>
 	.top-bar {
 		height: 36px;
@@ -87,6 +89,22 @@ templ MakeShipPlacementElement() {
 		color: white;
 	}
 
+	.fullscreen-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: red; /* Semi-transparent background */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		z-index: 999; /* Ensures it is above other content */
+		pointer-events: none; /* Ensures it doesn't capture any mouse events */
+		box-sizing: border-box;
+	}
+
 </style>
 <body>
 <div class="top-bar">
@@ -130,11 +148,13 @@ templ MakeShipPlacementElement() {
 </footer>
 <div class="back-text"
 	 hx-post="placement/back"
-	 hx-target="#placement_container"
+	 hx-target="#fullscreen_container"
 	 hx-swap="delete"
 	 hx-trigger="click"
 >Cancel</div>
 </body>
+</div>
+
 }
 
 

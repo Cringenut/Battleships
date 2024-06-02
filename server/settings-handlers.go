@@ -124,3 +124,7 @@ func (app *Config) HandlePlacementSave(c *gin.Context) {
 func (app *Config) HandlePlacementBack(c *gin.Context) {
 	return
 }
+
+func (app *Config) HandlePlacementShow(c *gin.Context) {
+	Render(c, 200, views.MakeShipPlacementElement())
+}
