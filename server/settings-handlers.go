@@ -12,7 +12,7 @@ import (
 	"strconv"
 )
 
-func (app *Config) HandleSave(c *gin.Context) {
+func (app *Config) HandleSettingsSave(c *gin.Context) {
 	jsonData, err := io.ReadAll(c.Request.Body)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Failed to read request body")
@@ -33,31 +33,17 @@ func (app *Config) HandleSave(c *gin.Context) {
 	fmt.Println("DESCRIPTION: " + saveDescription)
 
 	if saveNickname == "" {
+		Render(c, 200, views.MakeSettingsPage("", saveDescription))
 		return
 	} else {
-		data.SetPlayerData(saveNickname, saveDescription, web.GetAllShipCoords())
+		data.SetPlayerData(saveNickname, saveDescription, nil)
 	}
 
-	fmt.Println("Save data:", formData) // Add this line for debugging
-
-	// Respond with an HTML page containing JavaScript to redirect
+	// Respond with an HTML page containing HTML and javascript to redirect
 	c.Header("Content-Type", "text/html")
-	c.String(http.StatusMovedPermanently, `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Redirecting...</title>
-        </head>
-        <body>
-            <p>Processing complete. Redirecting...</p>
-            <script type="text/javascript">
-                window.location.href = "/";
-            </script>
-        </body>
-        </html>
-    `)
-	c.Abort() // End the request early
+	//c.Redirect(http.StatusTemporaryRedirect, "/")
+	c.HTML(http.StatusOK, "redirect.html", gin.H{})
+	c.Abort()
 }
 
 func (app *Config) HandlePlacementCell(c *gin.Context) {
@@ -97,7 +83,7 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 		web.SwitchCurrentPlacementType(false)
 	}
 
-	Render(c, 200, views.MakeSettingsPage())
+	Render(c, 200, views.MakeSettingsPage("Test", ""))
 }
 
 func (app *Config) HandlePlacementChosen(c *gin.Context) {
@@ -129,7 +115,7 @@ func (app *Config) HandlePlacementCancel(c *gin.Context) {
 
 func (app *Config) HandlePlacementSave(c *gin.Context) {
 	if !web.CanCurrentPlacementBeSaved() {
-		Render(c, 200, views.MakeSettingsPage())
+		Render(c, 200, views.MakePlacingElement())
 	}
 	data.SetPlayerShipPlacementType(web.GetCurrentPlacementType())
 	println(data.GetPlayerShipPlacementType())

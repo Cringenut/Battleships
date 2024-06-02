@@ -27,6 +27,6 @@ func (app *Config) HandleBattlePage(c *gin.Context) {
 
 // Handling Settings Page
 func (app *Config) HandleSettings(c *gin.Context) {
-	web.SetCurrentPlacementType(data.GetPlayerShipPlacementType())
-	Render(c, 200, views.MakeSettingsPage())
+	web.SetCurrentSettingsPlacementType(data.GetPlayerShipPlacementType())
+	Render(c, 200, views.MakeSettingsPage(data.GetPlayerNickname(), data.GetPlayerDescription()))
 }

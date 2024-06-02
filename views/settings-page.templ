@@ -5,7 +5,108 @@ import (
 	"Battleships/web"
 )
 
-templ MakeSettingsPage() {
+templ MakeShipPlacementElement() {
+	<style>
+	.top-bar {
+		display: flex;
+		justify-content: center;
+		align-items: center; /* Ensure vertical centering */
+		background-color: transparent;
+		padding: 12px;
+		font-family: "Special Elite", system-ui;
+	}
+
+	.center-text {
+		color: #e7e6e6;
+		display: flex; /* Add this line */
+		justify-content: center; /* Add this line */
+		align-items: center; /* Add this line */
+		height: 36px;
+		width: 160px;
+		margin: 0 10px;
+		text-align: center;
+	}
+
+	.top-bar button {
+		font-size: 18px;
+		margin: 0 10px;
+	}
+
+	footer {
+		display: flex;
+		justify-content: center;
+		padding-top: 30px;
+		background-color: transparent;
+		font-family: "Special Elite", system-ui;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 32px; /* Adjust the height as needed */
+	}
+
+	.save-text {
+		color: #e7e6e6;
+		font-family: "Special Elite", system-ui;
+		text-align: center;
+		font-size: 20px;
+	}
+	.left-btn, .right-btn {
+		color: #e7e6e6;
+		user-select: none;
+		cursor: pointer;
+	}
+
+	.left-btn:hover, .right-btn:hover, .save-text:hover {
+		color: white;
+		user-select: none;
+		cursor: pointer;
+	}
+</style>
+	<body>
+		<div class="top-bar">
+			<div
+				class="left-btn"
+				hx-trigger="click"
+				hx-post="/placement/switch"
+				hx-swap="outerHTML"
+				hx-target="#placement_menu"
+				hx-vals='{"chosenOption": "previous"}'
+			>&#60</div>
+			<span class="center-text">
+				switch web.GetCurrentPlacementType() {
+					case data.Simple:
+						Simple
+					case data.Advanced:
+						Advanced
+					case data.ServerRandom:
+						Server Random
+					case data.Random:
+						Randomised
+					default:
+				}
+			</span>
+			<div
+				class="right-btn"
+				hx-trigger="click"
+				hx-post="/placement/switch"
+				hx-swap="outerHTML"
+				hx-target="body"
+				hx-vals='{"chosenOption": "next"}'
+			>&#62</div>
+		</div>
+		@MakePlacingElement()
+		<footer>
+			<div
+				class="save-text"
+				hx-trigger="click"
+				hx-post="/placement/save"
+				hx-target="body"
+			>Save</div>
+		</footer>
+	</body>
+}
+
+templ MakeSettingsPage(nickname string, description string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<style>
@@ -34,31 +135,6 @@ templ MakeSettingsPage() {
 		z-index: -1;
 	}
 
-	.top-bar {
-		display: flex;
-		justify-content: center;
-		align-items: center; /* Ensure vertical centering */
-		background-color: transparent;
-		padding: 12px;
-		font-family: "Special Elite", system-ui;
-	}
-
-	.center-text {
-		color: #e7e6e6;
-		display: flex; /* Add this line */
-		justify-content: center; /* Add this line */
-		align-items: center; /* Add this line */
-		height: 36px;
-		width: 160px;
-		margin: 0 10px;
-		text-align: center;
-	}
-
-    .top-bar button {
-        font-size: 18px;
-        margin: 0 10px;
-    }
-
 	footer {
 		display: flex;
 		justify-content: center;
@@ -69,23 +145,106 @@ templ MakeSettingsPage() {
 		bottom: 0;
 		width: 100%;
 		height: 32px; /* Adjust the height as needed */
+		z-index: 2;
 	}
 
-    .save-text {
-		color: #e7e6e6;
-        font-family: "Special Elite", system-ui;
-        text-align: center;
-    }
-	.left-btn, .right-btn {
-		color: #e7e6e6;
-		user-select: none;
-		cursor: pointer;
+	.save-text {
+		color: red;
+		font-family: "Special Elite", system-ui;
+		text-align: center;
+		font-size: 20px;
 	}
 
-	.left-btn:hover, .right-btn:hover, .save-text:hover {
+	.save-text:hover {
 		color: white;
 		user-select: none;
 		cursor: pointer;
+	}
+
+	.container {
+		position: relative;
+		width: 100%;
+		flex: 1;
+		z-index: 1;
+		overflow-y: scroll;
+		scrollbar-width: none; /* For Firefox */
+		-ms-overflow-style: none;  /* For Internet Explorer and Edge */
+	}
+
+	body::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: rgba(135, 135, 135, 0.6);
+	}
+
+	body::-webkit-scrollbar {
+		width: 6px;
+		background-color: rgba(135, 135, 135, 0.6);
+	}
+
+	body::-webkit-scrollbar-thumb {
+		background-color: #454545;
+	}
+
+	.content {
+		position: relative;
+		z-index: 2;
+		padding-left: 20%;
+		padding-top: 20px;
+	}
+
+	.section {
+		margin-bottom: 20px;
+	}
+
+	.section h1 {
+		margin: 0;
+		font-size: 24px;
+	}
+
+	.section p {
+		font-size: 18px;
+		margin-top: 0;
+	}
+
+	label {
+		display: block;
+		height: 40px;
+		line-height: 40px;
+		font-size: 20px;
+		margin-bottom: 0;
+	}
+
+	input, textarea {
+		width: 50%;
+		padding-left: 8px;
+		height: 48px;
+		border: none;
+		border-radius: 4px;
+		background: rgba(255, 255, 255, 0.1);
+		color: white;
+		font-size: 20px;
+		resize: none;
+		overflow: hidden;
+		margin-bottom: 12px;
+		font-family: "Special Elite", system-ui;
+	}
+
+	textarea {
+		min-height: 96px;
+		padding-top: 12px;
+	}
+
+	input:focus, textarea:focus {
+		outline: none;
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	.header {
+		padding-bottom: 20px;
+		font-size: 40px;
+		height: 60px;
+		line-height: 60px;
+		margin: 0;
 	}
 
 </style>
@@ -97,45 +256,50 @@ templ MakeSettingsPage() {
 			<title>Layout Example</title>
 		</head>
 		<body>
-			<div class="top-bar">
-				<div
-					class="left-btn"
-					hx-trigger="click"
-					hx-post="/placement/switch"
-					hx-swap="outerHTML"
-					hx-target="#placement_menu"
-					hx-vals='{"chosenOption": "previous"}'
-				>&#60</div>
-				<span class="center-text">
-					switch web.GetCurrentPlacementType() {
-						case data.Simple:
-							Simple
-						case data.Advanced:
-							Advanced
-						case data.ServerRandom:
-							Server Random
-						case data.Random:
-							Randomised
-						default:
-					}
-				</span>
-				<div
-					class="right-btn"
-					hx-trigger="click"
-					hx-post="/placement/switch"
-					hx-swap="outerHTML"
-					hx-target="body"
-					hx-vals='{"chosenOption": "next"}'
-				>&#62</div>
+			<div class="content">
+				<h1 class="header">Settings</h1>
+				<div class="section">
+					<h1>Ship placement</h1>
+					<p>Choose the best formation for your ships armada</p>
+					<div>Edit</div>
+				</div>
+				<div class="section">
+					<h1>Player information</h1>
+					<p>Change your nickname and description</p>
+					<form>
+						<label for="nickname">Nickname:</label>
+						<input type="text" id="nickname" name="nickname" value={ nickname }/>
+						<label for="description">Description:</label>
+						<textarea id="description" name="description">{ description }</textarea>
+					</form>
+				</div>
 			</div>
-			@MakePlacingElement()
 			<footer>
-				<div class="save-text"
-						hx-trigger="click"
-						hx-post="/placement/save"
-						hx-target="body"
+				<div
+					class="save-text"
+					hx-trigger="click"
+					hx-post="/settings/save"
+					hx-target="body"
+					hx-swap="outerHTML"
+					hx-include="[name='nickname'], [name='description']"
 				>Save</div>
 			</footer>
 		</body>
+		<script>
+			// JavaScript function to auto-resize the textarea
+			function autoResizeTextarea(textarea) {
+				textarea.style.height = 'auto';
+				textarea.style.height = textarea.scrollHeight + 'px';
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				const textarea = document.getElementById('description');
+				if (textarea) {
+					textarea.addEventListener('input', function() {
+						autoResizeTextarea(textarea);
+					});
+				}
+			});
+		</script>
 	</html>
 }

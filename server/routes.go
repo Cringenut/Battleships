@@ -19,7 +19,8 @@ func (app *Config) Routes() {
 	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
 
 	// Handlers for settings
-	app.Router.POST("/save", app.HandleSave)
+	app.Router.POST("/settings/save", app.HandleSettingsSave)
+	app.Router.POST("/placement/page")
 	app.Router.POST("/placement/place", app.HandlePlacementCell)
 	app.Router.POST("/placement/switch", app.HandlePlacementTypeSwitch)
 	app.Router.POST("/placement/option", app.HandlePlacementChosen)

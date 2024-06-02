@@ -6,18 +6,27 @@ import (
 )
 
 var placementTypes = []data.PlacementType{data.Simple, data.Advanced, data.Random}
-var currentPlacementType data.PlacementType
+var currentSettingsPlacementType data.PlacementType
+var currentPlacementPlacementType data.PlacementType
 
-func SetCurrentPlacementType(placementType data.PlacementType) {
-	currentPlacementType = placementType
+func SetCurrentSettingsPlacementType(placementType data.PlacementType) {
+	currentSettingsPlacementType = placementType
 }
 
-func GetCurrentPlacementType() data.PlacementType {
-	return currentPlacementType
+func GetCurrentSettingsPlacementType() data.PlacementType {
+	return currentSettingsPlacementType
+}
+
+func SetCurrentPlacementPlacementType(placementType data.PlacementType) {
+	currentPlacementPlacementType = placementType
+}
+
+func GetCurrentPlacementPlacementType() data.PlacementType {
+	return currentPlacementPlacementType
 }
 
 func SwitchCurrentPlacementType(isNext bool) {
-	currentIndex := findPlacementIndex(currentPlacementType)
+	currentIndex := findPlacementIndex(currentPlacementPlacementType)
 	if currentIndex == -1 {
 		fmt.Println("Current placement type not found.")
 		return
@@ -25,15 +34,15 @@ func SwitchCurrentPlacementType(isNext bool) {
 
 	if isNext {
 		if currentIndex+1 >= len(placementTypes) {
-			currentPlacementType = placementTypes[0]
+			currentPlacementPlacementType = placementTypes[0]
 		} else {
-			currentPlacementType = placementTypes[currentIndex+1]
+			currentPlacementPlacementType = placementTypes[currentIndex+1]
 		}
 	} else {
 		if currentIndex-1 < 0 {
-			currentPlacementType = placementTypes[len(placementTypes)-1]
+			currentPlacementPlacementType = placementTypes[len(placementTypes)-1]
 		} else {
-			currentPlacementType = placementTypes[currentIndex-1]
+			currentPlacementPlacementType = placementTypes[currentIndex-1]
 		}
 	}
 }
@@ -48,10 +57,16 @@ func findPlacementIndex(value data.PlacementType) int {
 }
 
 func CanCurrentPlacementBeSaved() bool {
-	switch currentPlacementType {
+	result := false
+	switch currentPlacementPlacementType {
 	case data.Simple:
-		return IsAnyShipMissingCoords()
+		result = IsAnyShipMissingCoords()
 	default:
-		return false
+		result = false
 	}
+
+	if result == true {
+		SetCurrentSettingsPlacementType(GetCurrentPlacementPlacementType())
+	}
+	return result
 }

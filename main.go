@@ -17,6 +17,7 @@ func main() {
 	// Using router to handle responses
 	// Using New() so we don't get all responses written inside of console
 	router := gin.New()
+	router.LoadHTMLGlob("views/*")
 	// Gin recovery so server doesn't crash on INTERNAL_ERROR
 	router.Use(gin.Recovery())
 

@@ -169,20 +169,21 @@ templ MakeSimplePlacementBoard() {
 					<div class="squares-container">
 						@MakeFourSquareLongPlacementButton(0)
 					</div>
-                    if web.GetPlacingShip() == nil {
-                    <div class="clear-btn"
-                         hx-trigger="click"
-                         hx-post="/placement/clear"
-                         hx-target="#placement_menu"
-                    >Clear all</div>
-                    } else {
-                    <div class="cancel-btn"
-                         hx-trigger="click"
-                         hx-post="/placement/cancel"
-                         hx-target="#placement_menu"
-                    >Cancel</div>
-                    }
-
+					if web.GetPlacingShip() == nil {
+						<div
+							class="clear-btn"
+							hx-trigger="click"
+							hx-post="/placement/clear"
+							hx-target="#placement_menu"
+						>Clear all</div>
+					} else {
+						<div
+							class="cancel-btn"
+							hx-trigger="click"
+							hx-post="/placement/cancel"
+							hx-target="#placement_menu"
+						>Cancel</div>
+					}
 				</div>
 			</div>
 		</body>
