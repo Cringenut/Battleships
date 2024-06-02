@@ -112,12 +112,12 @@ templ MakeShipPlacementElement() {
 			class="left-btn"
 			hx-trigger="click"
 			hx-post="/placement/switch"
-			hx-swap="outerHTML"
-			hx-target="#placement_menu"
+			hx-target="#placement_container"
+			hx-swap="innerHTML"
 			hx-vals='{"chosenOption": "previous"}'
 	>&#60</div>
 	<span class="center-text">
-				switch web.GetCurrentSettingsPlacementType() {
+				switch web.GetCurrentPlacementPlacementType() {
 					case data.Simple:
 						Simple
 					case data.Advanced:
@@ -133,8 +133,8 @@ templ MakeShipPlacementElement() {
 			class="right-btn"
 			hx-trigger="click"
 			hx-post="/placement/switch"
-			hx-swap="outerHTML"
-			hx-target="body"
+			hx-target="#placement_container"
+			hx-swap="innerHTML"
 			hx-vals='{"chosenOption": "next"}'
 	>&#62</div>
 </div>
@@ -143,7 +143,7 @@ templ MakeShipPlacementElement() {
 	<div class="save-text"
 			hx-trigger="click"
 			hx-post="/placement/save"
-			hx-target="body"
+			hx-target="#placement_container"
 	>Save</div>
 </footer>
 <div class="back-text"
@@ -165,9 +165,11 @@ templ MakePlacementElement() {
 			case data.Simple:
 				@MakeSimplePlacementBoard()
 			case data.Advanced:
+				ADVANCED
 			case data.ServerRandom:
+				SERVER RANDOM
 			case data.Random:
-				@MakeSimplePlacementBoard()
+				RANDOM
 			default:
 		}
 	</div>
@@ -183,7 +185,7 @@ templ MakeSimplePlacementBoard() {
         }
         .container {
             flex: 1;
-            padding-top: 20px;
+            padding-bottom: 8px;
             display: flex;
             justify-content: center;
             align-items: flex-start;

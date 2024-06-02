@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v3.9">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/player-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/player-data.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/ship-placing-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ship-placing-element.templ" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +53,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build Battleships.executor": "Run",
+    "Go Build.go build Battleships.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
@@ -171,5 +170,16 @@
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/web/settings.go</url>
+          <line>58</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

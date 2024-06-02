@@ -9,10 +9,9 @@ func (pd *PlayerData) Init() {
 	pd.ShipPlacementType = Simple
 }
 
-func SetPlayerData(nickname, description string, shipCoords []string) {
+func SetPlayerData(nickname, description string) {
 	playerData.Nickname = nickname
 	playerData.Description = description
-	playerData.ShipCoords = shipCoords
 }
 
 func GetPlayerNickname() string {

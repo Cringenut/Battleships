@@ -36,7 +36,8 @@ func (app *Config) HandleSettingsSave(c *gin.Context) {
 		Render(c, 200, views.MakeSettingsPage("", saveDescription))
 		return
 	} else {
-		data.SetPlayerData(saveNickname, saveDescription, nil)
+		data.SetPlayerData(saveNickname, saveDescription)
+		data.SetPlayerShipPlacementType(web.GetCurrentSettingsPlacementType())
 	}
 
 	// Respond with an HTML page containing HTML and javascript to redirect
@@ -83,7 +84,7 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 		web.SwitchCurrentPlacementType(false)
 	}
 
-	Render(c, 200, views.MakeSettingsPage("Test", ""))
+	Render(c, 200, views.MakeShipPlacementElement())
 }
 
 func (app *Config) HandlePlacementChosen(c *gin.Context) {
@@ -115,7 +116,7 @@ func (app *Config) HandlePlacementCancel(c *gin.Context) {
 
 func (app *Config) HandlePlacementSave(c *gin.Context) {
 	if !web.CanCurrentPlacementBeSaved() {
-		Render(c, 200, views.MakePlacementElement())
+		Render(c, 200, views.MakeShipPlacementElement())
 	}
 	web.SetCurrentSettingsPlacementType(web.GetCurrentPlacementPlacementType())
 	println(data.GetPlayerShipPlacementType())
@@ -126,5 +127,6 @@ func (app *Config) HandlePlacementBack(c *gin.Context) {
 }
 
 func (app *Config) HandlePlacementShow(c *gin.Context) {
+	web.SetCurrentPlacementPlacementType(web.GetCurrentSettingsPlacementType())
 	Render(c, 200, views.MakeShipPlacementElement())
 }
