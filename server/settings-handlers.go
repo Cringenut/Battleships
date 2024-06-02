@@ -63,7 +63,7 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 		web.SetLastCoord(chosenCoord)
 	}
 
-	Render(c, 200, views.MakePlacingElement())
+	Render(c, 200, views.MakePlacementElement())
 }
 
 func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
@@ -100,23 +100,23 @@ func (app *Config) HandlePlacementChosen(c *gin.Context) {
 	web.SetPlacingShip(chosenOption)
 	println(chosenOption)
 
-	Render(c, 200, views.MakePlacingElement())
+	Render(c, 200, views.MakePlacementElement())
 }
 
 func (app *Config) HandlePlacementClear(c *gin.Context) {
 	web.ClearAllShipCoords()
-	Render(c, 200, views.MakePlacingElement())
+	Render(c, 200, views.MakePlacementElement())
 }
 
 func (app *Config) HandlePlacementCancel(c *gin.Context) {
 	web.SetPlacingShip(-1)
-	Render(c, 200, views.MakePlacingElement())
+	Render(c, 200, views.MakePlacementElement())
 }
 
 func (app *Config) HandlePlacementSave(c *gin.Context) {
 	if !web.CanCurrentPlacementBeSaved() {
-		Render(c, 200, views.MakePlacingElement())
+		Render(c, 200, views.MakePlacementElement())
 	}
-	data.SetPlayerShipPlacementType(web.GetCurrentPlacementType())
+	web.SetCurrentSettingsPlacementType(web.GetCurrentPlacementPlacementType())
 	println(data.GetPlayerShipPlacementType())
 }

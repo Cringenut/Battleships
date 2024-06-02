@@ -1,120 +1,14 @@
 package views
 
-import (
-	"Battleships/data"
-	"Battleships/web"
-)
-
-templ MakeShipPlacementElement() {
-	<style>
-	.top-bar {
-		display: flex;
-		justify-content: center;
-		align-items: center; /* Ensure vertical centering */
-		background-color: transparent;
-		padding: 12px;
-		font-family: "Special Elite", system-ui;
-	}
-
-	.center-text {
-		color: #e7e6e6;
-		display: flex; /* Add this line */
-		justify-content: center; /* Add this line */
-		align-items: center; /* Add this line */
-		height: 36px;
-		width: 160px;
-		margin: 0 10px;
-		text-align: center;
-	}
-
-	.top-bar button {
-		font-size: 18px;
-		margin: 0 10px;
-	}
-
-	footer {
-		display: flex;
-		justify-content: center;
-		padding-top: 30px;
-		background-color: transparent;
-		font-family: "Special Elite", system-ui;
-		position: fixed;
-		bottom: 0;
-		width: 100%;
-		height: 32px; /* Adjust the height as needed */
-	}
-
-	.save-text {
-		color: #e7e6e6;
-		font-family: "Special Elite", system-ui;
-		text-align: center;
-		font-size: 20px;
-	}
-	.left-btn, .right-btn {
-		color: #e7e6e6;
-		user-select: none;
-		cursor: pointer;
-	}
-
-	.left-btn:hover, .right-btn:hover, .save-text:hover {
-		color: white;
-		user-select: none;
-		cursor: pointer;
-	}
-</style>
-	<body>
-		<div class="top-bar">
-			<div
-				class="left-btn"
-				hx-trigger="click"
-				hx-post="/placement/switch"
-				hx-swap="outerHTML"
-				hx-target="#placement_menu"
-				hx-vals='{"chosenOption": "previous"}'
-			>&#60</div>
-			<span class="center-text">
-				switch web.GetCurrentPlacementType() {
-					case data.Simple:
-						Simple
-					case data.Advanced:
-						Advanced
-					case data.ServerRandom:
-						Server Random
-					case data.Random:
-						Randomised
-					default:
-				}
-			</span>
-			<div
-				class="right-btn"
-				hx-trigger="click"
-				hx-post="/placement/switch"
-				hx-swap="outerHTML"
-				hx-target="body"
-				hx-vals='{"chosenOption": "next"}'
-			>&#62</div>
-		</div>
-		@MakePlacingElement()
-		<footer>
-			<div
-				class="save-text"
-				hx-trigger="click"
-				hx-post="/placement/save"
-				hx-target="body"
-			>Save</div>
-		</footer>
-	</body>
-}
-
 templ MakeSettingsPage(nickname string, description string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<style>
-    body, html {
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+	body, html {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
 		background-image: url("https://i.imgur.com/aZmW7eC.png");
 		background-size: cover;
 		background-position: center;
@@ -122,7 +16,7 @@ templ MakeSettingsPage(nickname string, description string) {
 		color: white;
 		background-attachment: fixed;
 		z-index: -2;
-    }
+	}
 
 	body::after {
 		content: '';
@@ -159,16 +53,6 @@ templ MakeSettingsPage(nickname string, description string) {
 		color: white;
 		user-select: none;
 		cursor: pointer;
-	}
-
-	.container {
-		position: relative;
-		width: 100%;
-		flex: 1;
-		z-index: 1;
-		overflow-y: scroll;
-		scrollbar-width: none; /* For Firefox */
-		-ms-overflow-style: none;  /* For Internet Explorer and Edge */
 	}
 
 	body::-webkit-scrollbar-track {
@@ -247,6 +131,37 @@ templ MakeSettingsPage(nickname string, description string) {
 		margin: 0;
 	}
 
+	.edit-text {
+		color: #e7e6e6;
+		user-select: none;
+		cursor: pointer;
+	}
+
+	.edit-text:hover {
+		color: white;
+	}
+
+	.fullscreen-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: red; /* Semi-transparent background */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		z-index: 999; /* Ensures it is above other content */
+		pointer-events: none; /* Ensures it doesn't capture any mouse events */
+		box-sizing: border-box;
+	}
+
+	.fullscreen-container > * {
+		pointer-events: auto; /* Allows the children to capture mouse events */
+		z-index: 10000; /* Ensures children are above other content */
+	}
+
 </style>
 		<head>
 			<meta charset="UTF-8"/>
@@ -261,6 +176,7 @@ templ MakeSettingsPage(nickname string, description string) {
 				<div class="section">
 					<h1>Ship placement</h1>
 					<p>Choose the best formation for your ships armada</p>
+					<div class="fullscreen-container"></div>
 					<div>Edit</div>
 				</div>
 				<div class="section">
@@ -284,22 +200,25 @@ templ MakeSettingsPage(nickname string, description string) {
 					hx-include="[name='nickname'], [name='description']"
 				>Save</div>
 			</footer>
+			<div class="fullscreen-container">
+				@MakeShipPlacementElement()
+			</div>
 		</body>
 		<script>
-			// JavaScript function to auto-resize the textarea
-			function autoResizeTextarea(textarea) {
-				textarea.style.height = 'auto';
-				textarea.style.height = textarea.scrollHeight + 'px';
-			}
+	// JavaScript function to auto-resize the textarea
+	function autoResizeTextarea(textarea) {
+		textarea.style.height = 'auto';
+		textarea.style.height = textarea.scrollHeight + 'px';
+	}
 
-			document.addEventListener('DOMContentLoaded', function() {
-				const textarea = document.getElementById('description');
-				if (textarea) {
-					textarea.addEventListener('input', function() {
-						autoResizeTextarea(textarea);
-					});
-				}
+	document.addEventListener('DOMContentLoaded', function() {
+		const textarea = document.getElementById('description');
+		if (textarea) {
+			textarea.addEventListener('input', function() {
+				autoResizeTextarea(textarea);
 			});
-		</script>
+		}
+	});
+</script>
 	</html>
 }
