@@ -56,8 +56,8 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 		return
 	}
 
-	// Checking if next or previous type was chosen
 	chosenCoord := parsedData.Get("chosenCoord")
+	// Checking if next or previous type was chosen
 	if web.GetFirstCoord().Coord == "" {
 		web.SetFirstCoord(chosenCoord)
 	} else {
@@ -84,6 +84,7 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 		web.SwitchCurrentPlacementType(false)
 	}
 
+	web.SetPlacingShip(-1)
 	Render(c, 200, views.MakeShipPlacementElement())
 }
 
@@ -98,8 +99,9 @@ func (app *Config) HandlePlacementChosen(c *gin.Context) {
 
 	// Checking if next or previous type was chosen
 	chosenOption, err := strconv.Atoi(parsedData.Get("chosenOption"))
+	isAdvanced, err := strconv.ParseBool(parsedData.Get("isAdvanced"))
 	web.SetPlacingShip(chosenOption)
-	println(chosenOption)
+	println(isAdvanced)
 
 	Render(c, 200, views.MakePlacementElement())
 }

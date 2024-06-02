@@ -165,7 +165,7 @@ templ MakePlacementElement() {
 			case data.Simple:
 				@MakeSimplePlacementBoard()
 			case data.Advanced:
-				ADVANCED
+				@MakeSimplePlacementBoard()
 			case data.ServerRandom:
 				SERVER RANDOM
 			case data.Random:
@@ -307,22 +307,22 @@ templ MakeSimplePlacementBoard() {
 				@MakePlacementBoard()
 				<div class="main-container">
 					<div class="squares-container">
-						@MakeOneSquareLongPlacementButton(9)
-						@MakeOneSquareLongPlacementButton(8)
-						@MakeOneSquareLongPlacementButton(7)
-						@MakeOneSquareLongPlacementButton(6)
+						@MakeOneSquareLongPlacementButton(9, false)
+						@MakeOneSquareLongPlacementButton(8, false)
+						@MakeOneSquareLongPlacementButton(7, false)
+						@MakeOneSquareLongPlacementButton(6, false)
 					</div>
 					<div class="squares-container">
-						@MakeTwoSquareLongPlacementButton(5)
-						@MakeTwoSquareLongPlacementButton(4)
-						@MakeTwoSquareLongPlacementButton(3)
+						@MakeTwoSquareLongPlacementButton(5, false)
+						@MakeTwoSquareLongPlacementButton(4, false)
+						@MakeTwoSquareLongPlacementButton(3, false)
 					</div>
 					<div class="squares-container">
-						@MakeThreeSquareLongPlacementButton(2)
-						@MakeThreeSquareLongPlacementButton(1)
+						@MakeThreeSquareLongPlacementButton(2, false)
+						@MakeThreeSquareLongPlacementButton(1, false)
 					</div>
 					<div class="squares-container">
-						@MakeFourSquareLongPlacementButton(0)
+						@MakeFourSquareLongPlacementButton(0, false)
 					</div>
 					if web.GetPlacingShip() == nil {
 						<div
@@ -345,58 +345,60 @@ templ MakeSimplePlacementBoard() {
 	</html>
 }
 
-func chosenButton(index int) string {
-	return fmt.Sprintf(`{"chosenOption": "%s"}`, strconv.Itoa(index))
+func chosenButton(index int, isAdvanced bool) string {
+	return fmt.Sprintf(`{"chosenOption": "%s", "isAdvanced": "%s"}`, strconv.Itoa(index), strconv.FormatBool(isAdvanced))
 }
 
-templ MakeOneSquareLongPlacementButton(index int) {
+templ MakeOneSquareLongPlacementButton(index int, isAdvanced bool) {
 	<div
 		class="square img1"
 		hx-trigger="click"
 		hx-post="/placement/option"
 		hx-target="#placement_menu"
-		hx-vals={ chosenButton(index) }
+		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/IpQ6loJ.png" alt="Image 1"/>
 		{ web.GetShipCoords(index) }
 	</div>
 }
 
-templ MakeTwoSquareLongPlacementButton(index int) {
+templ MakeTwoSquareLongPlacementButton(index int, isAdvanced bool) {
 	<div
 		class="square img2"
 		hx-trigger="click"
 		hx-post="/placement/option"
 		hx-target="#placement_menu"
-		hx-vals={ chosenButton(index) }
+		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/OVSX1Hh.png" alt="Image 2"/>
 		{ web.GetShipCoords(index) }
 	</div>
 }
 
-templ MakeThreeSquareLongPlacementButton(index int) {
+templ MakeThreeSquareLongPlacementButton(index int, isAdvanced bool) {
 	<div
 		class="square img3"
 		hx-trigger="click"
 		hx-post="/placement/option"
 		hx-target="#placement_menu"
-		hx-vals={ chosenButton(index) }
+		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/dTb4d3k.png" alt="Image 3"/>
 		{ web.GetShipCoords(index) }
 	</div>
 }
 
-templ MakeFourSquareLongPlacementButton(index int) {
+templ MakeFourSquareLongPlacementButton(index int, isAdvanced bool) {
 	<div
 		class="square img4"
 		hx-trigger="click"
 		hx-post="/placement/option"
 		hx-target="#placement_menu"
-		hx-vals={ chosenButton(index) }
+		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/XUlAbmN.png" alt="Image 4"/>
 		{ web.GetShipCoords(index) }
 	</div>
 }
+
+

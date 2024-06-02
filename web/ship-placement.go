@@ -26,6 +26,8 @@ var board [size][size]bool
 // ShipSizes defines the sizes of ships to be placed
 var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
+var advancedShips = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
+	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
 var placingShip *Ship
 var firstCoord PlacementCoordinate
 var endCoords []string
@@ -36,7 +38,12 @@ func SetPlacingShip(index int) {
 		return
 	}
 
-	placingShip = &ships[index]
+	if currentPlacementPlacementType == data.Simple {
+		placingShip = &ships[index]
+	} else if currentPlacementPlacementType == data.Advanced {
+		println("ADVANCED")
+		placingShip = &advancedShips[index]
+	}
 
 	// Clear previous ship's coordinates from the board if they exist
 	if placingShip != nil && placingShip.coords != nil {
@@ -78,7 +85,11 @@ func SetFirstCoord(coord string) {
 		SetLastCoord(coord)
 	} else if placingShip != nil {
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
-		endCoords = possibleEndCoords(row, col, placingShip.size)
+		if currentPlacementPlacementType == data.Simple || placingShip.size < 3 {
+			endCoords = possibleEndCoords(row, col, placingShip.size)
+		} else if currentPlacementPlacementType == data.Advanced {
+			endCoords = possibleEndCoords(row, col, 2)
+		}
 	} else {
 		firstCoord = PlacementCoordinate{}
 	}
@@ -103,13 +114,24 @@ func SetLastCoord(coord string) {
 
 // IsCoordinateInShips checks if the given coordinate string is inside any of the ships' coordinates
 func IsCoordinateInShips(coord string) bool {
-	for _, ship := range ships {
-		for _, shipCoord := range ship.coords {
-			if strings.EqualFold(shipCoord, coord) {
-				return true
+	if currentPlacementPlacementType == data.Simple {
+		for _, ship := range ships {
+			for _, shipCoord := range ship.coords {
+				if strings.EqualFold(shipCoord, coord) {
+					return true
+				}
+			}
+		}
+	} else if currentPlacementPlacementType == data.Advanced {
+		for _, advancedShip := range advancedShips {
+			for _, shipCoord := range advancedShip.coords {
+				if strings.EqualFold(shipCoord, coord) {
+					return true
+				}
 			}
 		}
 	}
+
 	return false
 }
 
@@ -252,40 +274,52 @@ func printBoard() {
 
 }
 
-func GetAllShipCoords() []string {
-	var coords []string
-	for row := 0; row < size; row++ {
-		for col := 0; col < size; col++ {
-			if board[row][col] {
-				// Convert board indices back to user-friendly coordinates
-				coord := fmt.Sprintf("%c%d", rune('A'+col), 10-row) // Adjust for zero-index and reverse row order
-				coords = append(coords, coord)
-			}
-		}
-	}
-	return coords
-}
-
 func GetShipCoords(index int) string {
-	if len(ships[index].coords) == 0 {
-		if &ships[index] == placingShip {
-			return "Selected"
+	if currentPlacementPlacementType == data.Simple {
+		if len(ships[index].coords) == 0 {
+			if &ships[index] == placingShip {
+				return "Selected"
+			}
+			return "+"
 		}
-		return "+"
+	} else if currentPlacementPlacementType == data.Advanced {
+		println("ADVANCED")
+		if len(advancedShips[index].coords) == 0 {
+			if &advancedShips[index] == placingShip {
+				return "Selected"
+			}
+			return "+"
+		}
 	}
+
 	return strings.Join(ships[index].coords, " ")
 }
 
 func ClearAllShipCoords() {
-	for i := range ships {
-		ships[i].coords = nil
+	if currentPlacementPlacementType == data.Simple {
+		for i := range ships {
+			ships[i].coords = nil
+		}
+	} else if currentPlacementPlacementType == data.Advanced {
+		println("ADVANCED")
+		for i := range advancedShips {
+			advancedShips[i].coords = nil
+		}
 	}
 }
 
 func IsAnyShipMissingCoords() bool {
-	for i := range ships {
-		if len(ships[i].coords) != ships[i].size {
-			return false
+	if currentPlacementPlacementType == data.Simple {
+		for i := range ships {
+			if len(ships[i].coords) != ships[i].size {
+				return false
+			}
+		}
+	} else if currentPlacementPlacementType == data.Advanced {
+		for i := range advancedShips {
+			if len(advancedShips[i].coords) != advancedShips[i].size {
+				return false
+			}
 		}
 	}
 	return true
