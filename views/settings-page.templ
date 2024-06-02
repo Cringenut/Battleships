@@ -147,7 +147,7 @@ templ MakeSettingsPage(nickname string, description string) {
 		left: 0;
 		height: 100%;
 		width: 100%;
-		background-color: red; /* Semi-transparent background */
+		background-color: transparent; /* Semi-transparent background */
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -200,7 +200,7 @@ templ MakeSettingsPage(nickname string, description string) {
 					hx-include="[name='nickname'], [name='description']"
 				>Save</div>
 			</footer>
-			<div class="fullscreen-container">
+			<div class="fullscreen-container" id="placement_container">
 				@MakeShipPlacementElement()
 			</div>
 		</body>

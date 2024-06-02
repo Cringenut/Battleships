@@ -19,7 +19,7 @@ templ MakeShipPlacementElement() {
 		font-family: "Special Elite", system-ui;
 		position: absolute;
 		top: 0;
-		width: 100%;
+		width: 20%;
 		z-index: 99999;
 	}
 
@@ -69,6 +69,24 @@ templ MakeShipPlacementElement() {
 		cursor: pointer;
 	}
 
+	.back-text {
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 12px;
+		padding: 12px;
+		font-family: "Special Elite", system-ui;
+		font-size: 14px;
+		color: #e7e6e6;
+		z-index: 10005;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.back-text:hover {
+		color: white;
+	}
+
 </style>
 <body>
 <div class="top-bar">
@@ -104,13 +122,18 @@ templ MakeShipPlacementElement() {
 </div>
 <div>@MakePlacementElement()</div>
 <footer>
-	<div
-			class="save-text"
+	<div class="save-text"
 			hx-trigger="click"
 			hx-post="/placement/save"
 			hx-target="body"
 	>Save</div>
 </footer>
+<div class="back-text"
+	 hx-post="placement/back"
+	 hx-target="#placement_container"
+	 hx-swap="delete"
+	 hx-trigger="click"
+>Cancel</div>
 </body>
 }
 

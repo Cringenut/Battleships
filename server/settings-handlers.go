@@ -120,3 +120,7 @@ func (app *Config) HandlePlacementSave(c *gin.Context) {
 	web.SetCurrentSettingsPlacementType(web.GetCurrentPlacementPlacementType())
 	println(data.GetPlayerShipPlacementType())
 }
+
+func (app *Config) HandlePlacementBack(c *gin.Context) {
+	return
+}
