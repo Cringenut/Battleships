@@ -8,8 +8,9 @@ import (
 )
 
 templ MakeShipPlacementElement() {
-	<div class="fullscreen-container" id="fullscreen_container">
-		<style>
+<div class="fullscreen-container" id="fullscreen_container">
+
+<style>
 	.top-bar {
 		height: 36px;
 		display: flex;
@@ -105,59 +106,58 @@ templ MakeShipPlacementElement() {
 	}
 
 </style>
-		<body>
-			<div class="top-bar">
-				<div
-					class="left-btn"
-					hx-trigger="click"
-					hx-post="/placement/switch"
-					hx-target="#placement_container"
-					hx-swap="innerHTML"
-					hx-vals='{"chosenOption": "previous"}'
-				>&#60</div>
-				<span class="center-text">
-					switch web.GetCurrentPlacementPlacementType() {
-						case data.Simple:
-							Simple
-						case data.Advanced:
-							Advanced
-						case data.ServerRandom:
-							Server Random
-						case data.Random:
-							Randomised
-						default:
-					}
-				</span>
-				<div
-					class="right-btn"
-					hx-trigger="click"
-					hx-post="/placement/switch"
-					hx-target="#placement_container"
-					hx-swap="innerHTML"
-					hx-vals='{"chosenOption": "next"}'
-				>&#62</div>
-			</div>
-			<div>
-				@MakePlacementElement()
-			</div>
-			<footer>
-				<div
-					class="save-text"
-					hx-trigger="click"
-					hx-post="/placement/save"
-					hx-target="#placement_container"
-				>Save</div>
-			</footer>
-			<div
-				class="back-text"
-				hx-post="placement/back"
-				hx-target="#fullscreen_container"
-				hx-swap="delete"
-				hx-trigger="click"
-			>Cancel</div>
-		</body>
-	</div>
+<body>
+<div class="top-bar">
+	<div
+			class="left-btn"
+			hx-trigger="click"
+			hx-post="/placement/switch"
+			hx-target="#placement_container"
+			hx-swap="innerHTML"
+			hx-vals='{"chosenOption": "previous"}'
+	>&#60</div>
+	<span class="center-text">
+				switch web.GetCurrentPlacementPlacementType() {
+					case data.Simple:
+						Simple
+					case data.Advanced:
+						Advanced
+					case data.ServerRandom:
+						Server Random
+					case data.Random:
+						Randomised
+					default:
+				}
+			</span>
+	<div
+			class="right-btn"
+			hx-trigger="click"
+			hx-post="/placement/switch"
+			hx-target="#placement_container"
+			hx-swap="innerHTML"
+			hx-vals='{"chosenOption": "next"}'
+	>&#62</div>
+</div>
+<div>@MakePlacementElement()</div>
+<footer>
+	<div class="save-text"
+			hx-trigger="click"
+			hx-post="/placement/save"
+			hx-target="#placement_container"
+	>Save</div>
+</footer>
+<div class="back-text"
+	 hx-post="placement/back"
+	 hx-target="#fullscreen_container"
+	 hx-swap="delete"
+	 hx-trigger="click"
+>Cancel</div>
+</body>
+</div>
+
 }
+
+
 
 templ MakePlacementElement() {
 	<div id="placement_menu">
@@ -400,3 +400,5 @@ templ MakeFourSquareLongPlacementButton(index int, isAdvanced bool) {
 		{ web.GetShipCoords(index) }
 	</div>
 }
+
+

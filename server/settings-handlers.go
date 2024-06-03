@@ -43,7 +43,7 @@ func (app *Config) HandleSettingsSave(c *gin.Context) {
 	// Respond with an HTML page containing HTML and javascript to redirect
 	c.Header("Content-Type", "text/html")
 	//c.Redirect(http.StatusTemporaryRedirect, "/")
-	c.HTML(http.StatusOK, "redirect.html", gin.H{})
+	c.HTML(http.StatusOK, "main-menu-redirect.html", gin.H{})
 	c.Abort()
 }
 
@@ -60,8 +60,6 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 	// Checking if next or previous type was chosen
 	if web.GetFirstCoord().Coord == "" {
 		web.SetFirstCoord(chosenCoord)
-	} else if web.GetCurrentPlacementPlacementType() == data.Advanced && len(web.GetEndCoords()) != 0 && len(web.GetPlacingShip().Coords) < web.GetPlacingShip().Size-1 && web.GetPlacingShip().Size > 2 {
-		web.SetNextCoord(chosenCoord)
 	} else {
 		web.SetLastCoord(chosenCoord)
 	}
@@ -132,6 +130,5 @@ func (app *Config) HandlePlacementBack(c *gin.Context) {
 
 func (app *Config) HandlePlacementShow(c *gin.Context) {
 	web.SetCurrentPlacementPlacementType(web.GetCurrentSettingsPlacementType())
-	web.SetPlacingShip(-1)
 	Render(c, 200, views.MakeShipPlacementElement())
 }

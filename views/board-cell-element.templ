@@ -53,9 +53,7 @@ templ MakePlacementCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-			if (web.GetFirstCoord().Coord == coord || web.IsPlacingShipContains(coord)) {
-				<div class="placement-cell">{ coord }</div>
-			} else if (data.StringSliceContains(web.GetEndCoords(), coord)) {
+			if (data.StringSliceContains(web.GetEndCoords(), coord)) {
 				<div class="possible-end-cell">
 					{ coord }
 					<div
@@ -66,6 +64,8 @@ templ MakePlacementCell(coord string) {
 						hx-vals={ chosenCoord(coord) }
 					></div>
 				</div>
+			} else if (web.GetFirstCoord().Coord == coord) {
+				<div class="placement-cell">{ coord }</div>
 			} else if (web.IsCoordinateInShips(coord)) {
 				<div class="ship-cell">{ coord }</div>
 			} else {

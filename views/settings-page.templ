@@ -177,12 +177,11 @@ templ MakeSettingsPage(nickname string, description string) {
 					<h1>Ship placement</h1>
 					<p>Choose the best formation for your ships armada</p>
 					<div class="fullscreen-container"></div>
-					<div
-						class="edit-text"
-						hx-trigger="click"
-						hx-post="/placement/show"
-						hx-target="#placement_container"
-						hx-swap="innerHTML"
+					<div class="edit-text"
+						 hx-trigger="click"
+						 hx-post="/placement/show"
+						 hx-target="#placement_container"
+						 hx-swap="innerHTML"
 					>Edit</div>
 				</div>
 				<div class="section">
@@ -206,7 +205,9 @@ templ MakeSettingsPage(nickname string, description string) {
 					hx-include="[name='nickname'], [name='description']"
 				>Save</div>
 			</footer>
-			<div id="placement_container"></div>
+			<div id="placement_container">
+			</div>
+
 		</body>
 		<script>
 	// JavaScript function to auto-resize the textarea
