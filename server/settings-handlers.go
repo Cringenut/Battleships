@@ -60,6 +60,8 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 	// Checking if next or previous type was chosen
 	if web.GetFirstCoord().Coord == "" {
 		web.SetFirstCoord(chosenCoord)
+	} else if web.GetCurrentPlacementPlacementType() == data.Advanced && len(web.GetEndCoords()) != 0 && len(web.GetPlacingShip().Coords) < web.GetPlacingShip().Size-1 && web.GetPlacingShip().Size > 2 {
+		web.SetNextCoord(chosenCoord)
 	} else {
 		web.SetLastCoord(chosenCoord)
 	}
@@ -130,5 +132,6 @@ func (app *Config) HandlePlacementBack(c *gin.Context) {
 
 func (app *Config) HandlePlacementShow(c *gin.Context) {
 	web.SetCurrentPlacementPlacementType(web.GetCurrentSettingsPlacementType())
+	web.SetPlacingShip(-1)
 	Render(c, 200, views.MakeShipPlacementElement())
 }
