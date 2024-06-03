@@ -187,3 +187,40 @@ func GetGameRefresh(token string) error {
 
 	return nil
 }
+
+func GetLobby() ([]data.WaitingPlayer, error) {
+	geturl := "https://go-pjatk-server.fly.dev/api/lobby"
+
+	if err := CheckConnection(); err != nil {
+		return nil, err
+	}
+
+	// Create a new GET request
+	req, err := http.NewRequest("GET", geturl, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create a new HTTP client and send the request
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer func(Body io.ReadCloser) {
+		if err := Body.Close(); err != nil {
+			fmt.Println("Error closing response body:", err)
+		}
+	}(res.Body)
+
+	if res.StatusCode != http.StatusOK {
+		return nil, errors.New("failed to get the lobbies")
+	}
+
+	var playerLobbies []data.WaitingPlayer
+	if err := json.NewDecoder(res.Body).Decode(&playerLobbies); err != nil {
+		return nil, err
+	}
+
+	return playerLobbies, nil
+}

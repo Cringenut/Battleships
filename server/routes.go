@@ -19,7 +19,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
 	app.Router.POST("/multiplayer/wait", app.HandleMultiplayerWait)
 	app.Router.POST("/multiplayer/wait/refresh", app.HandleMultiplayerRefresh)
-	app.Router.POST("/multiplayer/join")
+	app.Router.POST("/multiplayer/lobbies", app.HandleMultiplayerLobbies)
 
 	// Handlers for settings
 	app.Router.POST("/settings/save", app.HandleSettingsSave)

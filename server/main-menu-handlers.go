@@ -67,3 +67,17 @@ func (app *Config) HandleMultiplayerRefresh(c *gin.Context) {
 	}
 	println("Refreshed")
 }
+
+func (app *Config) HandleMultiplayerLobbies(c *gin.Context) {
+	servers, err := requests.GetLobby()
+	if err != nil {
+		return
+	}
+
+	for index, server := range servers {
+		Render(c, 200, views.MakePlayerLobby(server.Nick, index))
+	}
+
+	println(len(servers))
+	println("Lobbies")
+}

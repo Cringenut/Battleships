@@ -1,7 +1,7 @@
 package views
 
 templ MakeLobbiesList() {
-<style>
+	<style>
     body {
         color: white;
     }
@@ -46,7 +46,6 @@ templ MakeLobbiesList() {
     .top-bar {
         width: 100%;
         height: 52px;
-        background-color: rgba(74, 74, 74, 1);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -141,36 +140,59 @@ templ MakeLobbiesList() {
         color: white;
     }
 </style>
-<body>
-<div class="outer-container" id="menu_container">
-    <div class="top-bar">
-        <div class="top-bar-text">Lobbies List</div>
-        <a href="/" class="close-button">X</a>
-    </div>
-    <div class="server-rectangle">
-        <div class="player-lobby">
-            <div class="text-nickname">Nickname</div>
-            <div class="text-join">Join</div>
-        </div>
-        <div class="player-lobby-two"></div>
-        <div class="player-lobby"></div>
-        <div class="player-lobby-two"></div>
-        <div class="player-lobby"></div>
-        <div class="player-lobby-two"></div>
-        <div class="player-lobby"></div>
-    </div>
-
-    <div class="buttons-container">
-        <div class="text-find"
-             hx-trigger="click"
-             hx-post="/multiplayer/wait/refresh"
-             hx-swap="outerHTML"
-             hx-target="#menu_container"
-        >Wait</div>
-        <div class="text-refresh">Refresh</div>
-    </div>
-
-</div>
-</body>
+	<body>
+		<div class="outer-container" id="menu_container">
+			<div class="top-bar">
+				<div class="top-bar-text">Lobbies List</div>
+				<a href="/" class="close-button">X</a>
+			</div>
+			<div class="server-rectangle" id="server_list">
+				<div class="player-lobby">
+					<div class="text-nickname">Nickname</div>
+					<div class="text-join">Join</div>
+				</div>
+				<div class="player-lobby-two"></div>
+				<div class="player-lobby"></div>
+				<div class="player-lobby-two"></div>
+				<div class="player-lobby"></div>
+				<div class="player-lobby-two"></div>
+				<div class="player-lobby"></div>
+			</div>
+			<div class="buttons-container">
+				<div
+					class="text-find"
+					hx-trigger="click"
+					hx-post="/multiplayer/wait"
+					hx-swap="outerHTML"
+					hx-target="#menu_container"
+				>Wait</div>
+				<div class="text-refresh"
+                     hx-trigger="click"
+                     hx-target="#server_list"
+                     hx-swap="innerHTML"
+                     hx-post="/multiplayer/lobbies"
+                >Refresh</div>
+			</div>
+			<div
+				hx-trigger="load once"
+				hx-target="#server_list"
+				hx-swap="innerHTML"
+				hx-post="/multiplayer/lobbies"
+			></div>
+		</div>
+	</body>
 }
 
+templ MakePlayerLobby(nickname string, index int) {
+	if (index % 2 == 0) {
+		<div class="player-lobby">
+			<div class="text-nickname">{ nickname }</div>
+			<div class="text-join">Join</div>
+		</div>
+	} else {
+		<div class="player-lobby-two">
+			<div class="text-nickname">{ nickname }</div>
+			<div class="text-join">Join</div>
+		</div>
+	}
+}

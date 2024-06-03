@@ -111,10 +111,10 @@ templ MakeDefaultMenuOptions() {
 					<input class="option" type="submit" value="Singleplayer" name="commit"/>
 				</form>
 				<form
-						hx-post="/"
-						hx-swap="outerHTML"
-						hx-target="#menu_container"
-						hx-vals='{"chosenOption": "multiplayer"}'
+					hx-post="/"
+					hx-swap="outerHTML"
+					hx-target="#menu_container"
+					hx-vals='{"chosenOption": "multiplayer"}'
 				>
 					<input class="option" type="submit" value="Multiplayer" name="commit"/>
 				</form>
@@ -142,22 +142,22 @@ templ MakeSingleplayerChosen() {
 }
 
 templ MakeMultiplayerWaitChosen() {
-<html lang="en">
-<head>
-	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-</head>
-<body>
-<div class="container" id="menu_container">
-	<p>Searching for enemy...</p>
-	<a href="/" class="option">Back</a>
-	<div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
-	<div
-		hx-trigger="every 10s"
-		hx-target="this"
-		hx-post="/multiplayer/refresh"
-		hx-swap="none"
-	></div>
-</div>
-</body>
-</html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		</head>
+		<body>
+			<div class="container" id="menu_container">
+				<p>Searching for enemy...</p>
+				<a href="/" class="option">Back</a>
+				<div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
+				<div
+					hx-trigger="every 10s"
+					hx-target="this"
+					hx-post="/multiplayer/wait/refresh"
+					hx-swap="none"
+				></div>
+			</div>
+		</body>
+	</html>
 }
