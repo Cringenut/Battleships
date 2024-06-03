@@ -108,12 +108,19 @@ templ MakeDefaultMenuOptions() {
 					hx-target="#menu-container"
 					hx-vals='{"chosenOption": "single"}'
 				>
-					<input class="option" type="submit" value="Submit" name="commit"/>
+					<input class="option" type="submit" value="Singleplayer" name="commit"/>
+				</form>
+				<form
+						hx-post="/"
+						hx-swap="outerHTML"
+						hx-target="#menu-container"
+						hx-vals='{"chosenOption": "multiplayer"}'
+				>
+					<input class="option" type="submit" value="Multiplayer" name="commit"/>
 				</form>
 				<div>
 					<a href="http://localhost:8080/settings">Settings</a>
 				</div>
-				<a href="http://localhost:8080/settings">Settings</a>
 			</div>
 		</body>
 	</html>

@@ -1,13 +1,12 @@
 package data
 
-import "fmt"
-
 var gameData GameData
 var gameStatus *GameStatus
 var playerShots []ShotResponse
 var enemyShots []string
 var IsPlayerTurn = false
 var enemyData EnemyData
+var shotsHistory []ShotResponse
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -53,7 +52,6 @@ func IsTurnChanged() bool {
 
 func AppendPlayerShots(coord string, res string) {
 	playerShots = append(playerShots, ShotResponse{coord, res})
-	fmt.Print(playerShots)
 }
 
 func SetEnemyShots(shots []string) {
@@ -114,4 +112,17 @@ func SetEnemyData(nickname, description string) {
 
 func GetEnemyData() EnemyData {
 	return enemyData
+}
+
+func AppendEnemyShotsToHistory() {
+	difference := len(GetGameStatus().OppShots) - len(GetEnemyShots())
+
+	for i := len(GetGameStatus().OppShots) - difference; i < len(GetGameStatus().OppShots); i++ {
+		shotsHistory = append(shotsHistory, ShotResponse{GetGameStatus().OppShots[i], "hit"})
+	}
+
+	for _, shots := range shotsHistory {
+		println(shots.Coord)
+	}
+
 }

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
+	"net/http"
 	"net/url"
 )
 
@@ -30,6 +31,13 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 		if err != nil {
 			return
 		}
+		// Respond with an HTML page containing HTML and javascript to redirect
+		c.Header("Content-Type", "text/html")
+		//c.Redirect(http.StatusTemporaryRedirect, "/")
+		c.HTML(http.StatusOK, "battle-page-redirect.html", gin.H{})
+		c.Abort()
+	case "multiplayer":
+		Render(c, 200, views.MakeLobbiesList())
 	case "back":
 		Render(c, 200, views.MakeMainMenu())
 	default:
@@ -42,4 +50,9 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
 	web.CheckBattleDataIntegrity()
 	fmt.Println("Redirect")
+}
+
+func (app *Config) HandleMultiplayerWait(c *gin.Context) {
+	web.MultiplayerWaitForOpponent()
+
 }

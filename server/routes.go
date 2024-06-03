@@ -17,6 +17,8 @@ func (app *Config) Routes() {
 	// Handlers for main menu
 	app.Router.POST("/", app.HandleMainMenuContainer)
 	app.Router.GET("/redirect", app.HandleBattlePageRedirect)
+	app.Router.POST("/multiplayer/wait")
+	app.Router.POST("/multiplayer/join")
 
 	// Handlers for settings
 	app.Router.POST("/settings/save", app.HandleSettingsSave)

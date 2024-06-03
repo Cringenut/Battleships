@@ -20,8 +20,8 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 		Render(c, 200, views.MakeTurnText(false))
 		return
 	}
-
 	data.SetGameStatus(gameStatus)
+
 	Render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
 	data.IsPlayerTurn = gameStatus.ShouldFire
 
@@ -33,7 +33,12 @@ func (app *Config) HandlePlayerTurn(c *gin.Context) {
 }
 
 func (app *Config) HandleEnemyTurn(c *gin.Context) {
-	println("Enemy")
+Status:
+	gameStatus, err := requests.GetGameStatus(data.GetToken())
+	if err != nil {
+		goto Status
+	}
+	data.SetGameStatus(gameStatus)
 	Render(c, 200, views.MakePlayerBoard())
 }
 
@@ -57,8 +62,9 @@ func (app *Config) HandleFire(c *gin.Context) {
 }
 
 func (app *Config) HandleSetShots(c *gin.Context) {
-	println("SET")
+	data.AppendEnemyShotsToHistory()
 	data.SetEnemyShots(data.GetGameStatus().OppShots)
+	Render(c, 200, views.MakeEnemyBoard())
 }
 
 func (app *Config) HandlePlayerInfo(c *gin.Context) {
