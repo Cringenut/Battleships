@@ -76,3 +76,8 @@ type ShotResponse struct {
 	Coord      string
 	ShotResult string
 }
+
+type WaitingPlayer struct {
+	Nick       string `json:"nick"`
+	GameStatus string `json:"game_status"`
+}

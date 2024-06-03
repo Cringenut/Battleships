@@ -30,7 +30,7 @@ func MultiplayerWaitForOpponent() error {
 		Desc:       data.GetPlayerDescription(),
 		Nick:       data.GetPlayerNickname(),
 		TargetNick: "",
-		WPBot:      true,
+		WPBot:      false,
 	}
 
 	jsonBody, err := json.Marshal(body)

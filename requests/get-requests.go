@@ -2,7 +2,6 @@ package requests
 
 import (
 	"Battleships/data"
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -24,84 +23,6 @@ func CheckConnection() error {
 	return nil
 }
 
-/* POST */
-func PostInitGame(body []byte) (string, error) {
-	posturl := "https://go-pjatk-server.fly.dev/api/game"
-
-	if err := CheckConnection(); err != nil {
-		return "", err
-	}
-
-	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
-	if err != nil {
-		return "", err
-	}
-
-	r.Header.Add("Content-Type", "application/json")
-
-	httpClient := &http.Client{}
-	res, err := httpClient.Do(r)
-	if err != nil {
-		return "", err
-	}
-
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
-		if err != nil {
-			// Handle error
-		}
-	}(res.Body)
-
-	return res.Header.Get("x-auth-token"), nil
-}
-
-func PostFire(token string, coord string) (string, error) {
-	posturl := "https://go-pjatk-server.fly.dev/api/game/fire"
-
-	// Creating the JSON body using a map and marshal it to bytes
-	jsonData := map[string]string{"coord": coord}
-	body, err := json.Marshal(jsonData)
-	if err != nil {
-		return "", err
-	}
-
-	if err := CheckConnection(); err != nil {
-		return "", err
-	}
-
-	r, err := http.NewRequest("POST", posturl, bytes.NewBuffer(body))
-	if err != nil {
-		return "", err
-	}
-
-	// Adding the necessary headers
-	r.Header.Add("Content-Type", "application/json")
-	r.Header.Add("X-Auth-Token", token) // Assuming authToken is provided when function is called
-
-	httpClient := &http.Client{}
-	res, err := httpClient.Do(r)
-	if err != nil {
-		return "", err
-	}
-	defer res.Body.Close()
-
-	// Read the response body
-	responseData := &data.FireResponse{}
-	err = json.NewDecoder(res.Body).Decode(responseData)
-	if err != nil {
-		return "", err
-	}
-
-	if responseData.Result == "" {
-		return "", errors.New("server response is empty")
-	}
-
-	// Print or use the "result" parameter
-	fmt.Println("Response from server:", responseData.Result)
-	return responseData.Result, nil
-}
-
-/* GET */
 func GetBoard(token string) ([]string, error) {
 	geturl := "https://go-pjatk-server.fly.dev/api/game/board"
 
@@ -230,4 +151,39 @@ func GetEnemyData(token string) (*data.EnemyData, error) {
 	}
 
 	return &enemyData, nil
+}
+
+func GetGameRefresh(token string) error {
+	geturl := "https://go-pjatk-server.fly.dev/api/game/refresh"
+
+	if err := CheckConnection(); err != nil {
+		return err
+	}
+
+	// Create a new GET request
+	req, err := http.NewRequest("GET", geturl, nil)
+	if err != nil {
+		return err
+	}
+
+	// Add the X-Auth-Token header using the token received during game initialization
+	req.Header.Add("X-Auth-Token", token)
+
+	// Create a new HTTP client and send the request
+	httpClient := &http.Client{}
+	res, err := httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+	defer func(Body io.ReadCloser) {
+		if err := Body.Close(); err != nil {
+			fmt.Println("Error closing response body:", err)
+		}
+	}(res.Body)
+
+	if res.StatusCode != http.StatusOK {
+		return errors.New("failed to refresh the game")
+	}
+
+	return nil
 }

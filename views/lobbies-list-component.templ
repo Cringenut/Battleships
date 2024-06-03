@@ -142,7 +142,7 @@ templ MakeLobbiesList() {
     }
 </style>
 <body>
-<div class="outer-container">
+<div class="outer-container" id="menu_container">
     <div class="top-bar">
         <div class="top-bar-text">Lobbies List</div>
         <a href="/" class="close-button">X</a>
@@ -161,7 +161,12 @@ templ MakeLobbiesList() {
     </div>
 
     <div class="buttons-container">
-        <div class="text-find">Find</div>
+        <div class="text-find"
+             hx-trigger="click"
+             hx-post="/multiplayer/wait/refresh"
+             hx-swap="outerHTML"
+             hx-target="#menu_container"
+        >Wait</div>
         <div class="text-refresh">Refresh</div>
     </div>
 
