@@ -1,5 +1,9 @@
 package views
 
+import (
+"fmt"
+)
+
 templ MakeLobbiesList() {
 	<style>
     body {
@@ -187,7 +191,13 @@ templ MakePlayerLobby(nickname string, index int) {
 	if (index % 2 == 0) {
 		<div class="player-lobby">
 			<div class="text-nickname">{ nickname }</div>
-			<div class="text-join">Join</div>
+			<div class="text-join"
+				 hx-trigger="click"
+				 hx-target="this"
+				 hx-swap="none"
+				 hx-post="/multiplayer/join"
+				 hx-vals={ chosenLobby(nickname) }
+			>Join</div>
 		</div>
 	} else {
 		<div class="player-lobby-two">
@@ -195,4 +205,8 @@ templ MakePlayerLobby(nickname string, index int) {
 			<div class="text-join">Join</div>
 		</div>
 	}
+}
+
+func chosenLobby(nickname string) string {
+	return fmt.Sprintf(`{"chosenLobby": "%s"}`, nickname)
 }

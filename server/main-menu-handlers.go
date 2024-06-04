@@ -75,3 +75,22 @@ func (app *Config) HandleMultiplayerLobbies(c *gin.Context) {
 	println(len(servers))
 	println("Lobbies")
 }
+
+func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	// Checking if next or previous type was chosen
+	chosenLobby := parsedData.Get("chosenLobby")
+	println("Chosen lobby: " + chosenLobby)
+
+	err = web.JoinLobby(chosenLobby)
+	if err != nil {
+		println("ERROR: " + err.Error())
+	}
+}

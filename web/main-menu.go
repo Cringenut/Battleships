@@ -25,10 +25,10 @@ func MultiplayerWaitForOpponent() error {
 	body := data.GameRequestBody{
 		Coords: []string{
 			"A1", "A3", "B9", "C7", "D1", "D2", "D3", "D4", "D7", "E7",
-			"F1", "F2", "F3", "F5", "G5", "G8", "G9", "I4", "J4", "J8",
+			"F1", "F2", "F3", "F5", "G5", "G8", "G9", "I4", "J4", "J10",
 		},
 		Desc:       data.GetPlayerDescription(),
-		Nick:       data.GetPlayerNickname(),
+		Nick:       "New_Player",
 		TargetNick: "",
 		WPBot:      false,
 	}
