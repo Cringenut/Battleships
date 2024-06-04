@@ -48,11 +48,6 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	fmt.Println(chosenOption)
 }
 
-func (app *Config) HandleBattlePageRedirect(c *gin.Context) {
-	web.CheckBattleDataIntegrity()
-	fmt.Println("Redirect")
-}
-
 func (app *Config) HandleMultiplayerWait(c *gin.Context) {
 	web.MultiplayerWaitForOpponent()
 	Render(c, 200, views.MakeMultiplayerWaitChosen())
@@ -62,7 +57,7 @@ func (app *Config) HandleMultiplayerRefresh(c *gin.Context) {
 	println("Start refresh")
 	err := requests.GetGameRefresh(data.GetToken())
 	if err != nil {
-		println(err.Error())
+		return
 	}
 	println("Refreshed")
 }

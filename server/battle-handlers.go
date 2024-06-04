@@ -23,8 +23,6 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 	}
 	data.SetGameStatus(gameStatus)
 
-	println("Time: " + strconv.Itoa(gameStatus.Timer))
-
 	Render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
 	data.IsPlayerTurn = gameStatus.ShouldFire
 }
@@ -85,5 +83,6 @@ func (app *Config) HandleEnemyInfo(c *gin.Context) {
 }
 
 func (app *Config) HandleBattleTimer(c *gin.Context) {
-
+	println("Timer changed")
+	Render(c, 200, views.MakeBattleTimer(strconv.Itoa(data.GetGameStatus().Timer)))
 }

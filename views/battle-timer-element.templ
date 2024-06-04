@@ -2,20 +2,5 @@ package views
 
 
 templ MakeBattleTimer(time string) {
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let timerElement = document.getElementById("time")
-        let timeLeft = parseInt(timerElement.textContent);
-        function updateTimer() {
-            if (timeLeft > 0) {
-                timeLeft--
-                timerElement.textContent = timeLeft;
-            } else {
-                clearInterval(countdown);
-            }
-        }
-        let countdown = setInterval(updateTimer, 1000);
-    });
-</script>
     <div class="timer-text" id="time">{ time }</div>
 }

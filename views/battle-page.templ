@@ -5,6 +5,7 @@ import (
 )
 
 templ MakeBattlePage() {
+	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
@@ -120,6 +121,21 @@ templ MakeBattlePage() {
 	</style>
 		</head>
 		<body>
+		<script>
+			document.addEventListener("htmx:afterRequest", function () {
+				let timerElement = document.getElementById("time")
+				let timeLeft = parseInt(timerElement.textContent);
+				function updateTimer() {
+					if (timeLeft > 0) {
+						timeLeft--
+						timerElement.textContent = timeLeft;
+					} else {
+						clearInterval(countdown);
+					}
+				}
+				let countdown = setInterval(updateTimer, 1000);
+			});
+		</script>
 			<div class="container fixed-width">
 				<div class="top-element">
 					<div
@@ -189,13 +205,12 @@ templ MakeTurnText(turnChanged bool) {
 				class="turn-text"
 				id="turn"
 				hx-get="/status"
-				hx-trigger="load every 0.2s"
+				hx-trigger="load every 0.4s"
 				hx-target="this"
 				hx-swap="outerHTML"
 			>
 				if (data.GetGameStatus().ShouldFire) {
 					Your turn
-					<div hx-target="#timer" hx-trigger="load" hx-swap="outerHTML"></div>
 				} else {
 					Enemy turn
 				}
@@ -208,6 +223,7 @@ templ MakeTurnText(turnChanged bool) {
 				if (data.GetGameStatus().ShouldFire) {
 					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
 					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load once" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
 				} else {
 					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
 				}

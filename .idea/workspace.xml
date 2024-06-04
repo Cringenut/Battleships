@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.2 // Waiting for the enemy">
-      <change afterPath="$PROJECT_DIR$/views/battle-page-redirect.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/battle-timer-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/player-info-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/player-info-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-timer-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-timer-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,6 +185,11 @@
           <url>file://$PROJECT_DIR$/web/settings.go</url>
           <line>58</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/web/battle.go</url>
+          <line>52</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

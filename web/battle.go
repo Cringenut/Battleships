@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"time"
 )
 
 func StartBattle() error {
@@ -47,8 +46,9 @@ Ships:
 	return nil
 }
 
-func SetTimerTime() string {
-	time.Sleep(200 * time.Millisecond)
-
+func GetTimerTime() string {
+	if data.GetGameStatus().GameStatus != "ended " && data.GetGameStatus().Timer < 1 {
+		return "60"
+	}
 	return strconv.Itoa(data.GetGameStatus().Timer)
 }
