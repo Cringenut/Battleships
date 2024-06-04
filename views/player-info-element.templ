@@ -9,113 +9,113 @@ templ MakePlayerInfo(nickname string, description string) {
 				<title>Three Containers Layout</title>
 				<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
 				<style>
-            .fullscreen-blur {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                backdrop-filter: blur(10px);
-                z-index: 10;
-            }
-            .info-holder {
-                width: 640px;
-                height: 400px;
-                background-color: rgba(55, 55, 55, 0.8);
-                box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                z-index: 1;
-                border-radius: 1px;
-                overflow-y: auto; /* Make the rectangle scrollable */
-                position: relative;
-                display: flex;
-                flex-direction: column;
-            }
-            label {
-                display: block;
-                height: 28px;
-                margin-left: 2px;
-                line-height: 40px;
-                font-size: 20px;
-            }
-            .text-block {
-                width: 90%;
-                margin-left: 2px;
-                margin-right: 8px;
-                border: none;
-                border-radius: 4px;
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-                font-size: 20px;
-                resize: none;
-                min-height: 24px;
-                line-height: 24px;
-            }
+        .fullscreen-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .info-holder {
+            width: 640px;
+            height: 400px;
+            background-color: rgba(55, 55, 55, 0.8);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1;
+            border-radius: 1px;
+            overflow-y: auto; /* Make the rectangle scrollable */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            display: block;
+            height: 28px;
+            margin-left: 2px;
+            line-height: 40px;
+            font-size: 20px;
+        }
+        .text-block {
+            width: 90%;
+            margin-left: 2px;
+            margin-right: 8px;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 20px;
+            resize: none;
+            min-height: 24px;
+            line-height: 24px;
+        }
 
-            .text-content, .label-content {
-                margin-left: 10px;
-                padding: 10px;
-                color: white; /* Ensure text is visible on white background */
-            }
+        .text-content, .label-content {
+            margin-left: 10px;
+            padding: 10px;
+            color: white; /* Ensure text is visible on white background */
+        }
 
-            .label-content {
-                padding-left: 4px;
-                padding-right: 0;
-            }
+        .label-content {
+            padding-left: 4px;
+            padding-right: 0;
+        }
 
-            .text-block-auto {
-                color: white;
-                margin-bottom: 20px;
-                min-height: 84px;
-            }
+        .text-block-auto {
+            color: white;
+            margin-bottom: 20px;
+            min-height: 84px;
+        }
 
-            .top-bar {
-                width: 100%;
-                height: 42px;
-                background-color: rgba(74, 74, 74, 1);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                box-sizing: border-box;
-                position: sticky;
-                top: 0;
-                z-index: 100; /* Ensure it's above other content */
-            }
+        .top-bar {
+            width: 100%;
+            height: 42px;
+            background-color: rgba(74, 74, 74, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            position: sticky;
+            top: 0;
+            z-index: 100; /* Ensure it's above other content */
+        }
 
-            .top-bar-text {
-                line-height: 42px;
-                flex-grow: 1;
-                text-align: center;
-                font-size: 18px;
-            }
+        .top-bar-text {
+            line-height: 42px;
+            flex-grow: 1;
+            text-align: center;
+            font-size: 18px;
+        }
 
-            .close-button {
-                font-family: "Special Elite", system-ui;
-                background: none;
-                border: none;
-                font-size: 16px;
-                color: white;
-                cursor: pointer;
-                margin-right: 8px;
-                text-decoration: none;
-            }
+        .close-button {
+            font-family: "Special Elite", system-ui;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            margin-right: 8px;
+            text-decoration: none;
+        }
 
-            .info-holder::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                background-color: rgba(135, 135, 135, 0.6);
-            }
+        .info-holder::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: rgba(135, 135, 135, 0.6);
+        }
 
-            .info-holder::-webkit-scrollbar {
-                width: 6px;
-                background-color: rgba(135, 135, 135, 0.6);
-            }
+        .info-holder::-webkit-scrollbar {
+            width: 6px;
+            background-color: rgba(135, 135, 135, 0.6);
+        }
 
-            .info-holder::-webkit-scrollbar-thumb {
-                background-color: #454545;
-            }
-        </style>
+        .info-holder::-webkit-scrollbar-thumb {
+            background-color: #454545;
+        }
+    </style>
 			</head>
 			<body>
 				<div class="fullscreen-blur">

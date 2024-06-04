@@ -134,7 +134,9 @@ templ MakeBattlePage() {
 					<div class="bottom-text">Accuracy: 28%</div>
 					<div class="rectangle">
 						@MakeTurnText(true)
-						<div class="timer-text">60</div>
+						<div id="timer">
+							@MakeBattleTimer("60")
+						</div>
 					</div>
 					<div class="token-text">
 						{ data.GetToken() }
@@ -187,12 +189,13 @@ templ MakeTurnText(turnChanged bool) {
 				class="turn-text"
 				id="turn"
 				hx-get="/status"
-				hx-trigger="every 0.2s"
+				hx-trigger="load every 0.2s"
 				hx-target="this"
 				hx-swap="outerHTML"
 			>
 				if (data.GetGameStatus().ShouldFire) {
 					Your turn
+					<div hx-target="#timer" hx-trigger="load" hx-swap="outerHTML"></div>
 				} else {
 					Enemy turn
 				}

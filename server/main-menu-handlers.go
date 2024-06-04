@@ -35,8 +35,7 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 		}
 		// Respond with an HTML page containing HTML and javascript to redirect
 		c.Header("Content-Type", "text/html")
-		//c.Redirect(http.StatusTemporaryRedirect, "/")
-		c.HTML(http.StatusOK, "battle-page-redirect.html", gin.H{})
+		c.HTML(http.StatusTemporaryRedirect, "battle-page-redirect.html", gin.H{})
 		c.Abort()
 	case "multiplayer":
 		Render(c, 200, views.MakeLobbiesList())

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
+	"strconv"
 	"strings"
 )
 
@@ -22,9 +23,10 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 	}
 	data.SetGameStatus(gameStatus)
 
+	println("Time: " + strconv.Itoa(gameStatus.Timer))
+
 	Render(c, 200, views.MakeTurnText(data.IsTurnChanged()))
 	data.IsPlayerTurn = gameStatus.ShouldFire
-
 }
 
 func (app *Config) HandlePlayerTurn(c *gin.Context) {
@@ -80,4 +82,8 @@ func (app *Config) HandleEnemyInfo(c *gin.Context) {
 
 	enemyData := data.GetEnemyData()
 	Render(c, 200, views.MakePlayerInfo(enemyData.Nickname, enemyData.Description))
+}
+
+func (app *Config) HandleBattleTimer(c *gin.Context) {
+
 }

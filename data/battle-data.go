@@ -7,6 +7,7 @@ var enemyShots []string
 var IsPlayerTurn = false
 var enemyData EnemyData
 var shotsHistory []ShotResponse
+var time int
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -125,4 +126,12 @@ func AppendEnemyShotsToHistory() {
 		println(shots.Coord)
 	}
 
+}
+
+func SetTime(newTime int) {
+	time = newTime
+}
+
+func GetTime() int {
+	return time
 }

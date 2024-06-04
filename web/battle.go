@@ -5,6 +5,8 @@ import (
 	"Battleships/requests"
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"time"
 )
 
 func StartBattle() error {
@@ -43,4 +45,10 @@ Ships:
 
 	data.SetPlayerShips(ships)
 	return nil
+}
+
+func SetTimerTime() string {
+	time.Sleep(200 * time.Millisecond)
+
+	return strconv.Itoa(data.GetGameStatus().Timer)
 }

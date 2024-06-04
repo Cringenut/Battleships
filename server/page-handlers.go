@@ -4,7 +4,6 @@ import (
 	"Battleships/data"
 	"Battleships/views"
 	"Battleships/web"
-	"fmt"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 )
@@ -21,7 +20,6 @@ func (app *Config) HandleMainMenu(c *gin.Context) {
 
 // Handling Battle Page
 func (app *Config) HandleBattlePage(c *gin.Context) {
-	fmt.Println("Battle page")
 	Render(c, 200, views.MakeBattlePage())
 }
 

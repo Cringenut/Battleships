@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.2 // Waiting for the enemy">
+      <change afterPath="$PROJECT_DIR$/views/battle-page-redirect.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/battle-timer-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requests/get-requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/requests/get-requests.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/lobbies-list-component.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/lobbies-list-component.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/player-info-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/player-info-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +26,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Go File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.22.3" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -55,6 +61,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Go Build.go build Battleships.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -123,8 +130,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-33c477a475b1-e0158606a674-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.15989.157" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-GO-241.15989.157" />
+        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
       </set>
     </attachedChunks>
   </component>
