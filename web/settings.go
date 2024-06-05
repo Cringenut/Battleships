@@ -5,8 +5,13 @@ import (
 	"fmt"
 )
 
+// All available placement types in settings that can be switched
 var placementTypes = []data.PlacementType{data.Simple, data.Advanced, data.Random}
+
+// Initial placement style when settings is open or new placement type is chosen and saved
 var currentSettingsPlacementType data.PlacementType
+
+// Current placement when we choose the new ship formation
 var currentPlacementPlacementType data.PlacementType
 
 func SetCurrentSettingsPlacementType(placementType data.PlacementType) {
@@ -25,6 +30,7 @@ func GetCurrentPlacementPlacementType() data.PlacementType {
 	return currentPlacementPlacementType
 }
 
+// Simple carosuel to switch between placement types if arrow button is clicked
 func SwitchCurrentPlacementType(isNext bool) {
 	currentIndex := findPlacementIndex(currentPlacementPlacementType)
 	if currentIndex == -1 {
@@ -47,6 +53,7 @@ func SwitchCurrentPlacementType(isNext bool) {
 	}
 }
 
+// Default solution because golang doesn't provide standard library for that functionality
 func findPlacementIndex(value data.PlacementType) int {
 	for i, v := range placementTypes {
 		if v == value {
@@ -59,12 +66,14 @@ func findPlacementIndex(value data.PlacementType) int {
 func CanCurrentPlacementBeSaved() bool {
 	result := false
 	switch currentPlacementPlacementType {
+	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
 		result = IsAnyShipMissingCoords()
 	default:
 		result = false
 	}
 
+	// Setting the currentSettingsPlacementType for the settings page
 	if result == true {
 		SetCurrentSettingsPlacementType(GetCurrentPlacementPlacementType())
 	}

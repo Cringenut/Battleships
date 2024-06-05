@@ -86,3 +86,13 @@ func (app *Config) HandleBattleTimer(c *gin.Context) {
 	println("Timer changed")
 	Render(c, 200, views.MakeBattleTimer(strconv.Itoa(data.GetGameStatus().Timer)))
 }
+
+func (app *Config) HandleBattleEnded(c *gin.Context) {
+	println("Battle Ended")
+	if data.GetGameStatus().LastGameStatus == "win" {
+		Render(c, 200, views.MakeWinScreen())
+	} else if data.GetGameStatus().LastGameStatus == "lose" {
+		Render(c, 200, views.MakeLoseScreen())
+	}
+
+}

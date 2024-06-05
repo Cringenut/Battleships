@@ -5,13 +5,23 @@ import (
 	"Battleships/requests"
 	"encoding/json"
 	"fmt"
-	"time"
 )
 
 func CheckBattleDataIntegrity() {
+Battle:
+	err := StartBattle()
+	if err != nil {
+		goto Battle
+	}
+
+Status:
+	gameStatus, err := requests.GetGameStatus(data.GetToken())
+	if err != nil || gameStatus.Opponent == "" {
+		goto Status
+	}
+	data.SetGameStatus(gameStatus)
 
 Data:
-	time.Sleep(200 * time.Millisecond)
 	enemyData, err := requests.GetEnemyData(data.GetToken())
 	if err != nil {
 		goto Data

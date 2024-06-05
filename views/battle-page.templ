@@ -118,10 +118,25 @@ templ MakeBattlePage() {
 			bottom: 0; /* Position at the bottom of the page */
 			z-index: 10; /* Ensures it is on top of other elements */
 		}
+		.fullscreen-container {
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background-color: orange; /* Semi-transparent background */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			z-index: 999; /* Ensures it is above other content */
+			pointer-events: none; /* Ensures it doesn't capture any mouse events */
+			box-sizing: border-box;
+		}
 	</style>
 		</head>
-		<body>
-		<script>
+		<body id="battle_body">
+			<script>
 			document.addEventListener("htmx:afterRequest", function () {
 				let timerElement = document.getElementById("time")
 				let timeLeft = parseInt(timerElement.textContent);
@@ -205,10 +220,18 @@ templ MakeTurnText(turnChanged bool) {
 				class="turn-text"
 				id="turn"
 				hx-get="/status"
-				hx-trigger="load every 0.4s"
+				hx-trigger="load every 0.95s"
 				hx-target="this"
 				hx-swap="outerHTML"
 			>
+				if (data.GetGameStatus().GameStatus == "ended") {
+				<div
+						hx-post="/battle/ended"
+						hx-trigger="load once"
+						hx-swap="innerHTML"
+						hx-target="#battle_body"
+				></div>
+				}
 				if (data.GetGameStatus().ShouldFire) {
 					Your turn
 				} else {

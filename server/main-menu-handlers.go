@@ -29,10 +29,7 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 		return
 	case "single":
 		Render(c, 200, views.MakeSingleplayerChosen())
-		err := web.StartBattle()
-		if err != nil {
-			return
-		}
+		web.CheckBattleDataIntegrity()
 		// Respond with an HTML page containing HTML and javascript to redirect
 		c.Header("Content-Type", "text/html")
 		c.HTML(http.StatusTemporaryRedirect, "battle-page-redirect.html", gin.H{})

@@ -4,13 +4,24 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.3 // Battle timer">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.2">
+      <change afterPath="$PROJECT_DIR$/views/battle-ended-screen.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-timer-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-timer-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/lobbies-list-component.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/lobbies-list-component.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/player-info-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/player-info-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ship-placing-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ship-placing-element.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/main-menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/main-menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/ship-placement.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ship-placement.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +31,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="HTML File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -175,16 +186,5 @@
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/settings.go</url>
-          <line>58</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

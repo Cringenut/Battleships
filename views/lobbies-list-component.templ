@@ -1,7 +1,7 @@
 package views
 
 import (
-"fmt"
+	"fmt"
 )
 
 templ MakeLobbiesList() {
@@ -170,12 +170,13 @@ templ MakeLobbiesList() {
 					hx-swap="outerHTML"
 					hx-target="#menu_container"
 				>Wait</div>
-				<div class="text-refresh"
-                     hx-trigger="click"
-                     hx-target="#server_list"
-                     hx-swap="innerHTML"
-                     hx-post="/multiplayer/lobbies"
-                >Refresh</div>
+				<div
+					class="text-refresh"
+					hx-trigger="click"
+					hx-target="#server_list"
+					hx-swap="innerHTML"
+					hx-post="/multiplayer/lobbies"
+				>Refresh</div>
 			</div>
 			<div
 				hx-trigger="load once"
@@ -191,12 +192,13 @@ templ MakePlayerLobby(nickname string, index int) {
 	if (index % 2 == 0) {
 		<div class="player-lobby">
 			<div class="text-nickname">{ nickname }</div>
-			<div class="text-join"
-				 hx-trigger="click"
-				 hx-target="this"
-				 hx-swap="none"
-				 hx-post="/multiplayer/join"
-				 hx-vals={ chosenLobby(nickname) }
+			<div
+				class="text-join"
+				hx-trigger="click"
+				hx-target="this"
+				hx-swap="none"
+				hx-post="/multiplayer/join"
+				hx-vals={ chosenLobby(nickname) }
 			>Join</div>
 		</div>
 	} else {

@@ -20,10 +20,11 @@ type Ship struct {
 
 const size = 10
 
-// Board represents the server board
+// Board represents the server board and also to check for positions where ship can't be placed
 var board [size][size]bool
 
-// ShipSizes defines the sizes of ships to be placed
+// Used in default placement
+// User
 var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
 var advancedShips = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},

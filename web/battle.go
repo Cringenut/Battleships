@@ -7,7 +7,9 @@ import (
 	"fmt"
 )
 
+// Setting up data for the battle
 func StartBattle() error {
+	// Body that will be sent to the server to start the battle
 	body := data.GameRequestBody{
 		Coords: []string{
 			"A1", "A3", "B9", "C7", "D1", "D2", "D3", "D4", "D7", "E7",
@@ -24,27 +26,37 @@ func StartBattle() error {
 		return err
 	}
 
+Token:
+	// If request is failed try to start the game until successful
 	token, err := requests.PostInitGame(jsonBody)
 	if err != nil {
-		return err
+		goto Token
 	}
 
 	data.SetToken(token)
+	// Printing token for debug
 	println(data.GetToken())
 
 Ships:
+	// Gets the ships from the server
+	// Not reliable because when ship is hit, it gets removed from the request body
 	ships, _ := requests.GetBoard(data.GetToken())
 	if len(ships) == 0 {
 		goto Ships
 	}
+	// Printing ships for debug
 	for _, position := range ships {
 		fmt.Println(position)
 	}
 
+	// Setting up original positions of all ships
+	// Used to show ships visually on the game board or to determine if the ship is hit
 	data.SetPlayerShips(ships)
 	return nil
 }
 
+// Temporary solution
+// Test body and simmilar as Start battle, but uses enemy nickname as parameter
 func JoinLobby(enemyNickname string) error {
 	body := data.GameRequestBody{
 		Coords: []string{
