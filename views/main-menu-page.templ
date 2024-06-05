@@ -99,7 +99,7 @@ templ MakeDefaultMenuOptions() {
 		<head>
 			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 		</head>
-		<body>
+		<body id="menu_body">
 			<div class="container" id="menu_container">
 				<div class="title">Battleships</div>
 				<form
@@ -132,9 +132,15 @@ templ MakeSingleplayerChosen() {
 			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 		</head>
 		<body>
+			<script type="text/javascript">
+			</script>
 			<div class="container" id="menu_container">
 				<p>Game starts soon...</p>
 				<a href="/" class="option">Back</a>
+				<div
+						hx-get="/battle/redirect"
+						hx-trigger="load once"
+				></div>
 			</div>
 		</body>
 	</html>

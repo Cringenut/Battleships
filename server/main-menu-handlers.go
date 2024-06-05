@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 )
@@ -29,11 +30,6 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 		return
 	case "single":
 		Render(c, 200, views.MakeSingleplayerChosen())
-		web.CheckBattleDataIntegrity()
-		// Respond with an HTML page containing HTML and javascript to redirect
-		c.Header("Content-Type", "text/html")
-		c.HTML(http.StatusTemporaryRedirect, "battle-page-redirect.html", gin.H{})
-		c.Abort()
 	case "multiplayer":
 		Render(c, 200, views.MakeLobbiesList())
 	case "back":
@@ -90,4 +86,24 @@ func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
 	if err != nil {
 		println("ERROR: " + err.Error())
 	}
+}
+
+func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
+	println("Redirect to battle")
+	// Define the URL to which you want to redirect
+	targetURL := "https://www.google.com/chrome/"
+
+	// Log the redirection attempt
+	log.Printf("Redirecting to: %s", targetURL)
+
+	// Check if the request is coming from HTMX
+	if c.GetHeader("HX-Request") != "" {
+		// Respond with an HTMX-specific header to trigger a client-side redirect
+		c.Header("HX-Redirect", targetURL)
+		c.Status(http.StatusOK)
+	} else {
+		// Regular redirection for non-HTMX requests
+		c.Redirect(http.StatusFound, targetURL)
+	}
+
 }
