@@ -179,7 +179,7 @@ templ MakeLobbiesList() {
 				>Refresh</div>
 			</div>
 			<div
-				hx-trigger="load once"
+				hx-trigger="load, once"
 				hx-target="#server_list"
 				hx-swap="innerHTML"
 				hx-post="/multiplayer/lobbies"

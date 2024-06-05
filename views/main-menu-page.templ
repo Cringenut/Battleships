@@ -139,7 +139,7 @@ templ MakeSingleplayerChosen() {
 				<a href="/" class="option">Back</a>
 				<div
 						hx-get="/battle/redirect"
-						hx-trigger="load once"
+						hx-trigger="load, once"
 				></div>
 			</div>
 		</body>
@@ -155,11 +155,15 @@ templ MakeMultiplayerWaitChosen() {
 			<div class="container" id="menu_container">
 				<p>Searching for enemy...</p>
 				<a href="/" class="option">Back</a>
-				<div hx-trigger="load" hx-get="/redirect" hx-swap="none"></div>
 				<div
 					hx-trigger="every 10s"
 					hx-target="this"
 					hx-post="/multiplayer/wait/refresh"
+					hx-swap="none"
+				></div>
+				<div hx-trigger="every 0.8s"
+					hx-target="this"
+					hx-get="/multiplayer/wait/check"
 					hx-swap="none"
 				></div>
 			</div>

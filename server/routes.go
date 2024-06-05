@@ -16,11 +16,12 @@ func (app *Config) Routes() {
 
 	// Handlers for main menu
 	app.Router.POST("/", app.HandleMainMenuContainer)
-	app.Router.POST("/multiplayer/wait", app.HandleMultiplayerWait)
+	app.Router.POST("/multiplayer/wait", app.HandleMultiplayerStartWait)
 	app.Router.POST("/multiplayer/wait/refresh", app.HandleMultiplayerRefresh)
 	app.Router.POST("/multiplayer/lobbies", app.HandleMultiplayerLobbies)
 	app.Router.POST("/multiplayer/join", app.HandleMultiplayerJoinLobby)
 	app.Router.GET("/battle/redirect", app.HandleMenuRedirectToBattle)
+	app.Router.GET("/multiplayer/wait/check", app.HandleMultiplayerWait)
 
 	// Handlers for settings
 	app.Router.POST("/settings/save", app.HandleSettingsSave)

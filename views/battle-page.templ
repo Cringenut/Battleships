@@ -220,14 +220,14 @@ templ MakeTurnText(turnChanged bool) {
 				class="turn-text"
 				id="turn"
 				hx-get="/status"
-				hx-trigger="load every 0.95s"
+				hx-trigger="load, every 0.95s"
 				hx-target="this"
 				hx-swap="outerHTML"
 			>
 				if (data.GetGameStatus().GameStatus == "ended") {
 				<div
 						hx-post="/battle/ended"
-						hx-trigger="load once"
+						hx-trigger="load, once"
 						hx-swap="innerHTML"
 						hx-target="#battle_body"
 				></div>
@@ -238,17 +238,17 @@ templ MakeTurnText(turnChanged bool) {
 					Enemy turn
 				}
 				if len(data.GetEnemyShots()) != len(data.GetGameStatus().OppShots) {
-					<div hx-trigger="load" hx-get="/shots" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load, once" hx-get="/shots" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load, once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 				}
 			</div>
 			if (turnChanged) {
 				if (data.GetGameStatus().ShouldFire) {
-					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load once" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
+					<div hx-trigger="load, once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load, once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load, once" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
 				} else {
-					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load, once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
 				}
 			}
 		</body>

@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 func (app *Config) HandleMainMenuContainer(c *gin.Context) {
@@ -29,6 +30,12 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	case "battle":
 		return
 	case "single":
+		// If battle didn't start we try to start it again until it returns no error
+	Battle:
+		err := web.StartBattle("", true)
+		if err != nil {
+			goto Battle
+		}
 		Render(c, 200, views.MakeSingleplayerChosen())
 	case "multiplayer":
 		Render(c, 200, views.MakeLobbiesList())
@@ -41,8 +48,8 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	fmt.Println(chosenOption)
 }
 
-func (app *Config) HandleMultiplayerWait(c *gin.Context) {
-	web.MultiplayerWaitForOpponent()
+func (app *Config) HandleMultiplayerStartWait(c *gin.Context) {
+	web.StartBattle("", false)
 	Render(c, 200, views.MakeMultiplayerWaitChosen())
 }
 
@@ -82,7 +89,9 @@ func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
 	chosenLobby := parsedData.Get("chosenLobby")
 	println("Chosen lobby: " + chosenLobby)
 
-	err = web.JoinLobby(chosenLobby)
+	err = web.StartBattle(chosenLobby, false)
+	app.HandleMenuRedirectToBattle(c)
+
 	if err != nil {
 		println("ERROR: " + err.Error())
 	}
@@ -90,8 +99,15 @@ func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
 
 func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 	println("Redirect to battle")
-	// Define the URL to which you want to redirect
-	targetURL := "https://www.google.com/chrome/"
+	// Battle page we redirect tp
+	targetURL := "/battle"
+
+	time.Sleep(1000 * time.Millisecond)
+
+	// Without this after redirect the first couple of seconds will contain no information about battle
+	// Enemy nickname and description would be unavailable
+	// Timer and current turn would be wrong
+	web.CheckBattleDataIntegrity()
 
 	// Log the redirection attempt
 	log.Printf("Redirecting to: %s", targetURL)
@@ -105,5 +121,16 @@ func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 		// Regular redirection for non-HTMX requests
 		c.Redirect(http.StatusFound, targetURL)
 	}
+}
 
+func (app *Config) HandleMultiplayerWait(c *gin.Context) {
+	println("Checking battle")
+	status, err := requests.GetGameStatus(data.GetToken())
+	if err != nil {
+		return
+	}
+
+	if status.Opponent != "" {
+		app.HandleMenuRedirectToBattle(c)
+	}
 }
