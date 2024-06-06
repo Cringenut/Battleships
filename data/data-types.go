@@ -83,9 +83,13 @@ type WaitingPlayer struct {
 }
 
 type PlayerStat struct {
-	Nick   string `json:"nick"`
 	Games  int    `json:"games"`
-	Wins   int    `json:"wins"`
-	Rank   int    `json:"rank"`
+	Nick   string `json:"nick"`
 	Points int    `json:"points"`
+	Rank   int    `json:"rank"`
+	Wins   int    `json:"wins"`
+}
+
+type StatsResponse struct {
+	Stats []PlayerStat `json:"stats"`
 }

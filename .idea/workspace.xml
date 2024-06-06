@@ -4,19 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.5 // New redirect method">
-      <change afterPath="$PROJECT_DIR$/views/ranking-page.templ" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.6 // Player ranking">
+      <change afterPath="$PROJECT_DIR$/server/ranking-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/static-functions.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/static-functions.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requests/get-requests.go" beforeDir="false" afterPath="$PROJECT_DIR$/requests/get-requests.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ship-placement.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ship-placement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ranking-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ranking-page.templ" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +150,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v2.2" />
     <MESSAGE value="Battleships v2.4" />
     <MESSAGE value="Battleships v2.5 // Fixed flickering bug" />
     <MESSAGE value="Battleships v3.0 Whole new project structure" />
@@ -176,7 +174,8 @@
     <MESSAGE value="Battleships v4.3 // Timer" />
     <MESSAGE value="Battleships v4.3 // Battle timer" />
     <MESSAGE value="Battleships v4.5 // New redirect method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.5 // New redirect method" />
+    <MESSAGE value="Battleships v4.6 // Player ranking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.6 // Player ranking" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

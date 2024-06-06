@@ -7,7 +7,8 @@ var enemyShots []string
 var IsPlayerTurn = false
 var enemyData EnemyData
 var shotsHistory []ShotResponse
-var time int
+var playerAccuracy = 100.0
+var enemyAccuracy = 100.0
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -128,10 +129,18 @@ func AppendEnemyShotsToHistory() {
 
 }
 
-func SetTime(newTime int) {
-	time = newTime
+func SetEnemyAccuracy(newAccuracy float64) {
+	enemyAccuracy = newAccuracy
 }
 
-func GetTime() int {
-	return time
+func GetEnemyAccuracy() float64 {
+	return enemyAccuracy
+}
+
+func SetPlayerAccuracy(newAccuracy float64) {
+	playerAccuracy = newAccuracy
+}
+
+func GetPlayerAccuracy() float64 {
+	return playerAccuracy
 }

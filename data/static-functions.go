@@ -1,7 +1,6 @@
 package data
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -49,12 +48,17 @@ func CalculateCellCoord(row int, col int) string {
 	return string(y) + strconv.Itoa(x)
 }
 
-func PrintOppShots() {
-	for _, item := range GetGameStatus().OppShots {
-		fmt.Println(item)
+func CalculateEnemyAccuracy() float64 {
+	if len(GetEnemyShots()) == len(GetGameStatus().OppShots) || len(GetGameStatus().OppShots) == 0 {
+		return GetEnemyAccuracy()
 	}
-}
 
-func HxValCoord(coord string) string {
-	return coord
+	hits := 0
+	for _, shot := range GetGameStatus().OppShots {
+		if StringSliceContains(GetPlayerShips(), shot) {
+			hits++
+		}
+	}
+
+	return (float64(hits) / float64(len(GetGameStatus().OppShots)) * 100)
 }

@@ -31,17 +31,16 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 	data.IsPlayerTurn = gameStatus.ShouldFire
 }
 
-func (app *Config) HandlePlayerTurn(c *gin.Context) {
-	println("Player")
+func (app *Config) HandleEnemyTarget(c *gin.Context) {
+
 	time.Sleep(200 * time.Millisecond)
 	Render(c, 200, views.MakeEnemyBoard())
 }
 
-func (app *Config) HandleEnemyTurn(c *gin.Context) {
+func (app *Config) HandlePlayerTarget(c *gin.Context) {
 	if data.GetToken() == "" {
 		time.Sleep(200 * time.Millisecond)
 		Render(c, 200, views.MakePlayerBoard())
-
 	}
 Status:
 	gameStatus, err := requests.GetGameStatus(data.GetToken())

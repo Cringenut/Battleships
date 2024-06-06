@@ -254,10 +254,10 @@ func GetStats() ([]data.PlayerStat, error) {
 		return nil, errors.New("failed to get the lobbies")
 	}
 
-	var playersStats []data.PlayerStat
-	if err := json.NewDecoder(res.Body).Decode(&playersStats); err != nil {
+	var statsResponse data.StatsResponse
+	if err := json.NewDecoder(res.Body).Decode(&statsResponse); err != nil {
 		return nil, err
 	}
 
-	return playersStats, nil
+	return statsResponse.Stats, nil
 }

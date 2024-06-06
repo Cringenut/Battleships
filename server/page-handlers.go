@@ -7,6 +7,7 @@ import (
 	"Battleships/web"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 func Render(c *gin.Context, status int, template templ.Component) error {
@@ -35,5 +36,11 @@ func (app *Config) HandleBattlePage(c *gin.Context) {
 
 // Handling Ranking Page
 func (app *Config) HandleRankingPage(c *gin.Context) {
-	Render(c, 200, views.MakeRankingPage())
+Ranking:
+	ranking, err := requests.GetStats()
+	if err != nil {
+		time.Sleep(100 * time.Millisecond)
+		goto Ranking
+	}
+	Render(c, 200, views.MakeRankingPage(ranking))
 }
