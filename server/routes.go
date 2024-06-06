@@ -13,6 +13,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/", app.HandleMainMenu)
 	app.Router.GET("/battle", app.HandleBattlePage)
 	app.Router.GET("/settings", app.HandleSettings)
+	app.Router.GET("/ranking", app.HandleRankingPage)
 
 	// Handlers for main menu
 	app.Router.POST("/", app.HandleMainMenuContainer)
@@ -24,7 +25,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/multiplayer/wait/check", app.HandleMultiplayerWait)
 
 	// Handlers for settings
-	app.Router.POST("/settings/save", app.HandleSettingsSave)
+	app.Router.GET("/settings/save", app.HandleSettingsSave)
 	app.Router.POST("/placement/page")
 	app.Router.POST("/placement/place", app.HandlePlacementCell)
 	app.Router.POST("/placement/advanced/place", app.HandlePlacementCell)

@@ -9,12 +9,16 @@ import (
 	"io"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func (app *Config) HandleGameStatus(c *gin.Context) {
 	if data.GetToken() == "" {
 		return
 	}
+
+	time.Sleep(100 * time.Millisecond)
+	println("status")
 
 	gameStatus, err := requests.GetGameStatus(data.GetToken())
 	if err != nil {
@@ -29,13 +33,20 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 
 func (app *Config) HandlePlayerTurn(c *gin.Context) {
 	println("Player")
+	time.Sleep(200 * time.Millisecond)
 	Render(c, 200, views.MakeEnemyBoard())
 }
 
 func (app *Config) HandleEnemyTurn(c *gin.Context) {
+	if data.GetToken() == "" {
+		time.Sleep(200 * time.Millisecond)
+		Render(c, 200, views.MakePlayerBoard())
+
+	}
 Status:
 	gameStatus, err := requests.GetGameStatus(data.GetToken())
 	if err != nil {
+		time.Sleep(500 * time.Millisecond)
 		goto Status
 	}
 	data.SetGameStatus(gameStatus)

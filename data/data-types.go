@@ -81,3 +81,11 @@ type WaitingPlayer struct {
 	Nick       string `json:"nick"`
 	GameStatus string `json:"game_status"`
 }
+
+type PlayerStat struct {
+	Nick   string `json:"nick"`
+	Games  int    `json:"games"`
+	Wins   int    `json:"wins"`
+	Rank   int    `json:"rank"`
+	Points int    `json:"points"`
+}

@@ -32,3 +32,8 @@ func (app *Config) HandleSettings(c *gin.Context) {
 func (app *Config) HandleBattlePage(c *gin.Context) {
 	Render(c, 200, views.MakeBattlePage())
 }
+
+// Handling Ranking Page
+func (app *Config) HandleRankingPage(c *gin.Context) {
+	Render(c, 200, views.MakeRankingPage())
+}

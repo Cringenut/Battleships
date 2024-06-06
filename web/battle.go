@@ -5,15 +5,13 @@ import (
 	"Battleships/requests"
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 func bodyBuilder(enemyNickname string, isSingleplayer bool) data.GameRequestBody {
 	// Body that will be sent to the server to start the battle
 	body := data.GameRequestBody{
-		Coords: []string{
-			"A1", "A3", "B9", "C7", "D1", "D2", "D3", "D4", "D7", "E7",
-			"F1", "F2", "F3", "F5", "G5", "G8", "G9", "I4", "J4", "J8",
-		},
+		Coords:     data.GetPlayerShips(),
 		Desc:       data.GetPlayerDescription(),
 		Nick:       data.GetPlayerNickname(),
 		TargetNick: enemyNickname,
@@ -34,6 +32,7 @@ Token:
 	// If request is failed try to start the game until successful
 	token, err := requests.PostInitGame(jsonBody)
 	if err != nil {
+		time.Sleep(200 * time.Millisecond)
 		goto Token
 	}
 

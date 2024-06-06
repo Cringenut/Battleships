@@ -68,7 +68,7 @@ func CanCurrentPlacementBeSaved() bool {
 	switch currentPlacementPlacementType {
 	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
-		result = IsAnyShipMissingCoords()
+		result = IsAnyShipNotMissingCoords()
 	default:
 		result = false
 	}

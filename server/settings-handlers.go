@@ -37,7 +37,10 @@ func (app *Config) HandleSettingsSave(c *gin.Context) {
 		return
 	} else {
 		data.SetPlayerData(saveNickname, saveDescription)
-		data.SetPlayerShipPlacementType(web.GetCurrentSettingsPlacementType())
+		if web.IsAnyShipNotMissingCoords() {
+			data.SetPlayerShipPlacementType(web.GetCurrentSettingsPlacementType())
+			data.SetPlayerShips(web.GetShipsCoords())
+		}
 	}
 
 	// Respond with an HTML page containing HTML and javascript to redirect

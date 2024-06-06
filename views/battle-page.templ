@@ -220,7 +220,7 @@ templ MakeTurnText(turnChanged bool) {
 				class="turn-text"
 				id="turn"
 				hx-get="/status"
-				hx-trigger="load, every 0.95s"
+				hx-trigger="every 0.8s"
 				hx-target="this"
 				hx-swap="outerHTML"
 			>
@@ -241,14 +241,15 @@ templ MakeTurnText(turnChanged bool) {
 					<div hx-trigger="load, once" hx-get="/shots" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 					<div hx-trigger="load, once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 				}
+				<div hx-trigger="every 1s" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 			</div>
 			if (turnChanged) {
 				if (data.GetGameStatus().ShouldFire) {
-					<div hx-trigger="load, once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load, once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load, once" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
+					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load once" hx-get="/board/turn/player" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load once" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
 				} else {
-					<div hx-trigger="load, once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
+					<div hx-trigger="load once" hx-get="/board/turn/enemy" hx-target="#player_board" hx-swap="outerHTML"></div>
 				}
 			}
 		</body>
