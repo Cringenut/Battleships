@@ -24,7 +24,7 @@ func (app *Config) HandleMainMenu(c *gin.Context) {
 // Handling Settings Page
 func (app *Config) HandleSettings(c *gin.Context) {
 	requests.GameAbandon(data.GetToken())
-	web.SetCurrentSettingsPlacementType(data.GetPlayerShipPlacementType())
+	data.SetCurrentSettingsPlacementType(data.GetPlayerShipPlacementType())
 	Render(c, 200, views.MakeSettingsPage(data.GetPlayerNickname(), data.GetPlayerDescription()))
 }
 

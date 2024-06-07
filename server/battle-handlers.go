@@ -15,7 +15,6 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 }
 
 func (app *Config) HandleEnemyTarget(c *gin.Context) {
-	data.SetEnemyAccuracy(data.CalculateEnemyAccuracy())
 	time.Sleep(100 * time.Millisecond)
 	Render(c, 200, views.MakeEnemyBoard())
 }

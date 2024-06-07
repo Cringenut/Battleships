@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/url"
+	"time"
 )
 
 func (app *Config) HandleMainMenuContainer(c *gin.Context) {
@@ -65,7 +66,12 @@ func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
 
 func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 	println("Redirect to battle")
-	web.RedirectToBattle(c)
+	time.Sleep(1000 * time.Millisecond)
+	// Without this after redirect the first couple of seconds will contain no information about battle
+	// Enemy nickname and description would be unavailable
+	// Timer and current turn would be wrong
+	web.CheckBattleDataIntegrity()
+	web.Redirect(c, "/battle")
 }
 
 func (app *Config) HandleMultiplayerWait(c *gin.Context) {

@@ -116,7 +116,7 @@ templ MakeShipPlacementElement() {
 					hx-vals='{"chosenOption": "previous"}'
 				>&#60</div>
 				<span class="center-text">
-					switch web.GetCurrentPlacementPlacementType() {
+					switch data.GetCurrentPlacementPlacementType() {
 						case data.Simple:
 							Simple
 						case data.Advanced:
@@ -161,7 +161,7 @@ templ MakeShipPlacementElement() {
 
 templ MakePlacementElement() {
 	<div id="placement_menu">
-		switch web.GetCurrentPlacementPlacementType() {
+		switch data.GetCurrentPlacementPlacementType() {
 			case data.Simple:
 				@MakeSimplePlacementBoard()
 			case data.Advanced:

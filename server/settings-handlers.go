@@ -38,16 +38,10 @@ func (app *Config) HandleSettingsSave(c *gin.Context) {
 	} else {
 		data.SetPlayerData(saveNickname, saveDescription)
 		if web.IsAnyShipNotMissingCoords() {
-			data.SetPlayerShipPlacementType(web.GetCurrentSettingsPlacementType())
+			data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
 			data.SetPlayerShips(web.GetShipsCoords())
 		}
 	}
-
-	// Respond with an HTML page containing HTML and javascript to redirect
-	c.Header("Content-Type", "text/html")
-	//c.Redirect(http.StatusTemporaryRedirect, "/")
-	c.HTML(http.StatusOK, "main-menu-redirect.html", gin.H{})
-	c.Abort()
 }
 
 func (app *Config) HandlePlacementCell(c *gin.Context) {
@@ -100,11 +94,8 @@ func (app *Config) HandlePlacementChosen(c *gin.Context) {
 		return
 	}
 
-	// Checking if next or previous type was chosen
 	chosenOption, err := strconv.Atoi(parsedData.Get("chosenOption"))
-	isAdvanced, err := strconv.ParseBool(parsedData.Get("isAdvanced"))
 	web.SetPlacingShip(chosenOption)
-	println(isAdvanced)
 
 	Render(c, 200, views.MakePlacementElement())
 }
@@ -123,11 +114,11 @@ func (app *Config) HandlePlacementSave(c *gin.Context) {
 	if !web.CanCurrentPlacementBeSaved() {
 		Render(c, 200, views.MakeShipPlacementElement())
 	}
-	web.SetCurrentSettingsPlacementType(web.GetCurrentPlacementPlacementType())
+	data.SetCurrentSettingsPlacementType(data.GetCurrentPlacementPlacementType())
 	println(data.GetPlayerShipPlacementType())
 }
 
 func (app *Config) HandlePlacementShow(c *gin.Context) {
-	web.SetCurrentPlacementPlacementType(web.GetCurrentSettingsPlacementType())
+	data.SetCurrentPlacementPlacementType(data.GetCurrentSettingsPlacementType())
 	Render(c, 200, views.MakeShipPlacementElement())
 }

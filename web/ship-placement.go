@@ -41,9 +41,9 @@ func SetPlacingShip(index int) {
 		return
 	}
 
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		placingShip = &ships[index]
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		println("ADVANCED")
 		placingShip = &advancedShips[index]
 	}
@@ -88,9 +88,9 @@ func SetFirstCoord(coord string) {
 		SetLastCoord(coord)
 	} else if placingShip != nil {
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
-		if currentPlacementPlacementType == data.Simple || placingShip.size < 3 {
+		if data.GetCurrentPlacementPlacementType() == data.Simple || placingShip.size < 3 {
 			endCoords = possibleEndCoords(row, col, placingShip.size)
-		} else if currentPlacementPlacementType == data.Advanced {
+		} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 			endCoords = possibleEndCoords(row, col, 2)
 		}
 	} else {
@@ -117,7 +117,7 @@ func SetLastCoord(coord string) {
 
 // IsCoordinateInShips checks if the given coordinate string is inside any of the ships' coordinates
 func IsCoordinateInShips(coord string) bool {
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for _, ship := range ships {
 			for _, shipCoord := range ship.coords {
 				if strings.EqualFold(shipCoord, coord) {
@@ -125,7 +125,7 @@ func IsCoordinateInShips(coord string) bool {
 				}
 			}
 		}
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		for _, advancedShip := range advancedShips {
 			for _, shipCoord := range advancedShip.coords {
 				if strings.EqualFold(shipCoord, coord) {
@@ -278,14 +278,14 @@ func printBoard() {
 }
 
 func GetShipCoords(index int) string {
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		if len(ships[index].coords) == 0 {
 			if &ships[index] == placingShip {
 				return "Selected"
 			}
 			return "+"
 		}
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		println("ADVANCED")
 		if len(advancedShips[index].coords) == 0 {
 			if &advancedShips[index] == placingShip {
@@ -299,11 +299,11 @@ func GetShipCoords(index int) string {
 }
 
 func ClearAllShipCoords() {
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for i := range ships {
 			ships[i].coords = nil
 		}
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		println("ADVANCED")
 		for i := range advancedShips {
 			advancedShips[i].coords = nil
@@ -313,14 +313,14 @@ func ClearAllShipCoords() {
 }
 
 func IsAnyShipNotMissingCoords() bool {
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for i := range ships {
 			if len(ships[i].coords) != ships[i].size {
 				return false
 			}
 		}
 		return true
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		for i := range advancedShips {
 			if len(advancedShips[i].coords) != advancedShips[i].size {
 				return false
@@ -337,11 +337,11 @@ func ClearBoard() {
 
 func GetShipsCoords() []string {
 	var allCoords []string
-	if currentPlacementPlacementType == data.Simple {
+	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for _, ship := range ships {
 			allCoords = append(allCoords, ship.coords...)
 		}
-	} else if currentPlacementPlacementType == data.Advanced {
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		for _, ship := range advancedShips {
 			allCoords = append(allCoords, ship.coords...)
 		}

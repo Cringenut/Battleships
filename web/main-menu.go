@@ -6,8 +6,6 @@ import (
 	"Battleships/web/battle"
 	"github.com/gin-gonic/gin"
 	"io"
-	"log"
-	"net/http"
 	"net/url"
 	"strconv"
 	"time"
@@ -32,31 +30,6 @@ Data:
 	return
 }
 
-func RedirectToBattle(c *gin.Context) {
-	// Battle page we redirect tp
-	targetURL := "/battle"
-
-	time.Sleep(1000 * time.Millisecond)
-
-	// Without this after redirect the first couple of seconds will contain no information about battle
-	// Enemy nickname and description would be unavailable
-	// Timer and current turn would be wrong
-	CheckBattleDataIntegrity()
-
-	// Log the redirection attempt
-	log.Printf("Redirecting to: %s", targetURL)
-
-	// Check if the request is coming from HTMX
-	if c.GetHeader("HX-Request") != "" {
-		// Respond with an HTMX-specific header to trigger a client-side redirect
-		c.Header("HX-Redirect", targetURL)
-		c.Status(http.StatusOK)
-	} else {
-		// Regular redirection for non-HTMX requests
-		c.Redirect(http.StatusFound, targetURL)
-	}
-}
-
 func RefreshLobby() {
 	println("Start refresh")
 Refresh:
@@ -75,7 +48,7 @@ func CheckIfSomeoneJoinedLobby(c *gin.Context) {
 	}
 
 	if status.Opponent != "" {
-		RedirectToBattle(c)
+		Redirect(c, "/battle")
 	}
 }
 
@@ -93,7 +66,7 @@ func JoinPlayerLobby(c *gin.Context) {
 	println("Chosen lobby: " + chosenLobby)
 
 	err = battle.StartBattle(chosenLobby, false)
-	RedirectToBattle(c)
+	Redirect(c, "/battle")
 
 	if err != nil {
 		println("ERROR: " + err.Error())

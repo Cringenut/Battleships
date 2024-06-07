@@ -5,57 +5,32 @@ import (
 	"fmt"
 )
 
-// All available placement types in settings that can be switched
-var placementTypes = []data.PlacementType{data.Simple, data.Advanced, data.Random}
-
-// Initial placement style when settings is open or new placement type is chosen and saved
-var currentSettingsPlacementType data.PlacementType
-
-// Current placement when we choose the new ship formation
-var currentPlacementPlacementType data.PlacementType
-
-func SetCurrentSettingsPlacementType(placementType data.PlacementType) {
-	currentSettingsPlacementType = placementType
-}
-
-func GetCurrentSettingsPlacementType() data.PlacementType {
-	return currentSettingsPlacementType
-}
-
-func SetCurrentPlacementPlacementType(placementType data.PlacementType) {
-	currentPlacementPlacementType = placementType
-}
-
-func GetCurrentPlacementPlacementType() data.PlacementType {
-	return currentPlacementPlacementType
-}
-
 // Simple carosuel to switch between placement types if arrow button is clicked
 func SwitchCurrentPlacementType(isNext bool) {
-	currentIndex := findPlacementIndex(currentPlacementPlacementType)
+	currentIndex := findPlacementIndex(data.GetCurrentPlacementPlacementType())
 	if currentIndex == -1 {
 		fmt.Println("Current placement type not found.")
 		return
 	}
 
 	if isNext {
-		if currentIndex+1 >= len(placementTypes) {
-			currentPlacementPlacementType = placementTypes[0]
+		if currentIndex+1 >= len(data.GetPlacementTypes()) {
+			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[0])
 		} else {
-			currentPlacementPlacementType = placementTypes[currentIndex+1]
+			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[currentIndex+1])
 		}
 	} else {
 		if currentIndex-1 < 0 {
-			currentPlacementPlacementType = placementTypes[len(placementTypes)-1]
+			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[len(data.GetPlacementTypes())-1])
 		} else {
-			currentPlacementPlacementType = placementTypes[currentIndex-1]
+			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[currentIndex-1])
 		}
 	}
 }
 
 // Default solution because golang doesn't provide standard library for that functionality
 func findPlacementIndex(value data.PlacementType) int {
-	for i, v := range placementTypes {
+	for i, v := range data.GetPlacementTypes() {
 		if v == value {
 			return i
 		}
@@ -65,7 +40,7 @@ func findPlacementIndex(value data.PlacementType) int {
 
 func CanCurrentPlacementBeSaved() bool {
 	result := false
-	switch currentPlacementPlacementType {
+	switch data.GetCurrentPlacementPlacementType() {
 	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
 		result = IsAnyShipNotMissingCoords()
@@ -75,7 +50,7 @@ func CanCurrentPlacementBeSaved() bool {
 
 	// Setting the currentSettingsPlacementType for the settings page
 	if result == true {
-		SetCurrentSettingsPlacementType(GetCurrentPlacementPlacementType())
+		data.SetCurrentSettingsPlacementType(data.GetCurrentPlacementPlacementType())
 	}
 	return result
 }
