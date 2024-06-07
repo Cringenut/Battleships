@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.8 // Project refactoring">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.8 // Removing all additional logic from handlers and placing it into web package instead">
+      <change afterPath="$PROJECT_DIR$/web/ranking.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/ranking-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/ranking-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/main-menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/main-menu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +147,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.0 Whole new project structure" />
     <MESSAGE value="Battleships v3.2 // Fixed the redirect problem" />
     <MESSAGE value="Battleships v3.2" />
     <MESSAGE value="Battleships v3.3 // Custom placement" />
@@ -171,7 +171,8 @@
     <MESSAGE value="Battleships v4.6 // Player ranking" />
     <MESSAGE value="Battleships v4.7 // Accuracy" />
     <MESSAGE value="Battleships v4.8 // Project refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.8 // Project refactoring" />
+    <MESSAGE value="Battleships v4.8 // Removing all additional logic from handlers and placing it into web package instead" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.8 // Removing all additional logic from handlers and placing it into web package instead" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

@@ -1,8 +1,6 @@
 package server
 
 import (
-	"Battleships/data"
-	"Battleships/requests"
 	"Battleships/views"
 	"Battleships/web"
 	"fmt"
@@ -51,47 +49,17 @@ func (app *Config) HandleMultiplayerStartWait(c *gin.Context) {
 }
 
 func (app *Config) HandleMultiplayerRefresh(c *gin.Context) {
-	println("Start refresh")
-	err := requests.GetGameRefresh(data.GetToken())
-	if err != nil {
-		return
-	}
-	println("Refreshed")
+	web.RefreshLobby()
 }
 
 func (app *Config) HandleMultiplayerLobbies(c *gin.Context) {
-	servers, err := requests.GetLobby()
-	if err != nil {
-		return
-	}
-
-	for index, server := range servers {
+	for index, server := range web.FindLobbies() {
 		Render(c, 200, views.MakePlayerLobby(server.Nick, index))
 	}
-
-	println(len(servers))
-	println("Lobbies")
 }
 
 func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
-	// Taking request body to extract chosen option
-	jsonData, _ := io.ReadAll(c.Request.Body)
-	parsedData, err := url.ParseQuery(string(jsonData))
-	if err != nil {
-		c.JSON(400, gin.H{"error": "Invalid request data"})
-		return
-	}
-
-	// Checking if next or previous type was chosen
-	chosenLobby := parsedData.Get("chosenLobby")
-	println("Chosen lobby: " + chosenLobby)
-
-	err = web.StartBattle(chosenLobby, false)
-	app.HandleMenuRedirectToBattle(c)
-
-	if err != nil {
-		println("ERROR: " + err.Error())
-	}
+	web.JoinPlayerLobby(c)
 }
 
 func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
@@ -101,12 +69,5 @@ func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 
 func (app *Config) HandleMultiplayerWait(c *gin.Context) {
 	println("Checking battle")
-	status, err := requests.GetGameStatus(data.GetToken())
-	if err != nil {
-		return
-	}
-
-	if status.Opponent != "" {
-		app.HandleMenuRedirectToBattle(c)
-	}
+	web.CheckIfSomeoneJoinedLobby(c)
 }
