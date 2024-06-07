@@ -72,7 +72,6 @@ func (app *Config) HandleFire(c *gin.Context) {
 }
 
 func (app *Config) HandleSetShots(c *gin.Context) {
-	data.AppendEnemyShotsToHistory()
 	data.SetEnemyShots(data.GetGameStatus().OppShots)
 	Render(c, 200, views.MakeEnemyBoard())
 }

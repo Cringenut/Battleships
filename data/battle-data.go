@@ -56,55 +56,16 @@ func AppendPlayerShots(coord string, res string) {
 	playerShots = append(playerShots, ShotResponse{coord, res})
 }
 
+func GetPlayerShots() []ShotResponse {
+	return playerShots
+}
+
 func SetEnemyShots(shots []string) {
 	enemyShots = shots
 }
 
 func GetEnemyShots() []string {
 	return enemyShots
-}
-
-func GetEnemyCellType(coord string) CellType {
-	if GetToken() == "" {
-		return Default
-	}
-
-	if result, found := getShotResult(playerShots, coord); found {
-		if result == "hit" || result == "sunk" {
-			return Hit
-		} else {
-			return Miss
-		}
-	}
-
-	return Default
-}
-
-func GetPlayerCellType(coord string) CellType {
-	if GetToken() == "" {
-		return Default
-	}
-
-	if StringSliceContains(GetGameStatus().OppShots, coord) {
-		if StringSliceContains(GetPlayerShips(), coord) {
-			return Hit
-		} else {
-			return Miss
-		}
-	} else if StringSliceContains(GetPlayerShips(), coord) {
-		return Ship
-	}
-
-	return Default
-}
-
-func getShotResult(shots []ShotResponse, coord string) (string, bool) {
-	for _, shot := range shots {
-		if shot.Coord == coord {
-			return shot.ShotResult, true
-		}
-	}
-	return "", false
 }
 
 func SetEnemyData(nickname, description string) {
@@ -114,19 +75,6 @@ func SetEnemyData(nickname, description string) {
 
 func GetEnemyData() EnemyData {
 	return enemyData
-}
-
-func AppendEnemyShotsToHistory() {
-	difference := len(GetGameStatus().OppShots) - len(GetEnemyShots())
-
-	for i := len(GetGameStatus().OppShots) - difference; i < len(GetGameStatus().OppShots); i++ {
-		shotsHistory = append(shotsHistory, ShotResponse{GetGameStatus().OppShots[i], "hit"})
-	}
-
-	for _, shots := range shotsHistory {
-		println(shots.Coord)
-	}
-
 }
 
 func SetEnemyAccuracy(newAccuracy float64) {

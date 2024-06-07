@@ -59,3 +59,46 @@ Ships:
 	data.SetPlayerShips(ships)
 	return nil
 }
+
+func GetEnemyCellType(coord string) data.CellType {
+	if data.GetToken() == "" {
+		return data.Default
+	}
+
+	if result, found := getPlayerShotResult(data.GetPlayerShots(), coord); found {
+		if result == "hit" || result == "sunk" {
+			return data.Hit
+		} else {
+			return data.Miss
+		}
+	}
+
+	return data.Default
+}
+
+func GetPlayerCellType(coord string) data.CellType {
+	if data.GetToken() == "" {
+		return data.Default
+	}
+
+	if data.StringSliceContains(data.GetGameStatus().OppShots, coord) {
+		if data.StringSliceContains(data.GetPlayerShips(), coord) {
+			return data.Hit
+		} else {
+			return data.Miss
+		}
+	} else if data.StringSliceContains(data.GetPlayerShips(), coord) {
+		return data.Ship
+	}
+
+	return data.Default
+}
+
+func getPlayerShotResult(shots []data.ShotResponse, coord string) (string, bool) {
+	for _, shot := range shots {
+		if shot.Coord == coord {
+			return shot.ShotResult, true
+		}
+	}
+	return "", false
+}
