@@ -52,6 +52,8 @@ Ships:
 		fmt.Println(position)
 	}
 
+	data.SetEnemyAccuracy(100.0)
+
 	// Setting up original positions of all ships
 	// Used to show ships visually on the game board or to determine if the ship is hit
 	data.SetPlayerShips(ships)

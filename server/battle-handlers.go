@@ -32,7 +32,7 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 }
 
 func (app *Config) HandleEnemyTarget(c *gin.Context) {
-
+	data.SetEnemyAccuracy(data.CalculateEnemyAccuracy())
 	time.Sleep(200 * time.Millisecond)
 	Render(c, 200, views.MakeEnemyBoard())
 }
@@ -78,12 +78,10 @@ func (app *Config) HandleSetShots(c *gin.Context) {
 }
 
 func (app *Config) HandlePlayerInfo(c *gin.Context) {
-	println("PlayerInfo")
 	Render(c, 200, views.MakePlayerInfo(data.GetPlayerNickname(), data.GetPlayerDescription()))
 }
 
 func (app *Config) HandleEnemyInfo(c *gin.Context) {
-	println("EnemyInfo")
 	if data.GetToken() == "" {
 		return
 	}
@@ -93,7 +91,6 @@ func (app *Config) HandleEnemyInfo(c *gin.Context) {
 }
 
 func (app *Config) HandleBattleTimer(c *gin.Context) {
-	println("Timer changed")
 	Render(c, 200, views.MakeBattleTimer(strconv.Itoa(data.GetGameStatus().Timer)))
 }
 
@@ -104,5 +101,8 @@ func (app *Config) HandleBattleEnded(c *gin.Context) {
 	} else if data.GetGameStatus().LastGameStatus == "lose" {
 		Render(c, 200, views.MakeLoseScreen())
 	}
+}
 
+func (app *Config) HandleEnemyAccuracy(c *gin.Context) {
+	Render(c, 200, views.MakeAccuracyField(5.0))
 }

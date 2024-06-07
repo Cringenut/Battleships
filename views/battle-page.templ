@@ -2,6 +2,7 @@ package views
 
 import (
 	"Battleships/data"
+	"time"
 )
 
 templ MakeBattlePage() {
@@ -186,7 +187,7 @@ templ MakeBattlePage() {
 						hx-target="#player_info"
 						hx-trigger="click"
 					>{ data.GetEnemyData().Nickname }</div>
-					<div class="bottom-text">Accuracy: 65%</div>
+					@MakeAccuracyField(5.0)
 				</div>
 				<div class="field-right">
 					@MakeEnemyBoard()
@@ -250,4 +251,13 @@ templ MakeTurnText(turnChanged bool) {
 
 		</body>
 	</html>
+}
+
+templ MakeAccuracyField(accuracy float64) {
+	<div class="bottom-text" id="enemy_accuracy"
+		 hx-post="/battle/enemy/accuracy"
+		 hx-swap="outerHTML"
+		 hx-target="this"
+		 hx-trigger="load"
+	>Accuracy: { time.Now().String() }</div>
 }
