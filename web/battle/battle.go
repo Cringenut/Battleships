@@ -1,10 +1,13 @@
-package web
+package battle
 
 import (
 	"Battleships/data"
 	"Battleships/requests"
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"io"
+	"strings"
 	"time"
 )
 
@@ -102,4 +105,19 @@ func getPlayerShotResult(shots []data.ShotResponse, coord string) (string, bool)
 		}
 	}
 	return "", false
+}
+
+func FireAtEnemy(c *gin.Context) {
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		return
+	}
+
+	coord := strings.TrimPrefix(string(jsonData), "coord=")
+	res, err := requests.PostFire(data.GetToken(), coord)
+	if err != nil {
+		return
+	}
+
+	data.AppendPlayerShots(coord, res)
 }

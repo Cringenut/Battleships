@@ -127,10 +127,6 @@ func (app *Config) HandlePlacementSave(c *gin.Context) {
 	println(data.GetPlayerShipPlacementType())
 }
 
-func (app *Config) HandlePlacementBack(c *gin.Context) {
-	return
-}
-
 func (app *Config) HandlePlacementShow(c *gin.Context) {
 	web.SetCurrentPlacementPlacementType(web.GetCurrentSettingsPlacementType())
 	Render(c, 200, views.MakeShipPlacementElement())

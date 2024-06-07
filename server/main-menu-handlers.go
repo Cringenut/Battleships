@@ -3,6 +3,7 @@ package server
 import (
 	"Battleships/views"
 	"Battleships/web"
+	"Battleships/web/battle"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -27,7 +28,7 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	case "single":
 		// If battle didn't start we try to start it again until it returns no error
 	Battle:
-		err := web.StartBattle("", true)
+		err := battle.StartBattle("", true)
 		if err != nil {
 			goto Battle
 		}
@@ -44,7 +45,7 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 }
 
 func (app *Config) HandleMultiplayerStartWait(c *gin.Context) {
-	web.StartBattle("", false)
+	battle.StartBattle("", false)
 	Render(c, 200, views.MakeMultiplayerWaitChosen())
 }
 

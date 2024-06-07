@@ -3,6 +3,7 @@ package views
 import (
 	"Battleships/data"
 	"Battleships/web"
+	"Battleships/web/battle"
 	"fmt"
 )
 
@@ -130,7 +131,7 @@ templ MakePlayerBoardCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-			switch web.GetPlayerCellType(coord) {
+			switch battle.GetPlayerCellType(coord) {
 				case data.Default:
 					<div class="cell" id={ coord }>{ coord[1:] }</div>
 				case data.Ship:
@@ -207,7 +208,7 @@ templ MakeEnemyBoardCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-			switch web.GetEnemyCellType(coord) {
+			switch battle.GetEnemyCellType(coord) {
 				case data.Default:
 					<form id="" hx-boost="true" hx-post="/handle/fire" hx-swap="outerHTML" hx-target="#enemy_board">
 						<input type="hidden" name="coord" value={ coord }/>

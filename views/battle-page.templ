@@ -165,7 +165,7 @@ templ MakeBattlePage() {
 					</div>
 					<div class="bottom-text">Accuracy: 28%</div>
 					<div class="rectangle">
-						@MakeTurnText(true)
+						@MakeTurnText()
 						<div id="timer">
 							@MakeBattleTimer("60")
 						</div>
@@ -204,7 +204,7 @@ templ MakeBattlePage() {
 	</html>
 }
 
-templ MakeTurnText(turnChanged bool) {
+templ MakeTurnText() {
 	<!DOCTYPE html>
 	<html lang="en">
 		<style>

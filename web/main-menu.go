@@ -3,6 +3,7 @@ package web
 import (
 	"Battleships/data"
 	"Battleships/requests"
+	"Battleships/web/battle"
 	"github.com/gin-gonic/gin"
 	"io"
 	"log"
@@ -91,7 +92,7 @@ func JoinPlayerLobby(c *gin.Context) {
 	chosenLobby := parsedData.Get("chosenLobby")
 	println("Chosen lobby: " + chosenLobby)
 
-	err = StartBattle(chosenLobby, false)
+	err = battle.StartBattle(chosenLobby, false)
 	RedirectToBattle(c)
 
 	if err != nil {
