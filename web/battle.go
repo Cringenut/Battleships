@@ -52,6 +52,7 @@ Ships:
 		fmt.Println(position)
 	}
 
+	data.SetPlayerAccuracy(100.0)
 	data.SetEnemyAccuracy(100.0)
 
 	// Setting up original positions of all ships

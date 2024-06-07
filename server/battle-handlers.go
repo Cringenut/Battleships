@@ -18,7 +18,6 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 	}
 
 	time.Sleep(100 * time.Millisecond)
-	println("status")
 
 	gameStatus, err := requests.GetGameStatus(data.GetToken())
 	if err != nil {

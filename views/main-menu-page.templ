@@ -140,11 +140,13 @@ templ MakeSingleplayerChosen() {
 			<div class="container" id="menu_container">
 				<p>Game starts soon...</p>
 				<a href="/" class="option">Back</a>
-				<div
-						hx-get="/battle/redirect"
-						hx-trigger="load, once"
-				></div>
 			</div>
+			<div
+					hx-trigger="load"
+					hx-get="/battle/redirect"
+					hx-target="this"
+					hx-swap="outerHTML"
+			></div>
 		</body>
 	</html>
 }

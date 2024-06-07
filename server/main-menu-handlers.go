@@ -8,10 +8,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
-	"log"
-	"net/http"
 	"net/url"
-	"time"
 )
 
 func (app *Config) HandleMainMenuContainer(c *gin.Context) {
@@ -99,28 +96,7 @@ func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
 
 func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 	println("Redirect to battle")
-	// Battle page we redirect tp
-	targetURL := "/battle"
-
-	time.Sleep(1000 * time.Millisecond)
-
-	// Without this after redirect the first couple of seconds will contain no information about battle
-	// Enemy nickname and description would be unavailable
-	// Timer and current turn would be wrong
-	web.CheckBattleDataIntegrity()
-
-	// Log the redirection attempt
-	log.Printf("Redirecting to: %s", targetURL)
-
-	// Check if the request is coming from HTMX
-	if c.GetHeader("HX-Request") != "" {
-		// Respond with an HTMX-specific header to trigger a client-side redirect
-		c.Header("HX-Redirect", targetURL)
-		c.Status(http.StatusOK)
-	} else {
-		// Regular redirection for non-HTMX requests
-		c.Redirect(http.StatusFound, targetURL)
-	}
+	web.RedirectToBattle(c)
 }
 
 func (app *Config) HandleMultiplayerWait(c *gin.Context) {
