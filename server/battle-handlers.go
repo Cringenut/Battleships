@@ -24,13 +24,15 @@ func (app *Config) HandlePlayerTarget(c *gin.Context) {
 	Render(c, 200, views.MakePlayerBoard())
 }
 
-func (app *Config) HandleFire(c *gin.Context) {
+func (app *Config) HandlePlayerShot(c *gin.Context) {
 	battle.FireAtEnemy(c)
+	battle.CalculatePlayerAccuracy()
 	Render(c, 200, views.MakeEnemyBoard())
 }
 
-func (app *Config) HandleSetShots(c *gin.Context) {
+func (app *Config) HandleSetEnemyShots(c *gin.Context) {
 	data.SetEnemyShots(data.GetGameStatus().OppShots)
+	battle.CalculateEnemyAccuracy()
 	Render(c, 200, views.MakeEnemyBoard())
 }
 
@@ -60,5 +62,9 @@ func (app *Config) HandleBattleEnded(c *gin.Context) {
 }
 
 func (app *Config) HandleEnemyAccuracy(c *gin.Context) {
-	Render(c, 200, views.MakeAccuracyField(5.0))
+	Render(c, 200, views.MakeEnemyAccuracyField())
+}
+
+func (app *Config) HandlePlayerAccuracy(c *gin.Context) {
+	Render(c, 200, views.MakePlayerAccuracyField())
 }

@@ -2,7 +2,7 @@ package views
 
 import (
 	"Battleships/data"
-	"time"
+	"strconv"
 )
 
 templ MakeBattlePage() {
@@ -163,7 +163,7 @@ templ MakeBattlePage() {
 					>
 						{ data.GetPlayerNickname() }
 					</div>
-					<div class="bottom-text">Accuracy: 28%</div>
+					@MakePlayerAccuracyField()
 					<div class="rectangle">
 						@MakeTurnText()
 						<div id="timer">
@@ -187,7 +187,7 @@ templ MakeBattlePage() {
 						hx-target="#player_info"
 						hx-trigger="click"
 					>{ data.GetEnemyData().Nickname }</div>
-					@MakeAccuracyField(5.0)
+					@MakeEnemyAccuracyField()
 				</div>
 				<div class="field-right">
 					@MakeEnemyBoard()
@@ -253,11 +253,20 @@ templ MakeTurnText() {
 	</html>
 }
 
-templ MakeAccuracyField(accuracy float64) {
+templ MakeEnemyAccuracyField() {
 	<div class="bottom-text" id="enemy_accuracy"
 		 hx-post="/battle/enemy/accuracy"
 		 hx-swap="outerHTML"
 		 hx-target="this"
 		 hx-trigger="load"
-	>Accuracy: { time.Now().String() }</div>
+	>Accuracy: { strconv.FormatFloat(data.GetEnemyAccuracy(), 'f', 1, 64) }%</div>
+}
+
+templ MakePlayerAccuracyField() {
+<div class="bottom-text" id="enemy_accuracy"
+	 hx-post="/battle/player/accuracy"
+	 hx-swap="outerHTML"
+	 hx-target="this"
+	 hx-trigger="load"
+>Accuracy: { strconv.FormatFloat(data.GetPlayerAccuracy(), 'f', 1, 64) }%</div>
 }

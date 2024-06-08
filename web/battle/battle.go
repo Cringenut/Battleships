@@ -121,3 +121,37 @@ func FireAtEnemy(c *gin.Context) {
 
 	data.AppendPlayerShots(coord, res)
 }
+
+func CalculateEnemyAccuracy() {
+	if len(data.GetEnemyShots()) == 0 {
+		data.SetEnemyAccuracy(100.00)
+		return
+	}
+
+	hit := 0
+	for _, shot := range data.GetEnemyShots() {
+		if data.StringSliceContains(data.GetPlayerShips(), shot) {
+			hit++
+		}
+	}
+
+	accuracy := (float64(hit) / float64(len(data.GetEnemyShots()))) * 100
+	data.SetEnemyAccuracy(accuracy)
+}
+
+func CalculatePlayerAccuracy() {
+	if len(data.GetPlayerShots()) == 0 {
+		data.SetPlayerAccuracy(100.00)
+		return
+	}
+
+	hit := 0
+	for _, shot := range data.GetPlayerShots() {
+		if shot.ShotResult != "miss" {
+			hit++
+		}
+	}
+
+	accuracy := (float64(hit) / float64(len(data.GetPlayerShots()))) * 100
+	data.SetPlayerAccuracy(accuracy)
+}
