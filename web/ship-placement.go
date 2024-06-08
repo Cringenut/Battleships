@@ -312,21 +312,21 @@ func ClearAllShipCoords() {
 	ClearBoard()
 }
 
-func IsAnyShipNotMissingCoords() bool {
+func IsAnyShipMissingCoords() bool {
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for i := range ships {
 			if len(ships[i].coords) != ships[i].size {
-				return false
+				return true
 			}
 		}
-		return true
+		return false
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		for i := range advancedShips {
 			if len(advancedShips[i].coords) != advancedShips[i].size {
-				return false
+				return true
 			}
 		}
-		return true
+		return false
 	}
 	return true
 }

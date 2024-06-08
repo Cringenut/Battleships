@@ -3,7 +3,46 @@ package web
 import (
 	"Battleships/data"
 	"fmt"
+	"github.com/gin-gonic/gin"
+	"io"
+	"net/http"
+	"net/url"
+	"strconv"
 )
+
+func SaveSettings(c *gin.Context) string {
+	jsonData, err := io.ReadAll(c.Request.Body)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to read request body")
+		return ""
+	}
+
+	// Parse the form data
+	formData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.String(http.StatusBadRequest, "Failed to parse form data")
+		return ""
+	}
+
+	saveNickname := formData.Get("nickname")
+	saveDescription := formData.Get("description")
+
+	fmt.Println("NICKNAME: " + saveNickname)
+	fmt.Println("DESCRIPTION: " + saveDescription)
+
+	if saveNickname == "" {
+		return saveDescription
+	}
+
+	data.SetPlayerData(saveNickname, saveDescription)
+	if IsAnyShipMissingCoords() {
+		data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
+		data.SetPlayerShips(GetShipsCoords())
+	}
+
+	Redirect(c, "/")
+	return saveDescription
+}
 
 // Simple carosuel to switch between placement types if arrow button is clicked
 func SwitchCurrentPlacementType(isNext bool) {
@@ -43,7 +82,7 @@ func CanCurrentPlacementBeSaved() bool {
 	switch data.GetCurrentPlacementPlacementType() {
 	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
-		result = IsAnyShipNotMissingCoords()
+		result = !IsAnyShipMissingCoords()
 	default:
 		result = false
 	}
@@ -53,4 +92,53 @@ func CanCurrentPlacementBeSaved() bool {
 		data.SetCurrentSettingsPlacementType(data.GetCurrentPlacementPlacementType())
 	}
 	return result
+}
+
+func PlacementCellClicked(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	chosenCoord := parsedData.Get("chosenCoord")
+	// Checking if next or previous type was chosen
+	if GetFirstCoord().Coord == "" {
+		SetFirstCoord(chosenCoord)
+	} else {
+		SetLastCoord(chosenCoord)
+	}
+}
+
+func SwitchPlacementType(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	// Checking if next or previous type was chosen
+	chosenOption := parsedData.Get("chosenOption")
+	if chosenOption == "next" {
+		SwitchCurrentPlacementType(true)
+	} else {
+		SwitchCurrentPlacementType(false)
+	}
+}
+
+func ShipToPlaceChosen(c *gin.Context) {
+	// Taking request body to extract chosen option
+	jsonData, _ := io.ReadAll(c.Request.Body)
+	parsedData, err := url.ParseQuery(string(jsonData))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid request data"})
+		return
+	}
+
+	chosenOption, err := strconv.Atoi(parsedData.Get("chosenOption"))
+	SetPlacingShip(chosenOption)
 }

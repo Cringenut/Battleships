@@ -25,7 +25,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/multiplayer/wait/check", app.HandleMultiplayerWait)
 
 	// Handlers for settings
-	app.Router.GET("/settings/save", app.HandleSettingsSave)
+	app.Router.POST("/settings/save", app.HandleSettingsSave)
 	app.Router.POST("/placement/page")
 	app.Router.POST("/placement/place", app.HandlePlacementCell)
 	app.Router.POST("/placement/advanced/place", app.HandlePlacementCell)

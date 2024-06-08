@@ -11,8 +11,10 @@ import (
 	"time"
 )
 
+// Without this after redirect the first couple of seconds will contain no information about battle
+// Enemy nickname and description would be unavailable
+// Timer and current turn would be wrong
 func CheckBattleDataIntegrity() {
-
 Status:
 	gameStatus, err := requests.GetGameStatus(data.GetToken())
 	if err != nil || gameStatus.Opponent == "" {

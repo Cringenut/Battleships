@@ -200,7 +200,7 @@ templ MakeSettingsPage(nickname string, description string) {
 				<div
 					class="save-text"
 					hx-trigger="click"
-					hx-get="/settings/save"
+					hx-post="/settings/save"
 					hx-target="body"
 					hx-swap="outerHTML"
 					hx-include="[name='nickname'], [name='description']"
