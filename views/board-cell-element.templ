@@ -2,7 +2,7 @@ package views
 
 import (
 	"Battleships/data"
-	"Battleships/web"
+	"Battleships/web/ships"
 	"Battleships/web/battle"
 	"fmt"
 )
@@ -54,7 +54,7 @@ templ MakePlacementCell(coord string) {
 			<title></title>
 		</head>
 		<body>
-			if (data.StringSliceContains(web.GetEndCoords(), coord)) {
+			if (data.StringSliceContains(ships.GetEndCoords(), coord)) {
 				<div class="possible-end-cell">
 					{ coord }
 					<div
@@ -65,14 +65,14 @@ templ MakePlacementCell(coord string) {
 						hx-vals={ chosenCoord(coord) }
 					></div>
 				</div>
-			} else if (web.GetFirstCoord().Coord == coord) {
+			} else if (ships.GetFirstCoord().Coord == coord) {
 				<div class="placement-cell">{ coord }</div>
-			} else if (web.IsCoordinateInShips(coord)) {
+			} else if (ships.IsCoordinateInShips(coord)) {
 				<div class="ship-cell">{ coord }</div>
 			} else {
 				<div class="cell">
 					{ coord }
-					if web.GetPlacingShip() != nil {
+					if ships.GetPlacingShip() != nil {
 						<div
 							class="invisible-button"
 							hx-trigger="click"

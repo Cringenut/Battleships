@@ -4,6 +4,7 @@ import (
 	"Battleships/data"
 	"Battleships/views"
 	"Battleships/web"
+	"Battleships/web/ships"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +20,7 @@ func (app *Config) HandlePlacementCell(c *gin.Context) {
 
 func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 	web.SwitchPlacementType(c)
-	web.SetPlacingShip(-1)
+	ships.SetPlacingShip(-1)
 	Render(c, 200, views.MakeShipPlacementElement())
 }
 
@@ -29,12 +30,12 @@ func (app *Config) HandlePlacementChosen(c *gin.Context) {
 }
 
 func (app *Config) HandlePlacementClear(c *gin.Context) {
-	web.ClearAllShipCoords()
+	ships.ClearAllShipCoords()
 	Render(c, 200, views.MakePlacementElement())
 }
 
 func (app *Config) HandlePlacementCancel(c *gin.Context) {
-	web.SetPlacingShip(-1)
+	ships.SetPlacingShip(-1)
 	Render(c, 200, views.MakePlacementElement())
 }
 

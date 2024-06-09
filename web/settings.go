@@ -2,6 +2,7 @@ package web
 
 import (
 	"Battleships/data"
+	"Battleships/web/ships"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -35,9 +36,9 @@ func SaveSettings(c *gin.Context) string {
 	}
 
 	data.SetPlayerData(saveNickname, saveDescription)
-	if IsAnyShipMissingCoords() {
+	if ships.IsAnyShipMissingCoords() {
 		data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
-		data.SetPlayerShips(GetShipsCoords())
+		data.SetPlayerShips(ships.GetShipsCoords())
 	}
 
 	Redirect(c, "/")
@@ -82,7 +83,7 @@ func CanCurrentPlacementBeSaved() bool {
 	switch data.GetCurrentPlacementPlacementType() {
 	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
-		result = !IsAnyShipMissingCoords()
+		result = !ships.IsAnyShipMissingCoords()
 	default:
 		result = false
 	}
@@ -105,10 +106,10 @@ func PlacementCellClicked(c *gin.Context) {
 
 	chosenCoord := parsedData.Get("chosenCoord")
 	// Checking if next or previous type was chosen
-	if GetFirstCoord().Coord == "" {
-		SetFirstCoord(chosenCoord)
+	if ships.GetFirstCoord().Coord == "" {
+		ships.SetFirstCoord(chosenCoord)
 	} else {
-		SetLastCoord(chosenCoord)
+		ships.SetLastCoord(chosenCoord)
 	}
 }
 
@@ -140,5 +141,5 @@ func ShipToPlaceChosen(c *gin.Context) {
 	}
 
 	chosenOption, err := strconv.Atoi(parsedData.Get("chosenOption"))
-	SetPlacingShip(chosenOption)
+	ships.SetPlacingShip(chosenOption)
 }

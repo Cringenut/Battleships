@@ -2,7 +2,7 @@ package views
 
 import (
 	"Battleships/data"
-	"Battleships/web"
+	"Battleships/web/ships"
 	"fmt"
 	"strconv"
 )
@@ -324,7 +324,7 @@ templ MakeSimplePlacementBoard() {
 					<div class="squares-container">
 						@MakeFourSquareLongPlacementButton(0, false)
 					</div>
-					if web.GetPlacingShip() == nil {
+					if ships.GetPlacingShip() == nil {
 						<div
 							class="clear-btn"
 							hx-trigger="click"
@@ -358,7 +358,7 @@ templ MakeOneSquareLongPlacementButton(index int, isAdvanced bool) {
 		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/IpQ6loJ.png" alt="Image 1"/>
-		{ web.GetShipCoords(index) }
+		{ ships.GetShipCoords(index) }
 	</div>
 }
 
@@ -371,7 +371,7 @@ templ MakeTwoSquareLongPlacementButton(index int, isAdvanced bool) {
 		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/OVSX1Hh.png" alt="Image 2"/>
-		{ web.GetShipCoords(index) }
+		{ ships.GetShipCoords(index) }
 	</div>
 }
 
@@ -384,7 +384,7 @@ templ MakeThreeSquareLongPlacementButton(index int, isAdvanced bool) {
 		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/dTb4d3k.png" alt="Image 3"/>
-		{ web.GetShipCoords(index) }
+		{ ships.GetShipCoords(index) }
 	</div>
 }
 
@@ -397,6 +397,6 @@ templ MakeFourSquareLongPlacementButton(index int, isAdvanced bool) {
 		hx-vals={ chosenButton(index, isAdvanced) }
 	>
 		<img src="https://i.imgur.com/XUlAbmN.png" alt="Image 4"/>
-		{ web.GetShipCoords(index) }
+		{ ships.GetShipCoords(index) }
 	</div>
 }

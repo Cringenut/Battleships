@@ -1,4 +1,4 @@
-package web
+package ships
 
 import (
 	"Battleships/data"
@@ -51,7 +51,7 @@ func SetPlacingShip(index int) {
 	// Clear previous ship's coordinates from the board if they exist
 	if placingShip != nil && placingShip.coords != nil {
 		for _, coord := range placingShip.coords {
-			row, col, valid := getCoordPosition(strings.ToUpper(coord))
+			row, col, valid := GetCoordPosition(strings.ToUpper(coord))
 			if valid {
 				board[row][col] = false
 			}
@@ -141,7 +141,7 @@ func IsCoordinateInShips(coord string) bool {
 // isValidPlacingCoordinate checks if the coordinate is within board limits
 func isValidPlacingCoordinate(coord string) (int, int, bool) {
 
-	row, col, isValid := getCoordPosition(coord)
+	row, col, isValid := GetCoordPosition(coord)
 
 	if !isValid {
 		return 0, 0, false
@@ -166,7 +166,7 @@ func isValidPlacingCoordinate(coord string) (int, int, bool) {
 	return row, col, true
 }
 
-func getCoordPosition(coord string) (int, int, bool) {
+func GetCoordPosition(coord string) (int, int, bool) {
 	if len(coord) < 2 || !unicode.IsLetter(rune(coord[0])) || !unicode.IsDigit(rune(coord[1])) {
 		return 0, 0, false
 	}
@@ -190,6 +190,11 @@ func getCoordPosition(coord string) (int, int, bool) {
 	}
 
 	return row, col, true
+}
+
+// Convert row and column indices to a coordinate string
+func GetCoordString(row, col int) string {
+	return fmt.Sprintf("%c%d", 'A'+data.InvertNumber(row), col)
 }
 
 // possibleEndCoords finds possible placements for a ship of a given length from a start coordinate

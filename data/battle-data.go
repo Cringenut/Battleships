@@ -60,6 +60,10 @@ func GetPlayerShots() []ShotResponse {
 	return playerShots
 }
 
+func SetPlayerShots(shots []ShotResponse) {
+	playerShots = shots
+}
+
 func SetEnemyShots(shots []string) {
 	enemyShots = shots
 }

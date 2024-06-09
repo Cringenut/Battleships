@@ -3,6 +3,7 @@ package battle
 import (
 	"Battleships/data"
 	"Battleships/requests"
+	"Battleships/web/ships"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -58,6 +59,7 @@ Ships:
 	data.SetShotsHistory([]data.ShotHistory{})
 	data.SetPlayerAccuracy(100.0)
 	data.SetEnemyAccuracy(100.0)
+	data.SetPlayerShots([]data.ShotResponse{})
 
 	// Setting up original positions of all ships
 	// Used to show ships visually on the game board or to determine if the ship is hit
@@ -122,6 +124,11 @@ func FireAtEnemy(c *gin.Context) {
 
 	data.AppendPlayerShots(coord, res)
 	data.AppendShotsHistory(coord, res, data.GetPlayerNickname())
+	if res == "sunk" {
+		for _, found := range FindShipCells(coord) {
+			println("Sunk: " + found)
+		}
+	}
 }
 
 func CalculateEnemyAccuracy() {
@@ -156,4 +163,48 @@ func CalculatePlayerAccuracy() {
 
 	accuracy := (float64(hit) / float64(len(data.GetPlayerShots()))) * 100
 	data.SetPlayerAccuracy(accuracy)
+}
+
+func isCoordHit(row, col int) bool {
+	coord := ships.GetCoordString(row, col)
+	for _, shot := range data.GetPlayerShots() {
+		if strings.EqualFold(shot.Coord, coord) && shot.ShotResult == "hit" {
+			return true
+		}
+	}
+	return false
+}
+
+const size = 10
+
+// Find all ship cells given one hit coordinate and the list of shots
+func FindShipCells(hitCoord string) []string {
+	row, col, valid := ships.GetCoordPosition(hitCoord)
+	if !valid {
+		fmt.Println("Invalid coordinate:", hitCoord)
+		return []string{}
+	}
+
+	directions := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+	foundCells := []string{hitCoord}
+
+	queue := []ships.PlacementCoordinate{{Row: row, Col: col, Coord: hitCoord}}
+	visited := map[string]bool{hitCoord: true}
+
+	for len(queue) > 0 {
+		current := queue[0]
+		queue = queue[1:]
+
+		for _, dir := range directions {
+			r, c := current.Row+dir[0], current.Col+dir[1]
+			coord := ships.GetCoordString(r, c)
+			if r >= 0 && r < size && c >= 0 && c < size && isCoordHit(r, c) && !visited[coord] {
+				foundCells = append(foundCells, coord)
+				queue = append(queue, ships.PlacementCoordinate{Row: r, Col: c, Coord: coord})
+				visited[coord] = true
+			}
+		}
+	}
+
+	return foundCells
 }

@@ -2,11 +2,11 @@ package views
 
 import (
 	"Battleships/data"
-	"Battleships/web"
+	"Battleships/web/ships"
 )
 
 func GetPlacementBoardClass() string {
-	if web.GetPlacingShip() == nil {
+	if ships.GetPlacingShip() == nil {
 		return "placement-board"
 	} else {
 		return "placement-board highlight"
