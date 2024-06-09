@@ -194,7 +194,7 @@ func GetCoordPosition(coord string) (int, int, bool) {
 
 // Convert row and column indices to a coordinate string
 func GetCoordString(row, col int) string {
-	return fmt.Sprintf("%c%d", 'A'+data.InvertNumber(row), col)
+	return fmt.Sprintf("%c%d", 'A'+col, data.InvertNumber(row))
 }
 
 // possibleEndCoords finds possible placements for a ship of a given length from a start coordinate

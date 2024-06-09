@@ -221,7 +221,9 @@ templ MakeEnemyBoardCell(coord string) {
 					</form>
 				case data.Ship:
 				case data.Hit:
-					<div class="hit-cell" id={ coord }></div>
+					<div class="hit-cell" id={ coord }>
+						{ coord }
+					</div>
 				case data.Miss:
 					<div class="miss-cell" id={ coord }></div>
 				default:

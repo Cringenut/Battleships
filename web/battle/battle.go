@@ -124,10 +124,8 @@ func FireAtEnemy(c *gin.Context) {
 
 	data.AppendPlayerShots(coord, res)
 	data.AppendShotsHistory(coord, res, data.GetPlayerNickname())
-	if res == "sunk" {
-		for _, found := range FindShipCells(coord) {
-			println("Sunk: " + found)
-		}
+	for _, found := range FindShipCells(res, coord) {
+		println("Sunk: " + found)
 	}
 }
 
@@ -165,21 +163,31 @@ func CalculatePlayerAccuracy() {
 	data.SetPlayerAccuracy(accuracy)
 }
 
-func isCoordHit(row, col int) bool {
+func isCoordHit(row, col int) (bool, string) {
 	coord := ships.GetCoordString(row, col)
+	println("candidate: " + coord)
+
 	for _, shot := range data.GetPlayerShots() {
 		if strings.EqualFold(shot.Coord, coord) && shot.ShotResult == "hit" {
-			return true
+			println(true)
+			return true, coord
 		}
 	}
-	return false
+	println(false)
+	return false, ""
 }
 
 const size = 10
 
+var queue []string
+
 // Find all ship cells given one hit coordinate and the list of shots
-func FindShipCells(hitCoord string) []string {
-	row, col, valid := ships.GetCoordPosition(hitCoord)
+func FindShipCells(res string, hitCoord string) []string {
+	if res != "sunk" {
+		return []string{}
+	}
+
+	_, _, valid := ships.GetCoordPosition(hitCoord)
 	if !valid {
 		fmt.Println("Invalid coordinate:", hitCoord)
 		return []string{}
@@ -188,20 +196,25 @@ func FindShipCells(hitCoord string) []string {
 	directions := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
 	foundCells := []string{hitCoord}
 
-	queue := []ships.PlacementCoordinate{{Row: row, Col: col, Coord: hitCoord}}
+	queue = []string{hitCoord}
 	visited := map[string]bool{hitCoord: true}
 
 	for len(queue) > 0 {
-		current := queue[0]
+		currentCoord := queue[0]
 		queue = queue[1:]
 
 		for _, dir := range directions {
-			r, c := current.Row+dir[0], current.Col+dir[1]
-			coord := ships.GetCoordString(r, c)
-			if r >= 0 && r < size && c >= 0 && c < size && isCoordHit(r, c) && !visited[coord] {
-				foundCells = append(foundCells, coord)
-				queue = append(queue, ships.PlacementCoordinate{Row: r, Col: c, Coord: coord})
-				visited[coord] = true
+			r, c, _ := ships.GetCoordPosition(currentCoord)
+			r += dir[0]
+			c += dir[1]
+
+			if r >= 0 && r < size && c >= 0 && c < size {
+				isHit, coord := isCoordHit(r, c)
+				if isHit && !visited[coord] {
+					foundCells = append(foundCells, coord)
+					queue = append(queue, coord)
+					visited[coord] = true
+				}
 			}
 		}
 	}
