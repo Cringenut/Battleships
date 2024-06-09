@@ -6,7 +6,7 @@ var playerShots []ShotResponse
 var enemyShots []string
 var IsPlayerTurn = false
 var enemyData EnemyData
-var shotsHistory []ShotResponse
+var shotsHistory []ShotHistory
 var playerAccuracy = 100.0
 var enemyAccuracy = 100.0
 
@@ -91,4 +91,16 @@ func SetPlayerAccuracy(newAccuracy float64) {
 
 func GetPlayerAccuracy() float64 {
 	return playerAccuracy
+}
+
+func SetShotsHistory(newShotsHistory []ShotHistory) {
+	shotsHistory = newShotsHistory
+}
+
+func AppendShotsHistory(coord string, res string, owner string) {
+	shotsHistory = append(shotsHistory, ShotHistory{ShotResponse{coord, res}, owner})
+}
+
+func GetShotsHistory() []ShotHistory {
+	return shotsHistory
 }

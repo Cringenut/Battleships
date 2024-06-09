@@ -198,6 +198,7 @@ templ MakeBattlePage() {
 				<div class="surrender-button">
 					<div>Surrender</div>
 				</div>
+				<div hx-trigger="every 2s" hx-post="/battle/shots/history" hx-target="this" hx-swap="none"></div>
 			</div>
 			<div id="player_info"></div>
 		</body>
@@ -237,10 +238,6 @@ templ MakeTurnText() {
 					Your turn
 				} else {
 					Enemy turn
-				}
-				if len(data.GetEnemyShots()) != len(data.GetGameStatus().OppShots) {
-					<div hx-trigger="load, once" hx-get="/shots" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-					<div hx-trigger="load, once" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 				}
 				<div hx-trigger="every 1s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 			</div>

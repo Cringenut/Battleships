@@ -4,6 +4,7 @@ import (
 	"Battleships/data"
 	"Battleships/views"
 	"Battleships/web/battle"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
 	"time"
@@ -67,4 +68,11 @@ func (app *Config) HandleEnemyAccuracy(c *gin.Context) {
 
 func (app *Config) HandlePlayerAccuracy(c *gin.Context) {
 	Render(c, 200, views.MakePlayerAccuracyField())
+}
+
+func (app *Config) HandleShotsHistory(c *gin.Context) {
+	for _, shot := range data.GetShotsHistory() {
+		fmt.Println(shot.Shot.ShotResult + ", " + shot.Shot.Coord + ", " + shot.Owner + "; ")
+	}
+	fmt.Println(len(data.GetShotsHistory()))
 }

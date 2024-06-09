@@ -93,3 +93,8 @@ type PlayerStat struct {
 type StatsResponse struct {
 	Stats []PlayerStat `json:"stats"`
 }
+
+type ShotHistory struct {
+	Shot  ShotResponse
+	Owner string
+}

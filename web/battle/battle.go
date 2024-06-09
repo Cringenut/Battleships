@@ -55,6 +55,7 @@ Ships:
 		fmt.Println(position)
 	}
 
+	data.SetShotsHistory([]data.ShotHistory{})
 	data.SetPlayerAccuracy(100.0)
 	data.SetEnemyAccuracy(100.0)
 
@@ -120,6 +121,7 @@ func FireAtEnemy(c *gin.Context) {
 	}
 
 	data.AppendPlayerShots(coord, res)
+	data.AppendShotsHistory(coord, res, data.GetPlayerNickname())
 }
 
 func CalculateEnemyAccuracy() {
