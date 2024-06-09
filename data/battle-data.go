@@ -4,12 +4,12 @@ var gameData GameData
 var gameStatus *GameStatus
 var playerShots []ShotResponse
 var enemyShots []string
-var IsPlayerTurn = false
 var enemyData EnemyData
 var shotsHistory []ShotHistory
 var playerAccuracy = 100.0
 var enemyAccuracy = 100.0
 var enemySunkShips []string
+var playerSunkShips []string
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -47,10 +47,6 @@ func SetGameStatus(status *GameStatus) {
 
 func GetGameStatus() *GameStatus {
 	return gameStatus
-}
-
-func IsTurnChanged() bool {
-	return gameStatus.ShouldFire != IsPlayerTurn
 }
 
 func AppendPlayerShots(coord string, res string) {
@@ -120,4 +116,16 @@ func AppendEnemySunkShips(ships []string) {
 
 func GetEnemySunkShips() []string {
 	return enemySunkShips
+}
+
+func SetPlayerSunkShips(ships []string) {
+	playerSunkShips = ships
+}
+
+func AppendPlayerSunkShips(ships []string) {
+	playerSunkShips = append(playerSunkShips, ships...)
+}
+
+func GetPlayerSunkShips() []string {
+	return playerSunkShips
 }

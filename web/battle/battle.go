@@ -61,6 +61,7 @@ Ships:
 	data.SetEnemyAccuracy(100.0)
 	data.SetPlayerShots([]data.ShotResponse{})
 	data.SetEnemySunkShips([]string{})
+	data.SetPlayerSunkShips([]string{})
 
 	// Setting up original positions of all ships
 	// Used to show ships visually on the game board or to determine if the ship is hit
@@ -91,8 +92,10 @@ func GetPlayerCellType(coord string) data.CellType {
 		return data.Default
 	}
 
-	if data.StringSliceContains(data.GetGameStatus().OppShots, coord) {
-		if data.StringSliceContains(data.GetPlayerShips(), coord) {
+	if data.StringSliceContains(data.GetEnemyShots(), coord) {
+		if data.StringSliceContains(data.GetPlayerSunkShips(), coord) {
+			return data.Sunk
+		} else if data.StringSliceContains(data.GetPlayerShips(), coord) {
 			return data.Hit
 		} else {
 			return data.Miss
@@ -164,7 +167,7 @@ func CalculatePlayerAccuracy() {
 	data.SetPlayerAccuracy(accuracy)
 }
 
-func isCoordHit(row, col int) (bool, string) {
+func isEnemyCoordHit(row, col int) (bool, string) {
 	coord := ships.GetCoordString(row, col)
 	println("candidate: " + coord)
 
@@ -210,7 +213,7 @@ func FindShipCells(res string, hitCoord string) []string {
 			c += dir[1]
 
 			if r >= 0 && r < size && c >= 0 && c < size {
-				isHit, coord := isCoordHit(r, c)
+				isHit, coord := isEnemyCoordHit(r, c)
 				if isHit && !visited[coord] {
 					foundCells = append(foundCells, coord)
 					queue = append(queue, coord)
@@ -221,4 +224,67 @@ func FindShipCells(res string, hitCoord string) []string {
 	}
 
 	return foundCells
+}
+
+func DidEnemyShotSunk() {
+	if len(data.GetGameStatus().OppShots)-len(data.GetEnemyShots()) > 0 {
+		println(len(data.GetGameStatus().OppShots) - len(data.GetEnemyShots()))
+	}
+
+	for i := 0; i < len(data.GetGameStatus().OppShots)-len(data.GetEnemyShots()); i++ {
+		hitCoord := data.GetGameStatus().OppShots[len(data.GetGameStatus().OppShots)-1-i]
+		if !data.StringSliceContains(data.GetPlayerShips(), hitCoord) {
+			data.AppendShotsHistory(hitCoord, "miss", data.GetEnemyData().Nickname)
+			return
+		}
+
+		directions := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+		foundCells := []string{hitCoord}
+
+		queue = []string{hitCoord}
+		visited := map[string]bool{hitCoord: true}
+
+		for len(queue) > 0 {
+			currentCoord := queue[0]
+			queue = queue[1:]
+
+			for _, dir := range directions {
+				r, c, _ := ships.GetCoordPosition(currentCoord)
+				r += dir[0]
+				c += dir[1]
+
+				if r >= 0 && r < size && c >= 0 && c < size {
+					isHit, coord := isPlayerShip(r, c)
+					if isHit && !visited[coord] {
+						foundCells = append(foundCells, coord)
+						queue = append(queue, coord)
+						visited[coord] = true
+					}
+				}
+			}
+		}
+
+		for _, shipCell := range foundCells {
+			if !data.StringSliceContains(data.GetGameStatus().OppShots, shipCell) {
+				data.AppendShotsHistory(hitCoord, "hit", data.GetEnemyData().Nickname)
+				return
+			}
+		}
+
+		println("Player ship sank")
+		data.AppendShotsHistory(hitCoord, "sunk", data.GetEnemyData().Nickname)
+		data.AppendPlayerSunkShips(foundCells)
+	}
+}
+
+func isPlayerShip(row, col int) (bool, string) {
+	coord := ships.GetCoordString(row, col)
+	println("candidate: " + coord)
+
+	if data.StringSliceContains(data.GetPlayerShips(), coord) {
+		println("Player ship coordinate: " + coord)
+		return true, coord
+	}
+	println("Empty cell coordinate: " + coord)
+	return false, ""
 }

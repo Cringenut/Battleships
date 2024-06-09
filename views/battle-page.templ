@@ -199,7 +199,13 @@ templ MakeBattlePage() {
 				<div class="surrender-button">
 					<div>Surrender</div>
 				</div>
+
 				<div hx-trigger="every 0.5s" hx-post="/battle/shots/history" hx-target="#side_menu" hx-swap="innerHTML"></div>
+				<div hx-trigger="every 0.5s" hx-get="/shots" hx-target="this" hx-swap="none"></div>
+				<div hx-trigger="every 0.5s" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
+				<div hx-trigger="every 1s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+				<div hx-trigger="every 0.2s" hx-get="/board/target/player" hx-target="#player_board" hx-swap="outerHTML"></div>
+
 			</div>
 			<div id="player_info"></div>
 		</body>
@@ -240,13 +246,7 @@ templ MakeTurnText() {
 				} else {
 					Enemy turn
 				}
-				<div hx-trigger="every 1s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 			</div>
-
-			<div hx-trigger="every 0.5s" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
-			<div hx-trigger="every 1s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-			<div hx-trigger="every 0.2s" hx-get="/board/target/player" hx-target="#player_board" hx-swap="outerHTML"></div>
-
 		</body>
 	</html>
 }

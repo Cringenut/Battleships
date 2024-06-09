@@ -111,6 +111,9 @@ templ MakePlayerBoardCell(coord string) {
     .ship-cell, .hit-cell {
         background-color: rgb(19, 19, 114);
     }
+	.sunk-cell {
+		background-color: red;
+	}
     .hit-cell {
         background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Explosion-155624_icon.svg/600px-Explosion-155624_icon.svg.png");
         background-repeat: no-repeat;
@@ -136,6 +139,8 @@ templ MakePlayerBoardCell(coord string) {
 					<div class="cell" id={ coord }>{ coord[1:] }</div>
 				case data.Ship:
 					<div class="ship-cell" id={ coord }>{ coord[1:] }</div>
+				case data.Sunk:
+					<div class="sunk-cell" id={ coord }></div>
 				case data.Hit:
 					<div class="hit-cell" id={ coord }></div>
 				case data.Miss:
