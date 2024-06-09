@@ -60,6 +60,7 @@ Ships:
 	data.SetPlayerAccuracy(100.0)
 	data.SetEnemyAccuracy(100.0)
 	data.SetPlayerShots([]data.ShotResponse{})
+	data.SetEnemySunkShips([]string{})
 
 	// Setting up original positions of all ships
 	// Used to show ships visually on the game board or to determine if the ship is hit
@@ -73,7 +74,9 @@ func GetEnemyCellType(coord string) data.CellType {
 	}
 
 	if result, found := getPlayerShotResult(data.GetPlayerShots(), coord); found {
-		if result == "hit" || result == "sunk" {
+		if data.StringSliceContains(data.GetEnemySunkShips(), coord) {
+			return data.Sunk
+		} else if result == "hit" {
 			return data.Hit
 		} else {
 			return data.Miss
@@ -124,9 +127,7 @@ func FireAtEnemy(c *gin.Context) {
 
 	data.AppendPlayerShots(coord, res)
 	data.AppendShotsHistory(coord, res, data.GetPlayerNickname())
-	for _, found := range FindShipCells(res, coord) {
-		println("Sunk: " + found)
-	}
+	data.AppendEnemySunkShips(FindShipCells(res, coord))
 }
 
 func CalculateEnemyAccuracy() {

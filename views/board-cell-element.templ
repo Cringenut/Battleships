@@ -149,7 +149,7 @@ templ MakePlayerBoardCell(coord string) {
 
 templ MakeEnemyBoardCell(coord string) {
 	<style>
-    .cell, .ship-cell, .hit-cell, .miss-cell {
+    .cell, .ship-cell, .hit-cell, .miss-cell, .sunk-cell {
         display: flex; /* Makes cell a flex container */
         justify-content: center; /* Centers content horizontally */
         align-items: center; /* Centers content vertically */
@@ -179,6 +179,9 @@ templ MakeEnemyBoardCell(coord string) {
         background-size: 60%;
         background-position: center;
     }
+	.sunk-cell {
+		background-color: red;
+	}
     button.invisible-button {
         position: absolute; /* Position the button over the cell */
         top: 0;
@@ -219,11 +222,10 @@ templ MakeEnemyBoardCell(coord string) {
 							}
 						</div>
 					</form>
-				case data.Ship:
+				case data.Sunk:
+					<div class="sunk-cell" id={ coord }></div>
 				case data.Hit:
-					<div class="hit-cell" id={ coord }>
-						{ coord }
-					</div>
+					<div class="hit-cell" id={ coord }></div>
 				case data.Miss:
 					<div class="miss-cell" id={ coord }></div>
 				default:

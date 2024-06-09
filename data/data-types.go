@@ -16,6 +16,7 @@ const (
 	Ship
 	Hit
 	Miss
+	Sunk
 )
 
 type PlayerData struct {

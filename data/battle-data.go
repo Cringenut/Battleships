@@ -9,6 +9,7 @@ var enemyData EnemyData
 var shotsHistory []ShotHistory
 var playerAccuracy = 100.0
 var enemyAccuracy = 100.0
+var enemySunkShips []string
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -107,4 +108,16 @@ func AppendShotsHistory(coord string, res string, owner string) {
 
 func GetShotsHistory() []ShotHistory {
 	return shotsHistory
+}
+
+func SetEnemySunkShips(ships []string) {
+	enemySunkShips = ships
+}
+
+func AppendEnemySunkShips(ships []string) {
+	enemySunkShips = append(enemySunkShips, ships...)
+}
+
+func GetEnemySunkShips() []string {
+	return enemySunkShips
 }

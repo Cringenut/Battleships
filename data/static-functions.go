@@ -47,18 +47,3 @@ func CalculateCellCoord(row int, col int) string {
 	y := rune('A' + col)
 	return string(y) + strconv.Itoa(x)
 }
-
-func CalculateEnemyAccuracy() float64 {
-	if len(GetEnemyShots()) == len(GetGameStatus().OppShots) || len(GetGameStatus().OppShots) == 0 {
-		return GetEnemyAccuracy()
-	}
-
-	hits := 0
-	for _, shot := range GetGameStatus().OppShots {
-		if StringSliceContains(GetPlayerShips(), shot) {
-			hits++
-		}
-	}
-
-	return (float64(hits) / float64(len(GetGameStatus().OppShots)) * 100)
-}

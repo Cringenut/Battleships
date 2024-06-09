@@ -71,7 +71,8 @@ func (app *Config) HandlePlayerAccuracy(c *gin.Context) {
 }
 
 func (app *Config) HandleShotsHistory(c *gin.Context) {
-	for _, shot := range data.GetShotsHistory() {
+	for index, shot := range data.GetShotsHistory() {
+		shot = data.GetShotsHistory()[len(data.GetShotsHistory())-1-index]
 		Render(c, 200, views.MakeShotsHistoryItem(shot.Shot.Coord, strings.Title(shot.Shot.ShotResult), shot.Owner))
 	}
 }
