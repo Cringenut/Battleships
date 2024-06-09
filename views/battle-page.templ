@@ -103,6 +103,7 @@ templ MakeBattlePage() {
 			padding-bottom: 12px;
 		}
 		.side-menu {
+			flex-direction: column;
 			background-color: rgba(52, 51, 51, 0.5);
 		}
 		.token-text {
@@ -194,11 +195,11 @@ templ MakeBattlePage() {
 				</div>
 			</div>
 			<div class="container flexible-width">
-				<div class="side-menu" id="sideMenu"></div>
+				<div class="side-menu" id="side_menu"></div>
 				<div class="surrender-button">
 					<div>Surrender</div>
 				</div>
-				<div hx-trigger="every 2s" hx-post="/battle/shots/history" hx-target="this" hx-swap="none"></div>
+				<div hx-trigger="every 0.5s" hx-post="/battle/shots/history" hx-target="#side_menu" hx-swap="innerHTML"></div>
 			</div>
 			<div id="player_info"></div>
 		</body>
@@ -266,4 +267,54 @@ templ MakePlayerAccuracyField() {
 	 hx-target="this"
 	 hx-trigger="load"
 >Accuracy: { strconv.FormatFloat(data.GetPlayerAccuracy(), 'f', 1, 64) }%</div>
+}
+
+templ MakeShotsHistoryItem(coord string, res string, owner string) {
+<style>
+	.shot-history-container {
+		padding-top: 2px;
+		width: 100%;
+		height: 38px;
+		background-color: rgba(48, 48, 48, 0.9);
+		display: flex;
+	}
+
+	.shot-history-coord {
+		width: 15%;
+		height: 100%;
+		padding-left: 4px;
+		font-size: 16px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	.shot-history-result {
+		width: 20%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+		bottom: 0;
+	}
+
+	.shot-history-nick {
+		width: 62%;
+		height: 100%;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		text-align: left;
+		bottom: 0;
+	}
+</style>
+<body>
+		<div class="shot-history-container">
+			<div class="shot-history-coord">{ coord }</div>
+			<div class="shot-history-result">{ res }</div>
+			<div class="shot-history-nick">{ owner }</div>
+		</div>
+</body>
 }

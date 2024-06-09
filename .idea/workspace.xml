@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.9 // Player and enemy accuracy fields">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.10 // Shots history">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/battle-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/battle-data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-types.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-types.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/battle/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/battle.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +143,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.3 // Custom placement" />
     <MESSAGE value="Battleships v3.3" />
     <MESSAGE value="Battleships v3.5 // New battle system handling" />
     <MESSAGE value="Battleships v3.5" />
@@ -172,7 +167,8 @@
     <MESSAGE value="Battleships v4.8 // Removing all additional logic from handlers and placing it into web package instead" />
     <MESSAGE value="Battleships v4.8" />
     <MESSAGE value="Battleships v4.9 // Player and enemy accuracy fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.9 // Player and enemy accuracy fields" />
+    <MESSAGE value="Battleships v4.10 // Shots history" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.10 // Shots history" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
