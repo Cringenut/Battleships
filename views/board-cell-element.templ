@@ -247,3 +247,51 @@ templ MakeEnemyBoardCell(coord string) {
 		</body>
 	</html>
 }
+
+templ MakeRandomBoardCell(coord string) {
+<style>
+	.cell, .ship-cell, .hit-cell, .miss-cell {
+		display: flex; /* Makes cell a flex container */
+		justify-content: center; /* Centers content horizontally */
+		align-items: center; /* Centers content vertically */
+		color: #e6e6e6; /* Sets the text color */
+		font-size: 24px; /* Sets the text size */
+		background-color: #222; /* Default background color */
+		position: relative; /* Allows for absolute positioning of the button */
+		z-index: auto;
+		width: 100%; /* Fill the grid space */
+		height: 100%; /* Ensures the cell fills the height of its container */
+		aspect-ratio: 1; /* Ensures that each cell is square */
+		overflow: hidden; /* Hide    any content that overflows */
+		user-select: none;
+	}
+	.ship-cell, .hit-cell {
+		background-color: rgb(19, 19, 114);
+	}
+	.sunk-cell {
+		background-color: red;
+	}
+	.hit-cell {
+		background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Explosion-155624_icon.svg/600px-Explosion-155624_icon.svg.png");
+		background-repeat: no-repeat;
+		background-size: 84%;
+		background-position: center;
+	}
+	.miss-cell {
+		background-image: url("https://i.imgur.com/GFE7hTr.png");
+		background-repeat: no-repeat;
+		background-size: 60%;
+		background-position: center;
+	}
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+	<title></title>
+</head>
+<body>
+<div class="cell" id={ coord }>{ coord }</div>
+</body>
+</html>
+}

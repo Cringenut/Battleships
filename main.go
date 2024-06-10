@@ -3,6 +3,7 @@ package main
 import (
 	"Battleships/data"
 	"Battleships/server"
+	"Battleships/web/ships"
 	"github.com/gin-gonic/gin"
 	"html/template"
 )
@@ -12,6 +13,7 @@ func main() {
 	data.InitializePlayerData()
 	data.InitializeGameData()
 	data.InitializeGameStatus()
+	ships.GenerateRandomShips()
 
 	// Initializing gin
 

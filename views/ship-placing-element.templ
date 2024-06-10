@@ -167,9 +167,8 @@ templ MakePlacementElement() {
 			case data.Advanced:
 				@MakeSimplePlacementBoard()
 			case data.ServerRandom:
-				SERVER RANDOM
 			case data.Random:
-				RANDOM
+				@MakeRandomPlacementBoard()
 			default:
 		}
 	</div>
@@ -344,6 +343,77 @@ templ MakeSimplePlacementBoard() {
 		</body>
 	</html>
 }
+
+
+
+templ MakeRandomPlacementBoard() {
+<!DOCTYPE html>
+<html lang="en">
+<style>
+	.top-bar button {
+		font-size: 18px;
+		margin: 0 10px;
+	}
+	.container {
+		flex: 1;
+		padding-bottom: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		position: relative;
+	}
+
+	.main-container {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		gap: 6px;
+		min-height: 384px;
+		min-width: 50px;
+		transform: translateX(95%);
+		margin-left: 194px;
+		z-index: 5;
+	}
+
+	.squares-container {
+		display: flex;
+		gap: 6px;
+	}
+
+	.square {
+		width: 70px;
+		height: 70px;
+		background-color: #222; /* Black squares, assuming a dark theme */
+		display: flex;
+		justify-content: center;
+		align-items: flex-end; /* Align items at the bottom */
+		color: white; /* Text color inside the square */
+		font-size: 14px; /* Adjust text size as needed */
+		padding-bottom: 4px; /* Add some padding at the bottom for spacing */
+		position: relative; /* Required for positioning child elements */
+		border-radius: 1px;
+		flex: 1;
+		aspect-ratio: 1;
+		font-family: "Special Elite", system-ui;
+		outline: 2px solid rgba(44, 44, 44, 0.9);
+		z-index: 4;
+	}
+</style>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+	<title>Layout Example</title>
+</head>
+<body>
+<div class="container" id="placement_container">
+	@MakeRandomBoard()
+</div>
+</body>
+</html>
+}
+
 
 func chosenButton(index int, isAdvanced bool) string {
 	return fmt.Sprintf(`{"chosenOption": "%s", "isAdvanced": "%s"}`, strconv.Itoa(index), strconv.FormatBool(isAdvanced))

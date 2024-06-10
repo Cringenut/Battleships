@@ -1,16 +1,16 @@
 package views
 
 templ MakeWinScreen() {
-<a href="/" class="back-button">X</a>
-<div class="fullscreen-container">
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8"></meta>
-		<title>Title</title>
-		<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
-	</head>
-	<style>
+	<a href="/" class="back-button">X</a>
+	<div class="fullscreen-container">
+		<!DOCTYPE html>
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8"/>
+				<title>Title</title>
+				<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			</head>
+			<style>
 
 		.fullscreen-container {
 			position: fixed;
@@ -59,26 +59,26 @@ templ MakeWinScreen() {
 			color: white;
 		}
 	</style>
-	<body>
-	<div class="content">
-		You Win!
+			<body>
+				<div class="content">
+					You Win!
+				</div>
+			</body>
+		</html>
 	</div>
-	</body>
-	</html>
-</div>
 }
 
 templ MakeLoseScreen() {
-<a href="/" class="back-button">X</a>
-<div class="fullscreen-container">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8"></meta>
-	<title>Title</title>
-	<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
-</head>
-<style>
+	<a href="/" class="back-button">X</a>
+	<div class="fullscreen-container">
+		<!DOCTYPE html>
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8"/>
+				<title>Title</title>
+				<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			</head>
+			<style>
 
 	.fullscreen-container {
 		position: fixed;
@@ -127,13 +127,11 @@ templ MakeLoseScreen() {
 		color: white;
 	}
 </style>
-<body>
-	<div class="content">
-		You Lost!
+			<body>
+				<div class="content">
+					You Lost!
+				</div>
+			</body>
+		</html>
 	</div>
-</body>
-</html>
-</div>
 }
-
-

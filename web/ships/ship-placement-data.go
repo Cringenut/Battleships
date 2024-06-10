@@ -26,6 +26,7 @@ var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
 var advancedShips = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
+var randomShips []string
 var placingShip *Ship
 var firstCoord PlacementCoordinate
 var endCoords []string
@@ -69,6 +70,14 @@ func GetEndCoords() []string {
 
 func GetNextCoords() []string {
 	return nextCoords
+}
+
+func GetRandomShips() []string {
+	return randomShips
+}
+
+func SetRandomShips(ships []string) {
+	randomShips = ships
 }
 
 func GetShipCoords(index int) string {

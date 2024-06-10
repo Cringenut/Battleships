@@ -199,13 +199,11 @@ templ MakeBattlePage() {
 				<div class="surrender-button">
 					<div>Surrender</div>
 				</div>
-
 				<div hx-trigger="every 0.5s" hx-post="/battle/shots/history" hx-target="#side_menu" hx-swap="innerHTML"></div>
 				<div hx-trigger="every 0.5s" hx-get="/shots" hx-target="this" hx-swap="none"></div>
 				<div hx-trigger="every 0.5s" hx-post="/timer" hx-target="#timer" hx-swap="innerHTML"></div>
 				<div hx-trigger="every 1s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 				<div hx-trigger="every 0.2s" hx-get="/board/target/player" hx-target="#player_board" hx-swap="outerHTML"></div>
-
 			</div>
 			<div id="player_info"></div>
 		</body>
@@ -234,12 +232,12 @@ templ MakeTurnText() {
 				hx-swap="outerHTML"
 			>
 				if (data.GetGameStatus().GameStatus == "ended") {
-				<div
+					<div
 						hx-post="/battle/ended"
 						hx-trigger="load, once"
 						hx-swap="innerHTML"
 						hx-target="#battle_body"
-				></div>
+					></div>
 				}
 				if (data.GetGameStatus().ShouldFire) {
 					Your turn
@@ -252,25 +250,29 @@ templ MakeTurnText() {
 }
 
 templ MakeEnemyAccuracyField() {
-	<div class="bottom-text" id="enemy_accuracy"
-		 hx-post="/battle/enemy/accuracy"
-		 hx-swap="outerHTML"
-		 hx-target="this"
-		 hx-trigger="load"
+	<div
+		class="bottom-text"
+		id="enemy_accuracy"
+		hx-post="/battle/enemy/accuracy"
+		hx-swap="outerHTML"
+		hx-target="this"
+		hx-trigger="load"
 	>Accuracy: { strconv.FormatFloat(data.GetEnemyAccuracy(), 'f', 1, 64) }%</div>
 }
 
 templ MakePlayerAccuracyField() {
-<div class="bottom-text" id="enemy_accuracy"
-	 hx-post="/battle/player/accuracy"
-	 hx-swap="outerHTML"
-	 hx-target="this"
-	 hx-trigger="load"
->Accuracy: { strconv.FormatFloat(data.GetPlayerAccuracy(), 'f', 1, 64) }%</div>
+	<div
+		class="bottom-text"
+		id="enemy_accuracy"
+		hx-post="/battle/player/accuracy"
+		hx-swap="outerHTML"
+		hx-target="this"
+		hx-trigger="load"
+	>Accuracy: { strconv.FormatFloat(data.GetPlayerAccuracy(), 'f', 1, 64) }%</div>
 }
 
 templ MakeShotsHistoryItem(coord string, res string, owner string) {
-<style>
+	<style>
 	.shot-history-container {
 		padding-top: 2px;
 		width: 100%;
@@ -310,11 +312,11 @@ templ MakeShotsHistoryItem(coord string, res string, owner string) {
 		bottom: 0;
 	}
 </style>
-<body>
+	<body>
 		<div class="shot-history-container">
 			<div class="shot-history-coord">{ coord }</div>
 			<div class="shot-history-result">{ res }</div>
 			<div class="shot-history-nick">{ owner }</div>
 		</div>
-</body>
+	</body>
 }

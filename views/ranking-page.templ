@@ -1,16 +1,16 @@
 package views
 
 import (
-    "Battleships/data"
-"strconv"
+	"Battleships/data"
+	"strconv"
 )
 
 templ MakeRankingPage(ranking []data.PlayerStat) {
-<!DOCTYPE html>
-<html lang="en">
-<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"></link>
-<style>
+	<!DOCTYPE html>
+	<html lang="en">
+		<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+		<style>
     html, body {
         background-color: black;
         font-family: "Special Elite", system-ui;
@@ -139,41 +139,39 @@ templ MakeRankingPage(ranking []data.PlayerStat) {
     }
 
 </style>
-<head>
-    <meta charset="UTF-8"></meta>
-    <title>Title</title>
-</head>
-<body>
-<div class="top-bar">
-    <div class="center-text">Leaderboard</div>
-</div>
-<div class="leaderboard-container">
-    <div class="info-field">
-        <div class="rank-text">Rank</div>
-        <div class="nickname-text">Nickname</div>
-        <div class="games-text">Games</div>
-        <div class="wins-text">Wins</div>
-        <div class="wins-percentage">Points</div>
-    </div>
-
-    for i := 0; i < 10; i++ {
-        @MakeRankingPosition(ranking[i])
-    }
-</div>
-
-<footer>
-    <a href="/" class="save-text">Back</a>
-</footer>
-</body>
-</html>
+		<head>
+			<meta charset="UTF-8"/>
+			<title>Title</title>
+		</head>
+		<body>
+			<div class="top-bar">
+				<div class="center-text">Leaderboard</div>
+			</div>
+			<div class="leaderboard-container">
+				<div class="info-field">
+					<div class="rank-text">Rank</div>
+					<div class="nickname-text">Nickname</div>
+					<div class="games-text">Games</div>
+					<div class="wins-text">Wins</div>
+					<div class="wins-percentage">Points</div>
+				</div>
+				for i := 0; i < 10; i++ {
+					@MakeRankingPosition(ranking[i])
+				}
+			</div>
+			<footer>
+				<a href="/" class="save-text">Back</a>
+			</footer>
+		</body>
+	</html>
 }
 
 templ MakeRankingPosition(playerStat data.PlayerStat) {
-<div class="leaderboard-position">
-    <div class="rank-text">{ strconv.Itoa(playerStat.Rank) }</div>
-    <div class="nickname-text">{ playerStat.Nick }</div>
-    <div class="games-text">{ strconv.Itoa(playerStat.Games) }</div>
-    <div class="wins-text">{ strconv.Itoa(playerStat.Wins) }</div>
-    <div class="wins-percentage">{ strconv.Itoa(playerStat.Points) }</div>
-</div>
+	<div class="leaderboard-position">
+		<div class="rank-text">{ strconv.Itoa(playerStat.Rank) }</div>
+		<div class="nickname-text">{ playerStat.Nick }</div>
+		<div class="games-text">{ strconv.Itoa(playerStat.Games) }</div>
+		<div class="wins-text">{ strconv.Itoa(playerStat.Wins) }</div>
+		<div class="wins-percentage">{ strconv.Itoa(playerStat.Points) }</div>
+	</div>
 }

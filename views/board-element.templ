@@ -117,3 +117,36 @@ templ MakeEnemyBoard() {
 		</body>
 	</html>
 }
+
+templ MakeRandomBoard() {
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title>Battle</title>
+		</head>
+		<style>
+	.random-board {
+		border-radius: 2px;
+		width: 100%;
+		aspect-ratio: 1;
+		background-color: rgba(44, 44, 44, 0.9);
+		margin: 30px;
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+		grid-template-rows: repeat(10, 1fr);
+		gap: 3px;
+		padding: 4px;
+		z-index: 1;
+	}
+</style>
+		<body>
+			<div class="random-board">
+				for row := 0; row < 10; row++ {
+					for col := 0; col < 10; col++ {
+						@MakeRandomBoardCell(data.CalculateCellCoord(row, col))
+					}
+				}
+			</div>
+		</body>
+	</html>
+}
