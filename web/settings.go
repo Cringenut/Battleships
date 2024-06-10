@@ -108,6 +108,8 @@ func PlacementCellClicked(c *gin.Context) {
 	// Checking if next or previous type was chosen
 	if ships.GetFirstCoord().Coord == "" {
 		ships.SetFirstCoord(chosenCoord)
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced && len(ships.GetNextCoords())+2 < ships.GetPlacingShip().Size {
+		ships.SetNextCoord(chosenCoord)
 	} else {
 		ships.SetLastCoord(chosenCoord)
 	}
@@ -129,6 +131,8 @@ func SwitchPlacementType(c *gin.Context) {
 	} else {
 		SwitchCurrentPlacementType(false)
 	}
+	ships.ClearBoard()
+	ships.RepopulateBoard()
 }
 
 func ShipToPlaceChosen(c *gin.Context) {

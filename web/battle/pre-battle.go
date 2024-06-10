@@ -28,6 +28,7 @@ func StartBattle(enemyNickname string, isSingleplayer bool) error {
 	if err != nil {
 		return err
 	}
+	data.SetToken("")
 
 Token:
 	// If request is failed try to start the game until successful

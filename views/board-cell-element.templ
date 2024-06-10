@@ -65,7 +65,7 @@ templ MakePlacementCell(coord string) {
 						hx-vals={ chosenCoord(coord) }
 					></div>
 				</div>
-			} else if (ships.GetFirstCoord().Coord == coord) {
+			} else if (ships.GetFirstCoord().Coord == coord) || data.StringSliceContains(ships.GetNextCoords(), coord) {
 				<div class="placement-cell">{ coord }</div>
 			} else if (ships.IsCoordinateInShips(coord)) {
 				<div class="ship-cell">{ coord }</div>
