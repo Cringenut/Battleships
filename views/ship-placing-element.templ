@@ -398,6 +398,73 @@ templ MakeRandomPlacementBoard() {
 		outline: 2px solid rgba(44, 44, 44, 0.9);
 		z-index: 4;
 	}
+
+	.square img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		object-fit: contain; /* Ensures the image is fully visible */
+		z-index: -1; /* Places the image behind the text */
+		filter: brightness(0) invert(0.65);
+	}
+
+	.img1 img {
+		height: 85%;
+		scale: 75%;
+	}
+
+	.img2 img {
+		height: 85%;
+		scale: 70%;
+	}
+
+	.img3 img {
+		height: 80%;
+		scale: 60%;
+	}
+
+	.img4 img {
+		height: 70%;
+		scale: 70%;
+	}
+
+	.square:hover {
+		cursor: pointer;
+		outline-color: white;
+	}
+
+	.square:hover img {
+		filter: brightness(0) invert(1);
+	}
+
+	footer {
+		display: flex;
+		flex-shrink: 0;
+		justify-content: center;
+		padding-top: 44px;
+		background-color: transparent;
+		font-family: "Special Elite", system-ui;
+	}
+
+	.clear-btn, .cancel-btn {
+		height: 70px;
+		flex: 1;
+		display: flex; /* Add this line */
+		color: #e7e6e6;
+		justify-content: center; /* Add this line */
+		align-items: center; /* Add this line */
+		text-align: center;
+		cursor: pointer;
+
+		background-color: red;
+		margin: 20px 100px;
+	}
+
+	.clear-btn:hover, .cancel-btn:hover {
+		color: white;
+	}
+
 </style>
 <head>
 	<meta charset="UTF-8"/>
@@ -409,6 +476,16 @@ templ MakeRandomPlacementBoard() {
 <body>
 <div class="container" id="placement_container">
 	@MakeRandomBoard()
+	<div class="main-container">
+		<div class="squares-container">
+		</div>
+		<div class="squares-container">
+		</div>
+		<div class="squares-container">
+		</div>
+		<div class="squares-container">
+		</div>
+	</div>
 </div>
 </body>
 </html>

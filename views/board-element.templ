@@ -119,34 +119,40 @@ templ MakeEnemyBoard() {
 }
 
 templ MakeRandomBoard() {
-	<html lang="en">
-		<head>
-			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-			<title>Battle</title>
-		</head>
-		<style>
-	.random-board {
-		border-radius: 2px;
-		width: 100%;
+<style>
+	.placement-board {
+		width: 400px;
 		aspect-ratio: 1;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 2px;
+		border-radius: 2px;
 		background-color: rgba(44, 44, 44, 0.9);
-		margin: 30px;
 		display: grid;
-		grid-template-columns: repeat(10, 1fr);
-		grid-template-rows: repeat(10, 1fr);
-		gap: 3px;
-		padding: 4px;
-		z-index: 1;
+		grid-template-columns: repeat(10, 1fr); /* 10 columns */
+		grid-template-rows: repeat(10, 1fr); /* 10 rows */
+		gap: 2px; /* Optional gap between cells */
+	}
+
+	.placement-board.highlight {
+		background-color: white;
 	}
 </style>
-		<body>
-			<div class="random-board">
-				for row := 0; row < 10; row++ {
-					for col := 0; col < 10; col++ {
-						@MakeRandomBoardCell(data.CalculateCellCoord(row, col))
-					}
-				}
-			</div>
-		</body>
-	</html>
+<html>
+<head>
+	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="boards.css"/>
+	<title>Battle</title>
+</head>
+<body>
+<div class={ GetPlacementBoardClass() } id="placement-board">
+	for row := 0; row < 10; row++ {
+	for col := 0; col < 10; col++ {
+	@MakeRandomBoardCell(data.CalculateCellCoord(row, col))
+	}
+	}
+</div>
+</body>
+</html>
 }
