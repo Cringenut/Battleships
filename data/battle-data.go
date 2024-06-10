@@ -10,6 +10,7 @@ var playerAccuracy = 100.0
 var enemyAccuracy = 100.0
 var enemySunkShips []string
 var playerSunkShips []string
+var playerShipsFormation [][]string
 
 func (gd *GameData) InitGameData() {
 	gd.Token = ""
@@ -128,4 +129,12 @@ func AppendPlayerSunkShips(ships []string) {
 
 func GetPlayerSunkShips() []string {
 	return playerSunkShips
+}
+
+func SetPlayerShipsFormation(formation [][]string) {
+	playerShipsFormation = formation
+}
+
+func GetPlayerShipsFormation() [][]string {
+	return playerShipsFormation
 }

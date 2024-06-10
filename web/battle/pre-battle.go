@@ -101,17 +101,19 @@ func FindAllShipCells(coord string) []string {
 
 func FindPlayerShipFormations(shipCoords []string) {
 	visited := map[string]bool{shipCoords[0]: true}
-	//foundShips := [][]string{}
+	var foundShips [][]string
 
 	for _, coord := range shipCoords {
 		if visited[coord] {
 			continue
 		}
-		fmt.Printf("%v", FindAllShipCells(coord))
 
 		for _, coord = range FindAllShipCells(coord) {
 			visited[coord] = true
 		}
+		foundShips = append(foundShips, FindAllShipCells(coord))
 	}
 
+	data.SetPlayerShipsFormation(foundShips)
+	fmt.Printf("%v", data.GetPlayerShipsFormation())
 }
