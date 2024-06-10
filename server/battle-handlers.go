@@ -32,6 +32,7 @@ func (app *Config) HandlePlayerShot(c *gin.Context) {
 }
 
 func (app *Config) HandleSetEnemyShots(c *gin.Context) {
+	battle.CheckEnemyShots()
 	battle.CalculateEnemyAccuracy()
 	Render(c, 200, views.MakeEnemyBoard())
 }

@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.10">
-      <change afterPath="$PROJECT_DIR$/web/battle/pre-battle.go" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.11">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/battle/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/battle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/battle/checkers.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/checkers.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,8 +143,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.5 // New battle system handling" />
-    <MESSAGE value="Battleships v3.5" />
     <MESSAGE value="Battleships v3.6 // Enemy and player information window during the battle, getting enemy information, new web structure" />
     <MESSAGE value="Battleships v3.7 // Settings page rework" />
     <MESSAGE value="Battleships v3.7" />
@@ -170,7 +166,9 @@
     <MESSAGE value="Battleships v4.9 // Player and enemy accuracy fields" />
     <MESSAGE value="Battleships v4.10 // Shots history" />
     <MESSAGE value="Battleships v4.10" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.10" />
+    <MESSAGE value="Battleships v4.11 // Grouping player ships after battle started" />
+    <MESSAGE value="Battleships v4.11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.11" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
@@ -181,7 +179,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/data/battle-data.go</url>
-          <line>125</line>
+          <line>126</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
