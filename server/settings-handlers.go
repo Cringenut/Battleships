@@ -30,7 +30,7 @@ func (app *Config) HandlePlacementChosen(c *gin.Context) {
 }
 
 func (app *Config) HandlePlacementClear(c *gin.Context) {
-	ships.ClearAllShipCoords()
+	ships.ClearAllShipsCoords()
 	Render(c, 200, views.MakePlacementElement())
 }
 

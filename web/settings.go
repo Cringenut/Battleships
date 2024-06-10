@@ -38,7 +38,7 @@ func SaveSettings(c *gin.Context) string {
 	data.SetPlayerData(saveNickname, saveDescription)
 	if ships.IsAnyShipMissingCoords() {
 		data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
-		data.SetPlayerShips(ships.GetShipsCoords())
+		data.SetPlayerShips(ships.GetAllShipsCoords())
 	}
 
 	Redirect(c, "/")
