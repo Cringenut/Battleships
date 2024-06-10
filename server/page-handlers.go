@@ -2,7 +2,6 @@ package server
 
 import (
 	"Battleships/data"
-	"Battleships/requests"
 	"Battleships/views"
 	"Battleships/web"
 	"github.com/a-h/templ"
@@ -17,13 +16,11 @@ func Render(c *gin.Context, status int, template templ.Component) error {
 // Abandoning the game when handle this pages for cases when user tries to go and change parameters during the battle
 // Handling Main Menu page
 func (app *Config) HandleMainMenu(c *gin.Context) {
-	requests.GameAbandon(data.GetToken())
 	Render(c, 200, views.MakeMainMenu())
 }
 
 // Handling Settings Page
 func (app *Config) HandleSettings(c *gin.Context) {
-	requests.GameAbandon(data.GetToken())
 	data.SetCurrentSettingsPlacementType(data.GetPlayerShipPlacementType())
 	Render(c, 200, views.MakeSettingsPage(data.GetPlayerNickname(), data.GetPlayerDescription()))
 }
@@ -35,6 +32,5 @@ func (app *Config) HandleBattlePage(c *gin.Context) {
 
 // Handling Ranking Page
 func (app *Config) HandleRankingPage(c *gin.Context) {
-	requests.GameAbandon(data.GetToken())
 	Render(c, 200, views.MakeRankingPage(web.GetCurrentRanking()))
 }
