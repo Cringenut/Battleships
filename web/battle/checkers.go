@@ -29,7 +29,7 @@ func CheckWin() bool {
 }
 
 func CheckEnemyShots() {
-	for _, shot := range data.GetGameStatus().OppShots[len(data.GetEnemyShots()):] {
+	for index, shot := range data.GetGameStatus().OppShots[len(data.GetEnemyShots()):] {
 
 		if !data.StringSliceContains(data.GetPlayerShips(), shot) {
 			data.AppendShotsHistory(shot, "miss", data.GetEnemyData().Nickname)
@@ -44,6 +44,7 @@ func CheckEnemyShots() {
 			}
 
 			for _, playerCoords := range hitShip {
+				println(index)
 				if !data.StringSliceContains(data.GetGameStatus().OppShots, playerCoords) {
 					data.AppendShotsHistory(shot, "hit", data.GetEnemyData().Nickname)
 					goto Set
