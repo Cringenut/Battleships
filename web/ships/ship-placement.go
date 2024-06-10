@@ -89,6 +89,7 @@ func SetFirstCoord(coord string) {
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
 		endCoords = possibleEndCoords(row, col, 1)
 		SetLastCoord(coord)
+		return
 	} else if placingShip != nil && data.GetCurrentPlacementPlacementType() == data.Simple {
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
 		endCoords = possibleEndCoords(row, col, placingShip.Size)
@@ -117,8 +118,7 @@ func SetLastCoord(coord string) {
 	if data.GetCurrentPlacementPlacementType() == data.Simple || (data.GetCurrentPlacementPlacementType() == data.Advanced && placingShip.Size < 3) {
 		placeShip(firstCoord.Row, firstCoord.Col, endRow, endCol, placingShip.Size)
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
-		println("SETTING LAST COORDINATE")
-		return
+		placeShip(-1, -1, endRow, endCol, placingShip.Size)
 	}
 
 	printBoard()
@@ -285,21 +285,35 @@ func possibleEndCoords(row, col, length int) []string {
 }
 
 func placeShip(row, col, endRow, endCol int, length int) {
-	dx := 0
-	dy := 0
-	if row != endRow {
-		dx = 1
-	} else {
-		dy = 1
-	}
-	for i := 0; i < length; i++ {
-		curRow := int(math.Min(float64(row), float64(endRow))) + i*dx
-		curCol := int(math.Min(float64(col), float64(endCol))) + i*dy
-		board[curRow][curCol] = true
+	if data.GetCurrentPlacementPlacementType() == data.Simple || placingShip.Size == 1 {
+		dx := 0
+		dy := 0
+		if row != endRow {
+			dx = 1
+		} else {
+			dy = 1
+		}
+		for i := 0; i < length; i++ {
+			curRow := int(math.Min(float64(row), float64(endRow))) + i*dx
+			curCol := int(math.Min(float64(col), float64(endCol))) + i*dy
+			board[curRow][curCol] = true
 
-		// Add coordinate to the placingShip's Coords
-		placingShip.Coords = append(placingShip.Coords, fmt.Sprintf("%c%d", rune('A'+curCol), 10-curRow))
+			// Add coordinate to the placingShip's Coords
+			placingShip.Coords = append(placingShip.Coords, fmt.Sprintf("%c%d", rune('A'+curCol), 10-curRow))
+		}
+	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
+		allCoords := nextCoords
+		allCoords = append(allCoords, firstCoord.Coord)
+		allCoords = append(allCoords, GetCoordString(endRow, endCol))
+
+		fmt.Printf("All coords: %v", allCoords)
+		for _, coord := range allCoords {
+			placingShip.Coords = append(placingShip.Coords, coord)
+			row, col, _ = GetCoordPosition(coord)
+			board[row][col] = true
+		}
 	}
+
 }
 
 func printBoard() {
@@ -334,6 +348,7 @@ func GetShipCoords(index int) string {
 			}
 			return "+"
 		}
+		return strings.Join(ships[index].Coords, " ")
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
 		if len(advancedShips[index].Coords) == 0 {
 			if &advancedShips[index] == placingShip {
@@ -341,9 +356,10 @@ func GetShipCoords(index int) string {
 			}
 			return "+"
 		}
+		return strings.Join(advancedShips[index].Coords, " ")
 	}
 
-	return strings.Join(ships[index].Coords, " ")
+	return strings.Join(nil, " ")
 }
 
 func ClearAllShipCoords() {
