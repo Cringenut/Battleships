@@ -136,6 +136,7 @@ func possibleEndCoords(row, col, length int) []string {
 
 func placeShip(row, col, endRow, endCol int, length int) {
 	if data.GetCurrentPlacementPlacementType() == data.Simple || placingShip.Size == 1 {
+		// Direction depending on ship orientation
 		dx := 0
 		dy := 0
 		if row != endRow {

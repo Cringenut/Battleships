@@ -33,7 +33,7 @@ func isValidPlacingCoordinate(coord string) (int, int, bool) {
 	return row, col, true
 }
 
-// IsCoordinateInShips checks if the given coordinate string is inside any of the ships' coordinates
+// IsCoordinateInShips checks if the given coordinate string is inside any of the ships coordinates
 func IsCoordinateInShips(coord string) bool {
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for _, ship := range ships {
@@ -56,6 +56,8 @@ func IsCoordinateInShips(coord string) bool {
 	return false
 }
 
+// Going through slices if ship length and amount of coordinates are different
+// Return true meaning that ship missing coords
 func IsAnyShipMissingCoords() bool {
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for i := range ships {

@@ -7,14 +7,11 @@ import (
 	"time"
 )
 
-const (
-	boardSize = 10
-)
-
 var (
 	shipSizes = []int{4, 3, 3, 2, 2, 2, 1, 1, 1, 1}
 )
 
+// Creating seed for random
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
@@ -29,7 +26,7 @@ func GenerateRandomCoordinates() {
 
 func placeShipRandomly(shipSize int) {
 	for {
-		row, col, valid := isValidPlacingCoordinate(GetCoordString(rand.Intn(boardSize), rand.Intn(boardSize)))
+		row, col, valid := isValidPlacingCoordinate(GetCoordString(rand.Intn(size), rand.Intn(size)))
 
 		if valid {
 			firstCoord = PlacementCoordinate{row, col, GetCoordString(row, col)}
@@ -46,6 +43,7 @@ func placeShipRandomly(shipSize int) {
 	}
 }
 
+// Using the same logic to go from first coord to last and add coords between them as in Simple placement
 func placeRandomShip(row, col, endRow, endCol int, length int) {
 	dx := 0
 	dy := 0

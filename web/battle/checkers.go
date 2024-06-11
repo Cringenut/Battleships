@@ -49,6 +49,9 @@ func CheckEnemyShots() {
 
 			// Checking all ship coords
 			for _, playerCoords := range hitShip {
+				if len(hitShip) == 1 {
+					goto Sunk
+				}
 				// If any of cells wasn't hit yet append as hit
 				// Check the length as GetEnemyShots length + current index
 				// Otherwise sunk can be added multiple times
@@ -58,6 +61,7 @@ func CheckEnemyShots() {
 				}
 			}
 
+		Sunk:
 			// Append sunk if all is checked true
 			data.AppendShotsHistory(shot, "sunk", data.GetEnemyData().Nickname)
 			data.AppendPlayerSunkShips(hitShip)

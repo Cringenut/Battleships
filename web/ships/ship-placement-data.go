@@ -21,11 +21,14 @@ const size = 10
 var board [size][size]bool
 
 // Used in default placement
-// User
 var ships = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
+
+// Used in advanced placement
 var advancedShips = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 	{2, nil}, {1, nil}, {1, nil}, {1, nil}, {1, nil}}
+
+// Used in random placement
 var randomShips []string
 var placingShip *Ship
 var firstCoord PlacementCoordinate
@@ -102,6 +105,8 @@ func GetShipCoords(index int) string {
 	return strings.Join(nil, " ")
 }
 
+// Removing all ship coordinates from their slices
+// Only used for Simple and Advanced placement types
 func ClearAllShipsCoords() {
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		for i := range ships {
@@ -112,9 +117,11 @@ func ClearAllShipsCoords() {
 			advancedShips[i].Coords = nil
 		}
 	}
+	// Clearing board so new ship placement would be available
 	ClearBoard()
 }
 
+// Getting ships coords depending on current placement placement type
 func GetAllShipsCoords() []string {
 	var allCoords []string
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
@@ -126,13 +133,14 @@ func GetAllShipsCoords() []string {
 			allCoords = append(allCoords, ship.Coords...)
 		}
 	} else if data.GetCurrentPlacementPlacementType() == data.Random {
-		allCoords = randomShips
+		allCoords = GetRandomShips()
 	} else {
 		allCoords = []string{}
 	}
 	return allCoords
 }
 
+// Used when switching between placement types
 func ClearBoard() {
 	board = [size][size]bool{}
 }
