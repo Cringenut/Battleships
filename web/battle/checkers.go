@@ -52,7 +52,7 @@ func CheckEnemyShots() {
 				// If any of cells wasn't hit yet append as hit
 				// Check the length as GetEnemyShots length + current index
 				// Otherwise sunk can be added multiple times
-				if !data.StringSliceContains(data.GetGameStatus().OppShots[len(data.GetEnemyShots()):+index], playerCoords) {
+				if !data.StringSliceContains(data.GetGameStatus().OppShots[:len(data.GetEnemyShots())+index-1], playerCoords) {
 					data.AppendShotsHistory(shot, "hit", data.GetEnemyData().Nickname)
 					goto Set
 				}

@@ -144,28 +144,34 @@ func placeShip(row, col, endRow, endCol int, length int) {
 			dy = 1
 		}
 		for i := 0; i < length; i++ {
+			// Going from first coord to end coord direction
 			curRow := int(math.Min(float64(row), float64(endRow))) + i*dx
 			curCol := int(math.Min(float64(col), float64(endCol))) + i*dy
+			// Populating the board
 			board[curRow][curCol] = true
 
 			// Add coordinate to the placingShip's Coords
 			placingShip.Coords = append(placingShip.Coords, fmt.Sprintf("%c%d", rune('A'+curCol), 10-curRow))
 		}
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
+		// Combining first, nextCoords, and endCoord
 		allCoords := nextCoords
 		allCoords = append(allCoords, firstCoord.Coord)
 		allCoords = append(allCoords, GetCoordString(endRow, endCol))
 
 		fmt.Printf("All coords: %v", allCoords)
+		// Simply append all coord to the ship
 		for _, coord := range allCoords {
 			placingShip.Coords = append(placingShip.Coords, coord)
 			row, col, _ = GetCoordPosition(coord)
+			// Populating the board
 			board[row][col] = true
 		}
 	}
 
 }
 
+// Print board for debug
 func printBoard() {
 	// Print each row
 	for i := 0; i < len(board); i++ {
