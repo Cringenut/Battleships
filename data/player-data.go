@@ -6,7 +6,7 @@ func (pd *PlayerData) Init() {
 	pd.Nickname = "John_Doe"
 	pd.Description = "My first game"
 	pd.ShipCoords = []string{}
-	pd.ShipPlacementType = Simple
+	pd.ShipPlacementType = Random
 }
 
 func SetPlayerData(nickname, description string) {

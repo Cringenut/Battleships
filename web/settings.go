@@ -36,8 +36,9 @@ func SaveSettings(c *gin.Context) string {
 	}
 
 	data.SetPlayerData(saveNickname, saveDescription)
-	if ships.IsAnyShipMissingCoords() {
+	if !ships.IsAnyShipMissingCoords() {
 		data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
+		data.SetCurrentPlacementPlacementType(data.GetCurrentSettingsPlacementType())
 		data.SetPlayerShips(ships.GetAllShipsCoords())
 	}
 
@@ -84,6 +85,12 @@ func CanCurrentPlacementBeSaved() bool {
 	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
 		result = !ships.IsAnyShipMissingCoords()
+	case data.Advanced:
+		result = !ships.IsAnyShipMissingCoords()
+	case data.Random:
+		return true
+	case data.ServerRandom:
+		return true
 	default:
 		result = false
 	}

@@ -125,6 +125,10 @@ func GetAllShipsCoords() []string {
 		for _, ship := range advancedShips {
 			allCoords = append(allCoords, ship.Coords...)
 		}
+	} else if data.GetCurrentPlacementPlacementType() == data.Random {
+		allCoords = randomShips
+	} else {
+		allCoords = []string{}
 	}
 	return allCoords
 }

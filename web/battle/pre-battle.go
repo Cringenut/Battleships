@@ -10,6 +10,7 @@ import (
 )
 
 func bodyBuilder(enemyNickname string, isSingleplayer bool) data.GameRequestBody {
+
 	// Body that will be sent to the server to start the battle
 	body := data.GameRequestBody{
 		Coords:     data.GetPlayerShips(),

@@ -10,6 +10,7 @@ import (
 
 func main() {
 
+	// Initializing default data
 	data.InitializePlayerData()
 	data.InitializeGameData()
 	data.InitializeGameStatus()
