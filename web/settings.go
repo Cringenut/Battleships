@@ -96,6 +96,7 @@ func CanCurrentPlacementBeSaved() bool {
 		result = !ships.IsAnyShipMissingCoords()
 	case data.Advanced:
 		result = !ships.IsAnyShipMissingCoords()
+	// Next placement types always filled in the right way so no check required
 	case data.Random:
 		return true
 	case data.ServerRandom:
