@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Simply getting the leaders untill no error, because this functionality is called only once
 func GetCurrentRanking() []data.PlayerStat {
 Ranking:
 	ranking, err := requests.GetStats()

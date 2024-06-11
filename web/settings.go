@@ -25,12 +25,15 @@ func SaveSettings(c *gin.Context) string {
 		return ""
 	}
 
+	// Getting values from the html file
 	saveNickname := formData.Get("nickname")
 	saveDescription := formData.Get("description")
 
+	// Debug
 	fmt.Println("NICKNAME: " + saveNickname)
 	fmt.Println("DESCRIPTION: " + saveDescription)
 
+	// If player nickname is empty stay on the page
 	if saveNickname == "" {
 		return saveDescription
 	}
@@ -38,7 +41,11 @@ func SaveSettings(c *gin.Context) string {
 	data.SetPlayerData(saveNickname, saveDescription)
 	if !ships.IsAnyShipMissingCoords() {
 		data.SetPlayerShipPlacementType(data.GetCurrentSettingsPlacementType())
+		// The GetAllShipCoords() uses the current placement of placement element not settings
+		// In order to not create additional function setting the placement for the placement element ourselves
+		// If we use open the placement element there will be no issues, the placement type is set on open from settings
 		data.SetCurrentPlacementPlacementType(data.GetCurrentSettingsPlacementType())
+
 		data.SetPlayerShips(ships.GetAllShipsCoords())
 	}
 
@@ -54,12 +61,14 @@ func SwitchCurrentPlacementType(isNext bool) {
 		return
 	}
 
+	// If last index go to 0
 	if isNext {
 		if currentIndex+1 >= len(data.GetPlacementTypes()) {
 			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[0])
 		} else {
 			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[currentIndex+1])
 		}
+		// If 0 go to last
 	} else {
 		if currentIndex-1 < 0 {
 			data.SetCurrentPlacementPlacementType(data.GetPlacementTypes()[len(data.GetPlacementTypes())-1])
@@ -82,8 +91,8 @@ func findPlacementIndex(value data.PlacementType) int {
 func CanCurrentPlacementBeSaved() bool {
 	result := false
 	switch data.GetCurrentPlacementPlacementType() {
-	// If any of the ships doesn't have all their coordinates
 	case data.Simple:
+		// Check if any of the ships doesn't have all their coordinates
 		result = !ships.IsAnyShipMissingCoords()
 	case data.Advanced:
 		result = !ships.IsAnyShipMissingCoords()
@@ -112,9 +121,13 @@ func PlacementCellClicked(c *gin.Context) {
 	}
 
 	chosenCoord := parsedData.Get("chosenCoord")
-	// Checking if next or previous type was chosen
+	// If no first coord set it
 	if ships.GetFirstCoord().Coord == "" {
 		ships.SetFirstCoord(chosenCoord)
+		// Used only for advanced placement
+		// The length of not filled advanced ship would always fulfil this condition
+		// Plus represent adding first and last coord
+		// Would be false when last coord should be placed
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced && len(ships.GetNextCoords())+2 < ships.GetPlacingShip().Size {
 		ships.SetNextCoord(chosenCoord)
 	} else {

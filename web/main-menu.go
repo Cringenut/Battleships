@@ -32,6 +32,8 @@ Data:
 	return
 }
 
+// Max time for operation is 15 seconds, and trigger is called every ten
+// So we are sending a refresh request untill no error
 func RefreshLobby() {
 	println("Start refresh")
 Refresh:
@@ -44,11 +46,14 @@ Refresh:
 }
 
 func CheckIfSomeoneJoinedLobby(c *gin.Context) {
+	// When someone joins all fields in game status would be filled
 	status, err := requests.GetGameStatus(data.GetToken())
 	if err != nil {
 		return
 	}
 
+	// Check condition using the opponent
+	// If opponent is set that means the game status is valid
 	if status.Opponent != "" {
 		Redirect(c, "/battle")
 	}
@@ -63,10 +68,11 @@ func JoinPlayerLobby(c *gin.Context) {
 		return
 	}
 
-	// Checking if next or previous type was chosen
+	// Getting enemy nickname from html
 	chosenLobby := parsedData.Get("chosenLobby")
 	println("Chosen lobby: " + chosenLobby)
 
+	// Starting battle passing enemy nickname and lack of bot
 	err = battle.StartBattle(chosenLobby, false)
 	Redirect(c, "/battle")
 
@@ -75,6 +81,8 @@ func JoinPlayerLobby(c *gin.Context) {
 	}
 }
 
+// No repeated condition untill success
+// If no lobbies are found user will simply click refresh again
 func FindLobbies() []data.WaitingPlayer {
 	servers, err := requests.GetLobby()
 	if err != nil {
