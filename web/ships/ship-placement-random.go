@@ -16,6 +16,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+// Going slice with shipsSizes and try to place each one from slice
 func GenerateRandomCoordinates() {
 	for _, size := range shipSizes {
 		placeShipRandomly(size)
@@ -25,18 +26,28 @@ func GenerateRandomCoordinates() {
 }
 
 func placeShipRandomly(shipSize int) {
+	// Try to place ship until successful
 	for {
+		// Creating random coordinate
 		row, col, valid := isValidPlacingCoordinate(GetCoordString(rand.Intn(size), rand.Intn(size)))
 
+		// Start placement if coordinate is valid and near space is empty
 		if valid {
+			// Using logic from placement
+			// Setting first coordinate and find endCoords right after
 			firstCoord = PlacementCoordinate{row, col, GetCoordString(row, col)}
 			endCoords = possibleEndCoords(row, col, shipSize)
 
+			// If any endCoord is available
 			if len(endCoords) > 0 {
+				// Choose random endCoord from the slice
 				endCoord := endCoords[rand.Intn(len(endCoords))]
 				endRow, endCol, _ := GetCoordPosition(endCoord)
+				// Placing random ship
 				placeRandomShip(firstCoord.Row, firstCoord.Col, endRow, endCol, shipSize)
+				// Clearing data
 				ClearData()
+				// Stop trying to place the current ship
 				break
 			}
 		}

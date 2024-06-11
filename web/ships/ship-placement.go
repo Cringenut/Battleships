@@ -12,21 +12,26 @@ func SetFirstCoord(coord string) {
 
 	if !valid {
 		fmt.Println("Invalid coordinate. Please enter a valid coordinate.")
+		// Used to keep trying to place the same ship
+		// Because clear data clears placingShip too
 		tempShip := placingShip
 		ClearData()
 		placingShip = tempShip
 		return
 	}
 
+	// If ship is of size 1 try place it on the board
 	if placingShip.Size == 1 {
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
 		endCoords = possibleEndCoords(row, col, 1)
 		SetLastCoord(coord)
 		return
 	} else if placingShip != nil && data.GetCurrentPlacementPlacementType() == data.Simple {
+		// Simple ship placement
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
 		endCoords = possibleEndCoords(row, col, placingShip.Size)
 	} else if placingShip != nil && data.GetCurrentPlacementPlacementType() == data.Advanced {
+		// Advanced ship placement
 		firstCoord = PlacementCoordinate{Row: row, Col: col, Coord: coord}
 		endCoords = possibleEndCoords(row, col, 2)
 	} else {
@@ -42,49 +47,69 @@ func SetFirstCoord(coord string) {
 func SetLastCoord(coord string) {
 	endRow, endCol, validEnd := isValidPlacingCoordinate(coord)
 
+	// Checking if coordinate is within board and among endCoords
 	if !validEnd || !data.StringSliceContains(endCoords, coord) {
+
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
+		// Used to keep trying to place the same ship
+		// Because clear data clears placingShip too
+		tempShip := placingShip
 		ClearData()
+		placingShip = tempShip
 		return
 	}
 
+	// The second condition is used for ships of length 2 because they can use the same logic as in Simple placement
 	if data.GetCurrentPlacementPlacementType() == data.Simple || (data.GetCurrentPlacementPlacementType() == data.Advanced && placingShip.Size < 3) {
 		placeShip(firstCoord.Row, firstCoord.Col, endRow, endCol, placingShip.Size)
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
+		// row and col are not required for advanced ship placement
 		placeShip(-1, -1, endRow, endCol, placingShip.Size)
 	}
 
+	// Debug
 	printBoard()
+	// Stop placing the ship
 	ClearData()
 }
 
+// Advanced placement if not placing last coord
 func SetNextCoord(coord string) {
+	// Checking if given coord is within board
 	_, _, validNext := isValidPlacingCoordinate(coord)
 
+	// Checking if coordinate is within board and among endCoords
 	if !validNext || !data.StringSliceContains(endCoords, coord) {
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
 		ClearData()
 		return
 	}
 
+	// Clearing coords to go through first and found next coords later
 	endCoords = []string{}
 	nextCoords = append(nextCoords, coord)
 
+	// Finding available next or last coordinates
 	for _, currentNextCoord := range nextCoords {
 		row, col, _ := GetCoordPosition(currentNextCoord)
+		// Checking for the ship of size 2
+		// It checks 1 cell next to out currentNextCoord
 		for _, possibleEndCoord := range possibleEndCoords(row, col, 2) {
+			// Append only if coordinate wasn't found yet and not first coord
 			if !data.StringSliceContains(nextCoords, possibleEndCoord) && possibleEndCoord != firstCoord.Coord {
 				endCoords = append(endCoords, possibleEndCoord)
 			}
 		}
 	}
 
+	// Appending the rest of available end coordinates including next to the first one
 	for _, possibleEndCoord := range possibleEndCoords(firstCoord.Row, firstCoord.Col, 2) {
 		if !data.StringSliceContains(nextCoords, possibleEndCoord) {
 			endCoords = append(endCoords, possibleEndCoord)
 		}
 	}
 
+	// If no space left to place clear current ship placement
 	if len(endCoords) == 0 {
 		fmt.Println("Invalid ship placement. Please choose different coordinate.")
 		ClearData()

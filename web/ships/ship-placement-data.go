@@ -30,17 +30,20 @@ var advancedShips = []Ship{{4, nil}, {3, nil}, {3, nil}, {2, nil}, {2, nil},
 
 // Used in random placement
 var randomShips []string
+
 var placingShip *Ship
 var firstCoord PlacementCoordinate
 var endCoords []string
 var nextCoords []string
 
 func SetPlacingShip(index int) {
+	// Fast way to clear placing ship and all according data
 	if index < 0 {
 		ClearData()
 		return
 	}
 
+	// Choosing placingShip depending on current placement type
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
 		placingShip = &ships[index]
 	} else if data.GetCurrentPlacementPlacementType() == data.Advanced {
@@ -83,12 +86,16 @@ func SetRandomShips(ships []string) {
 	randomShips = ships
 }
 
+// Used in buttons to the right of placement board
 func GetShipCoords(index int) string {
 	if data.GetCurrentPlacementPlacementType() == data.Simple {
+		// When placing ship it's coords are set to empty slice
+		// Combined with comparing addresses can be found if this button is button of the ship we try to place
 		if len(ships[index].Coords) == 0 {
 			if &ships[index] == placingShip {
 				return "Selected"
 			}
+			// If no coords are set return "+" showing that user has yet to place that ship
 			return "+"
 		}
 		return strings.Join(ships[index].Coords, " ")
@@ -102,6 +109,7 @@ func GetShipCoords(index int) string {
 		return strings.Join(advancedShips[index].Coords, " ")
 	}
 
+	// If coords are placed return them
 	return strings.Join(nil, " ")
 }
 
@@ -152,6 +160,7 @@ func ClearData() {
 	nextCoords = []string{}
 }
 
+// Filling the board depending on current placement
 func RepopulateBoard() {
 	for _, coord := range GetAllShipsCoords() {
 		row, col, _ := GetCoordPosition(coord)
