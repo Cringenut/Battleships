@@ -55,6 +55,7 @@ Ships:
 		fmt.Println(position)
 	}
 
+	// Setting default data
 	data.SetShotsHistory([]data.ShotHistory{})
 	data.SetPlayerAccuracy(100.0)
 	data.SetEnemyAccuracy(100.0)
@@ -70,9 +71,12 @@ Ships:
 	return nil
 }
 
+// Finding all ship coords by giving one coord from this ship
 func FindAllShipCells(coord string) []string {
+	// left, right, down, up
 	directions := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
 
+	// Same system as in FindEnemyShipCells()
 	foundCells := []string{coord}
 	queue = []string{coord}
 	visited := map[string]bool{coord: true}
@@ -101,7 +105,9 @@ func FindAllShipCells(coord string) []string {
 	return foundCells
 }
 
+// Function is required, because player ships send in a body can contain an error so we separate ships ourselves
 func FindPlayerShipFormations(shipCoords []string) {
+	// Used so we won't be adding the same ship multiple times
 	visited := map[string]bool{shipCoords[0]: true}
 	var foundShips [][]string
 

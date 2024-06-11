@@ -14,6 +14,7 @@ func GetEnemyCellType(coord string) data.CellType {
 		return data.Default
 	}
 
+	// If cell was shot find the shot result
 	if result, found := getPlayerShotResult(data.GetPlayerShots(), coord); found {
 		if data.StringSliceContains(data.GetEnemySunkShips(), coord) {
 			return data.Sunk
@@ -40,6 +41,7 @@ func GetPlayerCellType(coord string) data.CellType {
 		} else {
 			return data.Miss
 		}
+		// We know the player ship placement so we can show it
 	} else if data.StringSliceContains(data.GetPlayerShips(), coord) {
 		return data.Ship
 	}
@@ -68,11 +70,16 @@ func FireAtEnemy(c *gin.Context) {
 		return
 	}
 
+	// Append player shots history
 	data.AppendPlayerShots(coord, res)
 	data.AppendShotsHistory(coord, res, data.GetPlayerNickname())
+	// Checks if player shot was a sunk and if so finds sunken ship cells
 	data.AppendEnemySunkShips(FindEnemyShipCells(res, coord))
 }
 
+// Getting amount of shots
+// Counting hits
+// Calculating accuracy
 func CalculateEnemyAccuracy() {
 	if len(data.GetEnemyShots()) == 0 {
 		data.SetEnemyAccuracy(100.00)
@@ -111,10 +118,11 @@ const size = 10
 
 var queue []string
 
+// Checking if "candidate" is an enemy hit cell
 func isEnemyCoordHit(row, col int) (bool, string) {
 	coord := ships.GetCoordString(row, col)
-
 	for _, shot := range data.GetPlayerShots() {
+		// Appending if shot is among player shots and resulted into hit
 		if strings.EqualFold(shot.Coord, coord) && shot.ShotResult == "hit" {
 			println(true)
 			return true, coord
@@ -126,25 +134,32 @@ func isEnemyCoordHit(row, col int) (bool, string) {
 
 // Find all ship cells given one hit coordinate and the list of shots
 func FindEnemyShipCells(res string, hitCoord string) []string {
+	// Not sunk return
 	if res != "sunk" {
 		return []string{}
 	}
 
+	// Checking if valid coord was passed
 	_, _, valid := ships.GetCoordPosition(hitCoord)
 	if !valid {
 		return []string{}
 	}
 
+	// left, right, down, up
 	directions := [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+	// Adding the sunk coord as first
 	foundCells := []string{hitCoord}
 
+	// Coords we will iterate through
 	queue = []string{hitCoord}
+	// In order to don't check already checked texture and not go into infinite loop of searches
 	visited := map[string]bool{hitCoord: true}
 
 	for len(queue) > 0 {
 		currentCoord := queue[0]
 		queue = queue[1:]
 
+		// Checking each direction for potential hit cell
 		for _, dir := range directions {
 			r, c, _ := ships.GetCoordPosition(currentCoord)
 			r += dir[0]
@@ -161,5 +176,6 @@ func FindEnemyShipCells(res string, hitCoord string) []string {
 		}
 	}
 
+	// Returning all enemy ship cells
 	return foundCells
 }

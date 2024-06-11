@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v4.13">
-      <change afterPath="$PROJECT_DIR$/tests/ship_test.go" afterDir="false" />
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.1 // Commenting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/player-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/player-data.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/ranking-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ranking-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/battle/battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/battle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/battle/checkers.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/checkers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/battle/pre-battle.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/pre-battle.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ships/ship-placement-data.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ships/ship-placement-data.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,8 +163,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.8 // New coordinate post system" />
-    <MESSAGE value="Battleships v3.8" />
     <MESSAGE value="Battleships v3.9" />
     <MESSAGE value="Battleships v4.0 // Fully working settings page" />
     <MESSAGE value="Battleships v4.0" />
@@ -190,7 +186,9 @@
     <MESSAGE value="Battleships v4.12 // Working enemy shots history" />
     <MESSAGE value="Battleships v4.13 // Advanced and random ship placement" />
     <MESSAGE value="Battleships v4.13" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v4.13" />
+    <MESSAGE value="Battleships v5.0 // Main project functionality" />
+    <MESSAGE value="Battleships v5.1 // Commenting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v5.1 // Commenting" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
@@ -200,29 +198,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/data/battle-data.go</url>
-          <line>126</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/tests/ship_test.go</url>
           <line>15</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/battle/pre-battle.go</url>
-          <line>15</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/web/ships/ship-placement-data.go</url>
           <line>123</line>
           <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/settings.go</url>
-          <line>38</line>
-          <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/web/ships/ship-placement-checkers.go</url>

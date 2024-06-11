@@ -3,7 +3,7 @@ package data
 var playerData PlayerData
 
 func (pd *PlayerData) Init() {
-	pd.Nickname = "John_Doe"
+	pd.Nickname = "Player"
 	pd.Description = "My first game"
 	pd.ShipCoords = []string{}
 	pd.ShipPlacementType = Random
