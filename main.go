@@ -13,7 +13,7 @@ func main() {
 	data.InitializePlayerData()
 	data.InitializeGameData()
 	data.InitializeGameStatus()
-	ships.GenerateRandomShips()
+	ships.GenerateRandomCoordinates()
 
 	// Initializing gin
 
