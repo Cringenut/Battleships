@@ -11,7 +11,7 @@ templ MakeBattlePage() {
 		<head>
 			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
 			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
-			<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"></link>
+			<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"/>
 			<title>Battle</title>
 			<style>
 		body, html {
@@ -78,9 +78,15 @@ templ MakeBattlePage() {
 		}
 		.surrender-button {
 			height: 48px;
+			color: #e6e6e6;
 			background-color: rgba(255, 0, 0, 0.8);
 			align-content: center;
 			align-items: center;
+			user-select: none;
+			cursor: pointer;
+		}
+		.surrender-button:hover {
+			color: white;
 		}
 		.nickname-text {
 			font-size: 20px;
@@ -128,7 +134,7 @@ templ MakeBattlePage() {
 			left: 0;
 			height: 100%;
 			width: 100%;
-			background-color: orange; /* Semi-transparent background */
+			background-color: black; /* Semi-transparent background */
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -198,13 +204,17 @@ templ MakeBattlePage() {
 			</div>
 			<div class="container flexible-width">
 				<div class="side-menu" id="side_menu"></div>
-				<div class="surrender-button">
+				<div class="surrender-button"
+					hx-post="/battle/surrender/show"
+					hx-swap="outerHTML"
+					hx-target="#player_info"
+					hx-trigger="click"
+				>
 					<div>Surrender</div>
 				</div>
 				<div hx-trigger="every 0.5s" hx-post="/battle/shots/history" hx-target="#side_menu" hx-swap="innerHTML"></div>
 			</div>
 			<div id="player_info"></div>
-
 			<div hx-trigger="every 0.7s" hx-get="/battle/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
 			<div hx-trigger="every 0.5s" hx-get="/battle/shots" hx-target="this" hx-swap="none"></div>
 			<div hx-trigger="every 0.5s" hx-post="/battle/timer" hx-target="#timer" hx-swap="innerHTML"></div>
@@ -274,14 +284,19 @@ templ MakePlayerAccuracyField() {
 	>Accuracy: { strconv.FormatFloat(data.GetPlayerAccuracy(), 'f', 1, 64) }%</div>
 }
 
-templ MakeShotsHistoryItem(coord string, res string, owner string) {
+templ MakeShotsHistoryItem(coord string, res string, owner string, isPlayer bool) {
 	<style>
-	.shot-history-container {
+	.shot-history-container-enemy, .shot-history-container-player {
 		padding-top: 2px;
 		width: 100%;
 		height: 38px;
+		min-height: 38px;
 		background-color: rgba(48, 48, 48, 0.9);
 		display: flex;
+	}
+
+	.shot-history-container-player {
+		background-color: rgba(80, 80, 80, 0.9);
 	}
 
 	.shot-history-coord {
@@ -317,10 +332,18 @@ templ MakeShotsHistoryItem(coord string, res string, owner string) {
 	}
 </style>
 	<body>
-		<div class="shot-history-container">
-			<div class="shot-history-coord">{ coord }</div>
-			<div class="shot-history-result">{ res }</div>
-			<div class="shot-history-nick">{ owner }</div>
-		</div>
+		if (isPlayer) {
+			<div class="shot-history-container-player">
+				<div class="shot-history-coord">{ coord }</div>
+				<div class="shot-history-result">{ res }</div>
+				<div class="shot-history-nick">{ owner }</div>
+			</div>
+		} else {
+			<div class="shot-history-container-enemy">
+				<div class="shot-history-coord">{ coord }</div>
+				<div class="shot-history-result">{ res }</div>
+				<div class="shot-history-nick">{ owner }</div>
+			</div>
+		}
 	</body>
 }

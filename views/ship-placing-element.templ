@@ -356,12 +356,10 @@ templ MakeSimplePlacementBoard() {
 	</html>
 }
 
-
-
 templ MakeRandomPlacementBoard() {
-<!DOCTYPE html>
-<html lang="en">
-<style>
+	<!DOCTYPE html>
+	<html lang="en">
+		<style>
 	.top-bar button {
 		font-size: 18px;
 		margin: 0 10px;
@@ -495,32 +493,27 @@ templ MakeRandomPlacementBoard() {
 	}
 
 </style>
-<head>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
-	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-	<title>Layout Example</title>
-</head>
-<body>
-<div class="container" id="placement_container">
-	@MakeRandomBoard()
-	<div class="main-container">
-		<div class="squares-container">
-		</div>
-		<div class="squares-container">
-		</div>
-		<div class="squares-container">
-		</div>
-		<div class="squares-container">
-		</div>
-	</div>
-</div>
-<div class="randomise-btn" hx-get="/placement/randomise" hx-target="#placement_menu" hx-swap="outerHTML">Randomise</div>
-</body>
-</html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<title>Layout Example</title>
+		</head>
+		<body>
+			<div class="container" id="placement_container">
+				@MakeRandomBoard()
+				<div class="main-container">
+					<div class="squares-container"></div>
+					<div class="squares-container"></div>
+					<div class="squares-container"></div>
+					<div class="squares-container"></div>
+				</div>
+			</div>
+			<div class="randomise-btn" hx-get="/placement/randomise" hx-target="#placement_menu" hx-swap="outerHTML">Randomise</div>
+		</body>
+	</html>
 }
-
 
 func chosenButton(index int, isAdvanced bool) string {
 	return fmt.Sprintf(`{"chosenOption": "%s", "isAdvanced": "%s"}`, strconv.Itoa(index), strconv.FormatBool(isAdvanced))

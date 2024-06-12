@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.2">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.3 // Routes path refactoring">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/battle-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/battle-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/board-cell-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-cell-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/board-element.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/player-info-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-elements.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ranking-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ranking-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ship-placing-element.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ship-placing-element.templ" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +151,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.7 // Settings page rework" />
     <MESSAGE value="Battleships v3.7" />
     <MESSAGE value="Battleships v3.8 // New coordinate post system" />
     <MESSAGE value="Battleships v3.8" />
@@ -168,7 +175,8 @@
     <MESSAGE value="Battleships v5.1" />
     <MESSAGE value="Battleships v5.2 // New sunk cell appearance" />
     <MESSAGE value="Battleships v5.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v5.2" />
+    <MESSAGE value="Battleships v5.3 // Routes path refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v5.3 // Routes path refactoring" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>
@@ -194,7 +202,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/server/battle-handlers.go</url>
-          <line>19</line>
+          <line>20</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>

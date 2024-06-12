@@ -2,6 +2,7 @@ package server
 
 import (
 	"Battleships/data"
+	"Battleships/requests"
 	"Battleships/views"
 	"Battleships/web/battle"
 	"github.com/gin-gonic/gin"
@@ -88,6 +89,14 @@ func (app *Config) HandlePlayerAccuracy(c *gin.Context) {
 func (app *Config) HandleShotsHistory(c *gin.Context) {
 	for index, shot := range data.GetShotsHistory() {
 		shot = data.GetShotsHistory()[len(data.GetShotsHistory())-1-index]
-		Render(c, 200, views.MakeShotsHistoryItem(shot.Shot.Coord, strings.Title(shot.Shot.ShotResult), shot.Owner))
+		Render(c, 200, views.MakeShotsHistoryItem(shot.Shot.Coord, strings.Title(shot.Shot.ShotResult), shot.Owner, shot.Owner == data.GetPlayerNickname()))
 	}
+}
+
+func (app *Config) HandleSurrenderWindowShow(c *gin.Context) {
+	Render(c, 200, views.MakeSurrenderWindow())
+}
+
+func (app *Config) HandleSurrender(c *gin.Context) {
+	requests.GameAbandon(data.GetToken())
 }

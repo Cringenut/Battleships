@@ -120,7 +120,7 @@ templ MakeEnemyBoard() {
 }
 
 templ MakeRandomBoard() {
-<style>
+	<style>
 	.random-board {
 		width: 400px;
 		aspect-ratio: 1;
@@ -136,20 +136,20 @@ templ MakeRandomBoard() {
 		gap: 2px; /* Optional gap between cells */
 	}
 </style>
-<html>
-<head>
-	<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="boards.css"/>
-	<title>Battle</title>
-</head>
-<body>
-<div class="random-board">
-	for row := 0; row < 10; row++ {
-	for col := 0; col < 10; col++ {
-	@MakeRandomBoardCell(data.CalculateCellCoord(row, col))
-	}
-	}
-</div>
-</body>
-</html>
+	<html>
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<link rel="stylesheet" href="boards.css"/>
+			<title>Battle</title>
+		</head>
+		<body>
+			<div class="random-board">
+				for row := 0; row < 10; row++ {
+					for col := 0; col < 10; col++ {
+						@MakeRandomBoardCell(data.CalculateCellCoord(row, col))
+					}
+				}
+			</div>
+		</body>
+	</html>
 }
