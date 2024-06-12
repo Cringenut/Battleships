@@ -1,6 +1,6 @@
 package views
 
-templ MakeErrorScreenContainer() {
+templ MakeErrorScreenContainer(handlerPath string) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,23 +67,27 @@ templ MakeErrorScreenContainer() {
     </style>
 </head>
 <body>
+<div
+        hx-get={ handlerPath }
+        hx-trigger="every 0.2s"
+        hx-swap="innerHTML"
+        hx-target="#error_container"
+></div>
 <div class="error-container">
-    @MakeErrorMessage()
+    <div class="left-area" id="error_container"></div>
 </div>
 </body>
 </html>
 }
 
 templ MakeErrorMessage() {
-<div class="left-area">
-    <div class="error-message">
-        <div class="error-icon">
-            <img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"></img>
-        </div>
-        <div class="error-text">
-            Can't rename "Videos" because a file or folder with that name already exists
-            Can't rename "Videos" because a file or folder with that name already exists
-        </div>
+<div class="error-message">
+    <div class="error-icon">
+        <img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"></img>
+    </div>
+    <div class="error-text">
+        Can't rename "Videos" because a file or folder with that name already exists
+        Can't rename "Videos" because a file or folder with that name already exists
     </div>
 </div>
 }

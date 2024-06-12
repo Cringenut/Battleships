@@ -15,7 +15,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/settings", app.HandleSettings)
 	app.Router.GET("/ranking", app.HandleRankingPage)
 
-	// Handlers for main menu
+	// Main menu handlers
 	app.Router.POST("/", app.HandleMainMenuContainer)
 	app.Router.GET("/battle/redirect", app.HandleMenuRedirectToBattle)
 	app.Router.POST("/multiplayer/wait", app.HandleMultiplayerStartWait)
@@ -24,7 +24,7 @@ func (app *Config) Routes() {
 	app.Router.POST("/multiplayer/join", app.HandleMultiplayerJoinLobby)
 	app.Router.GET("/multiplayer/wait/check", app.HandleMultiplayerWait)
 
-	// Handlers for settings
+	// Settings handlers
 	app.Router.POST("/settings/save", app.HandleSettingsSave)
 	app.Router.POST("/placement/page")
 	app.Router.POST("/placement/place", app.HandlePlacementCell)
@@ -38,7 +38,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/placement/randomise", app.HandlePlacementRandomise)
 	app.Router.POST("/placement/back")
 
-	// Handlers for battle
+	// Battle handlers
 	app.Router.GET("/battle/status", app.HandleGameStatus)
 	app.Router.GET("/battle/board/target/enemy", app.HandleEnemyTarget)
 	app.Router.GET("/battle/board/target/player", app.HandlePlayerTarget)
@@ -53,5 +53,8 @@ func (app *Config) Routes() {
 	app.Router.POST("/battle/shots/history", app.HandleShotsHistory)
 	app.Router.POST("/battle/surrender/show", app.HandleSurrenderWindowShow)
 	app.Router.POST("/battle/surrender", app.HandleSurrender)
+
+	// Errors handlers
+	app.Router.GET("/errors/menu", app.HandleMainMenuErrors)
 
 }
