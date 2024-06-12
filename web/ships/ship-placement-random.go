@@ -18,6 +18,10 @@ func init() {
 
 // Going slice with shipsSizes and try to place each one from slice
 func GenerateRandomCoordinates() {
+	// Reset the board and randomShips slice
+	board = [10][10]bool{}
+	randomShips = []string{}
+
 	for _, size := range shipSizes {
 		placeShipRandomly(size)
 	}

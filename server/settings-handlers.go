@@ -61,3 +61,9 @@ func (app *Config) HandlePlacementShow(c *gin.Context) {
 	data.SetCurrentPlacementPlacementType(data.GetCurrentSettingsPlacementType())
 	Render(c, 200, views.MakeShipPlacementElement())
 }
+
+// Randomise ships when randomise button is clicked
+func (app *Config) HandlePlacementRandomise(c *gin.Context) {
+	ships.GenerateRandomCoordinates()
+	Render(c, 200, views.MakePlacementElement())
+}

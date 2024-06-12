@@ -121,7 +121,20 @@ templ MakeEnemyBoard() {
 
 templ MakeRandomBoard() {
 <style>
-
+	.random-board {
+		width: 400px;
+		aspect-ratio: 1;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 2px;
+		border-radius: 2px;
+		background-color: rgba(44, 44, 44, 0.9);
+		display: grid;
+		grid-template-columns: repeat(10, 1fr); /* 10 columns */
+		grid-template-rows: repeat(10, 1fr); /* 10 rows */
+		gap: 2px; /* Optional gap between cells */
+	}
 </style>
 <html>
 <head>
@@ -130,7 +143,7 @@ templ MakeRandomBoard() {
 	<title>Battle</title>
 </head>
 <body>
-<div class={ GetPlacementBoardClass() } id="placement-board">
+<div class="random-board">
 	for row := 0; row < 10; row++ {
 	for col := 0; col < 10; col++ {
 	@MakeRandomBoardCell(data.CalculateCellCoord(row, col))

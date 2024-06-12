@@ -35,6 +35,8 @@ func (app *Config) Routes() {
 	app.Router.POST("/placement/cancel", app.HandlePlacementCancel)
 	app.Router.POST("/placement/save", app.HandlePlacementSave)
 	app.Router.POST("/placement/show", app.HandlePlacementShow)
+	app.Router.GET("/placement/randomise", app.HandlePlacementRandomise)
+	app.Router.POST("/placement/back")
 
 	// Handlers for battle
 	app.Router.GET("/status", app.HandleGameStatus)

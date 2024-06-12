@@ -465,6 +465,20 @@ templ MakeRandomPlacementBoard() {
 		color: white;
 	}
 
+	.randomise-btn {
+		margin-top: 20px;
+		font-size: 14px;
+		color: #e7e6e6;
+		cursor: pointer;
+		padding: 10px 20px;
+		border-radius: 5px;
+		text-align: center;
+	}
+
+	.randomise-btn:hover {
+		color: white;
+	}
+
 </style>
 <head>
 	<meta charset="UTF-8"/>
@@ -487,6 +501,7 @@ templ MakeRandomPlacementBoard() {
 		</div>
 	</div>
 </div>
+<div class="randomise-btn" hx-get="/placement/randomise" hx-target="#placement_menu" hx-swap="outerHTML">Randomise</div>
 </body>
 </html>
 }
