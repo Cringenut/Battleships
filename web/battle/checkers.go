@@ -30,8 +30,13 @@ func CheckWin() bool {
 
 // Used to append enemy shots to history and set them
 func CheckEnemyShots() {
+	// Using this to later find if new hit was a sunk
+	// If we use shots from the server instead in case of last shots being hits and last one sunk
+	// They all would be marked as sunk
+	currentShots := data.GetEnemyShots()
 	// Going through difference between shots from server and that are already set
-	for index, shot := range data.GetGameStatus().OppShots[len(data.GetEnemyShots()):] {
+	for _, shot := range data.GetGameStatus().OppShots[len(data.GetEnemyShots()):] {
+		currentShots = append(currentShots, shot)
 
 		// If not player ship
 		if !data.StringSliceContains(data.GetPlayerShips(), shot) {
@@ -55,7 +60,7 @@ func CheckEnemyShots() {
 				// If any of cells wasn't hit yet append as hit
 				// Check the length as GetEnemyShots length + current index
 				// Otherwise sunk can be added multiple times
-				if !data.StringSliceContains(data.GetGameStatus().OppShots[:len(data.GetEnemyShots())+index-1], playerCoords) {
+				if !data.StringSliceContains(currentShots, playerCoords) {
 					data.AppendShotsHistory(shot, "hit", data.GetEnemyData().Nickname)
 					goto Set
 				}
