@@ -1,0 +1,89 @@
+package views
+
+templ MakeErrorScreenContainer() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"/>
+    <style>
+        .error-container {
+            display: flex;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            pointer-events:none;
+        }
+
+        .left-area {
+            margin-left: 10px;
+            margin-top: 30%;
+            width: 340px;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            top: 0;
+            pointer-events:none;
+        }
+
+        .error-message {
+            color: white;
+            display: flex;
+            align-items: center;
+            border: 2px solid white;
+            background-color: rgba(44, 44, 44, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 300px;
+            max-width: 300px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+            margin: 3px;
+            word-break: break-word;
+            user-select: none;
+            pointer-events:none;
+        }
+
+        .error-icon {
+            margin-right: 10px;
+            pointer-events:none;
+        }
+
+        .error-icon img {
+            width: 24px;
+            height: 24px;
+            pointer-events:none;
+        }
+
+        .error-text {
+            font-size: 1em;
+            line-height: 1.2em;
+            pointer-events:none;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    @MakeErrorMessage()
+</div>
+</body>
+</html>
+}
+
+templ MakeErrorMessage() {
+<div class="left-area">
+    <div class="error-message">
+        <div class="error-icon">
+            <img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"></img>
+        </div>
+        <div class="error-text">
+            Can't rename "Videos" because a file or folder with that name already exists
+            Can't rename "Videos" because a file or folder with that name already exists
+        </div>
+    </div>
+</div>
+}

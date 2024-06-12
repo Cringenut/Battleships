@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.4 // Surrender window">
+    <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.5 // Enemy shots history fix">
+      <change afterPath="$PROJECT_DIR$/data/errors-data.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/error-elements.templ" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/battle/checkers.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/battle/checkers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +144,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Battleships v3.8 // New coordinate post system" />
     <MESSAGE value="Battleships v3.8" />
     <MESSAGE value="Battleships v3.9" />
     <MESSAGE value="Battleships v4.0 // Fully working settings page" />
@@ -167,7 +168,8 @@
     <MESSAGE value="Battleships v5.2" />
     <MESSAGE value="Battleships v5.3 // Routes path refactoring" />
     <MESSAGE value="Battleships v5.4 // Surrender window" />
-    <option name="LAST_COMMIT_MESSAGE" value="Battleships v5.4 // Surrender window" />
+    <MESSAGE value="Battleships v5.5 // Enemy shots history fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Battleships v5.5 // Enemy shots history fix" />
   </component>
   <component name="VgoProject">
     <auto-vendoring-mode>false</auto-vendoring-mode>

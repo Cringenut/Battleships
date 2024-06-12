@@ -1,5 +1,10 @@
 package data
 
+import (
+	"sync"
+	"time"
+)
+
 type PlacementType int
 
 const (
@@ -98,4 +103,15 @@ type StatsResponse struct {
 type ShotHistory struct {
 	Shot  ShotResponse
 	Owner string
+}
+
+type CustomError struct {
+	Message string
+	Created time.Time
+	Timer   *time.Timer
+}
+
+type ErrorSlice struct {
+	errors []CustomError
+	mu     sync.Mutex
 }
