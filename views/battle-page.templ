@@ -159,7 +159,7 @@ templ MakeBattlePage() {
 				<div class="top-element">
 					<div
 						class="nickname-text"
-						hx-post="/player/info"
+						hx-post="/battle/player/info"
 						hx-swap="outerHTML"
 						hx-target="#player_info"
 						hx-trigger="click"
@@ -185,7 +185,7 @@ templ MakeBattlePage() {
 				<div class="top-element1">
 					<div
 						class="nickname-text"
-						hx-post="/enemy/info"
+						hx-post="/battle/enemy/info"
 						hx-swap="outerHTML"
 						hx-target="#player_info"
 						hx-trigger="click"
@@ -205,10 +205,10 @@ templ MakeBattlePage() {
 			</div>
 			<div id="player_info"></div>
 
-			<div hx-trigger="every 0.7s" hx-get="/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
-			<div hx-trigger="every 0.5s" hx-get="/shots" hx-target="this" hx-swap="none"></div>
+			<div hx-trigger="every 0.7s" hx-get="/battle/board/target/enemy" hx-target="#enemy_board" hx-swap="outerHTML"></div>
+			<div hx-trigger="every 0.5s" hx-get="/battle/shots" hx-target="this" hx-swap="none"></div>
 			<div hx-trigger="every 0.5s" hx-post="/battle/timer" hx-target="#timer" hx-swap="innerHTML"></div>
-			<div hx-trigger="every 0.2s" hx-get="/board/target/player" hx-target="#player_board" hx-swap="outerHTML"></div>
+			<div hx-trigger="every 0.2s" hx-get="/battle/board/target/player" hx-target="#player_board" hx-swap="outerHTML"></div>
 		</body>
 	</html>
 }
@@ -229,7 +229,7 @@ templ MakeTurnText() {
 			<div
 				class="turn-text"
 				id="turn"
-				hx-get="/status"
+				hx-get="/battle/status"
 				hx-trigger="every 0.8s"
 				hx-target="this"
 				hx-swap="outerHTML"

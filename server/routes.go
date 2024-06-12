@@ -17,11 +17,11 @@ func (app *Config) Routes() {
 
 	// Handlers for main menu
 	app.Router.POST("/", app.HandleMainMenuContainer)
+	app.Router.GET("/battle/redirect", app.HandleMenuRedirectToBattle)
 	app.Router.POST("/multiplayer/wait", app.HandleMultiplayerStartWait)
 	app.Router.POST("/multiplayer/wait/refresh", app.HandleMultiplayerRefresh)
 	app.Router.POST("/multiplayer/lobbies", app.HandleMultiplayerLobbies)
 	app.Router.POST("/multiplayer/join", app.HandleMultiplayerJoinLobby)
-	app.Router.GET("/battle/redirect", app.HandleMenuRedirectToBattle)
 	app.Router.GET("/multiplayer/wait/check", app.HandleMultiplayerWait)
 
 	// Handlers for settings
@@ -39,13 +39,13 @@ func (app *Config) Routes() {
 	app.Router.POST("/placement/back")
 
 	// Handlers for battle
-	app.Router.GET("/status", app.HandleGameStatus)
-	app.Router.GET("/board/target/enemy", app.HandleEnemyTarget)
-	app.Router.GET("/board/target/player", app.HandlePlayerTarget)
-	app.Router.POST("/handle/fire", app.HandlePlayerShot)
-	app.Router.GET("/shots", app.HandleSetEnemyShots)
-	app.Router.POST("/player/info", app.HandlePlayerInfo)
-	app.Router.POST("/enemy/info", app.HandleEnemyInfo)
+	app.Router.GET("/battle/status", app.HandleGameStatus)
+	app.Router.GET("/battle/board/target/enemy", app.HandleEnemyTarget)
+	app.Router.GET("/battle/board/target/player", app.HandlePlayerTarget)
+	app.Router.POST("/battle/fire", app.HandlePlayerShot)
+	app.Router.GET("/battle/shots", app.HandleSetEnemyShots)
+	app.Router.POST("/battle/player/info", app.HandlePlayerInfo)
+	app.Router.POST("/battle/enemy/info", app.HandleEnemyInfo)
 	app.Router.POST("/battle/timer", app.HandleBattleTimer)
 	app.Router.POST("/battle/ended", app.HandleBattleEnded)
 	app.Router.POST("/battle/enemy/accuracy", app.HandleEnemyAccuracy)
