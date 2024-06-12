@@ -74,5 +74,6 @@ func IsAnyShipMissingCoords() bool {
 		}
 		return false
 	}
-	return true
+	// For other cases check is not needed
+	return false
 }
