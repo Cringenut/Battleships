@@ -46,7 +46,7 @@ func (app *Config) Routes() {
 	app.Router.GET("/shots", app.HandleSetEnemyShots)
 	app.Router.POST("/player/info", app.HandlePlayerInfo)
 	app.Router.POST("/enemy/info", app.HandleEnemyInfo)
-	app.Router.POST("/timer", app.HandleBattleTimer)
+	app.Router.POST("/battle/timer", app.HandleBattleTimer)
 	app.Router.POST("/battle/ended", app.HandleBattleEnded)
 	app.Router.POST("/battle/enemy/accuracy", app.HandleEnemyAccuracy)
 	app.Router.POST("/battle/player/accuracy", app.HandlePlayerAccuracy)

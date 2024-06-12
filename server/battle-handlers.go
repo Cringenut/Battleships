@@ -19,6 +19,7 @@ func (app *Config) HandleGameStatus(c *gin.Context) {
 // Update enemy board
 func (app *Config) HandleEnemyTarget(c *gin.Context) {
 	time.Sleep(100 * time.Millisecond)
+	println("Enemy board")
 	Render(c, 200, views.MakeEnemyBoard())
 }
 
