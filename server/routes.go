@@ -56,5 +56,7 @@ func (app *Config) Routes() {
 
 	// Errors handlers
 	app.Router.GET("/errors/menu", app.HandleMainMenuErrors)
+	app.Router.GET("/errors/settings", app.HandleSettingsErrors)
+	app.Router.GET("/errors/battle", app.HandleBattleErrors)
 
 }

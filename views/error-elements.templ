@@ -15,6 +15,7 @@ templ MakeErrorScreenContainer(handlerPath string) {
             width: 100%;
             overflow: hidden;
             pointer-events:none;
+            z-index: 9999999;
         }
 
         .left-area {
@@ -29,6 +30,7 @@ templ MakeErrorScreenContainer(handlerPath string) {
             align-items: flex-start;
             top: 0;
             pointer-events:none;
+            z-index: 9999999;
         }
 
         .error-message {
@@ -46,23 +48,27 @@ templ MakeErrorScreenContainer(handlerPath string) {
             word-break: break-word;
             user-select: none;
             pointer-events:none;
+            z-index: 9999999;
         }
 
         .error-icon {
             margin-right: 10px;
             pointer-events:none;
+            z-index: 9999999;
         }
 
         .error-icon img {
             width: 24px;
             height: 24px;
             pointer-events:none;
+            z-index: 9999999;
         }
 
         .error-text {
             font-size: 1em;
             line-height: 1.2em;
             pointer-events:none;
+            z-index: 9999999;
         }
     </style>
 </head>
@@ -80,14 +86,13 @@ templ MakeErrorScreenContainer(handlerPath string) {
 </html>
 }
 
-templ MakeErrorMessage() {
+templ MakeErrorMessage(errorMessage string) {
 <div class="error-message">
     <div class="error-icon">
         <img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"></img>
     </div>
     <div class="error-text">
-        Can't rename "Videos" because a file or folder with that name already exists
-        Can't rename "Videos" because a file or folder with that name already exists
+        { errorMessage }
     </div>
 </div>
 }

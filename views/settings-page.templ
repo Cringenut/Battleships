@@ -172,6 +172,7 @@ templ MakeSettingsPage(nickname string, description string) {
 			<title>Settings</title>
 		</head>
 		<body>
+		@MakeErrorScreenContainer("/errors/settings")
 			<div class="content">
 				<h1 class="header">Settings</h1>
 				<div class="section">

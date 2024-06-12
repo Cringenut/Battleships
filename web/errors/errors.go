@@ -1,9 +1,11 @@
-package web
+package errors
 
 import (
 	"sync"
 	"time"
 )
+
+const lifeTime = 3 * time.Second
 
 type CustomError struct {
 	Message string
@@ -17,9 +19,19 @@ type ErrorSlice struct {
 }
 
 var mainMenuErrors ErrorSlice
+var settingsErrors ErrorSlice
+var battleErrors ErrorSlice
 
 func GetMainMenuErrors() *ErrorSlice {
 	return &mainMenuErrors
+}
+
+func GetSettingsErrors() *ErrorSlice {
+	return &settingsErrors
+}
+
+func GetBattleErrors() *ErrorSlice {
+	return &battleErrors
 }
 
 func (es *ErrorSlice) AddError(message string) {
@@ -28,8 +40,7 @@ func (es *ErrorSlice) AddError(message string) {
 
 	customError := CustomError{
 		Message: message,
-		Created: time.Now(),
-		Timer:   time.NewTimer(5 * time.Second),
+		Timer:   time.NewTimer(lifeTime),
 	}
 
 	es.errors = append(es.errors, customError)
@@ -65,6 +76,14 @@ func (es *ErrorSlice) ListErrors() []string {
 	return errors
 }
 
-func AddMainMenuError() {
-	mainMenuErrors.AddError("Test")
+func AddMainMenuError(errorMessage string) {
+	mainMenuErrors.AddError(errorMessage)
+}
+
+func AddSettingsError(errorMessage string) {
+	settingsErrors.AddError(errorMessage)
+}
+
+func AddBattleError(errorMessage string) {
+	settingsErrors.AddError(errorMessage)
 }

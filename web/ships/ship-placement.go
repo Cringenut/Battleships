@@ -2,6 +2,7 @@ package ships
 
 import (
 	"Battleships/data"
+	"Battleships/web/errors"
 	"fmt"
 	"math"
 	"strings"
@@ -40,6 +41,8 @@ func SetFirstCoord(coord string) {
 
 	if len(endCoords) == 0 {
 		fmt.Println("Invalid ship placement. Please choose different coordinate.")
+		errors.AddSettingsError("Invalid ship placement. Please choose different coordinate")
+
 		ClearData()
 	}
 }
@@ -51,6 +54,7 @@ func SetLastCoord(coord string) {
 	if !validEnd || !data.StringSliceContains(endCoords, coord) {
 
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
+		errors.AddSettingsError("Invalid end coordinate. Please select a valid end coordinate")
 		// Used to keep trying to place the same ship
 		// Because clear data clears placingShip too
 		tempShip := placingShip
@@ -81,6 +85,8 @@ func SetNextCoord(coord string) {
 	// Checking if coordinate is within board and among endCoords
 	if !validNext || !data.StringSliceContains(endCoords, coord) {
 		fmt.Println("Invalid end coordinate. Please select a valid end coordinate from the list.")
+		errors.AddSettingsError("Invalid end coordinate. Please select a valid end coordinate from the list")
+
 		ClearData()
 		return
 	}
@@ -112,6 +118,7 @@ func SetNextCoord(coord string) {
 	// If no space left to place clear current ship placement
 	if len(endCoords) == 0 {
 		fmt.Println("Invalid ship placement. Please choose different coordinate.")
+		errors.AddSettingsError("Invalid ship placement. Please choose different coordinate")
 		ClearData()
 	}
 }

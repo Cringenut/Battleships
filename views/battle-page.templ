@@ -146,6 +146,7 @@ templ MakeBattlePage() {
 	</style>
 		</head>
 		<body id="battle_body">
+		@MakeErrorScreenContainer("/errors/battle")
 			<script>
 			document.addEventListener("htmx:afterRequest", function () {
 				let timerElement = document.getElementById("time")

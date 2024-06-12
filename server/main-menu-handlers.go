@@ -28,20 +28,13 @@ func (app *Config) HandleMainMenuContainer(c *gin.Context) {
 	case "battle":
 		return
 	case "single":
-		/*
-				// If battle didn't start we try to start it again until it returns no error
-			Battle:
-				err := battle.StartBattle("", true)
-				if err != nil {
-					goto Battle
-				}
-				Render(c, 200, views.MakeSingleplayerChosen())
-		*/
-
-		//Temp to check error functionality
-		web.AddMainMenuError()
-		web.AddMainMenuError()
-		web.AddMainMenuError()
+		// If battle didn't start we try to start it again until it returns no error
+	Battle:
+		err := battle.StartBattle("", true)
+		if err != nil {
+			goto Battle
+		}
+		Render(c, 200, views.MakeSingleplayerChosen())
 	case "multiplayer":
 		Render(c, 200, views.MakeLobbiesList())
 	case "back":
