@@ -18,6 +18,7 @@ type ErrorSlice struct {
 	mu     sync.Mutex
 }
 
+// Slices of errors
 var mainMenuErrors ErrorSlice
 var settingsErrors ErrorSlice
 var battleErrors ErrorSlice
@@ -45,7 +46,7 @@ func (es *ErrorSlice) AddError(message string) {
 
 	es.errors = append(es.errors, customError)
 
-	// Start the timer to remove the error after 5 seconds
+	// Start the timer to remove the error
 	go func(err CustomError) {
 		<-err.Timer.C
 		es.removeError(err)

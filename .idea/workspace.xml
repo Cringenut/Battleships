@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.6">
-      <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/main-menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/main-menu/main-menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ranking.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ranking/ranking.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/redirect.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/redirect/redirect.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings/settings.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/errors-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/errors-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main-menu-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/main-menu-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/ranking-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/ranking-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/errors/errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/errors/errors.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,11 +190,6 @@
           <url>file://$PROJECT_DIR$/server/battle-handlers.go</url>
           <line>20</line>
           <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/errors/errors.go</url>
-          <line>82</line>
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

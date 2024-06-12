@@ -6,9 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Iterating through errors required for this handler
 func (app *Config) HandleMainMenuErrors(c *gin.Context) {
 	for index, _ := range errors.GetMainMenuErrors().ListErrors() {
+		// Iterating from back to front
 		newError := errors.GetMainMenuErrors().ListErrors()[len(errors.GetMainMenuErrors().ListErrors())-1-index]
+		// If empty error message don't render
 		if newError != "" {
 			Render(c, 200, views.MakeErrorMessage(newError))
 		}
