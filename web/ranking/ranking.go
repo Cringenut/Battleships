@@ -1,4 +1,4 @@
-package web
+package ranking
 
 import (
 	"Battleships/data"

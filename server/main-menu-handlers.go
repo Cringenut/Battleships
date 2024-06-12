@@ -2,8 +2,9 @@ package server
 
 import (
 	"Battleships/views"
-	"Battleships/web"
 	"Battleships/web/battle"
+	"Battleships/web/main-menu"
+	"Battleships/web/redirect"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
@@ -54,19 +55,19 @@ func (app *Config) HandleMultiplayerStartWait(c *gin.Context) {
 
 // Refresh handler
 func (app *Config) HandleMultiplayerRefresh(c *gin.Context) {
-	web.RefreshLobby()
+	main_menu.RefreshLobby()
 }
 
 // Show all lobbies inside list
 func (app *Config) HandleMultiplayerLobbies(c *gin.Context) {
-	for index, server := range web.FindLobbies() {
+	for index, server := range main_menu.FindLobbies() {
 		Render(c, 200, views.MakePlayerLobby(server.Nick, index))
 	}
 }
 
 // Join someones lobby
 func (app *Config) HandleMultiplayerJoinLobby(c *gin.Context) {
-	web.JoinPlayerLobby(c)
+	main_menu.JoinPlayerLobby(c)
 }
 
 func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
@@ -74,12 +75,12 @@ func (app *Config) HandleMenuRedirectToBattle(c *gin.Context) {
 	// Giving some time to cancel the battle
 	time.Sleep(1000 * time.Millisecond)
 	// Redirecting only after all the data is set
-	web.CheckBattleDataIntegrity()
-	web.Redirect(c, "/battle")
+	main_menu.CheckBattleDataIntegrity()
+	redirect.Redirect(c, "/battle")
 }
 
 // Simply checking if someone has joined our lobby
 func (app *Config) HandleMultiplayerWait(c *gin.Context) {
 	println("Checking battle")
-	web.CheckIfSomeoneJoinedLobby(c)
+	main_menu.CheckIfSomeoneJoinedLobby(c)
 }

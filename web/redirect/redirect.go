@@ -1,4 +1,4 @@
-package web
+package redirect
 
 import (
 	"github.com/gin-gonic/gin"

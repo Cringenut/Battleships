@@ -1,7 +1,9 @@
-package web
+package settings
 
 import (
 	"Battleships/data"
+	"Battleships/web/errors"
+	"Battleships/web/redirect"
 	"Battleships/web/ships"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -35,6 +37,7 @@ func SaveSettings(c *gin.Context) string {
 
 	// If player nickname is empty stay on the page
 	if saveNickname == "" {
+		errors.AddSettingsError("Nickname is required")
 		return saveDescription
 	}
 
@@ -47,9 +50,11 @@ func SaveSettings(c *gin.Context) string {
 		data.SetCurrentPlacementPlacementType(data.GetCurrentSettingsPlacementType())
 
 		data.SetPlayerShips(ships.GetAllShipsCoords())
+		redirect.Redirect(c, "/")
+	} else {
+		errors.AddSettingsError("Current ship placement missing coordinates")
 	}
 
-	Redirect(c, "/")
 	return saveDescription
 }
 
@@ -58,6 +63,7 @@ func SwitchCurrentPlacementType(isNext bool) {
 	currentIndex := findPlacementIndex(data.GetCurrentPlacementPlacementType())
 	if currentIndex == -1 {
 		fmt.Println("Current placement type not found.")
+		errors.AddSettingsError("Current placement type not found")
 		return
 	}
 
@@ -108,6 +114,8 @@ func CanCurrentPlacementBeSaved() bool {
 	// Setting the currentSettingsPlacementType for the settings page
 	if result == true {
 		data.SetCurrentSettingsPlacementType(data.GetCurrentPlacementPlacementType())
+	} else {
+		errors.AddSettingsError("Current ship placement missing coordinates")
 	}
 	return result
 }

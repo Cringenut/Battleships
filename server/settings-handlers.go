@@ -3,26 +3,26 @@ package server
 import (
 	"Battleships/data"
 	"Battleships/views"
-	"Battleships/web"
+	"Battleships/web/settings"
 	"Battleships/web/ships"
 	"github.com/gin-gonic/gin"
 )
 
 // Make it so description stays the same after the page is refreshed when settings couldn't be saved
 func (app *Config) HandleSettingsSave(c *gin.Context) {
-	description := web.SaveSettings(c)
+	description := settings.SaveSettings(c)
 	Render(c, 200, views.MakeSettingsPage("", description))
 }
 
 // Handle click at placement cell
 func (app *Config) HandlePlacementCell(c *gin.Context) {
-	web.PlacementCellClicked(c)
+	settings.PlacementCellClicked(c)
 	Render(c, 200, views.MakePlacementElement())
 }
 
 // Switch placement placement type switch
 func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
-	web.SwitchPlacementType(c)
+	settings.SwitchPlacementType(c)
 	// Clearing all the placement data to avoid visual bugs
 	ships.SetPlacingShip(-1)
 	Render(c, 200, views.MakeShipPlacementElement())
@@ -30,7 +30,7 @@ func (app *Config) HandlePlacementTypeSwitch(c *gin.Context) {
 
 // Choosing ship to place
 func (app *Config) HandlePlacementChosen(c *gin.Context) {
-	web.ShipToPlaceChosen(c)
+	settings.ShipToPlaceChosen(c)
 	Render(c, 200, views.MakePlacementElement())
 }
 
@@ -48,7 +48,7 @@ func (app *Config) HandlePlacementCancel(c *gin.Context) {
 
 func (app *Config) HandlePlacementSave(c *gin.Context) {
 	// If ships are not missing any coord save the placement
-	if !web.CanCurrentPlacementBeSaved() {
+	if !settings.CanCurrentPlacementBeSaved() {
 		Render(c, 200, views.MakeShipPlacementElement())
 	}
 	// If save successful set placement type for settings

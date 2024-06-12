@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41bce4d4-e3ff-4fd3-b103-fea97e29cdab" name="Changes" comment="Battleships v5.6">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/errors-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/errors-handlers.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main-menu-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main-menu-handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/battle-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/battle-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/error-elements.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/error-elements.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/settings-page.templ" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings-page.templ" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/errors/errors.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/ships/ship-placement.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ships/ship-placement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/page-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/page-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/settings-handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/settings-handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/main-menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/main-menu/main-menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/ranking.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/ranking/ranking.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/redirect.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/redirect/redirect.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/settings.go" beforeDir="false" afterPath="$PROJECT_DIR$/web/settings/settings.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +81,11 @@
       <recent name="C:\Battleships\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Battleships\web\settings" />
+      <recent name="D:\Battleships\web\redirects" />
+      <recent name="D:\Battleships\web\ranking" />
+      <recent name="D:\Battleships\web\main-menu" />
       <recent name="D:\Battleships\web\errors" />
-      <recent name="D:\Battleships\web\ships" />
-      <recent name="D:\Battleships\web\battle" />
-      <recent name="D:\Battleships\views" />
-      <recent name="D:\Battleships\views\redirectors" />
     </key>
   </component>
   <component name="RunManager">
@@ -184,13 +182,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/ships/ship-placement-data.go</url>
-          <line>143</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/web/settings.go</url>
-          <line>13</line>
+          <url>file://$PROJECT_DIR$/web/settings/settings.go</url>
+          <line>14</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">

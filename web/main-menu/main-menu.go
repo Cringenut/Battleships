@@ -1,9 +1,10 @@
-package web
+package main_menu
 
 import (
 	"Battleships/data"
 	"Battleships/requests"
 	"Battleships/web/battle"
+	"Battleships/web/redirect"
 	"github.com/gin-gonic/gin"
 	"io"
 	"net/url"
@@ -55,7 +56,7 @@ func CheckIfSomeoneJoinedLobby(c *gin.Context) {
 	// Check condition using the opponent
 	// If opponent is set that means the game status is valid
 	if status.Opponent != "" {
-		Redirect(c, "/battle")
+		redirect.Redirect(c, "/battle")
 	}
 }
 
@@ -74,7 +75,7 @@ func JoinPlayerLobby(c *gin.Context) {
 
 	// Starting battle passing enemy nickname and lack of bot
 	err = battle.StartBattle(chosenLobby, false)
-	Redirect(c, "/battle")
+	redirect.Redirect(c, "/battle")
 
 	if err != nil {
 		println("ERROR: " + err.Error())

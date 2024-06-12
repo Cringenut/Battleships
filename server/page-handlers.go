@@ -3,7 +3,7 @@ package server
 import (
 	"Battleships/data"
 	"Battleships/views"
-	"Battleships/web"
+	"Battleships/web/ranking"
 	"github.com/a-h/templ"
 	"github.com/gin-gonic/gin"
 )
@@ -31,5 +31,5 @@ func (app *Config) HandleBattlePage(c *gin.Context) {
 
 // Handling Ranking Page
 func (app *Config) HandleRankingPage(c *gin.Context) {
-	Render(c, 200, views.MakeRankingPage(web.GetCurrentRanking()))
+	Render(c, 200, views.MakeRankingPage(ranking.GetCurrentRanking()))
 }

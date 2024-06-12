@@ -43,7 +43,7 @@ templ MakeSettingsPage(nickname string, description string) {
 	}
 
 	.save-text {
-		color: red;
+		color: #e7e6e6;
 		font-family: "Special Elite", system-ui;
 		text-align: center;
 		font-size: 20px;
@@ -162,6 +162,23 @@ templ MakeSettingsPage(nickname string, description string) {
 		z-index: 10000; /* Ensures children are above other content */
 	}
 
+	.back-button {
+		position: fixed;
+		top: 20px;
+		left: 20px;
+		font-size: 24px;
+		text-decoration: none;
+		color: #eaeaea;
+		padding: 10px 20px;
+		border-radius: 5px;
+		z-index: 12;
+		cursor: pointer;
+	}
+
+	.back-button:hover {
+		color: white;
+	}
+
 </style>
 		<head>
 			<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"/>
@@ -172,6 +189,7 @@ templ MakeSettingsPage(nickname string, description string) {
 			<title>Settings</title>
 		</head>
 		<body>
+		<a href="/" class="back-button">X</a>
 		@MakeErrorScreenContainer("/errors/settings")
 			<div class="content">
 				<h1 class="header">Settings</h1>
