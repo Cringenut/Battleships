@@ -14,6 +14,22 @@ func GetPlacementBoardClass() string {
 	}
 }
 
+func GetPlayerOrEnemyBoardClass(isPlayer bool) string {
+	if isPlayer {
+		if !data.GetGameStatus().ShouldFire {
+			return ("player-board highlight")
+		} else {
+			return ("player-board")
+		}
+	} else {
+		if data.GetGameStatus().ShouldFire {
+			return ("enemy-board highlight")
+		} else {
+			return ("enemy-board")
+		}
+	}
+}
+
 templ MakePlacementBoard() {
 	<style>
     .placement-board {
@@ -73,9 +89,10 @@ templ MakePlayerBoard() {
         padding: 4px;
         z-index: 1;
     }
+
 </style>
 		<body>
-			<div class="player-board" id="player_board">
+			<div class={ GetPlayerOrEnemyBoardClass(true) } id="player_board">
 				for row := 0; row < 10; row++ {
 					for col := 0; col < 10; col++ {
 						@MakePlayerBoardCell("p" + data.CalculateCellCoord(row, col))
@@ -106,9 +123,13 @@ templ MakeEnemyBoard() {
         padding: 4px;
         z-index: 1;
     }
+
+	.enemy-board.highlight, .player-board.highlight {
+		background-color: #ababab;
+	}
 </style>
 		<body>
-			<div class="enemy-board" id="enemy_board">
+			<div class={ GetPlayerOrEnemyBoardClass(false) } id="enemy_board">
 				for row := 0; row < 10; row++ {
 					for col := 0; col < 10; col++ {
 						@MakeEnemyBoardCell(data.CalculateCellCoord(row, col))

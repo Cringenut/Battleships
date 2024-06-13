@@ -30,6 +30,10 @@ func StartBattle(enemyNickname string, isSingleplayer bool) error {
 		return err
 	}
 	data.SetToken("")
+	data.SetGameStatus(&data.GameStatus{"", "", "", []string{}, enemyNickname, false, 60})
+	data.SetEnemyData(enemyNickname, data.GetEnemyData().Description)
+
+	time.Sleep(100 * time.Millisecond)
 
 Token:
 	// If request is failed try to start the game until successful

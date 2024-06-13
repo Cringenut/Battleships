@@ -1,13 +1,13 @@
 package views
 
 templ MakeErrorScreenContainer(handlerPath string) {
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"/>
-    <style>
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+			<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet"/>
+			<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg/640px-USRC_Salmon_P_Chase_-_LoC_4a25817u.jpg"/>
+			<style>
         .error-container {
             display: flex;
             position: absolute;
@@ -71,28 +71,28 @@ templ MakeErrorScreenContainer(handlerPath string) {
             z-index: 9999999;
         }
     </style>
-</head>
-<body>
-<div
-        hx-get={ handlerPath }
-        hx-trigger="every 0.2s"
-        hx-swap="innerHTML"
-        hx-target="#error_container"
-></div>
-<div class="error-container">
-    <div class="left-area" id="error_container"></div>
-</div>
-</body>
-</html>
+		</head>
+		<body>
+			<div
+				hx-get={ handlerPath }
+				hx-trigger="every 0.2s"
+				hx-swap="innerHTML"
+				hx-target="#error_container"
+			></div>
+			<div class="error-container">
+				<div class="left-area" id="error_container"></div>
+			</div>
+		</body>
+	</html>
 }
 
 templ MakeErrorMessage(errorMessage string) {
-<div class="error-message">
-    <div class="error-icon">
-        <img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"></img>
-    </div>
-    <div class="error-text">
-        { errorMessage }
-    </div>
-</div>
+	<div class="error-message">
+		<div class="error-icon">
+			<img src="https://i.imgur.com/D3HOo6m.png" alt="Error Icon"/>
+		</div>
+		<div class="error-text">
+			{ errorMessage }
+		</div>
+	</div>
 }

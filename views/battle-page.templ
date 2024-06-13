@@ -146,7 +146,7 @@ templ MakeBattlePage() {
 	</style>
 		</head>
 		<body id="battle_body">
-		@MakeErrorScreenContainer("/errors/battle")
+			@MakeErrorScreenContainer("/errors/battle")
 			<script>
 			document.addEventListener("htmx:afterRequest", function () {
 				let timerElement = document.getElementById("time")
@@ -205,7 +205,8 @@ templ MakeBattlePage() {
 			</div>
 			<div class="container flexible-width">
 				<div class="side-menu" id="side_menu"></div>
-				<div class="surrender-button"
+				<div
+					class="surrender-button"
 					hx-post="/battle/surrender/show"
 					hx-swap="outerHTML"
 					hx-target="#player_info"

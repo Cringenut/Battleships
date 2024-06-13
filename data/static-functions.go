@@ -31,6 +31,7 @@ func InvertNumber(digit int) int {
 
 // Helper function to check if a string is in a slice of strings
 func StringSliceContains(s []string, str string) bool {
+	// When passing id from player it starts with "p" in order for html to not mistake player cell and enemy cell
 	if str[0] == 'p' {
 		str = str[1:]
 	}

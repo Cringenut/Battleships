@@ -11,12 +11,12 @@ func isValidPlacingCoordinate(coord string) (int, int, bool) {
 	row, col, isValid := GetCoordPosition(coord)
 
 	if !isValid {
-		return 0, 0, false
+		return -1, -1, false
 	}
 
 	// Ensure the spot is not already taken and check surrounding cells
 	if board[row][col] == true {
-		return 0, 0, false
+		return -1, -1, false
 	}
 
 	// Check adjacent cells, including diagonals
@@ -25,7 +25,7 @@ func isValidPlacingCoordinate(coord string) (int, int, bool) {
 			adjRow := row + dx
 			adjCol := col + dy
 			if adjRow >= 0 && adjRow < size && adjCol >= 0 && adjCol < size && board[adjRow][adjCol] == true {
-				return 0, 0, false
+				return -1, -1, false
 			}
 		}
 	}
